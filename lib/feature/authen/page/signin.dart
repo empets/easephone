@@ -81,8 +81,8 @@ class SignIn extends StatelessWidget {
                         builder: (context, state) {
                           return CustomeFormsSigin(
                             readOnly: state.status.isInProgress,
-                            prefixIcon: Icon(Icons.lock_outlined),
-                            textLabel: 'password',
+                            prefixIcon: Icon(Icons.phone_outlined),
+                            textLabel: 'numéro de compte mail',
                             errorText:
                                 state.password.isPure || state.password.isValid
                                 ? null
@@ -176,8 +176,15 @@ class SignIn extends StatelessWidget {
                                     ? null
                                     : () async {
                                         FocusScope.of(context).unfocus();
-                                        context.read<BlocSignin>().add(
-                                          SigninEvent.googleAuthen(),
+                                        // context.read<BlocSignin>().add(
+                                        //   SigninEvent.googleAuthen(),
+                                        // );
+
+                                        showAppSnackBar(
+                                          context,
+                                          iconRight: Icons.close,
+                                          message:
+                                              'Service momentanement indisponible',
                                         );
                                       },
                                 child: Container(

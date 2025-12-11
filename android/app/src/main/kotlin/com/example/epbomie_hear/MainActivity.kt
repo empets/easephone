@@ -1,4 +1,4 @@
-package com.example.epbomie_hear
+package com.example.epbomi
 
 import io.flutter.embedding.android.FlutterActivity
 

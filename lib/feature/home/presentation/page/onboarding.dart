@@ -8,6 +8,7 @@ import 'package:com.example.epbomi/feature/authen/domaine/usercase/signin_userca
 import 'package:com.example.epbomi/feature/authen/page/bloc/auth-by-mail/auth_by_mail_bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/auth-by-mail/state/auth_by_mail_state.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/bloc_signin.dart';
+import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/state/signin_state.dart';
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
@@ -51,42 +52,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ],
-      child: BlocListener<AuthByMailBloc, AuthByMailState>(
-        listener: (context, state) {
-          if (state.status.isSuccess) {
-            Navigator.of(context).push(fadeRoute(const HomeOverView()));
-          }
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AuthByMailBloc, AuthByMailState>(
+            listener: (context, state) {
+              if (state.status.isSuccess) {
+                Navigator.of(context).push(fadeRoute(const HomeOverView()));
+              }
 
-          if (state.status.isFailure) {
-            if (state.errorMessage.contains(
-              "Cet utilisateur existe pas creer un compte",
-            )) {
-              showAppSnackBar(
-                context,
-                color: MyColorName.errorRed,
-                iconRight: Icons.close,
-                message: state.errorMessage,
-              );
-              setState(() {
-                isSignUp = true;
-              });
-            }
+              if (state.status.isFailure) {
+                if (state.errorMessage.contains(
+                  "Cet utilisateur existe pas creer un compte",
+                )) {
+                  showAppSnackBar(
+                    context,
+                    color: MyColorName.errorRed,
+                    iconRight: Icons.close,
+                    message: state.errorMessage,
+                  );
+                  setState(() {
+                    isSignUp = true;
+                  });
+                }
 
-            if (state.errorMessage.contains(
-              "Cet utilisateur existe deja creer un compte",
-            )) {
-              showAppSnackBar(
-                context,
-                color: MyColorName.errorRed,
-                iconRight: Icons.close,
-                message: state.errorMessage,
-              );
-              setState(() {
-                isSignUp = false;
-              });
-            }
-          }
-        },
+                if (state.errorMessage.contains(
+                  "Cet utilisateur existe deja creer un compte",
+                )) {
+                  showAppSnackBar(
+                    context,
+                    color: MyColorName.errorRed,
+                    iconRight: Icons.close,
+                    message: state.errorMessage,
+                  );
+                  setState(() {
+                    isSignUp = false;
+                  });
+                }
+              }
+            },
+          ),
+          BlocListener<BlocSignin, SigninState>(
+            listener: (context, state) {
+              if (state.status.isSuccess) {
+                Navigator.of(context).push(fadeRoute(const HomeOverView()));
+              }
+            },
+          ),
+        ],
         child: Scaffold(
           body: SafeArea(
             top: false,

@@ -17,7 +17,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.epbomie_hear"
+    namespace = "com.example.epbomi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
