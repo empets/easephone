@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "18357377169",
+    "firebase_url": "https://authenfication-9fc25-default-rtdb.firebaseio.com",
+    "project_id": "authenfication-9fc25",
+    "storage_bucket": "authenfication-9fc25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18357377169:android:751c75c62dabcbf9844730",
+        "android_client_info": {
+          "package_name": "com.example.epbomi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAteU6V1OfMMleH-fM2RHjLuDX9OvdbCGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

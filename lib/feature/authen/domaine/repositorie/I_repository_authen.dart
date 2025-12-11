@@ -1,0 +1,20 @@
+import 'package:com.example.epbomi/core/data_process/failure.dart';
+// ignore: unused_import
+import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
+import 'package:dartz/dartz.dart';
+
+abstract class IRepositoryAuthen {
+  //cette methode permet de créer l'utilisateur
+
+  Future<Either<Failure, String?>> userAuthen(RequestAuthen request);
+
+  //cette methode permet de vérifier si l'utilisateur existe deja
+  Future<Either<Failure, String?>> signIn(RequestAuthen request);
+
+  //creation de compte marchant
+    Future<Either<Failure, String?>> createCompte(RequestCreateCompteHomeInformation request);
+
+  //creation de compte marchant
+    Future<Either<Failure, String?>> createCompteUpdateFormToher(RequestCreateCompteHeber request); 
+
+}
