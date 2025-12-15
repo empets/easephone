@@ -159,6 +159,7 @@ dev_dependencies:
   uuid: ^4.2.1
   very_good_analysis: ^7.0.0
   smooth_page_indicator: ^1.2.1
+  icons_launcher: ^3.0.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -177,7 +178,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo/logo.svg"
+  image_path: "assets/icon_launcher/icon.png"
   remove_alpha_ios: true  # recommandé pour éviter le rejet App Store
 
 # to rebuild assets : flutter packages pub run build_runner build
@@ -207,6 +208,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
+    - assets/icon_launcher/
     - assets/images/logo/
     - assets/icons/
     - assets/images/
