@@ -679,7 +679,7 @@ return submit();case _:
 
 
 class ChangeRoomNumberCreateCompteHebEvent implements CreateCompteHebEvent {
-  const ChangeRoomNumberCreateCompteHebEvent(this.roomNumber);
+   ChangeRoomNumberCreateCompteHebEvent(this.roomNumber);
   
 
  final  String roomNumber;
@@ -745,7 +745,7 @@ as String,
 
 
 class ChangeAverageBedCreateCompteHebEvent implements CreateCompteHebEvent {
-  const ChangeAverageBedCreateCompteHebEvent(this.averageBed);
+   ChangeAverageBedCreateCompteHebEvent(this.averageBed);
   
 
  final  String averageBed;
@@ -811,7 +811,7 @@ as String,
 
 
 class ChangeSelectedOptionCreateCompteHebEvent implements CreateCompteHebEvent {
-  const ChangeSelectedOptionCreateCompteHebEvent(this.option);
+   ChangeSelectedOptionCreateCompteHebEvent(this.option);
   
 
  final  String option;
@@ -877,7 +877,7 @@ as String,
 
 
 class ChangeDescriptionCreateCompteHebEvent implements CreateCompteHebEvent {
-  const ChangeDescriptionCreateCompteHebEvent(this.description);
+   ChangeDescriptionCreateCompteHebEvent(this.description);
   
 
  final  String description;
@@ -943,7 +943,7 @@ as String,
 
 
 class SubmitCreateCompteHebEvent implements CreateCompteHebEvent {
-  const SubmitCreateCompteHebEvent();
+   SubmitCreateCompteHebEvent();
   
 
 

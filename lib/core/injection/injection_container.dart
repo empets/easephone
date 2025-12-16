@@ -1,9 +1,11 @@
 import 'package:com.example.epbomi/core/injection/injection_container.config.dart';
+
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart' as shareData;
 //import 'injection.config.dart'; // généré
 
 final GetIt getIt = GetIt.instance;
@@ -31,6 +33,16 @@ abstract class InjectableModule {
     client: http.Client(),
     // retryPolicy: ExpiredTokenRetryPolicy(getIt(), getIt()),
   );
+
+  @lazySingleton
+  Future<shareData.SharedPreferences> get sharedPreferences =>
+      shareData.SharedPreferences.getInstance();
+
+  // @injectable
+  // Future<AppRoute> appRoute() async => AppRoute(
+  //   sharedPreferences: getIt<shareData.SharedPreferences>(),
+  //   appRouteBloc: getIt<AppRouteBloc>(),
+  // );
 
   // @lazySingleton
   // FirebaseService get firebaseService => FirebaseService();
@@ -75,8 +87,8 @@ abstract class InjectableModule {
   // ImagePicker get picker => ImagePicker();
 }
 
-abstract class Env {
-  static const test = 'test';
-  static const dev = 'dev';
-  static const prod = 'prod';
-}
+// abstract class Env {
+//   static const test = 'test';
+//   static const dev = 'dev';
+//   static const prod = 'prod';
+// }

@@ -5,17 +5,23 @@ import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen
 import 'package:com.example.epbomi/feature/authen/domaine/repositorie/I_repository_authen.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: IRepositoryAuthen)
 class RepositoriesAuthenImple implements IRepositoryAuthen {
-  RepositoriesAuthenImple({required this.firebaseRemoteService});
+  RepositoriesAuthenImple({
+    required this.sharedPreferences,
+    required this.firebaseRemoteService,
+  });
   final FirebaseRemoteService firebaseRemoteService;
+  final SharedPreferences sharedPreferences;
 
   @override
   Future<Either<Failure, String?>> userAuthen(RequestAuthen request) async {
     final response = await firebaseRemoteService.userAuthen(request);
 
     if (response is FirebaseSuccess<String?>) {
+      await sharedPreferences.setString('user_section', response.data ?? '');
       return Right(response.data);
     } else if (response is FirebaseError) {
       return Left(
@@ -29,6 +35,7 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   Future<Either<Failure, String?>> signIn(RequestAuthen request) async {
     final response = await firebaseRemoteService.signIn(request);
     if (response is FirebaseSuccess<String?>) {
+      await sharedPreferences.setString('user_section', response.data ?? '');
       return Right(response.data);
     } else if (response is FirebaseError) {
       return Left(
