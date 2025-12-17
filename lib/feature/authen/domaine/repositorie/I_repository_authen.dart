@@ -1,6 +1,9 @@
 import 'package:com.example.epbomi/core/data_process/failure.dart';
+import 'package:com.example.epbomi/core/usercase/usercase.dart';
+import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
 // ignore: unused_import
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IRepositoryAuthen {
@@ -12,9 +15,16 @@ abstract class IRepositoryAuthen {
   Future<Either<Failure, String?>> signIn(RequestAuthen request);
 
   //creation de compte marchant
-    Future<Either<Failure, String?>> createCompte(RequestCreateCompteHomeInformation request);
+  Future<Either<Failure, String?>> createCompte(
+    RequestCreateCompteHomeInformation request,
+  );
 
   //creation de compte marchant
-    Future<Either<Failure, String?>> createCompteUpdateFormToher(RequestCreateCompteHeber request); 
+  Future<Either<Failure, String?>> createCompteUpdateFormToher(
+    RequestCreateCompteHeber request,
+  );
 
+  //creation de compte marchant
+  Future<Either<Failure, ProfileUser>> getProfileUser(
+  );
 }

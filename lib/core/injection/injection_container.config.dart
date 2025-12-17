@@ -27,6 +27,8 @@ import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
     as _i700;
 import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
     as _i406;
+import '../../feature/authen/domaine/usercase/get_user_profile_usercase.dart'
+    as _i973;
 import '../../feature/authen/domaine/usercase/signin_usercase.dart' as _i228;
 import '../../feature/authen/page/bloc/auth-by-mail/auth_by_mail_bloc.dart'
     as _i622;
@@ -46,56 +48,45 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final injectableModule = _$InjectableModule();
+    gh.factory<_i908.AppRouteBloc>(() => _i908.AppRouteBloc());
     gh.lazySingleton<_i345.DatabaseReference>(() => injectableModule.userDb);
     gh.lazySingleton<_i519.Client>(() => injectableModule.httpClient);
-    gh.lazySingletonAsync<_i460.SharedPreferences>(
-      () => injectableModule.sharedPreferences,
-    );
     gh.lazySingleton<_i956.IRepositoryMarchant>(
       () => _i772.ImpRepositoryMarchant(),
     );
-    gh.factoryAsync<_i908.AppRouteBloc>(
-      () async => _i908.AppRouteBloc(
-        sharedPreferences: await getAsync<_i460.SharedPreferences>(),
+    gh.factory<_i574.AppRoute>(
+      () => _i574.AppRoute(
+        appRouteBloc: gh<_i908.AppRouteBloc>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
     gh.lazySingleton<_i505.FirebaseRemoteService>(
       () => _i505.ImplFirebaseRemoteService(db: gh<_i345.DatabaseReference>()),
     );
-    gh.lazySingletonAsync<_i283.IRepositoryAuthen>(
-      () async => _i417.RepositoriesAuthenImple(
-        sharedPreferences: await getAsync<_i460.SharedPreferences>(),
+    gh.lazySingleton<_i283.IRepositoryAuthen>(
+      () => _i417.RepositoriesAuthenImple(
         firebaseRemoteService: gh<_i505.FirebaseRemoteService>(),
       ),
     );
-    gh.factoryAsync<_i574.AppRoute>(
-      () async => _i574.AppRoute(
-        appRouteBloc: await getAsync<_i908.AppRouteBloc>(),
-        sharedPreferences: await getAsync<_i460.SharedPreferences>(),
-      ),
+    gh.lazySingleton<_i228.SigninUsercase>(
+      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingletonAsync<_i228.SigninUsercase>(
-      () async =>
-          _i228.SigninUsercase(await getAsync<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i700.CreateComptHebUsercase>(
+      () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingletonAsync<_i700.CreateComptHebUsercase>(
-      () async => _i700.CreateComptHebUsercase(
-        await getAsync<_i283.IRepositoryAuthen>(),
-      ),
+    gh.lazySingleton<_i933.AuthenByMailUsercase>(
+      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingletonAsync<_i933.AuthenByMailUsercase>(
-      () async =>
-          _i933.AuthenByMailUsercase(await getAsync<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
+      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingletonAsync<_i406.CreateComptemarchantUsercase>(
-      () async => _i406.CreateComptemarchantUsercase(
-        await getAsync<_i283.IRepositoryAuthen>(),
-      ),
+    gh.lazySingleton<_i973.GetUserProfileUsercase>(
+      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingletonAsync<_i622.AuthByMailBloc>(
-      () async => _i622.AuthByMailBloc(
-        signinUsercase: await getAsync<_i228.SigninUsercase>(),
-        authenByMailUsercase: await getAsync<_i933.AuthenByMailUsercase>(),
+    gh.lazySingleton<_i622.AuthByMailBloc>(
+      () => _i622.AuthByMailBloc(
+        signinUsercase: gh<_i228.SigninUsercase>(),
+        authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
       ),
     );
     return this;

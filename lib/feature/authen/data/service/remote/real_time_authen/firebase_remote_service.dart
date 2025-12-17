@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
+import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
@@ -15,6 +17,8 @@ abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompteUpdateFormToher(
     RequestCreateCompteHeber params,
   );
+
+  Future<FirebaseResult<ProfileUserModel>> getProfileUser();
 }
 
 @LazySingleton(as: FirebaseRemoteService)
@@ -138,6 +142,27 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<ProfileUserModel>> getProfileUser() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final localUserSection = sharedPreferences.getString('user_section');
+
+    try {
+      final response = await db.child('users/$localUserSection').get();
+      log(',,, ${response.value}');
+      final data = Map<String, dynamic>.from(response.value as Map);
+
+      if (response.exists) {
+        final firebaseResult = ProfileUserModel.fromJson(data);
+        return FirebaseSuccess(firebaseResult);
+      } else {
+        return FirebaseError("une erreur est survenue");
+      }
+    } catch (e) {
+      return FirebaseError('====${e.toString()}');
     }
   }
 }

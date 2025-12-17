@@ -34,9 +34,9 @@ abstract class InjectableModule {
     // retryPolicy: ExpiredTokenRetryPolicy(getIt(), getIt()),
   );
 
-  @lazySingleton
-  Future<shareData.SharedPreferences> get sharedPreferences =>
-      shareData.SharedPreferences.getInstance();
+  // @lazySingleton
+  // Future<shareData.SharedPreferences> get sharedPreferences =>
+  //     shareData.SharedPreferences.getInstance();
 
   // @injectable
   // Future<AppRoute> appRoute() async => AppRoute(

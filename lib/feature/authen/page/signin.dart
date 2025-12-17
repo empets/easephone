@@ -244,6 +244,24 @@ class _SignInState extends State<SignIn> {
                                     ),
                                   ),
 
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isSignUp = !isSignUp;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 19.h),
+                                      child: CustomeText(
+                                        texte:
+                                            'Naviger entre la connexion et la creation de compte',
+                                        texteSize: 13.sp,
+                                        letterSpacing: 0.2,
+                                        color: MyColorName.backgroundIvory,
+                                      ),
+                                    ),
+                                  ),
+
                                   Container(
                                     margin: EdgeInsets.only(bottom: 4.h),
                                     child: Row(

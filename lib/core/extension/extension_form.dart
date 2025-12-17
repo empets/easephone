@@ -1,4 +1,4 @@
-import 'package:com.example.epbomi/core/extension/extension.dart';
+import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:formz/formz.dart';
 
 enum TextFormzValidationError { empty }
