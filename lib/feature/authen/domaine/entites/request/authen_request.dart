@@ -15,12 +15,21 @@ abstract class RequestAuthen with _$RequestAuthen {
 abstract class RequestCreateCompteHomeInformation
     with _$RequestCreateCompteHomeInformation {
   factory RequestCreateCompteHomeInformation({
-    required String name,
-    required String specialite,
-    required String telephone,
-    required String adresse,
-    required String email,
-    required String autherKey,
+    String? name,
+    String? specialite,
+    String? telephone,
+    String? telephon2,
+    String? adresse,
+    String? email,
+    String? autherKey,
+    String? roomNumber,
+    String? averageBed,
+    String? option,
+    String? description,
+    String? emage,
+    String? formOne,
+    String? formTwo,
+    String? formTherd,
   }) = _SRequestCreateCompteHomeInformation;
 
   factory RequestCreateCompteHomeInformation.fromJson(

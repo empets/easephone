@@ -295,7 +295,7 @@ RequestCreateCompteHomeInformation _$RequestCreateCompteHomeInformationFromJson(
 /// @nodoc
 mixin _$RequestCreateCompteHomeInformation {
 
- String get name; String get specialite; String get telephone; String get adresse; String get email; String get autherKey;
+ String? get name; String? get specialite; String? get telephone; String? get telephon2; String? get adresse; String? get email; String? get autherKey; String? get roomNumber; String? get averageBed; String? get option; String? get description; String? get emage; String? get formOne; String? get formTwo; String? get formTherd;
 /// Create a copy of RequestCreateCompteHomeInformation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -308,16 +308,16 @@ $RequestCreateCompteHomeInformationCopyWith<RequestCreateCompteHomeInformation> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCreateCompteHomeInformation&&(identical(other.name, name) || other.name == name)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.email, email) || other.email == email)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCreateCompteHomeInformation&&(identical(other.name, name) || other.name == name)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.telephon2, telephon2) || other.telephon2 == telephon2)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.email, email) || other.email == email)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.emage, emage) || other.emage == emage)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,specialite,telephone,adresse,email,autherKey);
+int get hashCode => Object.hash(runtimeType,name,specialite,telephone,telephon2,adresse,email,autherKey,roomNumber,averageBed,option,description,emage,formOne,formTwo,formTherd);
 
 @override
 String toString() {
-  return 'RequestCreateCompteHomeInformation(name: $name, specialite: $specialite, telephone: $telephone, adresse: $adresse, email: $email, autherKey: $autherKey)';
+  return 'RequestCreateCompteHomeInformation(name: $name, specialite: $specialite, telephone: $telephone, telephon2: $telephon2, adresse: $adresse, email: $email, autherKey: $autherKey, roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, emage: $emage, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd)';
 }
 
 
@@ -328,7 +328,7 @@ abstract mixin class $RequestCreateCompteHomeInformationCopyWith<$Res>  {
   factory $RequestCreateCompteHomeInformationCopyWith(RequestCreateCompteHomeInformation value, $Res Function(RequestCreateCompteHomeInformation) _then) = _$RequestCreateCompteHomeInformationCopyWithImpl;
 @useResult
 $Res call({
- String name, String specialite, String telephone, String adresse, String email, String autherKey
+ String? name, String? specialite, String? telephone, String? telephon2, String? adresse, String? email, String? autherKey, String? roomNumber, String? averageBed, String? option, String? description, String? emage, String? formOne, String? formTwo, String? formTherd
 });
 
 
@@ -345,15 +345,24 @@ class _$RequestCreateCompteHomeInformationCopyWithImpl<$Res>
 
 /// Create a copy of RequestCreateCompteHomeInformation
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? email = null,Object? autherKey = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? specialite = freezed,Object? telephone = freezed,Object? telephon2 = freezed,Object? adresse = freezed,Object? email = freezed,Object? autherKey = freezed,Object? roomNumber = freezed,Object? averageBed = freezed,Object? option = freezed,Object? description = freezed,Object? emage = freezed,Object? formOne = freezed,Object? formTwo = freezed,Object? formTherd = freezed,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,specialite: null == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
-as String,telephone: null == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
-as String,adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,autherKey: null == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
-as String,
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,specialite: freezed == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
+as String?,telephone: freezed == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
+as String?,telephon2: freezed == telephon2 ? _self.telephon2 : telephon2 // ignore: cast_nullable_to_non_nullable
+as String?,adresse: freezed == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,autherKey: freezed == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
+as String?,roomNumber: freezed == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
+as String?,averageBed: freezed == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
+as String?,option: freezed == option ? _self.option : option // ignore: cast_nullable_to_non_nullable
+as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,emage: freezed == emage ? _self.emage : emage // ignore: cast_nullable_to_non_nullable
+as String?,formOne: freezed == formOne ? _self.formOne : formOne // ignore: cast_nullable_to_non_nullable
+as String?,formTwo: freezed == formTwo ? _self.formTwo : formTwo // ignore: cast_nullable_to_non_nullable
+as String?,formTherd: freezed == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -438,10 +447,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String specialite,  String telephone,  String adresse,  String email,  String autherKey)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? specialite,  String? telephone,  String? telephon2,  String? adresse,  String? email,  String? autherKey,  String? roomNumber,  String? averageBed,  String? option,  String? description,  String? emage,  String? formOne,  String? formTwo,  String? formTherd)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHomeInformation() when $default != null:
-return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.email,_that.autherKey);case _:
+return $default(_that.name,_that.specialite,_that.telephone,_that.telephon2,_that.adresse,_that.email,_that.autherKey,_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.emage,_that.formOne,_that.formTwo,_that.formTherd);case _:
   return orElse();
 
 }
@@ -459,10 +468,10 @@ return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String specialite,  String telephone,  String adresse,  String email,  String autherKey)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? specialite,  String? telephone,  String? telephon2,  String? adresse,  String? email,  String? autherKey,  String? roomNumber,  String? averageBed,  String? option,  String? description,  String? emage,  String? formOne,  String? formTwo,  String? formTherd)  $default,) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHomeInformation():
-return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.email,_that.autherKey);case _:
+return $default(_that.name,_that.specialite,_that.telephone,_that.telephon2,_that.adresse,_that.email,_that.autherKey,_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.emage,_that.formOne,_that.formTwo,_that.formTherd);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -479,10 +488,10 @@ return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String specialite,  String telephone,  String adresse,  String email,  String autherKey)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? specialite,  String? telephone,  String? telephon2,  String? adresse,  String? email,  String? autherKey,  String? roomNumber,  String? averageBed,  String? option,  String? description,  String? emage,  String? formOne,  String? formTwo,  String? formTherd)?  $default,) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHomeInformation() when $default != null:
-return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.email,_that.autherKey);case _:
+return $default(_that.name,_that.specialite,_that.telephone,_that.telephon2,_that.adresse,_that.email,_that.autherKey,_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.emage,_that.formOne,_that.formTwo,_that.formTherd);case _:
   return null;
 
 }
@@ -494,15 +503,24 @@ return $default(_that.name,_that.specialite,_that.telephone,_that.adresse,_that.
 @JsonSerializable()
 
 class _SRequestCreateCompteHomeInformation implements RequestCreateCompteHomeInformation {
-   _SRequestCreateCompteHomeInformation({required this.name, required this.specialite, required this.telephone, required this.adresse, required this.email, required this.autherKey});
+   _SRequestCreateCompteHomeInformation({this.name, this.specialite, this.telephone, this.telephon2, this.adresse, this.email, this.autherKey, this.roomNumber, this.averageBed, this.option, this.description, this.emage, this.formOne, this.formTwo, this.formTherd});
   factory _SRequestCreateCompteHomeInformation.fromJson(Map<String, dynamic> json) => _$SRequestCreateCompteHomeInformationFromJson(json);
 
-@override final  String name;
-@override final  String specialite;
-@override final  String telephone;
-@override final  String adresse;
-@override final  String email;
-@override final  String autherKey;
+@override final  String? name;
+@override final  String? specialite;
+@override final  String? telephone;
+@override final  String? telephon2;
+@override final  String? adresse;
+@override final  String? email;
+@override final  String? autherKey;
+@override final  String? roomNumber;
+@override final  String? averageBed;
+@override final  String? option;
+@override final  String? description;
+@override final  String? emage;
+@override final  String? formOne;
+@override final  String? formTwo;
+@override final  String? formTherd;
 
 /// Create a copy of RequestCreateCompteHomeInformation
 /// with the given fields replaced by the non-null parameter values.
@@ -517,16 +535,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestCreateCompteHomeInformation&&(identical(other.name, name) || other.name == name)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.email, email) || other.email == email)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestCreateCompteHomeInformation&&(identical(other.name, name) || other.name == name)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.telephon2, telephon2) || other.telephon2 == telephon2)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.email, email) || other.email == email)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.emage, emage) || other.emage == emage)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,specialite,telephone,adresse,email,autherKey);
+int get hashCode => Object.hash(runtimeType,name,specialite,telephone,telephon2,adresse,email,autherKey,roomNumber,averageBed,option,description,emage,formOne,formTwo,formTherd);
 
 @override
 String toString() {
-  return 'RequestCreateCompteHomeInformation(name: $name, specialite: $specialite, telephone: $telephone, adresse: $adresse, email: $email, autherKey: $autherKey)';
+  return 'RequestCreateCompteHomeInformation(name: $name, specialite: $specialite, telephone: $telephone, telephon2: $telephon2, adresse: $adresse, email: $email, autherKey: $autherKey, roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, emage: $emage, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd)';
 }
 
 
@@ -537,7 +555,7 @@ abstract mixin class _$SRequestCreateCompteHomeInformationCopyWith<$Res> impleme
   factory _$SRequestCreateCompteHomeInformationCopyWith(_SRequestCreateCompteHomeInformation value, $Res Function(_SRequestCreateCompteHomeInformation) _then) = __$SRequestCreateCompteHomeInformationCopyWithImpl;
 @override @useResult
 $Res call({
- String name, String specialite, String telephone, String adresse, String email, String autherKey
+ String? name, String? specialite, String? telephone, String? telephon2, String? adresse, String? email, String? autherKey, String? roomNumber, String? averageBed, String? option, String? description, String? emage, String? formOne, String? formTwo, String? formTherd
 });
 
 
@@ -554,15 +572,24 @@ class __$SRequestCreateCompteHomeInformationCopyWithImpl<$Res>
 
 /// Create a copy of RequestCreateCompteHomeInformation
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? email = null,Object? autherKey = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? specialite = freezed,Object? telephone = freezed,Object? telephon2 = freezed,Object? adresse = freezed,Object? email = freezed,Object? autherKey = freezed,Object? roomNumber = freezed,Object? averageBed = freezed,Object? option = freezed,Object? description = freezed,Object? emage = freezed,Object? formOne = freezed,Object? formTwo = freezed,Object? formTherd = freezed,}) {
   return _then(_SRequestCreateCompteHomeInformation(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,specialite: null == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
-as String,telephone: null == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
-as String,adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,autherKey: null == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
-as String,
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,specialite: freezed == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
+as String?,telephone: freezed == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
+as String?,telephon2: freezed == telephon2 ? _self.telephon2 : telephon2 // ignore: cast_nullable_to_non_nullable
+as String?,adresse: freezed == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,autherKey: freezed == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
+as String?,roomNumber: freezed == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
+as String?,averageBed: freezed == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
+as String?,option: freezed == option ? _self.option : option // ignore: cast_nullable_to_non_nullable
+as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,emage: freezed == emage ? _self.emage : emage // ignore: cast_nullable_to_non_nullable
+as String?,formOne: freezed == formOne ? _self.formOne : formOne // ignore: cast_nullable_to_non_nullable
+as String?,formTwo: freezed == formTwo ? _self.formTwo : formTwo // ignore: cast_nullable_to_non_nullable
+as String?,formTherd: freezed == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -99,10 +99,12 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
   ) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final localUserSection = sharedPreferences.getString('user_section');
     try {
       final request = Request<RequestCreateCompteHomeInformation>(
         data: params.toJson(),
-        user: '',
+        user: localUserSection.toString(),
         serviceLibelle: '',
       );
 
@@ -126,16 +128,23 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompteUpdateFormToher(
     RequestCreateCompteHeber params,
   ) async {
-    try {
-      final request = Request<RequestCreateCompteHeber>(
-        data: params.toJson(),
-        user: '',
-        serviceLibelle: '',
-      );
-      log('************$userKey');
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final localUserSection = sharedPreferences.getString('user_section');
 
+    try {
+      // final request = Request<RequestCreateCompteHeber>(
+      //   data: params.toJson(),
+      //   user: localUserSection.toString(),
+      //   serviceLibelle: '',
+      // );
+      // log('************$userKey');
+        final Map<String, dynamic> updates = {
+    ...params.toJson(),          // nouveaux champs simples
+    'serviceLibelle': '',
+    'user': localUserSection.toString(),
+  };
       // 2) Créer une nouvelle entrée
-      await db.child('hotel/$userKey').update({'herBer': request.data});
+      await db.child('hotel/$userKey').update(updates);
 
       // 4) Retourner le key généré
       return FirebaseSuccess(userKey);
@@ -166,3 +175,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 }
+
+
+// RequestCreateCompteHomeInformation(
+//         averageBed: params.averageBed,
+//         option: params.option,
+//         description: params.description,
+//         roomNumber: params.roomNumber,
+//       );

@@ -75,6 +75,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                 return Container(
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
+                                    letSpace: [],
                                     textLabel: 'Nom R',
                                     errorText:
                                         state.nomResidence.isPure ||
@@ -101,6 +102,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
                                     textLabel: 'Spe',
+                                    letSpace: [],
                                     errorText:
                                         state.specialite.isPure ||
                                             state.specialite.isValid
@@ -149,6 +151,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
                                     textLabel: 'Adre',
+                                    letSpace: [],
                                     errorText:
                                         state.adresse.isPure ||
                                             state.adresse.isValid

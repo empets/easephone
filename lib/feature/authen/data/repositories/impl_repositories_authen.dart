@@ -25,9 +25,7 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
       await sharedPreferences.setString('user_section', response.data ?? '');
       return Right(response.data);
     } else if (response is FirebaseError) {
-      return Left(
-        Failure(message: 'Cet utilisateur existe deja creer un compte'),
-      );
+      return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
@@ -40,9 +38,7 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
       await sharedPreferences.setString('user_section', response.data ?? '');
       return Right(response.data);
     } else if (response is FirebaseError) {
-      return Left(
-        Failure(message: 'Cet utilisateur existe pas creer un compte'),
-      );
+      return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));
   }

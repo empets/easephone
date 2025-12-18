@@ -89,8 +89,6 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
     );
   }
 
-
-
   MarkerLayer buildAutoMarkers(String label) {
     // 1. Génération de 5 points proches de la zone
     final List<LatLng> positions = [
@@ -118,7 +116,8 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
                 borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
               ),
               builder: (BuildContext context) {
-                return HomeDetails();
+                return SizedBox();
+                // return HomeDetails();
               },
             );
           },

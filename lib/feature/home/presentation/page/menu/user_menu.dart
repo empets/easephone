@@ -1,8 +1,11 @@
-
-
+import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
+import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,43 +42,32 @@ class UserMenuContent extends StatelessWidget {
             ),
           ),
 
-          Container(
-            margin: EdgeInsets.only(top: 28.h),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50.r), // arrondi
-                  child: Image.network(
-                    'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                    width: 50.h,
-                    height: 50.h,
-                    fit: BoxFit.cover,
+          BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+            builder: (context, state) {
+              if (state is SuccessState<ProfileUser>) {
+                return Container(
+                  margin: EdgeInsets.only(top: 28.h),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 27.r,
+                        backgroundColor: MyColorName.greyAvatar,
+                        child: Text(
+                          state.data.email.substring(0, 2),
+                          style: GoogleFonts.roboto(
+                            color: Colors.black,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(width: 7.w),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Back road ddkfj',
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      'Back road ddkfj',
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                );
+              } else {
+                return SizedBox();
+              }
+            },
           ),
           SizedBox(height: 25.h),
           Text(
@@ -135,7 +127,9 @@ class UserMenuContent extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(fadeRoute(const FormsHomeInformation()));
+                    Navigator.of(
+                      context,
+                    ).push(fadeRoute(const FormsHomeInformation()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

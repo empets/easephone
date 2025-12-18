@@ -4,7 +4,10 @@ import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_user_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/get_actif_user_profile_information.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_maps.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
@@ -24,10 +27,20 @@ class HomeOverView extends StatefulWidget {
 class _HomeOverViewState extends State<HomeOverView> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetUserProfileBloc(
-        getUserProfileUsercase: getIt<GetUserProfileUsercase>(),
-      )..add(SigninEvent.googleAuthen()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetUserProfileBloc(
+            getUserProfileUsercase: getIt<GetUserProfileUsercase>(),
+          )..add(SigninEvent.googleAuthen()),
+        ),
+        BlocProvider(
+          create: (context) => GetActifUserInformationBloc(
+            getActifCompteInformationUsercase:
+                getIt<GetActifCompteInformationUsercase>(),
+          )..add(SigninEvent.googleAuthen()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: SafeArea(
@@ -41,78 +54,7 @@ class _HomeOverViewState extends State<HomeOverView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(width: 7.h),
-                BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
-                  builder: (context, state) {
-                    if (state is SuccessState<ProfileUser>) {
-                      return GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            backgroundColor: MyColorName.white,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(25),
-                              ),
-                            ),
-                            builder: (BuildContext context) {
-                              return UserMenuContent();
-                            },
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30.r,
-                              backgroundColor: MyColorName.greyAvatar,
-                              child: Text(
-                                state.data.email.substring(0, 2),
-                                style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                            //    Image.network(
-                            //     'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                            //     width: 50.h,
-                            //     height: 50.h,
-                            //     fit: BoxFit.cover,
-                            //   ),
-                            // ),
-                            SizedBox(width: 5.w),
-
-                            // Column(
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //   children: [
-                            //     Text(
-                            //       state.data.email.substring(0, 3),
-                            //       style: GoogleFonts.roboto(
-                            //         color: Colors.black,
-                            //         fontSize: 18.sp,
-                            //         fontWeight: FontWeight.w700,
-                            //       ),
-                            //     ),
-                            //     Text(
-                            //       state.data.email,
-                            //       style: GoogleFonts.roboto(
-                            //         color: Colors.black45,
-                            //         fontSize: 13.sp,
-                            //         fontWeight: FontWeight.w500,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return SizedBox();
-                    }
-                  },
-                ),
-
+                UserProfile(),
                 SizedBox(height: 15.h),
 
                 // header de l'application
@@ -286,262 +228,348 @@ class _HomeOverViewState extends State<HomeOverView> {
                 ),
                 SizedBox(height: 10.h),
                 Expanded(
-                  child: Container(
-                    child: ListView.builder(
-                      itemBuilder: (context, state) {
-                        return GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              backgroundColor: MyColorName.white,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(25),
-                                ),
-                              ),
-                              builder: (BuildContext context) {
-                                return HomeDetails();
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 15.h),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black12),
-                              borderRadius: BorderRadius.circular(9.r),
-                            ),
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    Container(
-                                      height: 0.19.sh,
-                                      margin: EdgeInsetsGeometry.only(
-                                        bottom: 9.h,
-                                      ),
-                                      padding: EdgeInsetsGeometry.symmetric(
-                                        vertical: 5.h,
-                                        horizontal: 4.w,
-                                      ),
-                                      width: MediaQuery.sizeOf(
-                                        context,
-                                      ).width.sw,
-                                      child: ClipRRect(
+                  child:
+                      BlocBuilder<
+                        GetActifUserInformationBloc,
+                        ApiState<List<ActiveUserProfile>>
+                      >(
+                        builder: (context, state) {
+                          if (state is LoadState<List<ActiveUserProfile>>) {
+                            return CircularProgressIndicator();
+                          }
+
+                          if (state is SuccessState<List<ActiveUserProfile>>) {
+                            return SizedBox(
+                              height: 0.6.sh,
+                              child: ListView.builder(
+                                itemCount: state.data.length,
+                                itemBuilder: (context, index) {
+                                  final profile = state.data[index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: MyColorName.white,
+                                        isScrollControlled: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(25),
+                                          ),
+                                        ),
+                                        builder: (BuildContext context) {
+                                          return HomeDetails(profile: profile);
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 15.h),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.black12,
+                                        ),
                                         borderRadius: BorderRadius.circular(
-                                          7.r,
-                                        ),
-                                        child: Image.network(
-                                          'http://m.ahstatic.com/is/image/accorhotels/HCM_P_8147067:4by3?fmt=jpg&op_usm=1.75,0.3,2,0&resMode=sharp2&iccEmbed=true&icc=sRGB&dpr=on,1.5&wid=335&hei=251&qlt=80',
-                                          fit: BoxFit.cover,
+                                          9.r,
                                         ),
                                       ),
-                                    ),
-
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(8.0),
-                                        margin: EdgeInsets.only(
-                                          top: 15.h,
-                                          right: 4.w,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: MyColorName.cardBorder
-                                              .withValues(alpha: 0.3),
-                                          borderRadius: BorderRadius.circular(
-                                            7.r,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.stars,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                Container(
-                                  padding: EdgeInsetsGeometry.symmetric(
-                                    vertical: 4.h,
-                                    horizontal: 8.w,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 5.h),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                      child: Column(
                                         children: [
-                                          Align(
-                                            alignment: Alignment.bottomLeft,
-                                            child: Text(
-                                              'Hotel bella CAmps',
-                                              style: GoogleFonts.roboto(
-                                                color: Colors.grey.shade600,
-                                                fontSize: 18.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
+                                          Stack(
                                             children: [
-                                              Text(
-                                                '1,5k',
-                                                style: GoogleFonts.roboto(
-                                                  color: Colors.grey.shade600,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 0.1.sp,
+                                              Container(
+                                                height: 0.19.sh,
+                                                margin: EdgeInsetsGeometry.only(
+                                                  bottom: 9.h,
                                                 ),
-                                              ),
-                                              SizedBox(width: 2.w),
-                                              Icon(
-                                                Icons
-                                                    .star_border_purple500_rounded,
-                                                color: Colors.amber,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 7.h),
-
-                                      Row(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              25.r,
-                                            ), // arrondi
-                                            child: Image.network(
-                                              'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                                              width: 40.h,
-                                              height: 40.h,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          SizedBox(width: 10.w),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'orem ipsum dolor sit amet',
-                                                style: GoogleFonts.roboto(
-                                                  color: Colors.grey.shade600,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: 0.1.sp,
-                                                ),
-                                              ),
-
-                                              Text(
-                                                'orem ipsum dolor sit amet',
-                                                style: GoogleFonts.roboto(
-                                                  color: Colors.green,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: 0.1.sp,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-
-                                      SizedBox(height: 10.h),
-
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              'tincidunt justo elit pulvinar erat',
-                                              style: GoogleFonts.roboto(
-                                                color: Colors.grey.shade600,
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            '2000 f',
-                                            style: GoogleFonts.roboto(
-                                              color: Colors.green,
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      Row(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.home_work_rounded,
-                                                color: Colors.grey.shade600,
-                                                size: 18.sp,
-                                              ),
-                                              SizedBox(width: 2.w),
-                                              Text(
-                                                '12 Rue des Jardins, Cocody, Abidjan',
-                                                style: GoogleFonts.roboto(
-                                                  color: Colors.grey.shade600,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 7.h),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.person_pin,
-                                                  color: Colors.grey.shade600,
-                                                  size: 18.sp,
-                                                ),
-                                                SizedBox(width: 5.w),
-                                                Text(
-                                                  '+225 88-88-99-10',
-                                                  style: GoogleFonts.roboto(
-                                                    color: Colors.grey.shade600,
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w400,
+                                                padding:
+                                                    EdgeInsetsGeometry.symmetric(
+                                                      vertical: 5.h,
+                                                      horizontal: 4.w,
+                                                    ),
+                                                width: MediaQuery.sizeOf(
+                                                  context,
+                                                ).width.sw,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        7.r,
+                                                      ),
+                                                  child: Image.network(
+                                                    'http://m.ahstatic.com/is/image/accorhotels/HCM_P_8147067:4by3?fmt=jpg&op_usm=1.75,0.3,2,0&resMode=sharp2&iccEmbed=true&icc=sRGB&dpr=on,1.5&wid=335&hei=251&qlt=80',
+                                                    fit: BoxFit.cover,
                                                   ),
+                                                ),
+                                              ),
+
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(
+                                                    8.0,
+                                                  ),
+                                                  margin: EdgeInsets.only(
+                                                    top: 15.h,
+                                                    right: 4.w,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: MyColorName
+                                                        .cardBorder
+                                                        .withValues(alpha: 0.3),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          7.r,
+                                                        ),
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.stars,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          Container(
+                                            padding:
+                                                EdgeInsetsGeometry.symmetric(
+                                                  vertical: 4.h,
+                                                  horizontal: 8.w,
+                                                ),
+                                            child: Column(
+                                              children: [
+                                                // SizedBox(height: 2.h),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.bottomLeft,
+                                                      child: Text(
+                                                        profile.name,
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade600,
+                                                              fontSize: 18.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          '1,5k',
+                                                          style:
+                                                              GoogleFonts.roboto(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                letterSpacing:
+                                                                    0.1.sp,
+                                                              ),
+                                                        ),
+                                                        SizedBox(width: 2.w),
+                                                        Icon(
+                                                          Icons
+                                                              .star_border_purple500_rounded,
+                                                          color: Colors.amber,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 10.h),
+
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(
+                                                        'tincidunt justo elit pulvinar erat',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                              color: Colors
+                                                                  .grey
+                                                                  .shade600,
+                                                              fontSize: 15.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '2000 f',
+                                                      style: GoogleFonts.roboto(
+                                                        color: Colors.green,
+                                                        fontSize: 20.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 10.h),
+                                                Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .home_work_rounded,
+                                                          color: Colors
+                                                              .grey
+                                                              .shade600,
+                                                          size: 18.sp,
+                                                        ),
+                                                        SizedBox(width: 2.w),
+                                                        Text(
+                                                          profile.adresse,
+                                                          style:
+                                                              GoogleFonts.roboto(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                        top: 7.h,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.person_pin,
+                                                            color: Colors
+                                                                .grey
+                                                                .shade600,
+                                                            size: 18.sp,
+                                                          ),
+                                                          SizedBox(width: 5.w),
+                                                          Text(
+                                                            profile.telephone,
+                                                            style:
+                                                                GoogleFonts.roboto(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        },
+                      ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UserProfile extends StatelessWidget {
+  const UserProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetUserProfileBloc(
+            getUserProfileUsercase: getIt<GetUserProfileUsercase>(),
+          )..add(SigninEvent.googleAuthen()),
+        ),
+      ],
+      child: BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+        builder: (context, state) {
+          if (state is SuccessState<ProfileUser>) {
+            return GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: MyColorName.white,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25),
+                    ),
+                  ),
+                  builder: (BuildContext _) {
+                    return BlocProvider.value(
+                      value: context.read<GetUserProfileBloc>(),
+                      child: UserMenuContent(),
+                    );
+                  },
+                );
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 27.r,
+                    backgroundColor: MyColorName.greyAvatar,
+                    child: Text(
+                      state.data.email.substring(0, 2),
+                      style: GoogleFonts.roboto(
+                        color: Colors.black,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       ),
     );
   }

@@ -9,6 +9,7 @@ import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
 import 'package:formz/formz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
   CreateCompteBloc({required this.comptemarchantUsercase})
@@ -88,6 +89,9 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
           await Future.delayed(Duration(seconds: 3));
 
+          final sharedPreferences = await SharedPreferences.getInstance();
+          final localUserSection = sharedPreferences.getString('user_section');
+
           final response = await comptemarchantUsercase.call(
             RequestCreateCompteHomeInformation(
               adresse: state.adresse.value,
@@ -95,7 +99,7 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               specialite: state.specialite.value,
               telephone: state.telephone.value,
               email: 'ppp',
-              autherKey: "ekeee",
+              autherKey: localUserSection,
             ),
           );
 

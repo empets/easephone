@@ -34,8 +34,11 @@ import '../../feature/authen/page/bloc/auth-by-mail/auth_by_mail_bloc.dart'
     as _i622;
 import '../../feature/home/data/repository/imp_repository_marchant.dart'
     as _i772;
+import '../../feature/home/data/service/firebase/remote.dart' as _i35;
 import '../../feature/home/domaine/repository/i_repository_marchant.dart'
     as _i956;
+import '../../feature/home/domaine/usercase/get_actif_compte_information_usercase.dart'
+    as _i774;
 import '../../router/app_route.dart' as _i574;
 import '../../router/bloc/app_bloc.dart' as _i908;
 import 'injection_container.dart' as _i809;
@@ -51,21 +54,32 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i908.AppRouteBloc>(() => _i908.AppRouteBloc());
     gh.lazySingleton<_i345.DatabaseReference>(() => injectableModule.userDb);
     gh.lazySingleton<_i519.Client>(() => injectableModule.httpClient);
-    gh.lazySingleton<_i956.IRepositoryMarchant>(
-      () => _i772.ImpRepositoryMarchant(),
-    );
     gh.factory<_i574.AppRoute>(
       () => _i574.AppRoute(
         appRouteBloc: gh<_i908.AppRouteBloc>(),
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
+    gh.lazySingleton<_i35.MarchanServiceFirebase>(
+      () =>
+          _i35.ImpleMarchantServiceFirebase(db: gh<_i345.DatabaseReference>()),
+    );
     gh.lazySingleton<_i505.FirebaseRemoteService>(
       () => _i505.ImplFirebaseRemoteService(db: gh<_i345.DatabaseReference>()),
+    );
+    gh.lazySingleton<_i956.IRepositoryMarchant>(
+      () => _i772.ImpRepositoryMarchant(
+        marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
+      ),
     );
     gh.lazySingleton<_i283.IRepositoryAuthen>(
       () => _i417.RepositoriesAuthenImple(
         firebaseRemoteService: gh<_i505.FirebaseRemoteService>(),
+      ),
+    );
+    gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
+      () => _i774.GetActifCompteInformationUsercase(
+        gh<_i956.IRepositoryMarchant>(),
       ),
     );
     gh.lazySingleton<_i228.SigninUsercase>(

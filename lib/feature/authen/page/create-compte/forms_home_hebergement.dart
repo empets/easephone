@@ -236,6 +236,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                               margin: EdgeInsets.symmetric(vertical: 9.h),
                               child: ProductionFormCustomer(
                                 textLabel: 'Decription',
+                                letSpace: [],
                                 minLines: 3,
                                 maxLines: 3,
                                 errorText:

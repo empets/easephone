@@ -1,8 +1,46 @@
-
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart'
-    show Align, Alignment, Axis, Border, BorderRadius, BorderRadiusGeometry, BoxDecoration, BoxFit, BoxShape, BuildContext, CircleAvatar, ClipOval, ClipRRect, Color, Colors, Column, Container, CrossAxisAlignment, EdgeInsets, Flexible, FontWeight, Icon, Icons, Image, ListTile, MainAxisAlignment, Material, MediaQuery, Radius, Row, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TickerProviderStateMixin, Widget, PageController;
+    show
+        Align,
+        Alignment,
+        Axis,
+        Border,
+        BorderRadius,
+        BorderRadiusGeometry,
+        BoxDecoration,
+        BoxFit,
+        BoxShape,
+        BuildContext,
+        CircleAvatar,
+        ClipOval,
+        ClipRRect,
+        Color,
+        Colors,
+        Column,
+        Container,
+        CrossAxisAlignment,
+        EdgeInsets,
+        Flexible,
+        FontWeight,
+        Icon,
+        Icons,
+        Image,
+        ListTile,
+        MainAxisAlignment,
+        Material,
+        MediaQuery,
+        Radius,
+        Row,
+        SingleChildScrollView,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Text,
+        TickerProviderStateMixin,
+        Widget,
+        PageController;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +49,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeDetails extends StatefulWidget {
-  const HomeDetails({super.key});
+  const HomeDetails({super.key, required this.profile});
+
+  final ActiveUserProfile profile;
 
   @override
   State<HomeDetails> createState() => _HomeDetailsState();
@@ -19,10 +59,9 @@ class HomeDetails extends StatefulWidget {
 
 class _HomeDetailsState extends State<HomeDetails>
     with TickerProviderStateMixin {
-    PageController controller = PageController();
+  PageController controller = PageController();
 
-    late int currentIdenx = 0;
-
+  late int currentIdenx = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +111,7 @@ class _HomeDetailsState extends State<HomeDetails>
                     children: [
                       SizedBox(height: 10.h),
                       CustomeText(
-                        texte: 'Hôtel Étoile du Vent',
+                        texte: widget.profile.name,
                         texteSize: 18.sp,
                         fontWeight: FontWeight.w600,
                         color: MyColorName.black,
@@ -117,7 +156,7 @@ class _HomeDetailsState extends State<HomeDetails>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 0.2.sh,
                     width: MediaQuery.sizeOf(context).width.sw,
                     child: PageView.builder(
@@ -125,36 +164,36 @@ class _HomeDetailsState extends State<HomeDetails>
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
-                      margin: EdgeInsets.only(right: 6.w),
-                      width: 0.9.sw,
-                      child: ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(7.r),
-                        child: Image.network(
-                          'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?fm=jpg&q=60&w=3000',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                                          );
-                      },)
+                          margin: EdgeInsets.only(right: 6.w),
+                          width: 0.9.sw,
+                          child: ClipRRect(
+                            borderRadius: BorderRadiusGeometry.circular(7.r),
+                            child: Image.network(
+                              'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?fm=jpg&q=60&w=3000',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-              
+
                   Align(
                     alignment: Alignment.centerRight,
                     child: Container(
                       height: 20.h,
                       margin: REdgeInsets.symmetric(vertical: 6.h),
                       child: SmoothPageIndicator(
-                      controller: controller, count: 3,
-                      effect: ColorTransitionEffect(
-                        dotColor: MyColorName.greyMedium,
-                        activeDotColor: Colors.amber,
-                        dotHeight: 6.h
-                      ),
+                        controller: controller,
+                        count: 3,
+                        effect: ColorTransitionEffect(
+                          dotColor: MyColorName.greyMedium,
+                          activeDotColor: Colors.amber,
+                          dotHeight: 6.h,
+                        ),
                       ),
                     ),
                   ),
-
-                  
 
                   Row(
                     children: [
@@ -220,8 +259,7 @@ class _HomeDetailsState extends State<HomeDetails>
                         SizedBox(width: 8.w),
                         Flexible(
                           child: CustomeText(
-                            texte:
-                                'Rue 123, Quartier des Fleurs, Abidjan, Côte d’Ivoire',
+                            texte: widget.profile.adresse,
                             texteSize: 12.sp,
                             color: MyColorName.black,
                             fontWeight: FontWeight.w400,
@@ -246,11 +284,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                       Icons.person_pin,
                                       color: Colors.grey.shade600,
                                       size: 18.sp,
-                                      
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      '+225 88-88-99-10',
+                                      widget.profile.telephone,
                                       style: GoogleFonts.roboto(
                                         color: Colors.grey.shade600,
                                         fontSize: 12.sp,
@@ -268,11 +305,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                       Icons.phone_callback,
                                       color: Colors.grey.shade600,
                                       size: 18.sp,
-                                      
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      '+225 88-88-99-10',
+                                      widget.profile.telephone,
                                       style: GoogleFonts.roboto(
                                         color: Colors.grey.shade600,
                                         fontSize: 12.sp,
@@ -314,11 +350,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                           Icons.bed_rounded,
                                           color: Colors.grey.shade600,
                                           size: 18.sp,
-                                          
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Lit',
+                                          'Lit: ${widget.profile.averageBed}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
                                             fontSize: 12.sp,
@@ -341,12 +376,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                           color: Colors.grey.shade600,
                                           size: 18.sp,
                                           opticalSize: 12,
-                                          
-                                       
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Roome',
+                                          'Roome:${widget.profile.roomNumber}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
                                             fontSize: 12.sp,
@@ -367,14 +400,13 @@ class _HomeDetailsState extends State<HomeDetails>
                                           Icons.restaurant_menu_sharp,
                                           color: Colors.grey.shade600,
                                           size: 18.sp,
-                                       
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Roome',
+                                          'Roome:${widget.profile.option}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
-                                            fontSize: 12.sp,
+                                            fontSize: 1.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -405,8 +437,7 @@ class _HomeDetailsState extends State<HomeDetails>
                         height: 0.1.sh,
                         margin: EdgeInsets.only(top: 5.h),
                         child: CustomeText(
-                          texte:
-                              'aliquip ex ea cfficia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquip ex ea cfficia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                          texte: widget.profile.description,
                           texteSize: 12.sp,
                           fontWeight: FontWeight.w300,
                           letterSpacing: 0.1.sp,
@@ -428,14 +459,11 @@ class _HomeDetailsState extends State<HomeDetails>
                             ),
                           ),
                           SizedBox(width: 5.w),
-                          Icon(
-                            Icons.edit_outlined,
-                            color: Colors.amber,
-                          ),
+                          Icon(Icons.edit_outlined, color: Colors.amber),
                         ],
                       ),
 
-                      Container(
+                      SizedBox(
                         height: 0.19.sh,
                         // color: MyColorName.greyMedium,
                         child: SingleChildScrollView(
@@ -446,8 +474,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                 (index) => Container(
                                   margin: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
-                                    color: MyColorName.cardBorder.withValues(alpha: 0.3),
-                                    borderRadius: BorderRadius.circular(6.r)
+                                    color: MyColorName.cardBorder.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    borderRadius: BorderRadius.circular(6.r),
                                   ),
                                   child: ListTile(
                                     title: CustomeText(
@@ -507,7 +537,7 @@ class _HomeDetailsState extends State<HomeDetails>
                             ),
                           ),
                           SizedBox(width: 5.w),
-                          Icon(Icons.room_rounded, color: Colors.amber,),
+                          Icon(Icons.room_rounded, color: Colors.amber),
                         ],
                       ),
 
@@ -595,7 +625,6 @@ class _HomeDetailsState extends State<HomeDetails>
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ],

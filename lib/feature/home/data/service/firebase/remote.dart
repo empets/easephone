@@ -1,39 +1,44 @@
-// import 'package:com.example.epbomi/core/data_process/request/request.dart';
-// import 'package:com.example.epbomi/core/data_process/success.dart';
-// import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
-// import 'package:injectable/injectable.dart';
-// import 'package:firebase_database/firebase_database.dart' as databaseRf;
+import 'dart:developer';
+import 'package:com.example.epbomi/core/data_process/success.dart';
+import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
+import 'package:injectable/injectable.dart';
+import 'package:firebase_database/firebase_database.dart' as databaseRf;
 
-// abstract class ImarchanService {
-//   Future<FirebaseResult<String?>> createCompte(RequestAuthen params);
-// }
+abstract class MarchanServiceFirebase {
+  // cette mehode permet d'obtenir les information sur un compte actf
+  Future<FirebaseResult<List<ActiveUserProfileModel>>>
+  getActifUserInformationAboutCompte();
+}
 
-// @LazySingleton(as: ImarchanService)
-// class ImpleImarchantService implements ImarchanService {
-//   ImpleImarchantService({required this.db});
+@LazySingleton(as: MarchanServiceFirebase)
+class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
+  ImpleMarchantServiceFirebase({required this.db});
 
-//   final databaseRf.DatabaseReference db;
+  final databaseRf.DatabaseReference db;
 
-//   @override
-//   Future<FirebaseResult<String?>> createCompte(RequestAuthen params) async {
-//     try {
-//       // 1) Construire l'objet Request
-//       final request = Request<RequestAuthen>(
-//         data: params.toJson(),
-//         user: "",
-//         serviceLibelle: 'serviceLibelle',
-//       );
+  @override
+  Future<FirebaseResult<List<ActiveUserProfileModel>>>
+  getActifUserInformationAboutCompte() async {
+    try {
+      final snapshot = await db.child('hotel').get();
 
-//       // 2) Créer une nouvelle entrée
-//       final ref = db.push();
+      final flatUsers = (snapshot.value as Map).values.map((e) {
+        final m = Map<String, dynamic>.from(e as Map);
+        return {...m, ...Map<String, dynamic>.from(m.remove('herBer') ?? {})};
+      }).toList();
 
-//       // 3) Sauvegarder dans Firebase (en convertissant en Map)
-//       await ref.set(request.data);
+      log('data:::::::  $flatUsers');
 
-//       // 4) Retourner le key généré
-//       return FirebaseSuccess(ref.key);
-//     } catch (e) {
-//       return FirebaseError(e.toString());
-//     }
-//   }
-// }
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseError("Aucune donnée trouvée");
+      }
+      final userProfile = (snapshot.value as Map).values.map((e) {
+        return ActiveUserProfileModel.fromJson(Map<String, dynamic>.from(e));
+      }).toList();
+
+      return FirebaseSuccess(userProfile);
+    } catch (e) {
+      return FirebaseError(e.toString());
+    }
+  }
+}
