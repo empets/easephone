@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CreateCompteState {
 
- TextFormz get nomResidence; TextFormz get specialite; TextFormz get telephone; TextFormz get adresse; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
+ TextFormz get nomResidence; TextFormz get specialite; TextFormz get telephone; TextFormz get adresse; TextFormz get lat; TextFormz get long; TextFormz get whatsapp; TextFormz get facebok; TextFormz get email; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
 /// Create a copy of CreateCompteState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CreateCompteStateCopyWith<CreateCompteState> get copyWith => _$CreateCompteStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteState&&(identical(other.nomResidence, nomResidence) || other.nomResidence == nomResidence)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteState&&(identical(other.nomResidence, nomResidence) || other.nomResidence == nomResidence)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsapp, whatsapp) || other.whatsapp == whatsapp)&&(identical(other.facebok, facebok) || other.facebok == facebok)&&(identical(other.email, email) || other.email == email)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nomResidence,specialite,telephone,adresse,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,nomResidence,specialite,telephone,adresse,lat,long,whatsapp,facebok,email,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteState(nomResidence: $nomResidence, specialite: $specialite, telephone: $telephone, adresse: $adresse, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteState(nomResidence: $nomResidence, specialite: $specialite, telephone: $telephone, adresse: $adresse, lat: $lat, long: $long, whatsapp: $whatsapp, facebok: $facebok, email: $email, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CreateCompteStateCopyWith<$Res>  {
   factory $CreateCompteStateCopyWith(CreateCompteState value, $Res Function(CreateCompteState) _then) = _$CreateCompteStateCopyWithImpl;
 @useResult
 $Res call({
- TextFormz nomResidence, TextFormz specialite, TextFormz telephone, TextFormz adresse, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz nomResidence, TextFormz specialite, TextFormz telephone, TextFormz adresse, TextFormz lat, TextFormz long, TextFormz whatsapp, TextFormz facebok, TextFormz email, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -62,12 +62,17 @@ class _$CreateCompteStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nomResidence = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nomResidence = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? lat = null,Object? long = null,Object? whatsapp = null,Object? facebok = null,Object? email = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_self.copyWith(
 nomResidence: null == nomResidence ? _self.nomResidence : nomResidence // ignore: cast_nullable_to_non_nullable
 as TextFormz,specialite: null == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
 as TextFormz,telephone: null == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
 as TextFormz,adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as TextFormz,lat: null == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as TextFormz,long: null == long ? _self.long : long // ignore: cast_nullable_to_non_nullable
+as TextFormz,whatsapp: null == whatsapp ? _self.whatsapp : whatsapp // ignore: cast_nullable_to_non_nullable
+as TextFormz,facebok: null == facebok ? _self.facebok : facebok // ignore: cast_nullable_to_non_nullable
+as TextFormz,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
@@ -156,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  TextFormz lat,  TextFormz long,  TextFormz whatsapp,  TextFormz facebok,  TextFormz email,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SCreateCompteState() when $default != null:
-return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.lat,_that.long,_that.whatsapp,_that.facebok,_that.email,_that.status,_that.errorMessage,_that.isValide);case _:
   return orElse();
 
 }
@@ -177,10 +182,10 @@ return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adress
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  TextFormz lat,  TextFormz long,  TextFormz whatsapp,  TextFormz facebok,  TextFormz email,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
 switch (_that) {
 case SCreateCompteState():
-return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.lat,_that.long,_that.whatsapp,_that.facebok,_that.email,_that.status,_that.errorMessage,_that.isValide);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +202,10 @@ return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adress
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz nomResidence,  TextFormz specialite,  TextFormz telephone,  TextFormz adresse,  TextFormz lat,  TextFormz long,  TextFormz whatsapp,  TextFormz facebok,  TextFormz email,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
 switch (_that) {
 case SCreateCompteState() when $default != null:
-return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adresse,_that.lat,_that.long,_that.whatsapp,_that.facebok,_that.email,_that.status,_that.errorMessage,_that.isValide);case _:
   return null;
 
 }
@@ -212,13 +217,18 @@ return $default(_that.nomResidence,_that.specialite,_that.telephone,_that.adress
 
 
 class SCreateCompteState implements CreateCompteState {
-   SCreateCompteState({required this.nomResidence, required this.specialite, required this.telephone, required this.adresse, required this.status, required this.errorMessage, required this.isValide});
+   SCreateCompteState({required this.nomResidence, required this.specialite, required this.telephone, required this.adresse, required this.lat, required this.long, required this.whatsapp, required this.facebok, required this.email, required this.status, required this.errorMessage, required this.isValide});
   
 
 @override final  TextFormz nomResidence;
 @override final  TextFormz specialite;
 @override final  TextFormz telephone;
 @override final  TextFormz adresse;
+@override final  TextFormz lat;
+@override final  TextFormz long;
+@override final  TextFormz whatsapp;
+@override final  TextFormz facebok;
+@override final  TextFormz email;
 @override final  FormzSubmissionStatus status;
 @override final  String errorMessage;
 @override final  bool isValide;
@@ -233,16 +243,16 @@ $SCreateCompteStateCopyWith<SCreateCompteState> get copyWith => _$SCreateCompteS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SCreateCompteState&&(identical(other.nomResidence, nomResidence) || other.nomResidence == nomResidence)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SCreateCompteState&&(identical(other.nomResidence, nomResidence) || other.nomResidence == nomResidence)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsapp, whatsapp) || other.whatsapp == whatsapp)&&(identical(other.facebok, facebok) || other.facebok == facebok)&&(identical(other.email, email) || other.email == email)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nomResidence,specialite,telephone,adresse,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,nomResidence,specialite,telephone,adresse,lat,long,whatsapp,facebok,email,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteState(nomResidence: $nomResidence, specialite: $specialite, telephone: $telephone, adresse: $adresse, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteState(nomResidence: $nomResidence, specialite: $specialite, telephone: $telephone, adresse: $adresse, lat: $lat, long: $long, whatsapp: $whatsapp, facebok: $facebok, email: $email, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -253,7 +263,7 @@ abstract mixin class $SCreateCompteStateCopyWith<$Res> implements $CreateCompteS
   factory $SCreateCompteStateCopyWith(SCreateCompteState value, $Res Function(SCreateCompteState) _then) = _$SCreateCompteStateCopyWithImpl;
 @override @useResult
 $Res call({
- TextFormz nomResidence, TextFormz specialite, TextFormz telephone, TextFormz adresse, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz nomResidence, TextFormz specialite, TextFormz telephone, TextFormz adresse, TextFormz lat, TextFormz long, TextFormz whatsapp, TextFormz facebok, TextFormz email, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -270,12 +280,17 @@ class _$SCreateCompteStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nomResidence = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nomResidence = null,Object? specialite = null,Object? telephone = null,Object? adresse = null,Object? lat = null,Object? long = null,Object? whatsapp = null,Object? facebok = null,Object? email = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(SCreateCompteState(
 nomResidence: null == nomResidence ? _self.nomResidence : nomResidence // ignore: cast_nullable_to_non_nullable
 as TextFormz,specialite: null == specialite ? _self.specialite : specialite // ignore: cast_nullable_to_non_nullable
 as TextFormz,telephone: null == telephone ? _self.telephone : telephone // ignore: cast_nullable_to_non_nullable
 as TextFormz,adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as TextFormz,lat: null == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as TextFormz,long: null == long ? _self.long : long // ignore: cast_nullable_to_non_nullable
+as TextFormz,whatsapp: null == whatsapp ? _self.whatsapp : whatsapp // ignore: cast_nullable_to_non_nullable
+as TextFormz,facebok: null == facebok ? _self.facebok : facebok // ignore: cast_nullable_to_non_nullable
+as TextFormz,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable

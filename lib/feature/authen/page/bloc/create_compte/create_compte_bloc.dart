@@ -34,6 +34,11 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               state.specialite,
               state.telephone,
               state.adresse,
+              state.lat,
+              state.long,
+              state.whatsapp,
+              state.facebok,
+              state.email
             ]),
           ),
         );
@@ -49,6 +54,11 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               state.nomResidence,
               state.telephone,
               state.adresse,
+              state.lat,
+              state.long,
+              state.whatsapp,
+              state.facebok,
+              state.email
             ]),
           ),
         );
@@ -64,6 +74,11 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               state.nomResidence,
               state.specialite,
               state.adresse,
+              state.lat,
+              state.long,
+              state.whatsapp,
+              state.facebok,
+              state.email
             ]),
           ),
         );
@@ -79,11 +94,118 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               state.nomResidence,
               state.specialite,
               state.telephone,
+              state.lat,
+              state.long,
+              state.whatsapp,
+              state.facebok,
+              state.email
             ]),
           ),
         );
         break;
 
+      case ChangeLatCompteEvent(:final lat):
+        emit(
+          state.copyWith(
+            lat: TextFormz.dirty(lat),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(lat),
+              state.adresse,
+              state.nomResidence,
+              state.specialite,
+              state.telephone,
+              state.long,
+              state.whatsapp,
+              state.facebok,
+              state.email
+            ]),
+          ),
+        );
+        break;
+        
+        case ChangelongCompteEvent(:final long):
+        emit(
+          state.copyWith(
+            long: TextFormz.dirty(long),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(long),
+              state.lat,
+              state.adresse,
+              state.nomResidence,
+              state.specialite,
+              state.telephone,
+              state.whatsapp,
+              state.facebok,
+              state.email
+            ]),
+          ),
+        );
+        break;
+
+
+       case ChangeWhatsappCompteEvent(:final whatsapp):
+        emit(
+          state.copyWith(
+            whatsapp: TextFormz.dirty(whatsapp),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(whatsapp),
+              state.long,
+              state.lat,
+              state.adresse,
+              state.nomResidence,
+              state.specialite,
+              state.telephone,
+              state.facebok,
+              state.email
+            ]),
+          ),
+        );
+        break;
+
+       case ChangeFacbokLinckCompteEvent(:final facebok):
+        emit(
+          state.copyWith(
+            facebok: TextFormz.dirty(facebok),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(facebok),
+              state.whatsapp,
+              state.long,
+              state.lat,
+              state.adresse,
+              state.nomResidence,
+              state.specialite,
+              state.telephone,
+              state.email
+            ]),
+          ),
+        );
+        break;
+
+      case ChangeEmailCreateCompteEvent(:final email):
+        emit(
+          state.copyWith(
+            email: TextFormz.dirty(email),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(email),
+              state.facebok,
+              state.whatsapp,
+              state.long,
+              state.lat,
+              state.adresse,
+              state.nomResidence,
+              state.specialite,
+              state.telephone,
+            
+            ]),
+          ),
+        );
+        break;
+      
       case SubmitCreateCompteEvent():
         if (state.isValide) {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -98,8 +220,14 @@ class CreateCompteBloc extends Bloc<CreateCompteEvent, CreateCompteState> {
               name: state.nomResidence.value,
               specialite: state.specialite.value,
               telephone: state.telephone.value,
-              email: 'ppp',
+              email: state.email.value,
               autherKey: localUserSection,
+              formOne: 'success',
+              lat: state.lat.value,
+              long: state.long.value,
+              whatsappContact: state.whatsapp.value,
+              facebookLinck: state.facebok.value,
+              
             ),
           );
 
@@ -203,6 +331,7 @@ class CreateCompteHBloc
               roomNumber: state.roomNumber.value,
               option: state.selectedOption.value,
               description: state.description.value,
+              formTwo: 'success'
             ),
           );
 

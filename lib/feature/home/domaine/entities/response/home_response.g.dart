@@ -20,6 +20,12 @@ _SActiveUserProfile _$SActiveUserProfileFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       option: json['option'] as String,
       roomNumber: json['roomNumber'] as String,
+      facebookLinck: json['facebookLinck'] as String,
+      lat: json['lat'] as String,
+      long: json['long'] as String,
+      whatsappContact: json['whatsappContact'] as String,
+      formOne: json['formOne'] as String,
+      formTwo: json['formTwo'] as String,
     );
 
 Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
@@ -36,4 +42,19 @@ Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
       'description': instance.description,
       'option': instance.option,
       'roomNumber': instance.roomNumber,
+      'facebookLinck': instance.facebookLinck,
+      'lat': instance.lat,
+      'long': instance.long,
+      'whatsappContact': instance.whatsappContact,
+      'formOne': instance.formOne,
+      'formTwo': instance.formTwo,
     };
+
+_SLikeResponse _$SLikeResponseFromJson(Map<String, dynamic> json) =>
+    _SLikeResponse(
+      compter: (json['compter'] as num).toInt(),
+      userId: json['userId'] as String,
+    );
+
+Map<String, dynamic> _$SLikeResponseToJson(_SLikeResponse instance) =>
+    <String, dynamic>{'compter': instance.compter, 'userId': instance.userId};

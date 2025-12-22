@@ -37,8 +37,11 @@ import '../../feature/home/data/repository/imp_repository_marchant.dart'
 import '../../feature/home/data/service/firebase/remote.dart' as _i35;
 import '../../feature/home/domaine/repository/i_repository_marchant.dart'
     as _i956;
+import '../../feature/home/domaine/usercase/dis_like_profile_usercase.dart'
+    as _i331;
 import '../../feature/home/domaine/usercase/get_actif_compte_information_usercase.dart'
     as _i774;
+import '../../feature/home/domaine/usercase/liker_profile.dart' as _i21;
 import '../../router/app_route.dart' as _i574;
 import '../../router/bloc/app_bloc.dart' as _i908;
 import 'injection_container.dart' as _i809;
@@ -82,6 +85,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i956.IRepositoryMarchant>(),
       ),
     );
+    gh.lazySingleton<_i21.LikeProfileUsercase>(
+      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
+      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
     gh.lazySingleton<_i228.SigninUsercase>(
       () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
     );
@@ -91,11 +100,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i933.AuthenByMailUsercase>(
       () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
-      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
     gh.lazySingleton<_i973.GetUserProfileUsercase>(
       () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
+      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i622.AuthByMailBloc>(
       () => _i622.AuthByMailBloc(

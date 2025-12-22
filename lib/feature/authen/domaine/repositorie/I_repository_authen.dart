@@ -1,7 +1,4 @@
 import 'package:com.example.epbomi/core/data_process/failure.dart';
-import 'package:com.example.epbomi/core/usercase/usercase.dart';
-import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
-// ignore: unused_import
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:dartz/dartz.dart';
@@ -25,6 +22,12 @@ abstract class IRepositoryAuthen {
   );
 
   //creation de compte marchant
-  Future<Either<Failure, ProfileUser>> getProfileUser(
-  );
+  Future<Either<Failure, ProfileUser>> getProfileUser();
+  // current position
+  //  Future<Either<Failure, LocationData?>> getLocation();
+
+  //    Future< Either<Failure, Coordonne>> searchLocationByLatLng(
+  //   double lat,
+  //   double lon,
+  // );
 }

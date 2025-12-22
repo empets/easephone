@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
@@ -15,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RepositoriesAuthenImple implements IRepositoryAuthen {
   RepositoriesAuthenImple({required this.firebaseRemoteService});
   final FirebaseRemoteService firebaseRemoteService;
+
 
   @override
   Future<Either<Failure, String?>> userAuthen(RequestAuthen request) async {
@@ -83,4 +83,8 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
+  
+
+
+
 }

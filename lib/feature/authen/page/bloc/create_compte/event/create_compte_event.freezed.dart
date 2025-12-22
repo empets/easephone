@@ -55,14 +55,19 @@ extension CreateCompteEventPatterns on CreateCompteEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeResidenceNameCreateCompteEvent value)?  changeResidenceName,TResult Function( ChangeSpecialiteCreateCompteEvent value)?  changeSpecialite,TResult Function( ChangeTelephoneCreateCompteEvent value)?  changeTelephone,TResult Function( ChangeAdresseCreateCompteEvent value)?  changeAdresse,TResult Function( SubmitCreateCompteEvent value)?  submit,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeResidenceNameCreateCompteEvent value)?  changeResidenceName,TResult Function( ChangeSpecialiteCreateCompteEvent value)?  changeSpecialite,TResult Function( ChangeTelephoneCreateCompteEvent value)?  changeTelephone,TResult Function( ChangeAdresseCreateCompteEvent value)?  changeAdresse,TResult Function( ChangeLatCompteEvent value)?  changeLat,TResult Function( ChangelongCompteEvent value)?  changelong,TResult Function( ChangeWhatsappCompteEvent value)?  changeWhatsapp,TResult Function( ChangeFacbokLinckCompteEvent value)?  changeFacbokLinck,TResult Function( ChangeEmailCreateCompteEvent value)?  changeEmail,TResult Function( SubmitCreateCompteEvent value)?  submit,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent() when changeResidenceName != null:
 return changeResidenceName(_that);case ChangeSpecialiteCreateCompteEvent() when changeSpecialite != null:
 return changeSpecialite(_that);case ChangeTelephoneCreateCompteEvent() when changeTelephone != null:
 return changeTelephone(_that);case ChangeAdresseCreateCompteEvent() when changeAdresse != null:
-return changeAdresse(_that);case SubmitCreateCompteEvent() when submit != null:
+return changeAdresse(_that);case ChangeLatCompteEvent() when changeLat != null:
+return changeLat(_that);case ChangelongCompteEvent() when changelong != null:
+return changelong(_that);case ChangeWhatsappCompteEvent() when changeWhatsapp != null:
+return changeWhatsapp(_that);case ChangeFacbokLinckCompteEvent() when changeFacbokLinck != null:
+return changeFacbokLinck(_that);case ChangeEmailCreateCompteEvent() when changeEmail != null:
+return changeEmail(_that);case SubmitCreateCompteEvent() when submit != null:
 return submit(_that);case _:
   return orElse();
 
@@ -81,14 +86,19 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeResidenceNameCreateCompteEvent value)  changeResidenceName,required TResult Function( ChangeSpecialiteCreateCompteEvent value)  changeSpecialite,required TResult Function( ChangeTelephoneCreateCompteEvent value)  changeTelephone,required TResult Function( ChangeAdresseCreateCompteEvent value)  changeAdresse,required TResult Function( SubmitCreateCompteEvent value)  submit,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeResidenceNameCreateCompteEvent value)  changeResidenceName,required TResult Function( ChangeSpecialiteCreateCompteEvent value)  changeSpecialite,required TResult Function( ChangeTelephoneCreateCompteEvent value)  changeTelephone,required TResult Function( ChangeAdresseCreateCompteEvent value)  changeAdresse,required TResult Function( ChangeLatCompteEvent value)  changeLat,required TResult Function( ChangelongCompteEvent value)  changelong,required TResult Function( ChangeWhatsappCompteEvent value)  changeWhatsapp,required TResult Function( ChangeFacbokLinckCompteEvent value)  changeFacbokLinck,required TResult Function( ChangeEmailCreateCompteEvent value)  changeEmail,required TResult Function( SubmitCreateCompteEvent value)  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent():
 return changeResidenceName(_that);case ChangeSpecialiteCreateCompteEvent():
 return changeSpecialite(_that);case ChangeTelephoneCreateCompteEvent():
 return changeTelephone(_that);case ChangeAdresseCreateCompteEvent():
-return changeAdresse(_that);case SubmitCreateCompteEvent():
+return changeAdresse(_that);case ChangeLatCompteEvent():
+return changeLat(_that);case ChangelongCompteEvent():
+return changelong(_that);case ChangeWhatsappCompteEvent():
+return changeWhatsapp(_that);case ChangeFacbokLinckCompteEvent():
+return changeFacbokLinck(_that);case ChangeEmailCreateCompteEvent():
+return changeEmail(_that);case SubmitCreateCompteEvent():
 return submit(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -106,14 +116,19 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeResidenceNameCreateCompteEvent value)?  changeResidenceName,TResult? Function( ChangeSpecialiteCreateCompteEvent value)?  changeSpecialite,TResult? Function( ChangeTelephoneCreateCompteEvent value)?  changeTelephone,TResult? Function( ChangeAdresseCreateCompteEvent value)?  changeAdresse,TResult? Function( SubmitCreateCompteEvent value)?  submit,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeResidenceNameCreateCompteEvent value)?  changeResidenceName,TResult? Function( ChangeSpecialiteCreateCompteEvent value)?  changeSpecialite,TResult? Function( ChangeTelephoneCreateCompteEvent value)?  changeTelephone,TResult? Function( ChangeAdresseCreateCompteEvent value)?  changeAdresse,TResult? Function( ChangeLatCompteEvent value)?  changeLat,TResult? Function( ChangelongCompteEvent value)?  changelong,TResult? Function( ChangeWhatsappCompteEvent value)?  changeWhatsapp,TResult? Function( ChangeFacbokLinckCompteEvent value)?  changeFacbokLinck,TResult? Function( ChangeEmailCreateCompteEvent value)?  changeEmail,TResult? Function( SubmitCreateCompteEvent value)?  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent() when changeResidenceName != null:
 return changeResidenceName(_that);case ChangeSpecialiteCreateCompteEvent() when changeSpecialite != null:
 return changeSpecialite(_that);case ChangeTelephoneCreateCompteEvent() when changeTelephone != null:
 return changeTelephone(_that);case ChangeAdresseCreateCompteEvent() when changeAdresse != null:
-return changeAdresse(_that);case SubmitCreateCompteEvent() when submit != null:
+return changeAdresse(_that);case ChangeLatCompteEvent() when changeLat != null:
+return changeLat(_that);case ChangelongCompteEvent() when changelong != null:
+return changelong(_that);case ChangeWhatsappCompteEvent() when changeWhatsapp != null:
+return changeWhatsapp(_that);case ChangeFacbokLinckCompteEvent() when changeFacbokLinck != null:
+return changeFacbokLinck(_that);case ChangeEmailCreateCompteEvent() when changeEmail != null:
+return changeEmail(_that);case SubmitCreateCompteEvent() when submit != null:
 return submit(_that);case _:
   return null;
 
@@ -131,13 +146,18 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String name)?  changeResidenceName,TResult Function( String specialite)?  changeSpecialite,TResult Function( String telephone)?  changeTelephone,TResult Function( String adresse)?  changeAdresse,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String name)?  changeResidenceName,TResult Function( String specialite)?  changeSpecialite,TResult Function( String telephone)?  changeTelephone,TResult Function( String adresse)?  changeAdresse,TResult Function( String lat)?  changeLat,TResult Function( String long)?  changelong,TResult Function( String whatsapp)?  changeWhatsapp,TResult Function( String facebok)?  changeFacbokLinck,TResult Function( String email)?  changeEmail,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent() when changeResidenceName != null:
 return changeResidenceName(_that.name);case ChangeSpecialiteCreateCompteEvent() when changeSpecialite != null:
 return changeSpecialite(_that.specialite);case ChangeTelephoneCreateCompteEvent() when changeTelephone != null:
 return changeTelephone(_that.telephone);case ChangeAdresseCreateCompteEvent() when changeAdresse != null:
-return changeAdresse(_that.adresse);case SubmitCreateCompteEvent() when submit != null:
+return changeAdresse(_that.adresse);case ChangeLatCompteEvent() when changeLat != null:
+return changeLat(_that.lat);case ChangelongCompteEvent() when changelong != null:
+return changelong(_that.long);case ChangeWhatsappCompteEvent() when changeWhatsapp != null:
+return changeWhatsapp(_that.whatsapp);case ChangeFacbokLinckCompteEvent() when changeFacbokLinck != null:
+return changeFacbokLinck(_that.facebok);case ChangeEmailCreateCompteEvent() when changeEmail != null:
+return changeEmail(_that.email);case SubmitCreateCompteEvent() when submit != null:
 return submit();case _:
   return orElse();
 
@@ -156,13 +176,18 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String name)  changeResidenceName,required TResult Function( String specialite)  changeSpecialite,required TResult Function( String telephone)  changeTelephone,required TResult Function( String adresse)  changeAdresse,required TResult Function()  submit,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String name)  changeResidenceName,required TResult Function( String specialite)  changeSpecialite,required TResult Function( String telephone)  changeTelephone,required TResult Function( String adresse)  changeAdresse,required TResult Function( String lat)  changeLat,required TResult Function( String long)  changelong,required TResult Function( String whatsapp)  changeWhatsapp,required TResult Function( String facebok)  changeFacbokLinck,required TResult Function( String email)  changeEmail,required TResult Function()  submit,}) {final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent():
 return changeResidenceName(_that.name);case ChangeSpecialiteCreateCompteEvent():
 return changeSpecialite(_that.specialite);case ChangeTelephoneCreateCompteEvent():
 return changeTelephone(_that.telephone);case ChangeAdresseCreateCompteEvent():
-return changeAdresse(_that.adresse);case SubmitCreateCompteEvent():
+return changeAdresse(_that.adresse);case ChangeLatCompteEvent():
+return changeLat(_that.lat);case ChangelongCompteEvent():
+return changelong(_that.long);case ChangeWhatsappCompteEvent():
+return changeWhatsapp(_that.whatsapp);case ChangeFacbokLinckCompteEvent():
+return changeFacbokLinck(_that.facebok);case ChangeEmailCreateCompteEvent():
+return changeEmail(_that.email);case SubmitCreateCompteEvent():
 return submit();case _:
   throw StateError('Unexpected subclass');
 
@@ -180,13 +205,18 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String name)?  changeResidenceName,TResult? Function( String specialite)?  changeSpecialite,TResult? Function( String telephone)?  changeTelephone,TResult? Function( String adresse)?  changeAdresse,TResult? Function()?  submit,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String name)?  changeResidenceName,TResult? Function( String specialite)?  changeSpecialite,TResult? Function( String telephone)?  changeTelephone,TResult? Function( String adresse)?  changeAdresse,TResult? Function( String lat)?  changeLat,TResult? Function( String long)?  changelong,TResult? Function( String whatsapp)?  changeWhatsapp,TResult? Function( String facebok)?  changeFacbokLinck,TResult? Function( String email)?  changeEmail,TResult? Function()?  submit,}) {final _that = this;
 switch (_that) {
 case ChangeResidenceNameCreateCompteEvent() when changeResidenceName != null:
 return changeResidenceName(_that.name);case ChangeSpecialiteCreateCompteEvent() when changeSpecialite != null:
 return changeSpecialite(_that.specialite);case ChangeTelephoneCreateCompteEvent() when changeTelephone != null:
 return changeTelephone(_that.telephone);case ChangeAdresseCreateCompteEvent() when changeAdresse != null:
-return changeAdresse(_that.adresse);case SubmitCreateCompteEvent() when submit != null:
+return changeAdresse(_that.adresse);case ChangeLatCompteEvent() when changeLat != null:
+return changeLat(_that.lat);case ChangelongCompteEvent() when changelong != null:
+return changelong(_that.long);case ChangeWhatsappCompteEvent() when changeWhatsapp != null:
+return changeWhatsapp(_that.whatsapp);case ChangeFacbokLinckCompteEvent() when changeFacbokLinck != null:
+return changeFacbokLinck(_that.facebok);case ChangeEmailCreateCompteEvent() when changeEmail != null:
+return changeEmail(_that.email);case SubmitCreateCompteEvent() when submit != null:
 return submit();case _:
   return null;
 
@@ -452,6 +482,336 @@ class _$ChangeAdresseCreateCompteEventCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? adresse = null,}) {
   return _then(ChangeAdresseCreateCompteEvent(
 null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeLatCompteEvent implements CreateCompteEvent {
+  const ChangeLatCompteEvent(this.lat);
+  
+
+ final  String lat;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeLatCompteEventCopyWith<ChangeLatCompteEvent> get copyWith => _$ChangeLatCompteEventCopyWithImpl<ChangeLatCompteEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeLatCompteEvent&&(identical(other.lat, lat) || other.lat == lat));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,lat);
+
+@override
+String toString() {
+  return 'CreateCompteEvent.changeLat(lat: $lat)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeLatCompteEventCopyWith<$Res> implements $CreateCompteEventCopyWith<$Res> {
+  factory $ChangeLatCompteEventCopyWith(ChangeLatCompteEvent value, $Res Function(ChangeLatCompteEvent) _then) = _$ChangeLatCompteEventCopyWithImpl;
+@useResult
+$Res call({
+ String lat
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeLatCompteEventCopyWithImpl<$Res>
+    implements $ChangeLatCompteEventCopyWith<$Res> {
+  _$ChangeLatCompteEventCopyWithImpl(this._self, this._then);
+
+  final ChangeLatCompteEvent _self;
+  final $Res Function(ChangeLatCompteEvent) _then;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? lat = null,}) {
+  return _then(ChangeLatCompteEvent(
+null == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangelongCompteEvent implements CreateCompteEvent {
+  const ChangelongCompteEvent(this.long);
+  
+
+ final  String long;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangelongCompteEventCopyWith<ChangelongCompteEvent> get copyWith => _$ChangelongCompteEventCopyWithImpl<ChangelongCompteEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangelongCompteEvent&&(identical(other.long, long) || other.long == long));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,long);
+
+@override
+String toString() {
+  return 'CreateCompteEvent.changelong(long: $long)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangelongCompteEventCopyWith<$Res> implements $CreateCompteEventCopyWith<$Res> {
+  factory $ChangelongCompteEventCopyWith(ChangelongCompteEvent value, $Res Function(ChangelongCompteEvent) _then) = _$ChangelongCompteEventCopyWithImpl;
+@useResult
+$Res call({
+ String long
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangelongCompteEventCopyWithImpl<$Res>
+    implements $ChangelongCompteEventCopyWith<$Res> {
+  _$ChangelongCompteEventCopyWithImpl(this._self, this._then);
+
+  final ChangelongCompteEvent _self;
+  final $Res Function(ChangelongCompteEvent) _then;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? long = null,}) {
+  return _then(ChangelongCompteEvent(
+null == long ? _self.long : long // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeWhatsappCompteEvent implements CreateCompteEvent {
+  const ChangeWhatsappCompteEvent(this.whatsapp);
+  
+
+ final  String whatsapp;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeWhatsappCompteEventCopyWith<ChangeWhatsappCompteEvent> get copyWith => _$ChangeWhatsappCompteEventCopyWithImpl<ChangeWhatsappCompteEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeWhatsappCompteEvent&&(identical(other.whatsapp, whatsapp) || other.whatsapp == whatsapp));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,whatsapp);
+
+@override
+String toString() {
+  return 'CreateCompteEvent.changeWhatsapp(whatsapp: $whatsapp)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeWhatsappCompteEventCopyWith<$Res> implements $CreateCompteEventCopyWith<$Res> {
+  factory $ChangeWhatsappCompteEventCopyWith(ChangeWhatsappCompteEvent value, $Res Function(ChangeWhatsappCompteEvent) _then) = _$ChangeWhatsappCompteEventCopyWithImpl;
+@useResult
+$Res call({
+ String whatsapp
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeWhatsappCompteEventCopyWithImpl<$Res>
+    implements $ChangeWhatsappCompteEventCopyWith<$Res> {
+  _$ChangeWhatsappCompteEventCopyWithImpl(this._self, this._then);
+
+  final ChangeWhatsappCompteEvent _self;
+  final $Res Function(ChangeWhatsappCompteEvent) _then;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? whatsapp = null,}) {
+  return _then(ChangeWhatsappCompteEvent(
+null == whatsapp ? _self.whatsapp : whatsapp // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeFacbokLinckCompteEvent implements CreateCompteEvent {
+  const ChangeFacbokLinckCompteEvent(this.facebok);
+  
+
+ final  String facebok;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeFacbokLinckCompteEventCopyWith<ChangeFacbokLinckCompteEvent> get copyWith => _$ChangeFacbokLinckCompteEventCopyWithImpl<ChangeFacbokLinckCompteEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeFacbokLinckCompteEvent&&(identical(other.facebok, facebok) || other.facebok == facebok));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,facebok);
+
+@override
+String toString() {
+  return 'CreateCompteEvent.changeFacbokLinck(facebok: $facebok)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeFacbokLinckCompteEventCopyWith<$Res> implements $CreateCompteEventCopyWith<$Res> {
+  factory $ChangeFacbokLinckCompteEventCopyWith(ChangeFacbokLinckCompteEvent value, $Res Function(ChangeFacbokLinckCompteEvent) _then) = _$ChangeFacbokLinckCompteEventCopyWithImpl;
+@useResult
+$Res call({
+ String facebok
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeFacbokLinckCompteEventCopyWithImpl<$Res>
+    implements $ChangeFacbokLinckCompteEventCopyWith<$Res> {
+  _$ChangeFacbokLinckCompteEventCopyWithImpl(this._self, this._then);
+
+  final ChangeFacbokLinckCompteEvent _self;
+  final $Res Function(ChangeFacbokLinckCompteEvent) _then;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? facebok = null,}) {
+  return _then(ChangeFacbokLinckCompteEvent(
+null == facebok ? _self.facebok : facebok // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeEmailCreateCompteEvent implements CreateCompteEvent {
+  const ChangeEmailCreateCompteEvent(this.email);
+  
+
+ final  String email;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeEmailCreateCompteEventCopyWith<ChangeEmailCreateCompteEvent> get copyWith => _$ChangeEmailCreateCompteEventCopyWithImpl<ChangeEmailCreateCompteEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeEmailCreateCompteEvent&&(identical(other.email, email) || other.email == email));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,email);
+
+@override
+String toString() {
+  return 'CreateCompteEvent.changeEmail(email: $email)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeEmailCreateCompteEventCopyWith<$Res> implements $CreateCompteEventCopyWith<$Res> {
+  factory $ChangeEmailCreateCompteEventCopyWith(ChangeEmailCreateCompteEvent value, $Res Function(ChangeEmailCreateCompteEvent) _then) = _$ChangeEmailCreateCompteEventCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeEmailCreateCompteEventCopyWithImpl<$Res>
+    implements $ChangeEmailCreateCompteEventCopyWith<$Res> {
+  _$ChangeEmailCreateCompteEventCopyWithImpl(this._self, this._then);
+
+  final ChangeEmailCreateCompteEvent _self;
+  final $Res Function(ChangeEmailCreateCompteEvent) _then;
+
+/// Create a copy of CreateCompteEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(ChangeEmailCreateCompteEvent(
+null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

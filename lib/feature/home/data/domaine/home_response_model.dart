@@ -19,6 +19,13 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
     required String? description,
     required String? option,
     required String? roomNumber,
+    required String? facebookLinck,
+    required String? lat,
+    required String? long,
+    required String? whatsappContact,
+    required String? formOne,
+    required String? formTwo,
+    // required String? formTherd,
   }) = _SActiveUserProfileModel;
 
   factory ActiveUserProfileModel.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +45,29 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
       description: model.description.getOrEmpty(),
       option: model.option.getOrEmpty(),
       roomNumber: model.roomNumber.getOrEmpty(),
+      facebookLinck: model.facebookLinck.getOrEmpty(),
+      lat: model.lat.getOrEmpty(),
+      long: model.long.getOrEmpty(),
+      whatsappContact: model.whatsappContact.getOrEmpty(),
+      formOne: model.formOne.getOrEmpty(),
+      formTwo: model.formTwo.getOrEmpty(),
+      // formTherd: model.formTherd.getOrEmpty(),
+    );
+  }
+}
+
+@freezed
+abstract class LikeResponseModel with _$LikeResponseModel {
+  factory LikeResponseModel({required int compter, required String userId}) =
+      _SLikeResponseModel;
+
+  factory LikeResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$LikeResponseModelFromJson(json);
+
+  static LikeResponse toDomaine(LikeResponseModel model) {
+    return LikeResponse(
+      compter: model.compter.getOrEmpty(),
+      userId: model.userId.getOrEmpty(),
     );
   }
 }

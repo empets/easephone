@@ -3,7 +3,6 @@ import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 /// AppBar personnalisée avec bouton retour et icônes d'actions
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -48,12 +47,7 @@ class CustomLeading extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              if (context.canPop()) {
-                Navigator.pop(context);
-              } else {
-                // context.go(PageRoutes.home);
-                Navigator.pop(context);
-              }
+              Navigator.pop(context);
             },
             icon: SvgPicture.asset(
               MyAssets.icons.iconArrowFelt.path,

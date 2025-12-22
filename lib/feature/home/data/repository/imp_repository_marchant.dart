@@ -2,6 +2,7 @@ import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:com.example.epbomi/feature/home/data/service/firebase/remote.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/repository/i_repository_marchant.dart';
 import 'package:dartz/dartz.dart';
@@ -17,11 +18,35 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
   @override
   Future<Either<Failure, List<ActiveUserProfile>>>
   getActifUserInformationAboutCompte() async {
-    final response = await marchanServiceFirebase.getActifUserInformationAboutCompte();
+    final response = await marchanServiceFirebase
+        .getActifUserInformationAboutCompte();
     if (response is FirebaseSuccess<List<ActiveUserProfileModel>>) {
       return Right(
         response.data.map(ActiveUserProfileModel.toDomaine).toList(),
       );
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  // cette methode permet de liker un profile
+  @override
+  Future<Either<Failure, String?>> like(RequestLike request) async {
+    final response = await marchanServiceFirebase.likeProfile(request);
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  @override
+  Future<Either<Failure, void>> dislike(RequestLike request) async {
+    final response = await marchanServiceFirebase.likeProfile(request);
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
     } else if (response is FirebaseError) {
       return Left(Failure(message: response.toString()));
     }

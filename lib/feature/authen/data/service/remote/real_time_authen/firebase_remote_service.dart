@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
@@ -138,11 +137,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       //   serviceLibelle: '',
       // );
       // log('************$userKey');
-        final Map<String, dynamic> updates = {
-    ...params.toJson(),          // nouveaux champs simples
-    'serviceLibelle': '',
-    'user': localUserSection.toString(),
-  };
+      final Map<String, dynamic> updates = {
+        ...params.toJson(), // nouveaux champs simples
+        'serviceLibelle': '',
+        'user': localUserSection.toString(),
+      };
       // 2) Créer une nouvelle entrée
       await db.child('hotel/$userKey').update(updates);
 
@@ -175,11 +174,3 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 }
-
-
-// RequestCreateCompteHomeInformation(
-//         averageBed: params.averageBed,
-//         option: params.option,
-//         description: params.description,
-//         roomNumber: params.roomNumber,
-//       );

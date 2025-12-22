@@ -34,10 +34,12 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
     {
       'title': 'Actif Service de restauration',
       'subtitle': 'Service haut débit avec installation rapide',
+      'value': 'oui',
     },
     {
       'title': 'Actif Service de restauration',
       'subtitle': 'Support disponible 24h/24 et 7j/7',
+      'value': 'non',
     },
   ];
 
@@ -130,6 +132,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                     ),
                                   );
                                 },
+                                
                               ),
                             );
                           },
@@ -172,7 +175,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                                 fontWeight: FontWeight.w500,
                                                 letterSpacing: 0.15.sp,
                                               ),
-                                              value: item['subtitle'],
+                                              value: item['value'],
                                               isSelected: false,
                                               onChanged: (option) {
                                                 if (option != null) {

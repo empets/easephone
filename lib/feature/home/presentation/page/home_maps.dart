@@ -1,4 +1,3 @@
-import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';

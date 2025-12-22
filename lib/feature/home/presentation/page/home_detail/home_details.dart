@@ -63,6 +63,59 @@ class _HomeDetailsState extends State<HomeDetails>
 
   late int currentIdenx = 0;
 
+  final MapController _mapController = MapController();
+  late MapController mapController;
+
+  void _animatedMapMove(LatLng destLocation, double dezoomer) {
+    // Décalage pour que le marqueur soit plus haut dans l’écran
+    const double offsetLatitude = -0.002;
+
+    // Nouveau point où la caméra doit aller (un peu plus haut que le marqueur)
+    final LatLng cameraTarget = LatLng(
+      destLocation.latitude + offsetLatitude,
+      destLocation.longitude,
+    );
+
+    final latTween = Tween<double>(
+      begin: mapController.camera.center.latitude,
+      end: cameraTarget.latitude,
+    );
+    final lngTween = Tween<double>(
+      begin: mapController.camera.center.longitude,
+      end: cameraTarget.longitude,
+    );
+    final zoomTween = Tween<double>(
+      begin: mapController.camera.zoom,
+      end: dezoomer,
+    );
+
+    final controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    final animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.fastOutSlowIn,
+    );
+
+    controller.addListener(() {
+      mapController.move(
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
+    });
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
+        controller.dispose();
+      }
+    });
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -249,7 +302,7 @@ class _HomeDetailsState extends State<HomeDetails>
                   ),
 
                   Container(
-                    margin: EdgeInsets.only(top: 12.h, left: 6.w),
+                    margin: EdgeInsets.only(top: 12.h, left: 0.w),
                     child: Row(
                       children: [
                         Icon(
@@ -326,13 +379,13 @@ class _HomeDetailsState extends State<HomeDetails>
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomeText(
-                        texte: 'Caractéristique:',
-                        texteSize: 13.sp,
-                        color: MyColorName.black,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.3.sp,
-                      ),
+                      // CustomeText(
+                      //   texte: 'Cara',
+                      //   texteSize: 13.sp,
+                      //   color: MyColorName.black,
+                      //   fontWeight: FontWeight.w700,
+                      //   letterSpacing: 0.3.sp,
+                      // ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 3.w),
                         child: Row(
@@ -353,7 +406,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Lit: ${widget.profile.averageBed}',
+                                          'Lit : ${widget.profile.averageBed}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
                                             fontSize: 12.sp,
@@ -379,7 +432,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Roome:${widget.profile.roomNumber}',
+                                          'Roome : ${widget.profile.roomNumber}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
                                             fontSize: 12.sp,
@@ -403,10 +456,10 @@ class _HomeDetailsState extends State<HomeDetails>
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Roome:${widget.profile.option}',
+                                          ': ${widget.profile.option}',
                                           style: GoogleFonts.roboto(
                                             color: Colors.grey.shade600,
-                                            fontSize: 1.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -550,13 +603,16 @@ class _HomeDetailsState extends State<HomeDetails>
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: FlutterMap(
-                          // mapController: _mapController,
+                          mapController: _mapController,
                           options: MapOptions(
                             onTap: (tapPosition, point) {
-                              // _animatedMapMove(point, 17);
+                              _animatedMapMove(point, 10);
                             },
-                            initialCenter: const LatLng(5.3891808, -4.0082932),
-                            initialZoom: 7,
+                            initialCenter: LatLng(
+                              double.parse(widget.profile.lat),
+                              double.parse(widget.profile.long),
+                            ),
+                            initialZoom: 9,
                             maxZoom: 23,
                             minZoom: 16,
                           ),

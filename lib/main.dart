@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       child: BlocListener<AppRouteBloc, SigninState>(
         listener: (context, state) {
           if (state.status.isFailure) {
-            showAppSnackBar(
+            return showAppSnackBar(
               context,
               iconRight: Icons.close,
               message: 'Service momentanement indisponible',

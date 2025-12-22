@@ -17,14 +17,23 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
     required String description,
     required String option,
     required String roomNumber,
+    required String facebookLinck,
+    required String lat,
+    required String long,
+    required String whatsappContact,
+    required String formOne,
+    required String formTwo,
   }) = _SActiveUserProfile;
 
   factory ActiveUserProfile.fromJson(Map<String, dynamic> json) =>
       _$ActiveUserProfileFromJson(json);
-
 }
 
+@freezed
+abstract class LikeResponse with _$LikeResponse {
+  factory LikeResponse({required int compter, required String userId}) =
+      _SLikeResponse;
 
-
-
-
+  factory LikeResponse.fromJson(Map<String, dynamic> json) =>
+      _$LikeResponseFromJson(json);
+}
