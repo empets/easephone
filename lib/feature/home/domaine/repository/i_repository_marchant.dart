@@ -13,5 +13,5 @@ abstract class IRepositoryMarchant {
   Future<Either<Failure, String?>> like(RequestLike request);
 
   // permet de disliker une profile
-  Future<Either<Failure, void>> dislike(RequestLike request);
+  Future<Either<Failure, String?>> dislike(RequestLike request);
 }

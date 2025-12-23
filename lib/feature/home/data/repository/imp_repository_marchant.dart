@@ -43,7 +43,7 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
   }
 
   @override
-  Future<Either<Failure, void>> dislike(RequestLike request) async {
+  Future<Either<Failure, String?>> dislike(RequestLike request) async {
     final response = await marchanServiceFirebase.likeProfile(request);
     if (response is FirebaseSuccess<String?>) {
       return Right(response.data);

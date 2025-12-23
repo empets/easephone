@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
@@ -28,6 +30,7 @@ class HomeOverView extends StatefulWidget {
 }
 
 class _HomeOverViewState extends State<HomeOverView> {
+  late bool isLiked = false;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -337,25 +340,35 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                   builder: (context, state) {
                                                     return InkWell(
                                                       onTap: () {
-                                                        // context
-                                                        //     .read<
-                                                        //       LikeProfileBloc
-                                                        //     >()
-                                                        //     .add(
-                                                        //       LikeProfileEvent.likeProfile(
-                                                        //         like: true,
-                                                        //       ),
-                                                        //     );
+                                                        setState(() {
+                                                          isLiked = !isLiked;
+                                                        });
 
-                                                        context
-                                                            .read<
-                                                              LikeProfileBloc
-                                                            >()
-                                                            .add(
-                                                              LikeProfileEvent.disLikeProfile(
-                                                                disLike: false,
-                                                              ),
-                                                            );
+                                                        if (isLiked) {
+                                                          log('dislike=======');
+                                                          context
+                                                              .read<
+                                                                LikeProfileBloc
+                                                              >()
+                                                              .add(
+                                                                LikeProfileEvent.disLikeProfile(
+                                                                  disLike:
+                                                                      false,
+                                                                ),
+                                                              );
+                                                        } else {
+                                                          log('like=======');
+
+                                                          context
+                                                              .read<
+                                                                LikeProfileBloc
+                                                              >()
+                                                              .add(
+                                                                LikeProfileEvent.likeProfile(
+                                                                  like: true,
+                                                                ),
+                                                              );
+                                                        }
                                                       },
                                                       child: Align(
                                                         alignment:

@@ -8,13 +8,13 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class DisLikeProfileUsercase
-    implements UseCase<void, RequestLike> {
+    implements UseCase<String?, RequestLike> {
   DisLikeProfileUsercase(this.repository);
 
   final IRepositoryMarchant repository;
 
   @override
-  Future<Either<Failure, void>> call(
+  Future<Either<Failure, String?>> call(
     RequestLike params,
   ){
     return repository.dislike(params);

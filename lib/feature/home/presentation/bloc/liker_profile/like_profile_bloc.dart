@@ -29,7 +29,11 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
           final sharedPreferences = await SharedPreferences.getInstance();
           final localUserSection = sharedPreferences.getString('user_section');
           final response = await likeProfileUsercase.call(
-            RequestLike(compter: 1, userId: localUserSection.toString()),
+            RequestLike(
+              compter: 1,
+              userId: localUserSection.toString(),
+              date: DateTime.now().toString(),
+            ),
           );
           emit(
             response.fold(
@@ -47,7 +51,11 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
           final sharedPreferences = await SharedPreferences.getInstance();
           final localUserSection = sharedPreferences.getString('user_section');
           final response = await disLikeProfileUsercase.call(
-            RequestLike(compter: -1, userId: localUserSection.toString()),
+            RequestLike(
+              compter: 0,
+              userId: localUserSection.toString(),
+              date: DateTime.now().toString(),
+            ),
           );
           emit(
             response.fold(
@@ -57,7 +65,7 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
               },
               (r) {
                 log('==== ');
-                return ApiState.success(null);
+                return ApiState.success(r);
               },
             ),
           );

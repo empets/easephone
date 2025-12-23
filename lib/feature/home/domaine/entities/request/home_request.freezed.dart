@@ -22,7 +22,7 @@ RequestLike _$RequestLikeFromJson(
 /// @nodoc
 mixin _$RequestLike {
 
- String get userId; int get compter;
+ String get userId; int get compter; String get date;
 /// Create a copy of RequestLike
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +35,16 @@ $RequestLikeCopyWith<RequestLike> get copyWith => _$RequestLikeCopyWithImpl<Requ
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestLike&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.compter, compter) || other.compter == compter));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestLike&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.compter, compter) || other.compter == compter)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,compter);
+int get hashCode => Object.hash(runtimeType,userId,compter,date);
 
 @override
 String toString() {
-  return 'RequestLike(userId: $userId, compter: $compter)';
+  return 'RequestLike(userId: $userId, compter: $compter, date: $date)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $RequestLikeCopyWith<$Res>  {
   factory $RequestLikeCopyWith(RequestLike value, $Res Function(RequestLike) _then) = _$RequestLikeCopyWithImpl;
 @useResult
 $Res call({
- String userId, int compter
+ String userId, int compter, String date
 });
 
 
@@ -72,11 +72,12 @@ class _$RequestLikeCopyWithImpl<$Res>
 
 /// Create a copy of RequestLike
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? compter = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? compter = null,Object? date = null,}) {
   return _then(_self.copyWith(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,compter: null == compter ? _self.compter : compter // ignore: cast_nullable_to_non_nullable
-as int,
+as int,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  int compter)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  int compter,  String date)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SRequestLike() when $default != null:
-return $default(_that.userId,_that.compter);case _:
+return $default(_that.userId,_that.compter,_that.date);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.userId,_that.compter);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  int compter)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  int compter,  String date)  $default,) {final _that = this;
 switch (_that) {
 case _SRequestLike():
-return $default(_that.userId,_that.compter);case _:
+return $default(_that.userId,_that.compter,_that.date);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.userId,_that.compter);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  int compter)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  int compter,  String date)?  $default,) {final _that = this;
 switch (_that) {
 case _SRequestLike() when $default != null:
-return $default(_that.userId,_that.compter);case _:
+return $default(_that.userId,_that.compter,_that.date);case _:
   return null;
 
 }
@@ -217,11 +218,12 @@ return $default(_that.userId,_that.compter);case _:
 @JsonSerializable()
 
 class _SRequestLike implements RequestLike {
-   _SRequestLike({required this.userId, required this.compter});
+   _SRequestLike({required this.userId, required this.compter, required this.date});
   factory _SRequestLike.fromJson(Map<String, dynamic> json) => _$SRequestLikeFromJson(json);
 
 @override final  String userId;
 @override final  int compter;
+@override final  String date;
 
 /// Create a copy of RequestLike
 /// with the given fields replaced by the non-null parameter values.
@@ -236,16 +238,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestLike&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.compter, compter) || other.compter == compter));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestLike&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.compter, compter) || other.compter == compter)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,compter);
+int get hashCode => Object.hash(runtimeType,userId,compter,date);
 
 @override
 String toString() {
-  return 'RequestLike(userId: $userId, compter: $compter)';
+  return 'RequestLike(userId: $userId, compter: $compter, date: $date)';
 }
 
 
@@ -256,7 +258,7 @@ abstract mixin class _$SRequestLikeCopyWith<$Res> implements $RequestLikeCopyWit
   factory _$SRequestLikeCopyWith(_SRequestLike value, $Res Function(_SRequestLike) _then) = __$SRequestLikeCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, int compter
+ String userId, int compter, String date
 });
 
 
@@ -273,11 +275,12 @@ class __$SRequestLikeCopyWithImpl<$Res>
 
 /// Create a copy of RequestLike
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? compter = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? compter = null,Object? date = null,}) {
   return _then(_SRequestLike(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,compter: null == compter ? _self.compter : compter // ignore: cast_nullable_to_non_nullable
-as int,
+as int,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

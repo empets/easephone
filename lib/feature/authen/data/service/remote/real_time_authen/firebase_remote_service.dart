@@ -131,12 +131,7 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     final localUserSection = sharedPreferences.getString('user_section');
 
     try {
-      // final request = Request<RequestCreateCompteHeber>(
-      //   data: params.toJson(),
-      //   user: localUserSection.toString(),
-      //   serviceLibelle: '',
-      // );
-      // log('************$userKey');
+   
       final Map<String, dynamic> updates = {
         ...params.toJson(), // nouveaux champs simples
         'serviceLibelle': '',

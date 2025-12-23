@@ -15,7 +15,7 @@ abstract class MarchanServiceFirebase {
   Future<FirebaseResult<String?>> likeProfile(RequestLike params);
 
   // permet de disliker une profile
-  Future<FirebaseResult<void>> dislike(RequestLike params);
+  Future<FirebaseResult<String?>> dislike(RequestLike params);
 }
 
 @LazySingleton(as: MarchanServiceFirebase)
@@ -23,6 +23,7 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   ImpleMarchantServiceFirebase({required this.db});
 
   final databaseRf.DatabaseReference db;
+  late String? like = '';
 
   @override
   Future<FirebaseResult<List<ActiveUserProfileModel>>>
@@ -53,14 +54,10 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
 
   @override
   Future<FirebaseResult<String?>> likeProfile(RequestLike params) async {
-    final snapShot = await db
-        .child('likeProfile')
-        .orderByChild('userId')
-        .equalTo(params.userId)
-        .get();
-
     try {
-      if (snapShot.exists) {
+      final response = await db.child('likeProfile/${params.userId}').get();
+
+      if (response.exists) {
         return FirebaseError("Vous avez deja liker se profile");
       } else {
         // 1) Construire l'objet Request
@@ -76,6 +73,7 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
 
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
+        like = ref.key;
 
         // 4) Retourner le key généré
         return FirebaseSuccess(ref.key);
@@ -87,25 +85,20 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   }
 
   @override
-  Future<FirebaseResult<void>> dislike(RequestLike params) async {
+  Future<FirebaseResult<String?>> dislike(RequestLike params) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final localUserSection = sharedPreferences.getString('user_section');
 
-    final snapShot = await db
-        .child('likeProfile/$localUserSection')
-        .orderByChild('userId')
-        .equalTo(params.userId)
-        .get();
-
-    log('message:::::n. $snapShot');
     try {
-      if (!snapShot.exists) {
-        return FirebaseError("Vous n'avez pas liké ce profil");
-      }
+      final Map<String, dynamic> updates = {
+        ...params.toJson(), // nouveaux champs simples
+        'serviceLibelle': '',
+        'user': localUserSection.toString(),
+      };
 
-      db.child('likeProfile/$localUserSection').remove();
+      await db.child('likeProfile/$like').update(updates);
 
-      return FirebaseError("Like non trouvé");
+      return FirebaseSuccess(like);
     } catch (e) {
       log("🔥 Firebase ERROR dislike → $e");
       return FirebaseError(e.toString());
