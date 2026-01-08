@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
@@ -82,6 +83,22 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
       return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  @override
+  Future<Either<Failure, String>> uploadImage(CreatCompteImage params) async{
+
+      final response = await firebaseRemoteService.uploadImage(
+      params
+    );
+    if (response is FirebaseSuccess<String>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+
+   
   }
   
 

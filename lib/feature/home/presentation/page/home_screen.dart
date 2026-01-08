@@ -10,11 +10,14 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/dis_like_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/get_like_number.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/liker_profile.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/event/like_profile_event.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_like_number.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/like_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/get_actif_user_profile_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +33,7 @@ class HomeOverView extends StatefulWidget {
 }
 
 class _HomeOverViewState extends State<HomeOverView> {
-  late bool isLiked = false;
+  late bool isLiked = true;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -52,6 +55,12 @@ class _HomeOverViewState extends State<HomeOverView> {
             likeProfileUsercase: getIt<LikeProfileUsercase>(),
             disLikeProfileUsercase: getIt<DisLikeProfileUsercase>(),
           ),
+        ),
+
+        BlocProvider(
+          create: (context) => GetLikeNumberBloc(
+            getLikeListeUsercase: getIt<GetLikeListeUsercase>(),
+          )..add(LikeProfileEvent.likeProfile(like: true)),
         ),
       ],
       child: BlocListener<LikeProfileBloc, ApiState<String?>>(
@@ -279,19 +288,21 @@ class _HomeOverViewState extends State<HomeOverView> {
                                     final profile = state.data[index];
                                     return GestureDetector(
                                       onTap: () {
-                                        // showModalBottomSheet(
-                                        //   context: context,
-                                        //   backgroundColor: MyColorName.white,
-                                        //   isScrollControlled: true,
-                                        //   shape: const RoundedRectangleBorder(
-                                        //     borderRadius: BorderRadius.vertical(
-                                        //       top: Radius.circular(25),
-                                        //     ),
-                                        //   ),
-                                        //   builder: (BuildContext context) {
-                                        //     return HomeDetails(profile: profile);
-                                        //   },
-                                        // );
+                                        showModalBottomSheet(
+                                          context: context,
+                                          backgroundColor: MyColorName.white,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(25),
+                                            ),
+                                          ),
+                                          builder: (BuildContext context) {
+                                            return HomeDetails(
+                                              profile: profile,
+                                            );
+                                          },
+                                        );
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(bottom: 15.h),
@@ -339,13 +350,25 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                 >(
                                                   builder: (context, state) {
                                                     return InkWell(
-                                                      onTap: () {
+                                                      onLongPress: () {
                                                         setState(() {
                                                           isLiked = !isLiked;
                                                         });
 
                                                         if (isLiked) {
-                                                          log('dislike=======');
+                                                          log('Like -->>');
+                                                          context
+                                                              .read<
+                                                                LikeProfileBloc
+                                                              >()
+                                                              .add(
+                                                                LikeProfileEvent.likeProfile(
+                                                                  like: true,
+                                                                ),
+                                                              );
+                                                        } else {
+                                                          log('DisLike -->>');
+
                                                           context
                                                               .read<
                                                                 LikeProfileBloc
@@ -354,18 +377,6 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                 LikeProfileEvent.disLikeProfile(
                                                                   disLike:
                                                                       false,
-                                                                ),
-                                                              );
-                                                        } else {
-                                                          log('like=======');
-
-                                                          context
-                                                              .read<
-                                                                LikeProfileBloc
-                                                              >()
-                                                              .add(
-                                                                LikeProfileEvent.likeProfile(
-                                                                  like: true,
                                                                 ),
                                                               );
                                                         }
@@ -395,8 +406,11 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                 ),
                                                           ),
                                                           child: Icon(
-                                                            Icons.stars,
-                                                            color: Colors.grey,
+                                                            Icons
+                                                                .favorite_rounded,
+                                                            color: isLiked
+                                                                ? Colors.red
+                                                                : Colors.grey,
                                                           ),
                                                         ),
                                                       ),
@@ -437,32 +451,72 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                               ),
                                                         ),
                                                       ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            '1,5k',
-                                                            style:
-                                                                GoogleFonts.roboto(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade600,
-                                                                  fontSize:
-                                                                      14.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  letterSpacing:
-                                                                      0.1.sp,
+                                                      state
+                                                              is SuccessState<
+                                                                List<
+                                                                  LikeResponse
+                                                                >
+                                                              >
+                                                          ? Row(
+                                                              children: [
+                                                                Text(
+                                                                  state
+                                                                          .data
+                                                                          .length
+                                                                          .toString() ??
+                                                                      '0',
+                                                                  style: GoogleFonts.roboto(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    letterSpacing:
+                                                                        0.1.sp,
+                                                                  ),
                                                                 ),
-                                                          ),
-                                                          SizedBox(width: 2.w),
-                                                          Icon(
-                                                            Icons
-                                                                .star_border_purple500_rounded,
-                                                            color: Colors.amber,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                                SizedBox(
+                                                                  width: 2.w,
+                                                                ),
+                                                                Icon(
+                                                                  Icons
+                                                                      .star_border_purple500_rounded,
+                                                                  color: Colors
+                                                                      .amber,
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Row(
+                                                              children: [
+                                                                Text(
+                                                                  '4',
+                                                                  style: GoogleFonts.roboto(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    letterSpacing:
+                                                                        0.1.sp,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 2.w,
+                                                                ),
+                                                                Icon(
+                                                                  Icons
+                                                                      .star_border_purple500_rounded,
+                                                                  color: Colors
+                                                                      .amber,
+                                                                ),
+                                                              ],
+                                                            ),
                                                     ],
                                                   ),
                                                   SizedBox(height: 10.h),

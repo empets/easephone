@@ -29,6 +29,7 @@ import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
     as _i406;
 import '../../feature/authen/domaine/usercase/get_user_profile_usercase.dart'
     as _i973;
+import '../../feature/authen/domaine/usercase/send_image.dart' as _i452;
 import '../../feature/authen/domaine/usercase/signin_usercase.dart' as _i228;
 import '../../feature/authen/page/bloc/auth-by-mail/auth_by_mail_bloc.dart'
     as _i622;
@@ -41,6 +42,7 @@ import '../../feature/home/domaine/usercase/dis_like_profile_usercase.dart'
     as _i331;
 import '../../feature/home/domaine/usercase/get_actif_compte_information_usercase.dart'
     as _i774;
+import '../../feature/home/domaine/usercase/get_like_number.dart' as _i832;
 import '../../feature/home/domaine/usercase/liker_profile.dart' as _i21;
 import '../../router/app_route.dart' as _i574;
 import '../../router/bloc/app_bloc.dart' as _i908;
@@ -91,11 +93,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i331.DisLikeProfileUsercase>(
       () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
     );
+    gh.lazySingleton<_i832.GetLikeListeUsercase>(
+      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
     gh.lazySingleton<_i228.SigninUsercase>(
       () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i452.CreateCoompteSendImageUsercase>(
+      () => _i452.CreateCoompteSendImageUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i933.AuthenByMailUsercase>(
       () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),

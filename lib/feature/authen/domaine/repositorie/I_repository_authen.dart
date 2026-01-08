@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
@@ -23,6 +25,8 @@ abstract class IRepositoryAuthen {
 
   //creation de compte marchant
   Future<Either<Failure, ProfileUser>> getProfileUser();
+
+  Future<Either<Failure, String>> uploadImage(CreatCompteImage params);
   // current position
   //  Future<Either<Failure, LocationData?>> getLocation();
 

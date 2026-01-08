@@ -57,3 +57,8 @@ class CreateCompteHebEvent with _$CreateCompteHebEvent {
       ChangeDescriptionCreateCompteHebEvent;
   factory CreateCompteHebEvent.submit() = SubmitCreateCompteHebEvent;
 }
+
+@freezed
+abstract class CreateCompteSendImage with _$CreateCompteSendImage {
+  factory CreateCompteSendImage.image(String file) = ImageCreateCompteSendImage;
+}

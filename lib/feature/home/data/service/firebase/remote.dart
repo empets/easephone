@@ -16,6 +16,8 @@ abstract class MarchanServiceFirebase {
 
   // permet de disliker une profile
   Future<FirebaseResult<String?>> dislike(RequestLike params);
+
+  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber();
 }
 
 @LazySingleton(as: MarchanServiceFirebase)
@@ -55,10 +57,14 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   @override
   Future<FirebaseResult<String?>> likeProfile(RequestLike params) async {
     try {
-      final response = await db.child('likeProfile/${params.userId}').get();
+      final response = await db
+          .child('likeProfile')
+          .orderByChild('userId')
+          .equalTo(params.userId)
+          .get();
 
       if (response.exists) {
-        return FirebaseError("Vous avez deja liker se profile");
+        return dislike(params);
       } else {
         // 1) Construire l'objet Request
         final request = Request<RequestLike>(
@@ -66,8 +72,6 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
           user: "",
           serviceLibelle: 'serviceLibelle',
         );
-        log("data ::::  $request");
-
         // 2) Créer une nouvelle entrée
         final ref = db.child('likeProfile').push();
 
@@ -90,17 +94,47 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
     final localUserSection = sharedPreferences.getString('user_section');
 
     try {
-      final Map<String, dynamic> updates = {
-        ...params.toJson(), // nouveaux champs simples
-        'serviceLibelle': '',
-        'user': localUserSection.toString(),
-      };
+      final response = await db
+          .child('likeProfile')
+          .orderByChild('userId')
+          .equalTo(params.userId)
+          .get();
 
-      await db.child('likeProfile/$like').update(updates);
+      if (response.exists) {
+        log("🔥 vous avez jamais liker se profile");
 
-      return FirebaseSuccess(like);
+        final Map<String, dynamic> updates = {
+          ...params.toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+          'user': localUserSection.toString(),
+        };
+
+        await db.child('likeProfile/$like').update(updates);
+
+        return FirebaseSuccess(like);
+      } else {
+        return FirebaseError("Vous avez jamais liker se profile");
+      }
     } catch (e) {
       log("🔥 Firebase ERROR dislike → $e");
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() async {
+    try {
+      final snapshot = await db.child('likeProfile').get();
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseError("Aucune donnée trouvée");
+      }
+      final userProfile = (snapshot.value as Map).values.map((e) {
+        return LikeResponseModel.fromJson(Map<String, dynamic>.from(e));
+      }).toList();
+
+      return FirebaseSuccess(userProfile);
+    } catch (e) {
+      log(':: information:${e.runtimeType.toString()}');
       return FirebaseError(e.toString());
     }
   }

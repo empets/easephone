@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
@@ -6,6 +7,8 @@ import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
@@ -18,6 +21,7 @@ abstract class FirebaseRemoteService {
   );
 
   Future<FirebaseResult<ProfileUserModel>> getProfileUser();
+  Future<FirebaseResult<String>> uploadImage(CreatCompteImage params);
 }
 
 @LazySingleton(as: FirebaseRemoteService)
@@ -131,7 +135,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     final localUserSection = sharedPreferences.getString('user_section');
 
     try {
-   
       final Map<String, dynamic> updates = {
         ...params.toJson(), // nouveaux champs simples
         'serviceLibelle': '',
@@ -167,5 +170,31 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     } catch (e) {
       return FirebaseError('====${e.toString()}');
     }
+  }
+
+  @override
+  Future<FirebaseResult<String>> uploadImage(CreatCompteImage params) async {
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('${params.userId}${DateTime.timestamp()}.jpg');
+
+      await ref.putFile(File(params.file));
+
+      final reponse = await ref.getDownloadURL();
+      return FirebaseSuccess(reponse);
+    } catch (e) {
+      log('************$e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  Future<void> saveImageUrl(CreatCompteImage params) async {
+    final Map<String, dynamic> updates = {
+      ...params.toJson(), // nouveaux champs simples
+      'serviceLibelle': '',
+    };
+    await FirebaseDatabase.instance.ref('hotel/$userKey').update(updates);
   }
 }

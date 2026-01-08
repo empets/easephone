@@ -4,7 +4,9 @@ import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_herb_usercase.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_bloc.dart';
+import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_profile_image.dart';
@@ -52,9 +54,26 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
       child: BlocListener<CreateCompteHBloc, CreateCompteHbState>(
         listener: (context, state) {
           if (state.status.isSuccess) {
-            Navigator.of(
+            // BlocProvider(
+            //   create: (context) => CreateCompteImageBloc(
+            //     compteSendImageUsercase:
+            //         getIt<CreateCoompteSendImageUsercase>(),
+            //   ),
+            //   c
+            // );
+
+            Navigator.push(
               context,
-            ).push(fadeRoute(const FormsHomeProfileImage()));
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => CreateCompteImageBloc(
+                    compteSendImageUsercase:
+                        getIt<CreateCoompteSendImageUsercase>(),
+                  ),
+                  child: FormsHomeProfileImage(),
+                ),
+              ),
+            );
           }
         },
         child: Scaffold(
@@ -132,7 +151,6 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                     ),
                                   );
                                 },
-                                
                               ),
                             );
                           },

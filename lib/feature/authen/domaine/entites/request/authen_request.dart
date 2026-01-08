@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
 part 'authen_request.freezed.dart';
@@ -116,4 +118,15 @@ abstract class Address with _$Address {
 
   factory Address.fromJson(Map<String, dynamic> json) =>
       _$AddressFromJson(json);
+}
+
+@freezed
+abstract class CreatCompteImage with _$CreatCompteImage {
+  factory CreatCompteImage({
+    required String file, // mot rechercher
+    required String userId,
+  }) = _CreatCompteImage;
+
+  factory CreatCompteImage.fromJson(Map<String, dynamic> json) =>
+      _$CreatCompteImageFromJson(json);
 }

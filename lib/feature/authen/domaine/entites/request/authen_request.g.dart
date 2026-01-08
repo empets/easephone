@@ -184,3 +184,12 @@ Map<String, dynamic> _$AddressToJson(_Address instance) => <String, dynamic>{
   'city': instance.city,
   'state': instance.state,
 };
+
+_CreatCompteImage _$CreatCompteImageFromJson(Map<String, dynamic> json) =>
+    _CreatCompteImage(
+      file: json['file'] as String,
+      userId: json['userId'] as String,
+    );
+
+Map<String, dynamic> _$CreatCompteImageToJson(_CreatCompteImage instance) =>
+    <String, dynamic>{'file': instance.file, 'userId': instance.userId};

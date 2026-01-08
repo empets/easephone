@@ -1331,4 +1331,261 @@ String toString() {
 
 
 
+/// @nodoc
+mixin _$CreateCompteSendImage {
+
+ String get file;
+/// Create a copy of CreateCompteSendImage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateCompteSendImageCopyWith<CreateCompteSendImage> get copyWith => _$CreateCompteSendImageCopyWithImpl<CreateCompteSendImage>(this as CreateCompteSendImage, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteSendImage&&(identical(other.file, file) || other.file == file));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,file);
+
+@override
+String toString() {
+  return 'CreateCompteSendImage(file: $file)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CreateCompteSendImageCopyWith<$Res>  {
+  factory $CreateCompteSendImageCopyWith(CreateCompteSendImage value, $Res Function(CreateCompteSendImage) _then) = _$CreateCompteSendImageCopyWithImpl;
+@useResult
+$Res call({
+ String file
+});
+
+
+
+
+}
+/// @nodoc
+class _$CreateCompteSendImageCopyWithImpl<$Res>
+    implements $CreateCompteSendImageCopyWith<$Res> {
+  _$CreateCompteSendImageCopyWithImpl(this._self, this._then);
+
+  final CreateCompteSendImage _self;
+  final $Res Function(CreateCompteSendImage) _then;
+
+/// Create a copy of CreateCompteSendImage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? file = null,}) {
+  return _then(_self.copyWith(
+file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [CreateCompteSendImage].
+extension CreateCompteSendImagePatterns on CreateCompteSendImage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ImageCreateCompteSendImage value)?  image,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage() when image != null:
+return image(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ImageCreateCompteSendImage value)  image,}){
+final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage():
+return image(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ImageCreateCompteSendImage value)?  image,}){
+final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage() when image != null:
+return image(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String file)?  image,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage() when image != null:
+return image(_that.file);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String file)  image,}) {final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage():
+return image(_that.file);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String file)?  image,}) {final _that = this;
+switch (_that) {
+case ImageCreateCompteSendImage() when image != null:
+return image(_that.file);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class ImageCreateCompteSendImage implements CreateCompteSendImage {
+   ImageCreateCompteSendImage(this.file);
+  
+
+@override final  String file;
+
+/// Create a copy of CreateCompteSendImage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ImageCreateCompteSendImageCopyWith<ImageCreateCompteSendImage> get copyWith => _$ImageCreateCompteSendImageCopyWithImpl<ImageCreateCompteSendImage>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageCreateCompteSendImage&&(identical(other.file, file) || other.file == file));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,file);
+
+@override
+String toString() {
+  return 'CreateCompteSendImage.image(file: $file)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ImageCreateCompteSendImageCopyWith<$Res> implements $CreateCompteSendImageCopyWith<$Res> {
+  factory $ImageCreateCompteSendImageCopyWith(ImageCreateCompteSendImage value, $Res Function(ImageCreateCompteSendImage) _then) = _$ImageCreateCompteSendImageCopyWithImpl;
+@override @useResult
+$Res call({
+ String file
+});
+
+
+
+
+}
+/// @nodoc
+class _$ImageCreateCompteSendImageCopyWithImpl<$Res>
+    implements $ImageCreateCompteSendImageCopyWith<$Res> {
+  _$ImageCreateCompteSendImageCopyWithImpl(this._self, this._then);
+
+  final ImageCreateCompteSendImage _self;
+  final $Res Function(ImageCreateCompteSendImage) _then;
+
+/// Create a copy of CreateCompteSendImage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? file = null,}) {
+  return _then(ImageCreateCompteSendImage(
+null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 // dart format on

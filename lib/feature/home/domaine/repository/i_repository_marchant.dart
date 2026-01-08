@@ -14,4 +14,10 @@ abstract class IRepositoryMarchant {
 
   // permet de disliker une profile
   Future<Either<Failure, String?>> dislike(RequestLike request);
+
+  // recuper le nombre de like 
+
+  Future<Either<Failure, List<LikeResponse>>> getLikeNumber();
+
+
 }
