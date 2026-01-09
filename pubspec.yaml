@@ -146,6 +146,7 @@ dependencies:
   shared_preferences: ^2.2.2
   ind_utils: ^2.0.13
   firebase_storage: any
+  url_launcher: ^6.2.6
   # location: ^8.0.1
 
 dev_dependencies:

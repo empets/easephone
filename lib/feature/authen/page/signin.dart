@@ -31,6 +31,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   late bool isSignUp = false;
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +84,12 @@ class _SignInState extends State<SignIn> {
                     isSignUp = false;
                   });
                 }
+                  showAppSnackBar(
+                    context,
+                    color: MyColorName.errorRed,
+                    iconRight: Icons.close,
+                    message: state.errorMessage,
+                  );
               }
             },
           ),
@@ -139,63 +146,89 @@ class _SignInState extends State<SignIn> {
                                   ),
                                   Expanded(child: SizedBox(height: 5)),
 
-                                  BlocBuilder<AuthByMailBloc, AuthByMailState>(
-                                    builder: (context, state) {
-                                      return CustomeFormsSigin(
-                                        textInputType:
-                                            TextInputType.emailAddress,
-                                        readOnly: state.status.isInProgress,
-                                        prefixIcon: Icon(Icons.email_outlined),
-                                        textLabel: 'Email',
-                                        errorText:
-                                            state.email.isPure ||
-                                                state.email.isValid
-                                            ? null
-                                            : '',
-                                        msgError: '',
-                                        onChanged: (email) {
-                                          context.read<AuthByMailBloc>().add(
-                                            AuthByMailEvent.changeEmail(email),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-
-                                  SizedBox(height: 9.h),
-
-                                  Container(
-                                    margin: EdgeInsets.symmetric(vertical: 5.h),
-                                    child:
+                                  Form(
+                                    key: globalKey,
+                                    child: Column(
+                                      children: [
                                         BlocBuilder<
                                           AuthByMailBloc,
                                           AuthByMailState
                                         >(
                                           builder: (context, state) {
                                             return CustomeFormsSigin(
+                                              textInputType:
+                                                  TextInputType.emailAddress,
                                               readOnly:
                                                   state.status.isInProgress,
                                               prefixIcon: Icon(
-                                                Icons.phone_outlined,
+                                                Icons.email_outlined,
                                               ),
-                                              textLabel:
-                                                  'numéro de compte mail',
+                                              textLabel: 'Email',
                                               errorText:
-                                                  state.password.isPure ||
-                                                      state.password.isValid
+                                                  state.email.isPure ||
+                                                      state.email.isValid
                                                   ? null
                                                   : '',
                                               msgError: '',
-                                              onChanged: (password) {
-                                                context.read<AuthByMailBloc>().add(
-                                                  AuthByMailEvent.changePassword(
-                                                    password,
-                                                  ),
-                                                );
+                                              onChanged: (email) {
+                                                context
+                                                    .read<AuthByMailBloc>()
+                                                    .add(
+                                                      AuthByMailEvent.changeEmail(
+                                                        email,
+                                                      ),
+                                                    );
                                               },
                                             );
                                           },
                                         ),
+
+                                        SizedBox(height: 9.h),
+
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                            vertical: 5.h,
+                                          ),
+                                          child:
+                                              BlocBuilder<
+                                                AuthByMailBloc,
+                                                AuthByMailState
+                                              >(
+                                                builder: (context, state) {
+                                                  return CustomeFormsSigin(
+                                                    readOnly: state
+                                                        .status
+                                                        .isInProgress,
+                                                    prefixIcon: Icon(
+                                                      Icons.phone_outlined,
+                                                    ),
+                                                    textLabel:
+                                                        'numéro de compte mail',
+                                                    errorText:
+                                                        state.password.isPure ||
+                                                            state
+                                                                .password
+                                                                .isValid
+                                                        ? null
+                                                        : '',
+                                                    msgError: '',
+                                                    onChanged: (password) {
+                                                      context
+                                                          .read<
+                                                            AuthByMailBloc
+                                                          >()
+                                                          .add(
+                                                            AuthByMailEvent.changePassword(
+                                                              password,
+                                                            ),
+                                                          );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
 
                                   Container(
@@ -248,6 +281,7 @@ class _SignInState extends State<SignIn> {
                                     onTap: () {
                                       setState(() {
                                         isSignUp = !isSignUp;
+                                        globalKey.currentState?.reset();
                                       });
                                     },
                                     child: Container(

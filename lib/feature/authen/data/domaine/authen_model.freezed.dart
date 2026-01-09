@@ -22,7 +22,7 @@ ProfileUserModel _$ProfileUserModelFromJson(
 /// @nodoc
 mixin _$ProfileUserModel {
 
- String? get email; String? get password;
+ String? get email; String? get password; String? get userId;
 /// Create a copy of ProfileUserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +35,16 @@ $ProfileUserModelCopyWith<ProfileUserModel> get copyWith => _$ProfileUserModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileUserModel&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileUserModel&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,userId);
 
 @override
 String toString() {
-  return 'ProfileUserModel(email: $email, password: $password)';
+  return 'ProfileUserModel(email: $email, password: $password, userId: $userId)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $ProfileUserModelCopyWith<$Res>  {
   factory $ProfileUserModelCopyWith(ProfileUserModel value, $Res Function(ProfileUserModel) _then) = _$ProfileUserModelCopyWithImpl;
 @useResult
 $Res call({
- String? email, String? password
+ String? email, String? password, String? userId
 });
 
 
@@ -72,10 +72,11 @@ class _$ProfileUserModelCopyWithImpl<$Res>
 
 /// Create a copy of ProfileUserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? password = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? password = freezed,Object? userId = freezed,}) {
   return _then(_self.copyWith(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email,  String? password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email,  String? password,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SProfileUserModel() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.userId);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email,  String? password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email,  String? password,  String? userId)  $default,) {final _that = this;
 switch (_that) {
 case _SProfileUserModel():
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.userId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email,  String? password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email,  String? password,  String? userId)?  $default,) {final _that = this;
 switch (_that) {
 case _SProfileUserModel() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.userId);case _:
   return null;
 
 }
@@ -217,11 +218,12 @@ return $default(_that.email,_that.password);case _:
 @JsonSerializable()
 
 class _SProfileUserModel implements ProfileUserModel {
-   _SProfileUserModel({required this.email, required this.password});
+   _SProfileUserModel({required this.email, required this.password, required this.userId});
   factory _SProfileUserModel.fromJson(Map<String, dynamic> json) => _$SProfileUserModelFromJson(json);
 
 @override final  String? email;
 @override final  String? password;
+@override final  String? userId;
 
 /// Create a copy of ProfileUserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -236,16 +238,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SProfileUserModel&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SProfileUserModel&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,userId);
 
 @override
 String toString() {
-  return 'ProfileUserModel(email: $email, password: $password)';
+  return 'ProfileUserModel(email: $email, password: $password, userId: $userId)';
 }
 
 
@@ -256,7 +258,7 @@ abstract mixin class _$SProfileUserModelCopyWith<$Res> implements $ProfileUserMo
   factory _$SProfileUserModelCopyWith(_SProfileUserModel value, $Res Function(_SProfileUserModel) _then) = __$SProfileUserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? email, String? password
+ String? email, String? password, String? userId
 });
 
 
@@ -273,10 +275,11 @@ class __$SProfileUserModelCopyWithImpl<$Res>
 
 /// Create a copy of ProfileUserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? password = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? password = freezed,Object? userId = freezed,}) {
   return _then(_SProfileUserModel(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

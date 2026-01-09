@@ -1,16 +1,12 @@
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
-import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
-import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_hebergement.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +25,8 @@ class FormsHomeProfileImage extends StatefulWidget {
 
 class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
     with TickerProviderStateMixin {
+  File? imageFile;
+  late String profileImage = '';
   Future<File?> pickImage() async {
     final picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -36,9 +34,10 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
     if (image == null)
       return null;
     else {
-      context.read<CreateCompteImageBloc>().add(
-        CreateCompteSendImage.image(image.path),
-      );
+      setState(() {
+        imageFile = File(image.path);
+        profileImage = image.path;
+      });
       return File(image.path);
     }
   }
@@ -47,7 +46,6 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColorName.white,
-      appBar: CustomAppBar(),
       body: BlocListener<CreateCompteImageBloc, ApiState<String>>(
         listener: (context, state) {
           if (state is SuccessState<String>) {
@@ -70,6 +68,55 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
                 children: [
                   Column(
                     children: [
+                      SizedBox(height: 5.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height: 0.07.sh,
+                              width: 0.08.sw,
+                              padding: EdgeInsets.symmetric(
+                                vertical: 8.h,
+                                horizontal: 5.w,
+                              ),
+                              child: SvgPicture.asset(
+                                MyAssets.icons.iconArrowFelt.path,
+                                width: 13.w,
+                              ),
+                            ),
+                          ),
+                          BlocBuilder<CreateCompteImageBloc, ApiState<String>>(
+                            builder: (context, state) {
+                              return GestureDetector(
+                                onTap: () {
+                                  pickImage();
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 4.h),
+                                  padding: const EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: MyColorName.black,
+                                    ),
+                                    color: MyColorName.black,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.pencil,
+                                    color: MyColorName.white,
+                                    size: 15.h,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                       KeyboardVisibilityBuilder(
                         builder: (context, isKeyboardVisible) =>
                             isKeyboardVisible
@@ -86,62 +133,32 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
                                           top: 0.05.sh,
                                           bottom: 30.h,
                                         ),
-                                        padding: EdgeInsets.all(9.h),
+                                        width: 0.46.sw,
+                                        height: 0.46.sw, // ⚠️
+                                        padding: EdgeInsets.all(6.h),
                                         decoration: BoxDecoration(
-                                          // border: Border.all(
-                                          //   color: MyColorName.black.withValues(
-                                          //     alpha: 0.4,
-                                          //   ),
-                                          // ),
                                           shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.grey.withOpacity(0.4),
+                                            width: 1,
+                                          ),
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            100.r,
-                                          ),
-                                          child: SvgPicture.asset(
-                                            MyAssets
-                                                .icons
-                                                .undrawNewsfeed8ms9
-                                                .path,
-                                            height: 200.h,
-                                          ),
+                                        child: ClipOval(
+                                          child: imageFile != null
+                                              ? Image.file(
+                                                  imageFile!,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : SvgPicture.asset(
+                                                  MyAssets
+                                                      .icons
+                                                      .undrawNewsfeed8ms9
+                                                      .path,
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                       );
                                     },
-                                  ),
-                                  Positioned(
-                                    bottom: 30.h,
-                                    right: 28.w,
-                                    child:
-                                        BlocBuilder<
-                                          CreateCompteImageBloc,
-                                          ApiState<String>
-                                        >(
-                                          builder: (context, state) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                pickImage();
-                                              },
-                                              child: Container(
-                                                padding: const EdgeInsets.all(
-                                                  8.0,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: MyColorName.black,
-                                                  ),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.pencil,
-                                                  color: MyColorName.black,
-                                                  size: 18.h,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
                                   ),
                                 ],
                               ),
@@ -149,16 +166,29 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
 
                       SizedBox(height: 20.h),
 
-                      CustomeButton(
-                        btnBackground: MyColorName.textPrimaryDark,
-                        btnTextColor: MyColorName.white,
-                        btnText: 'Valider',
-                        btnRadius: 10.r,
-                        btnTextSize: 15.sp,
-                        onTap: () {
-                          Navigator.of(
-                            context,
-                          ).push(fadeRoute(const FormsHomeHebergement()));
+                      BlocBuilder<CreateCompteImageBloc, ApiState<String>>(
+                        builder: (context, state) {
+                          return CustomeButton(
+                            btnBackground: MyColorName.textPrimaryDark,
+                            btnTextColor: MyColorName.white,
+                            btnText: 'Valider',
+                            btnRadius: 10.r,
+                            btnTextSize: 15.sp,
+                            isInProgress: state is LoadState<String>
+                                ? true
+                                : false,
+                            onTap: state is LoadState<String>
+                                ? null
+                                : () {
+                                    if (profileImage.trim().isNotEmpty) {
+                                      context.read<CreateCompteImageBloc>().add(
+                                        CreateCompteSendImage.image(
+                                          profileImage,
+                                        ),
+                                      );
+                                    }
+                                  },
+                          );
                         },
                       ),
                     ],

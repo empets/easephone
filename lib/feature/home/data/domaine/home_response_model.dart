@@ -25,6 +25,8 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
     required String? whatsappContact,
     required String? formOne,
     required String? formTwo,
+    required String? formTherd,
+    required String? file,
     // required String? formTherd,
   }) = _SActiveUserProfileModel;
 
@@ -51,6 +53,8 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
       whatsappContact: model.whatsappContact.getOrEmpty(),
       formOne: model.formOne.getOrEmpty(),
       formTwo: model.formTwo.getOrEmpty(),
+      formTherd: model.formTherd.getOrEmpty(),
+      file: model.file.getOrEmpty(),
       // formTherd: model.formTherd.getOrEmpty(),
     );
   }

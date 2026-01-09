@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: MyColorName.white,
+      backgroundColor: MyColorName.backgroundIvory,
       elevation: 0,
       leading: const CustomLeading(),
     );
@@ -42,6 +42,7 @@ class CustomLeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5.h),
+      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

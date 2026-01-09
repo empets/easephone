@@ -1,3 +1,4 @@
+
 import 'package:com.example.epbomi/core/extension/email_extension.dart';
 import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:com.example.epbomi/core/extension/extension_form.dart';
@@ -53,6 +54,8 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
           await Future.delayed(Duration(seconds: 4));
 
+
+
           final response = await authenByMailUsercase.call(
             RequestAuthen(
               email: state.email.value,
@@ -78,6 +81,8 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
         if (state.isValide) {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
           await Future.delayed(Duration(seconds: 4));
+
+     
 
           final response = await signinUsercase.call(
             RequestAuthen(

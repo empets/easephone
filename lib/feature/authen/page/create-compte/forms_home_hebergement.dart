@@ -265,7 +265,6 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                         state.description.isValid
                                     ? null
                                     : '',
-                                textInputType: TextInputType.number,
                                 prefixIcon: Icon(Icons.edit_note),
                                 msgError: 'Veuillez renseigner ce champ',
                                 onChanged: (description) {

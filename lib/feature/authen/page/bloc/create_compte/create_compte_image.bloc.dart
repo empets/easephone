@@ -27,7 +27,11 @@ class CreateCompteImageBloc
           final localUserSection = sharedPreferences.getString('user_section');
 
           final response = await compteSendImageUsercase.call(
-            CreatCompteImage(file: file, userId: localUserSection.toString()),
+            CreatCompteImage(
+              file: file,
+              userId: localUserSection.toString(),
+              formTherd: 'success',
+            ),
           );
 
           emit(

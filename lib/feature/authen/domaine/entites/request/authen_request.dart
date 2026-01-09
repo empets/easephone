@@ -15,6 +15,15 @@ abstract class RequestAuthen with _$RequestAuthen {
 }
 
 @freezed
+abstract class RequestAuthenUpdateKey with _$RequestAuthenUpdateKey {
+  factory RequestAuthenUpdateKey({required String userId}) =
+      _SRequestAuthenUpdateKey;
+
+  factory RequestAuthenUpdateKey.fromJson(Map<String, dynamic> json) =>
+      _$RequestAuthenUpdateKeyFromJson(json);
+}
+
+@freezed
 abstract class RequestCreateCompteHomeInformation
     with _$RequestCreateCompteHomeInformation {
   factory RequestCreateCompteHomeInformation({
@@ -125,6 +134,7 @@ abstract class CreatCompteImage with _$CreatCompteImage {
   factory CreatCompteImage({
     required String file, // mot rechercher
     required String userId,
+    required String formTherd,
   }) = _CreatCompteImage;
 
   factory CreatCompteImage.fromJson(Map<String, dynamic> json) =>

@@ -26,6 +26,8 @@ _SActiveUserProfile _$SActiveUserProfileFromJson(Map<String, dynamic> json) =>
       whatsappContact: json['whatsappContact'] as String,
       formOne: json['formOne'] as String,
       formTwo: json['formTwo'] as String,
+      formTherd: json['formTherd'] as String,
+      file: json['file'] as String,
     );
 
 Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
@@ -48,6 +50,8 @@ Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
       'whatsappContact': instance.whatsappContact,
       'formOne': instance.formOne,
       'formTwo': instance.formTwo,
+      'formTherd': instance.formTherd,
+      'file': instance.file,
     };
 
 _SLikeResponse _$SLikeResponseFromJson(Map<String, dynamic> json) =>

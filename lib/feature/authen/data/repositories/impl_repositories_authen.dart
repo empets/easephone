@@ -7,6 +7,7 @@ import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/repositorie/I_repository_authen.dart';
+import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RepositoriesAuthenImple implements IRepositoryAuthen {
   RepositoriesAuthenImple({required this.firebaseRemoteService});
   final FirebaseRemoteService firebaseRemoteService;
-
 
   @override
   Future<Either<Failure, String?>> userAuthen(RequestAuthen request) async {
@@ -86,22 +86,32 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   }
 
   @override
-  Future<Either<Failure, String>> uploadImage(CreatCompteImage params) async{
-
-      final response = await firebaseRemoteService.uploadImage(
-      params
-    );
+  Future<Either<Failure, String>> uploadImage(CreatCompteImage params) async {
+    final response = await firebaseRemoteService.uploadImage(params);
     if (response is FirebaseSuccess<String>) {
       return Right(response.data);
     } else if (response is FirebaseError) {
       return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));
-
-   
   }
-  
 
+  @override
+  Future<Either<Failure, List<ProfileUser>>> getProfileUserList() async {
+    final response = await firebaseRemoteService.getProfileUserList();
+    if (response is FirebaseSuccess<List<ProfileUserModel>>) {
+      return Right(response.data.map(ProfileUserModel.toDomain).toList());
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
 
-
+  @override
+  Future<Either<Failure, String?>> userAutheUpdateKey(
+    RequestAuthenUpdateKey request,
+  ) {
+    // TODO: implement userAutheUpdateKey
+    throw UnimplementedError();
+  }
 }

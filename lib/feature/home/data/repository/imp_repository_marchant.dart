@@ -52,7 +52,7 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-  
+
   @override
   Future<Either<Failure, List<LikeResponse>>> getLikeNumber() async{
        final response = await marchanServiceFirebase
@@ -66,4 +66,17 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
+
+//   @override
+//   Stream<Either<Failure, List<LikeResponse>>> getLikeNumber() {
+//     return marchanServiceFirebase.getLikeNumber().map((response) {
+//       if (response is FirebaseSuccess<List<LikeResponseModel>>) {
+//         return Right(response.data.map(LikeResponseModel.toDomaine).toList());
+//       } else if (response is FirebaseError) {
+//         return Left(Failure(message: response.toString()));
+//       } else {
+//         return Left(Failure(message: 'Erreur inconnue'));
+//       }
+//     });
+//   }
 }

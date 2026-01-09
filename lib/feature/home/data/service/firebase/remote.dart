@@ -122,7 +122,7 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   }
 
   @override
-  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() async {
+  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber()  async{
     try {
       final snapshot = await db.child('likeProfile').get();
       if (!snapshot.exists || snapshot.value == null) {
@@ -138,4 +138,28 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
       return FirebaseError(e.toString());
     }
   }
+
+  // @override
+  // Stream<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() {
+  //   return db.child('likeProfile').onValue.map((event) {
+  //     try {
+  //       final snapshot = event.snapshot;
+
+  //       if (!snapshot.exists || snapshot.value == null) {
+  //         return FirebaseSuccess<List<LikeResponseModel>>([]);
+  //       }
+
+  //       final data = snapshot.value as Map<dynamic, dynamic>;
+
+  //       final userProfile = data.values.map((e) {
+  //         return LikeResponseModel.fromJson(Map<String, dynamic>.from(e));
+  //       }).toList();
+
+  //       return FirebaseSuccess<List<LikeResponseModel>>(userProfile);
+  //     } catch (e) {
+  //       log('🔥 Firebase stream error: $e');
+  //       return FirebaseError<List<LikeResponseModel>>(e.toString());
+  //     }
+  //   });
+  // }
 }

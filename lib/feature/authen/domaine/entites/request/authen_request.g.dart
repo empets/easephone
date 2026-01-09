@@ -15,6 +15,14 @@ _SRequestAuthen _$SRequestAuthenFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SRequestAuthenToJson(_SRequestAuthen instance) =>
     <String, dynamic>{'email': instance.email, 'password': instance.password};
 
+_SRequestAuthenUpdateKey _$SRequestAuthenUpdateKeyFromJson(
+  Map<String, dynamic> json,
+) => _SRequestAuthenUpdateKey(userId: json['userId'] as String);
+
+Map<String, dynamic> _$SRequestAuthenUpdateKeyToJson(
+  _SRequestAuthenUpdateKey instance,
+) => <String, dynamic>{'userId': instance.userId};
+
 _SRequestCreateCompteHomeInformation
 _$SRequestCreateCompteHomeInformationFromJson(Map<String, dynamic> json) =>
     _SRequestCreateCompteHomeInformation(
@@ -189,7 +197,12 @@ _CreatCompteImage _$CreatCompteImageFromJson(Map<String, dynamic> json) =>
     _CreatCompteImage(
       file: json['file'] as String,
       userId: json['userId'] as String,
+      formTherd: json['formTherd'] as String,
     );
 
 Map<String, dynamic> _$CreatCompteImageToJson(_CreatCompteImage instance) =>
-    <String, dynamic>{'file': instance.file, 'userId': instance.userId};
+    <String, dynamic>{
+      'file': instance.file,
+      'userId': instance.userId,
+      'formTherd': instance.formTherd,
+    };

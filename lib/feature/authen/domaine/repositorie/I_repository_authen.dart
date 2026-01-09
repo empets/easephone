@@ -9,6 +9,8 @@ abstract class IRepositoryAuthen {
   //cette methode permet de créer l'utilisateur
 
   Future<Either<Failure, String?>> userAuthen(RequestAuthen request);
+  Future<Either<Failure, String?>> userAutheUpdateKey(RequestAuthenUpdateKey request);
+
 
   //cette methode permet de vérifier si l'utilisateur existe deja
   Future<Either<Failure, String?>> signIn(RequestAuthen request);
@@ -25,6 +27,7 @@ abstract class IRepositoryAuthen {
 
   //creation de compte marchant
   Future<Either<Failure, ProfileUser>> getProfileUser();
+  Future<Either<Failure,List<ProfileUser>>> getProfileUserList();
 
   Future<Either<Failure, String>> uploadImage(CreatCompteImage params);
   // current position

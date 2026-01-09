@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:latlong2/latlong.dart';
 part 'home_request.freezed.dart';
 part 'home_request.g.dart';
 

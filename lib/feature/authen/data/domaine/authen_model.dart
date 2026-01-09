@@ -10,6 +10,7 @@ abstract class ProfileUserModel with _$ProfileUserModel {
   factory ProfileUserModel({
     required String? email,
     required String? password,
+    required String? userId,
   }) = _SProfileUserModel;
 
   factory ProfileUserModel.fromJson(Map<String, dynamic> json) =>
@@ -19,6 +20,7 @@ abstract class ProfileUserModel with _$ProfileUserModel {
     return ProfileUser(
       email: model.email.getOrEmpty(),
       password: model.password.getOrEmpty(),
+      userId: model.userId.getOrEmpty(),
     );
   }
 }

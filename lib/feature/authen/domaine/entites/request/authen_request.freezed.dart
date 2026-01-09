@@ -284,6 +284,276 @@ as String,
 
 }
 
+RequestAuthenUpdateKey _$RequestAuthenUpdateKeyFromJson(
+  Map<String, dynamic> json
+) {
+    return _SRequestAuthenUpdateKey.fromJson(
+      json
+    );
+}
+
+/// @nodoc
+mixin _$RequestAuthenUpdateKey {
+
+ String get userId;
+/// Create a copy of RequestAuthenUpdateKey
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestAuthenUpdateKeyCopyWith<RequestAuthenUpdateKey> get copyWith => _$RequestAuthenUpdateKeyCopyWithImpl<RequestAuthenUpdateKey>(this as RequestAuthenUpdateKey, _$identity);
+
+  /// Serializes this RequestAuthenUpdateKey to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthenUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId);
+
+@override
+String toString() {
+  return 'RequestAuthenUpdateKey(userId: $userId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestAuthenUpdateKeyCopyWith<$Res>  {
+  factory $RequestAuthenUpdateKeyCopyWith(RequestAuthenUpdateKey value, $Res Function(RequestAuthenUpdateKey) _then) = _$RequestAuthenUpdateKeyCopyWithImpl;
+@useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestAuthenUpdateKeyCopyWithImpl<$Res>
+    implements $RequestAuthenUpdateKeyCopyWith<$Res> {
+  _$RequestAuthenUpdateKeyCopyWithImpl(this._self, this._then);
+
+  final RequestAuthenUpdateKey _self;
+  final $Res Function(RequestAuthenUpdateKey) _then;
+
+/// Create a copy of RequestAuthenUpdateKey
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,}) {
+  return _then(_self.copyWith(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [RequestAuthenUpdateKey].
+extension RequestAuthenUpdateKeyPatterns on RequestAuthenUpdateKey {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthenUpdateKey value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthenUpdateKey value)  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthenUpdateKey value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey() when $default != null:
+return $default(_that.userId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId)  $default,) {final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey():
+return $default(_that.userId);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId)?  $default,) {final _that = this;
+switch (_that) {
+case _SRequestAuthenUpdateKey() when $default != null:
+return $default(_that.userId);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SRequestAuthenUpdateKey implements RequestAuthenUpdateKey {
+   _SRequestAuthenUpdateKey({required this.userId});
+  factory _SRequestAuthenUpdateKey.fromJson(Map<String, dynamic> json) => _$SRequestAuthenUpdateKeyFromJson(json);
+
+@override final  String userId;
+
+/// Create a copy of RequestAuthenUpdateKey
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SRequestAuthenUpdateKeyCopyWith<_SRequestAuthenUpdateKey> get copyWith => __$SRequestAuthenUpdateKeyCopyWithImpl<_SRequestAuthenUpdateKey>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SRequestAuthenUpdateKeyToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthenUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId);
+
+@override
+String toString() {
+  return 'RequestAuthenUpdateKey(userId: $userId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SRequestAuthenUpdateKeyCopyWith<$Res> implements $RequestAuthenUpdateKeyCopyWith<$Res> {
+  factory _$SRequestAuthenUpdateKeyCopyWith(_SRequestAuthenUpdateKey value, $Res Function(_SRequestAuthenUpdateKey) _then) = __$SRequestAuthenUpdateKeyCopyWithImpl;
+@override @useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class __$SRequestAuthenUpdateKeyCopyWithImpl<$Res>
+    implements _$SRequestAuthenUpdateKeyCopyWith<$Res> {
+  __$SRequestAuthenUpdateKeyCopyWithImpl(this._self, this._then);
+
+  final _SRequestAuthenUpdateKey _self;
+  final $Res Function(_SRequestAuthenUpdateKey) _then;
+
+/// Create a copy of RequestAuthenUpdateKey
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+  return _then(_SRequestAuthenUpdateKey(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 RequestCreateCompteHomeInformation _$RequestCreateCompteHomeInformationFromJson(
   Map<String, dynamic> json
 ) {
@@ -2107,7 +2377,7 @@ as String?,
 mixin _$CreatCompteImage {
 
  String get file;// mot rechercher
- String get userId;
+ String get userId; String get formTherd;
 /// Create a copy of CreatCompteImage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2120,16 +2390,16 @@ $CreatCompteImageCopyWith<CreatCompteImage> get copyWith => _$CreatCompteImageCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatCompteImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatCompteImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,file,userId);
+int get hashCode => Object.hash(runtimeType,file,userId,formTherd);
 
 @override
 String toString() {
-  return 'CreatCompteImage(file: $file, userId: $userId)';
+  return 'CreatCompteImage(file: $file, userId: $userId, formTherd: $formTherd)';
 }
 
 
@@ -2140,7 +2410,7 @@ abstract mixin class $CreatCompteImageCopyWith<$Res>  {
   factory $CreatCompteImageCopyWith(CreatCompteImage value, $Res Function(CreatCompteImage) _then) = _$CreatCompteImageCopyWithImpl;
 @useResult
 $Res call({
- String file, String userId
+ String file, String userId, String formTherd
 });
 
 
@@ -2157,10 +2427,11 @@ class _$CreatCompteImageCopyWithImpl<$Res>
 
 /// Create a copy of CreatCompteImage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? file = null,Object? userId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? file = null,Object? userId = null,Object? formTherd = null,}) {
   return _then(_self.copyWith(
 file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,formTherd: null == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -2246,10 +2517,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String file,  String userId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String file,  String userId,  String formTherd)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreatCompteImage() when $default != null:
-return $default(_that.file,_that.userId);case _:
+return $default(_that.file,_that.userId,_that.formTherd);case _:
   return orElse();
 
 }
@@ -2267,10 +2538,10 @@ return $default(_that.file,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String file,  String userId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String file,  String userId,  String formTherd)  $default,) {final _that = this;
 switch (_that) {
 case _CreatCompteImage():
-return $default(_that.file,_that.userId);case _:
+return $default(_that.file,_that.userId,_that.formTherd);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2287,10 +2558,10 @@ return $default(_that.file,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String file,  String userId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String file,  String userId,  String formTherd)?  $default,) {final _that = this;
 switch (_that) {
 case _CreatCompteImage() when $default != null:
-return $default(_that.file,_that.userId);case _:
+return $default(_that.file,_that.userId,_that.formTherd);case _:
   return null;
 
 }
@@ -2302,12 +2573,13 @@ return $default(_that.file,_that.userId);case _:
 @JsonSerializable()
 
 class _CreatCompteImage implements CreatCompteImage {
-   _CreatCompteImage({required this.file, required this.userId});
+   _CreatCompteImage({required this.file, required this.userId, required this.formTherd});
   factory _CreatCompteImage.fromJson(Map<String, dynamic> json) => _$CreatCompteImageFromJson(json);
 
 @override final  String file;
 // mot rechercher
 @override final  String userId;
+@override final  String formTherd;
 
 /// Create a copy of CreatCompteImage
 /// with the given fields replaced by the non-null parameter values.
@@ -2322,16 +2594,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatCompteImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatCompteImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,file,userId);
+int get hashCode => Object.hash(runtimeType,file,userId,formTherd);
 
 @override
 String toString() {
-  return 'CreatCompteImage(file: $file, userId: $userId)';
+  return 'CreatCompteImage(file: $file, userId: $userId, formTherd: $formTherd)';
 }
 
 
@@ -2342,7 +2614,7 @@ abstract mixin class _$CreatCompteImageCopyWith<$Res> implements $CreatCompteIma
   factory _$CreatCompteImageCopyWith(_CreatCompteImage value, $Res Function(_CreatCompteImage) _then) = __$CreatCompteImageCopyWithImpl;
 @override @useResult
 $Res call({
- String file, String userId
+ String file, String userId, String formTherd
 });
 
 
@@ -2359,10 +2631,11 @@ class __$CreatCompteImageCopyWithImpl<$Res>
 
 /// Create a copy of CreatCompteImage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? file = null,Object? userId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? file = null,Object? userId = null,Object? formTherd = null,}) {
   return _then(_CreatCompteImage(
 file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,formTherd: null == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

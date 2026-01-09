@@ -8,10 +8,13 @@ import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
+  Future<FirebaseResult<String?>> userAutheUpdateKey(
+    RequestAuthenUpdateKey params,
+  );
+
   Future<FirebaseResult<String?>> signIn(RequestAuthen params);
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
@@ -22,6 +25,8 @@ abstract class FirebaseRemoteService {
 
   Future<FirebaseResult<ProfileUserModel>> getProfileUser();
   Future<FirebaseResult<String>> uploadImage(CreatCompteImage params);
+
+  Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList();
 }
 
 @LazySingleton(as: FirebaseRemoteService)
@@ -30,6 +35,7 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
   final databaseReference.DatabaseReference db;
   late String userKey = '';
+  late String authKey = '';
 
   @override
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params) async {
@@ -53,15 +59,38 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
         // 2) Créer une nouvelle entrée
         final ref = db.child('users').push();
+        authKey = ref.key.toString();
 
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
+
+        userAutheUpdateKey(RequestAuthenUpdateKey(userId: authKey));
 
         // 4) Retourner le key généré
         return FirebaseSuccess(ref.key);
       }
     } catch (e) {
       log("🔥 Firebase ERROR exise → $e");
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> userAutheUpdateKey(
+    RequestAuthenUpdateKey params,
+  ) async {
+    try {
+      final Map<String, dynamic> updates = {
+        ...params.toJson(), // nouveaux champs simples
+        'serviceLibelle': '',
+      };
+      // 2) Créer une nouvelle entrée
+      await db.child('users/${params.userId}').update(updates);
+
+      // 4) Retourner le key généré
+      return FirebaseSuccess(authKey);
+    } catch (e) {
+      log('************$e');
       return FirebaseError(e.toString());
     }
   }
@@ -173,6 +202,24 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   }
 
   @override
+  Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList() async {
+    try {
+      final snapshot = await db.child('users').get();
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseError("Aucune donnée trouvée");
+      }
+      final userProfile = (snapshot.value as Map).values.map((e) {
+        return ProfileUserModel.fromJson(Map<String, dynamic>.from(e));
+      }).toList();
+
+      return FirebaseSuccess(userProfile);
+    } catch (e) {
+      log(':: information:${e.runtimeType.toString()}');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
   Future<FirebaseResult<String>> uploadImage(CreatCompteImage params) async {
     try {
       final ref = FirebaseStorage.instance
@@ -183,6 +230,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       await ref.putFile(File(params.file));
 
       final reponse = await ref.getDownloadURL();
+      log('service ------>>> $reponse');
+
+      saveImageUrl(params.copyWith(file: reponse));
       return FirebaseSuccess(reponse);
     } catch (e) {
       log('************$e');
@@ -195,6 +245,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       ...params.toJson(), // nouveaux champs simples
       'serviceLibelle': '',
     };
-    await FirebaseDatabase.instance.ref('hotel/$userKey').update(updates);
+    await db.child('hotel/$userKey').update(updates);
   }
 }

@@ -27,6 +27,8 @@ import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
     as _i700;
 import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
     as _i406;
+import '../../feature/authen/domaine/usercase/get_user_list_usercase.dart'
+    as _i470;
 import '../../feature/authen/domaine/usercase/get_user_profile_usercase.dart'
     as _i973;
 import '../../feature/authen/domaine/usercase/send_image.dart' as _i452;
@@ -113,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
       () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i470.GetUserListUsercase>(
+      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i622.AuthByMailBloc>(
       () => _i622.AuthByMailBloc(

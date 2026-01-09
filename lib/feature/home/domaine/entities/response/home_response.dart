@@ -23,6 +23,8 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
     required String whatsappContact,
     required String formOne,
     required String formTwo,
+    required String formTherd,
+    required String file,
   }) = _SActiveUserProfile;
 
   factory ActiveUserProfile.fromJson(Map<String, dynamic> json) =>

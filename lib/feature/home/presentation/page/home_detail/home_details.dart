@@ -1,22 +1,21 @@
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
+import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
+import 'package:com.example.epbomi/feature/home/presentation/page/home_maps.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart'
     show
         Align,
         Alignment,
         Axis,
-        Border,
         BorderRadius,
         BorderRadiusGeometry,
         BoxDecoration,
         BoxFit,
-        BoxShape,
         BuildContext,
         CircleAvatar,
         ClipOval,
         ClipRRect,
-        Color,
         Colors,
         Column,
         Container,
@@ -27,9 +26,7 @@ import 'package:flutter/material.dart'
         Icon,
         Icons,
         Image,
-        ListTile,
         MainAxisAlignment,
-        Material,
         MediaQuery,
         Radius,
         Row,
@@ -42,10 +39,8 @@ import 'package:flutter/material.dart'
         Widget,
         PageController;
 import 'package:flutter/widgets.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeDetails extends StatefulWidget {
@@ -60,61 +55,6 @@ class HomeDetails extends StatefulWidget {
 class _HomeDetailsState extends State<HomeDetails>
     with TickerProviderStateMixin {
   PageController controller = PageController();
-
-  late int currentIdenx = 0;
-
-  final MapController _mapController = MapController();
-  late MapController mapController;
-
-  void _animatedMapMove(LatLng destLocation, double dezoomer) {
-    // Décalage pour que le marqueur soit plus haut dans l’écran
-    const double offsetLatitude = -0.002;
-
-    // Nouveau point où la caméra doit aller (un peu plus haut que le marqueur)
-    final LatLng cameraTarget = LatLng(
-      destLocation.latitude + offsetLatitude,
-      destLocation.longitude,
-    );
-
-    final latTween = Tween<double>(
-      begin: mapController.camera.center.latitude,
-      end: cameraTarget.latitude,
-    );
-    final lngTween = Tween<double>(
-      begin: mapController.camera.center.longitude,
-      end: cameraTarget.longitude,
-    );
-    final zoomTween = Tween<double>(
-      begin: mapController.camera.zoom,
-      end: dezoomer,
-    );
-
-    final controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-
-    final animation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.fastOutSlowIn,
-    );
-
-    controller.addListener(() {
-      mapController.move(
-        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
-        zoomTween.evaluate(animation),
-      );
-    });
-
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed ||
-          status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
-
-    controller.forward();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -215,6 +155,7 @@ class _HomeDetailsState extends State<HomeDetails>
                         height: 0.3.sh,
                         width: MediaQuery.sizeOf(context).width.sw,
                         child: PageView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           controller: controller,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -226,12 +167,54 @@ class _HomeDetailsState extends State<HomeDetails>
                                   7.r,
                                 ),
                                 child: Image.network(
-                                  'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?fm=jpg&q=60&w=3000',
+                                  widget.profile.file,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             );
                           },
+                        ),
+                      ),
+
+                      Positioned(
+                        right: 2.w,
+                        bottom: 0.h,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(
+                              context,
+                            ).push(fadeRoute(const HomeMapsOverViewScreen()));
+                          },
+                          child: Stack(
+                            children: [
+                              Container(
+                                height: 0.05.sh,
+                                width: 0.05.sh,
+                                margin: EdgeInsets.only(
+                                  right: 8.w,
+                                  bottom: 10.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(9.r),
+                                ),
+                                child: ClipOval(
+                                  child: Image.network(
+                                    'https://www.shutterstock.com/image-vector/city-map-navigation-gps-navigator-260nw-2449090905.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+
+                              Positioned(
+                                top: 6.h,
+                                left: 8.w,
+                                child: Icon(
+                                  Icons.location_history_rounded,
+                                  color: Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
