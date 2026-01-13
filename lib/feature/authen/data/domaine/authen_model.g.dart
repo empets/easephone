@@ -11,6 +11,7 @@ _SProfileUserModel _$SProfileUserModelFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String?,
       password: json['password'] as String?,
       userId: json['userId'] as String?,
+      profileImage: json['profileImage'] as String?,
     );
 
 Map<String, dynamic> _$SProfileUserModelToJson(_SProfileUserModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$SProfileUserModelToJson(_SProfileUserModel instance) =>
       'email': instance.email,
       'password': instance.password,
       'userId': instance.userId,
+      'profileImage': instance.profileImage,
     };

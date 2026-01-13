@@ -101,14 +101,14 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
                                   padding: const EdgeInsets.all(8.0),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: MyColorName.black,
+                                      color: MyColorName.greyAvatar,
                                     ),
-                                    color: MyColorName.black,
+                                    // color: MyColorName.black,
                                     shape: BoxShape.circle,
                                   ),
                                   child: FaIcon(
                                     FontAwesomeIcons.pencil,
-                                    color: MyColorName.white,
+                                    color: MyColorName.black,
                                     size: 15.h,
                                   ),
                                 ),

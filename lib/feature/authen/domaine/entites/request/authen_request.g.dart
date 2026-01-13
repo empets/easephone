@@ -206,3 +206,15 @@ Map<String, dynamic> _$CreatCompteImageToJson(_CreatCompteImage instance) =>
       'userId': instance.userId,
       'formTherd': instance.formTherd,
     };
+
+_CreatProfileImage _$CreatProfileImageFromJson(Map<String, dynamic> json) =>
+    _CreatProfileImage(
+      profileImage: json['profileImage'] as String,
+      userId: json['userId'] as String,
+    );
+
+Map<String, dynamic> _$CreatProfileImageToJson(_CreatProfileImage instance) =>
+    <String, dynamic>{
+      'profileImage': instance.profileImage,
+      'userId': instance.userId,
+    };

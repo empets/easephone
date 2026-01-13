@@ -29,6 +29,7 @@ _SActiveUserProfileModel _$SActiveUserProfileModelFromJson(
   formTwo: json['formTwo'] as String?,
   formTherd: json['formTherd'] as String?,
   file: json['file'] as String?,
+  profileImage: json['profileImage'] as String?,
 );
 
 Map<String, dynamic> _$SActiveUserProfileModelToJson(
@@ -54,13 +55,19 @@ Map<String, dynamic> _$SActiveUserProfileModelToJson(
   'formTwo': instance.formTwo,
   'formTherd': instance.formTherd,
   'file': instance.file,
+  'profileImage': instance.profileImage,
 };
 
 _SLikeResponseModel _$SLikeResponseModelFromJson(Map<String, dynamic> json) =>
     _SLikeResponseModel(
       compter: (json['compter'] as num).toInt(),
       userId: json['userId'] as String,
+      likeId: json['likeId'] as String?,
     );
 
 Map<String, dynamic> _$SLikeResponseModelToJson(_SLikeResponseModel instance) =>
-    <String, dynamic>{'compter': instance.compter, 'userId': instance.userId};
+    <String, dynamic>{
+      'compter': instance.compter,
+      'userId': instance.userId,
+      'likeId': instance.likeId,
+    };

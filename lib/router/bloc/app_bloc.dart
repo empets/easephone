@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/state/signin_state.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
@@ -32,7 +31,6 @@ class AppRouteBloc extends Bloc<SigninEvent, SigninState> {
             state.copyWith(errorMsg: "", status: FormzSubmissionStatus.failure),
           );
         }
-        break;
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
+import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -7,7 +7,16 @@ import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 import 'package:latlong2/latlong.dart';
 
 class HomeMapsOverViewScreen extends StatefulWidget {
-  const HomeMapsOverViewScreen({super.key});
+  const HomeMapsOverViewScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+    required this.adress,
+  });
+
+  final double latitude;
+  final double longitude;
+  final String adress;
 
   @override
   State<HomeMapsOverViewScreen> createState() => _HomeMapsOverViewScreenState();
@@ -69,7 +78,6 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
   }
 
   // Position par défaut (ex : Abidjan)
-  final LatLng _center = LatLng(5.347, -4.012); // remplace par ce que tu veux
 
   // Marqueurs dynamiques (tu peux les sauvegarder si besoin)
   final List<Marker> _markers = [];
@@ -80,7 +88,7 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
     // Exemple : ajoute un marqueur initial
     _markers.add(
       Marker(
-        point: _center,
+        point: LatLng(widget.latitude, widget.longitude),
         width: 48,
         height: 48,
         child: Icon(Icons.location_on, size: 40, color: Colors.red),
@@ -90,13 +98,7 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
 
   MarkerLayer buildAutoMarkers(String label) {
     // 1. Génération de 5 points proches de la zone
-    final List<LatLng> positions = [
-      LatLng(5.3891808, -4.0082932),
-      LatLng(5.3899500, -4.0091000),
-      LatLng(5.3887200, -4.0078000),
-      LatLng(5.3894000, -4.0069000),
-      LatLng(5.3901500, -4.0087500),
-    ];
+    final List<LatLng> positions = [LatLng(widget.latitude, widget.longitude)];
 
     // 2. Construction des Markers
     final markers = positions.map((pos) {
@@ -167,48 +169,7 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 0.1.sh,
-        title: GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              backgroundColor: MyColorName.white,
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-              ),
-              builder: (BuildContext context) {
-                return UserMenuContent();
-              },
-            );
-          },
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50.r), // arrondi
-                child: Image.network(
-                  'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                  width: 50.h,
-                  height: 50.h,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(width: 5.w),
-              Text(
-                'Back road ',
-                style: GoogleFonts.roboto(
-                  color: Colors.black,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Colors.white,
-      ),
+
       body: Stack(
         children: [
           FlutterMap(
@@ -217,7 +178,7 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
               onTap: (tapPosition, point) {
                 _animatedMapMove(point, 17);
               },
-              initialCenter: const LatLng(5.3891808, -4.0082932),
+              initialCenter: LatLng(widget.latitude, widget.longitude),
               initialZoom: 18,
               maxZoom: 23,
               minZoom: 16,
@@ -233,52 +194,50 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
                 markers: [
                   Marker(
                     rotate: true,
-                    width: 100,
-                    height: 100,
-                    point: LatLng(5.3890300, -4.0082910),
+                    width: 100.h,
+                    height: 100.h,
+                    point: LatLng(widget.latitude, widget.longitude),
                     child: Column(
                       children: [
-                        Material(
-                          color: Colors.transparent,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 7,
-                              horizontal: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.black45,
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Text(
-                              'Own',
-                              style: GoogleFonts.roboto(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 7,
+                                horizontal: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black45,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Text(
+                                widget.adress,
+                                style: GoogleFonts.roboto(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 10),
                         Container(
-                          height: 40,
-                          padding: EdgeInsets.all(10),
+                          // height: 30,
+                          // width: 30,
                           decoration: BoxDecoration(
-                            color: Colors.blue.shade100.withValues(alpha: 0.6),
                             shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 1),
                           ),
-                          child: Container(
-                            // height: 30,
-                            // width: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 1),
-                            ),
-                            child: Icon(
-                              Icons.circle,
-                              size: 17,
-                              color: Colors.blue,
-                            ),
+                          child: Icon(
+                            Icons.location_history,
+                            size: 20.r,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -286,18 +245,31 @@ class _HomeMapsOverViewScreenState extends State<HomeMapsOverViewScreen>
                   ),
                 ],
               ),
-
-              buildAutoMarkers('logement'),
             ],
           ),
-          Container(
-            height: 9,
-            width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(100),
+          Positioned(
+            top: 28.h,
+            left: 7.w,
+
+            child: Material(
+              elevation: 4,
+              shape: const CircleBorder(),
+              child: InkWell(
+                onTap: () => Navigator.maybePop(context),
+                borderRadius: BorderRadius.circular(24),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 24,
+                  ),
+                ),
               ),
             ),
           ),

@@ -4,8 +4,12 @@ part 'home_request.g.dart';
 
 @freezed
 abstract class RequestLike with _$RequestLike {
-  factory RequestLike({required String userId, required int compter, required String date}) =
-      _SRequestLike;
+  factory RequestLike({
+    required String userId,
+    required int compter,
+    required String date,
+    String? likeId,
+  }) = _SRequestLike;
 
   factory RequestLike.fromJson(Map<String, dynamic> json) =>
       _$RequestLikeFromJson(json);

@@ -147,6 +147,10 @@ dependencies:
   ind_utils: ^2.0.13
   firebase_storage: any
   url_launcher: ^6.2.6
+  connectivity_plus: ^6.0.5
+  internet_connection_checker: ^1.0.0+1
+  geolocator: ^14.0.2
+  
   # location: ^8.0.1
 
 dev_dependencies:

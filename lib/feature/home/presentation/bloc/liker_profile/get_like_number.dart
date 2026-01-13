@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
-import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_like_number.dart';
@@ -22,7 +21,7 @@ class GetLikeNumberBloc
     Emitter<ApiState<List<LikeResponse>>> emit,
   ) async {
     await event.whenOrNull(
-      likeProfile: (like)async {
+      likeProfile: (like, userId) async {
         if (like == true) {
           emit(ApiState<List<LikeResponse>>.load());
 

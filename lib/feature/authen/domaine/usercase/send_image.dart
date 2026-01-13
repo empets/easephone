@@ -13,9 +13,20 @@ class CreateCoompteSendImageUsercase
   final IRepositoryAuthen repository;
 
   @override
-  Future<Either<Failure, String?>> call(
-    CreatCompteImage params,
-  ) {
+  Future<Either<Failure, String?>> call(CreatCompteImage params) {
     return repository.uploadImage(params);
+  }
+}
+
+@lazySingleton
+class CreateProfileImageUsercase
+    implements UseCase<String?, CreatProfileImage> {
+  CreateProfileImageUsercase(this.repository);
+
+  final IRepositoryAuthen repository;
+
+  @override
+  Future<Either<Failure, String?>> call(CreatProfileImage params) {
+    return repository.uploadprofileImage(params);
   }
 }

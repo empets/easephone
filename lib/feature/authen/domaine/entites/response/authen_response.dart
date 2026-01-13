@@ -4,7 +4,7 @@ part 'authen_response.g.dart';
 
 @freezed
 abstract class ProfileUser with _$ProfileUser {
-  factory ProfileUser({required String email, required String password, required String userId}) =
+  factory ProfileUser({required String email, required String password, required String userId,required String  profileImage}) =
       _SProfileUser;
 
   factory ProfileUser.fromJson(Map<String, dynamic> json) =>

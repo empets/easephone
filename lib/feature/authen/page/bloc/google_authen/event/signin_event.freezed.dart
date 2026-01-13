@@ -55,11 +55,12 @@ extension SigninEventPatterns on SigninEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GoogleAuthenSigninEvent value)?  googleAuthen,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GoogleAuthenSigninEvent value)?  googleAuthen,TResult Function( UserIsOnlyneGoogleAuthenSigninEvent value)?  userIsOnlyne,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent() when googleAuthen != null:
-return googleAuthen(_that);case _:
+return googleAuthen(_that);case UserIsOnlyneGoogleAuthenSigninEvent() when userIsOnlyne != null:
+return userIsOnlyne(_that);case _:
   return orElse();
 
 }
@@ -77,11 +78,12 @@ return googleAuthen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GoogleAuthenSigninEvent value)  googleAuthen,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GoogleAuthenSigninEvent value)  googleAuthen,required TResult Function( UserIsOnlyneGoogleAuthenSigninEvent value)  userIsOnlyne,}){
 final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent():
-return googleAuthen(_that);case _:
+return googleAuthen(_that);case UserIsOnlyneGoogleAuthenSigninEvent():
+return userIsOnlyne(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +100,12 @@ return googleAuthen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GoogleAuthenSigninEvent value)?  googleAuthen,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GoogleAuthenSigninEvent value)?  googleAuthen,TResult? Function( UserIsOnlyneGoogleAuthenSigninEvent value)?  userIsOnlyne,}){
 final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent() when googleAuthen != null:
-return googleAuthen(_that);case _:
+return googleAuthen(_that);case UserIsOnlyneGoogleAuthenSigninEvent() when userIsOnlyne != null:
+return userIsOnlyne(_that);case _:
   return null;
 
 }
@@ -119,10 +122,11 @@ return googleAuthen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  googleAuthen,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  googleAuthen,TResult Function( bool userIsOnlyne)?  userIsOnlyne,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent() when googleAuthen != null:
-return googleAuthen();case _:
+return googleAuthen();case UserIsOnlyneGoogleAuthenSigninEvent() when userIsOnlyne != null:
+return userIsOnlyne(_that.userIsOnlyne);case _:
   return orElse();
 
 }
@@ -140,10 +144,11 @@ return googleAuthen();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  googleAuthen,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  googleAuthen,required TResult Function( bool userIsOnlyne)  userIsOnlyne,}) {final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent():
-return googleAuthen();case _:
+return googleAuthen();case UserIsOnlyneGoogleAuthenSigninEvent():
+return userIsOnlyne(_that.userIsOnlyne);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +165,11 @@ return googleAuthen();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  googleAuthen,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  googleAuthen,TResult? Function( bool userIsOnlyne)?  userIsOnlyne,}) {final _that = this;
 switch (_that) {
 case GoogleAuthenSigninEvent() when googleAuthen != null:
-return googleAuthen();case _:
+return googleAuthen();case UserIsOnlyneGoogleAuthenSigninEvent() when userIsOnlyne != null:
+return userIsOnlyne(_that.userIsOnlyne);case _:
   return null;
 
 }
@@ -202,5 +208,71 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class UserIsOnlyneGoogleAuthenSigninEvent implements SigninEvent {
+   UserIsOnlyneGoogleAuthenSigninEvent({required this.userIsOnlyne});
+  
+
+ final  bool userIsOnlyne;
+
+/// Create a copy of SigninEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserIsOnlyneGoogleAuthenSigninEventCopyWith<UserIsOnlyneGoogleAuthenSigninEvent> get copyWith => _$UserIsOnlyneGoogleAuthenSigninEventCopyWithImpl<UserIsOnlyneGoogleAuthenSigninEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserIsOnlyneGoogleAuthenSigninEvent&&(identical(other.userIsOnlyne, userIsOnlyne) || other.userIsOnlyne == userIsOnlyne));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,userIsOnlyne);
+
+@override
+String toString() {
+  return 'SigninEvent.userIsOnlyne(userIsOnlyne: $userIsOnlyne)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UserIsOnlyneGoogleAuthenSigninEventCopyWith<$Res> implements $SigninEventCopyWith<$Res> {
+  factory $UserIsOnlyneGoogleAuthenSigninEventCopyWith(UserIsOnlyneGoogleAuthenSigninEvent value, $Res Function(UserIsOnlyneGoogleAuthenSigninEvent) _then) = _$UserIsOnlyneGoogleAuthenSigninEventCopyWithImpl;
+@useResult
+$Res call({
+ bool userIsOnlyne
+});
+
+
+
+
+}
+/// @nodoc
+class _$UserIsOnlyneGoogleAuthenSigninEventCopyWithImpl<$Res>
+    implements $UserIsOnlyneGoogleAuthenSigninEventCopyWith<$Res> {
+  _$UserIsOnlyneGoogleAuthenSigninEventCopyWithImpl(this._self, this._then);
+
+  final UserIsOnlyneGoogleAuthenSigninEvent _self;
+  final $Res Function(UserIsOnlyneGoogleAuthenSigninEvent) _then;
+
+/// Create a copy of SigninEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userIsOnlyne = null,}) {
+  return _then(UserIsOnlyneGoogleAuthenSigninEvent(
+userIsOnlyne: null == userIsOnlyne ? _self.userIsOnlyne : userIsOnlyne // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 // dart format on

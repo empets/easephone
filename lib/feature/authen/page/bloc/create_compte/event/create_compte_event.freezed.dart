@@ -1334,7 +1334,7 @@ String toString() {
 /// @nodoc
 mixin _$CreateCompteSendImage {
 
- String get file;
+ String get file; String? get userId;
 /// Create a copy of CreateCompteSendImage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1345,16 +1345,16 @@ $CreateCompteSendImageCopyWith<CreateCompteSendImage> get copyWith => _$CreateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteSendImage&&(identical(other.file, file) || other.file == file));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteSendImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,file);
+int get hashCode => Object.hash(runtimeType,file,userId);
 
 @override
 String toString() {
-  return 'CreateCompteSendImage(file: $file)';
+  return 'CreateCompteSendImage(file: $file, userId: $userId)';
 }
 
 
@@ -1365,7 +1365,7 @@ abstract mixin class $CreateCompteSendImageCopyWith<$Res>  {
   factory $CreateCompteSendImageCopyWith(CreateCompteSendImage value, $Res Function(CreateCompteSendImage) _then) = _$CreateCompteSendImageCopyWithImpl;
 @useResult
 $Res call({
- String file
+ String file, String? userId
 });
 
 
@@ -1382,10 +1382,11 @@ class _$CreateCompteSendImageCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteSendImage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? file = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? file = null,Object? userId = freezed,}) {
   return _then(_self.copyWith(
 file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
-as String,
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -1470,10 +1471,10 @@ return image(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String file)?  image,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String file,  String? userId)?  image,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ImageCreateCompteSendImage() when image != null:
-return image(_that.file);case _:
+return image(_that.file,_that.userId);case _:
   return orElse();
 
 }
@@ -1491,10 +1492,10 @@ return image(_that.file);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String file)  image,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String file,  String? userId)  image,}) {final _that = this;
 switch (_that) {
 case ImageCreateCompteSendImage():
-return image(_that.file);case _:
+return image(_that.file,_that.userId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1511,10 +1512,10 @@ return image(_that.file);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String file)?  image,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String file,  String? userId)?  image,}) {final _that = this;
 switch (_that) {
 case ImageCreateCompteSendImage() when image != null:
-return image(_that.file);case _:
+return image(_that.file,_that.userId);case _:
   return null;
 
 }
@@ -1526,10 +1527,11 @@ return image(_that.file);case _:
 
 
 class ImageCreateCompteSendImage implements CreateCompteSendImage {
-   ImageCreateCompteSendImage(this.file);
+   ImageCreateCompteSendImage(this.file, {this.userId});
   
 
 @override final  String file;
+@override final  String? userId;
 
 /// Create a copy of CreateCompteSendImage
 /// with the given fields replaced by the non-null parameter values.
@@ -1541,16 +1543,16 @@ $ImageCreateCompteSendImageCopyWith<ImageCreateCompteSendImage> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageCreateCompteSendImage&&(identical(other.file, file) || other.file == file));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageCreateCompteSendImage&&(identical(other.file, file) || other.file == file)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,file);
+int get hashCode => Object.hash(runtimeType,file,userId);
 
 @override
 String toString() {
-  return 'CreateCompteSendImage.image(file: $file)';
+  return 'CreateCompteSendImage.image(file: $file, userId: $userId)';
 }
 
 
@@ -1561,7 +1563,7 @@ abstract mixin class $ImageCreateCompteSendImageCopyWith<$Res> implements $Creat
   factory $ImageCreateCompteSendImageCopyWith(ImageCreateCompteSendImage value, $Res Function(ImageCreateCompteSendImage) _then) = _$ImageCreateCompteSendImageCopyWithImpl;
 @override @useResult
 $Res call({
- String file
+ String file, String? userId
 });
 
 
@@ -1578,10 +1580,11 @@ class _$ImageCreateCompteSendImageCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteSendImage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? file = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? file = null,Object? userId = freezed,}) {
   return _then(ImageCreateCompteSendImage(
 null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
-as String,
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

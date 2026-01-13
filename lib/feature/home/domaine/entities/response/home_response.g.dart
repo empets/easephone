@@ -28,6 +28,7 @@ _SActiveUserProfile _$SActiveUserProfileFromJson(Map<String, dynamic> json) =>
       formTwo: json['formTwo'] as String,
       formTherd: json['formTherd'] as String,
       file: json['file'] as String,
+      profileImage: json['profileImage'] as String,
     );
 
 Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
@@ -52,13 +53,19 @@ Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
       'formTwo': instance.formTwo,
       'formTherd': instance.formTherd,
       'file': instance.file,
+      'profileImage': instance.profileImage,
     };
 
 _SLikeResponse _$SLikeResponseFromJson(Map<String, dynamic> json) =>
     _SLikeResponse(
       compter: (json['compter'] as num).toInt(),
       userId: json['userId'] as String,
+      likeId: json['likeId'] as String,
     );
 
 Map<String, dynamic> _$SLikeResponseToJson(_SLikeResponse instance) =>
-    <String, dynamic>{'compter': instance.compter, 'userId': instance.userId};
+    <String, dynamic>{
+      'compter': instance.compter,
+      'userId': instance.userId,
+      'likeId': instance.likeId,
+    };

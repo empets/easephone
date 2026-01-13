@@ -11,6 +11,7 @@ _SRequestLike _$SRequestLikeFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       compter: (json['compter'] as num).toInt(),
       date: json['date'] as String,
+      likeId: json['likeId'] as String?,
     );
 
 Map<String, dynamic> _$SRequestLikeToJson(_SRequestLike instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$SRequestLikeToJson(_SRequestLike instance) =>
       'userId': instance.userId,
       'compter': instance.compter,
       'date': instance.date,
+      'likeId': instance.likeId,
     };

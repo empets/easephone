@@ -2,7 +2,6 @@ import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/form/form.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
-import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_herb_usercase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_bloc.dart';
@@ -39,7 +38,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
       'value': 'oui',
     },
     {
-      'title': 'Actif Service de restauration',
+      'title': 'Service de restauration non actif',
       'subtitle': 'Support disponible 24h/24 et 7j/7',
       'value': 'non',
     },
@@ -111,7 +110,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                             return Container(
                               margin: EdgeInsets.symmetric(vertical: 9.h),
                               child: ProductionFormCustomer(
-                                textLabel: 'rom number',
+                                textLabel: 'Nombre de chambre',
                                 errorText:
                                     state.roomNumber.isPure ||
                                         state.roomNumber.isValid
@@ -135,7 +134,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                             return Container(
                               margin: EdgeInsets.symmetric(vertical: 9.h),
                               child: ProductionFormCustomer(
-                                textLabel: 'avrege bed by room',
+                                textLabel: 'Moyenne de douche par suite',
                                 errorText:
                                     state.averageBed.isPure ||
                                         state.averageBed.isValid
@@ -256,7 +255,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                             return Container(
                               margin: EdgeInsets.symmetric(vertical: 9.h),
                               child: ProductionFormCustomer(
-                                textLabel: 'Decription',
+                                textLabel: 'Décrivez votre activité',
                                 letSpace: [],
                                 minLines: 3,
                                 maxLines: 3,

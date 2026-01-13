@@ -27,6 +27,8 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
     required String? formTwo,
     required String? formTherd,
     required String? file,
+    required String? profileImage,
+
     // required String? formTherd,
   }) = _SActiveUserProfileModel;
 
@@ -55,6 +57,8 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
       formTwo: model.formTwo.getOrEmpty(),
       formTherd: model.formTherd.getOrEmpty(),
       file: model.file.getOrEmpty(),
+      profileImage: model.profileImage.getOrEmpty(),
+
       // formTherd: model.formTherd.getOrEmpty(),
     );
   }
@@ -62,8 +66,11 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
 
 @freezed
 abstract class LikeResponseModel with _$LikeResponseModel {
-  factory LikeResponseModel({required int compter, required String userId}) =
-      _SLikeResponseModel;
+  factory LikeResponseModel({
+    required int compter,
+    required String userId,
+    required String? likeId,
+  }) = _SLikeResponseModel;
 
   factory LikeResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LikeResponseModelFromJson(json);
@@ -72,6 +79,7 @@ abstract class LikeResponseModel with _$LikeResponseModel {
     return LikeResponse(
       compter: model.compter.getOrEmpty(),
       userId: model.userId.getOrEmpty(),
+      likeId: model.likeId.getOrEmpty(),
     );
   }
 }

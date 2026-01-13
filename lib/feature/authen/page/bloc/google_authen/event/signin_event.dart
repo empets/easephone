@@ -4,4 +4,6 @@ part 'signin_event.freezed.dart';
 @freezed
 class SigninEvent with _$SigninEvent {
   factory SigninEvent.googleAuthen() = GoogleAuthenSigninEvent;
+  factory SigninEvent.userIsOnlyne({required bool userIsOnlyne}) =
+      UserIsOnlyneGoogleAuthenSigninEvent;
 }

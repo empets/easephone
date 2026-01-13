@@ -60,5 +60,6 @@ class CreateCompteHebEvent with _$CreateCompteHebEvent {
 
 @freezed
 abstract class CreateCompteSendImage with _$CreateCompteSendImage {
-  factory CreateCompteSendImage.image(String file) = ImageCreateCompteSendImage;
+  factory CreateCompteSendImage.image(String file, {String? userId}) =
+      ImageCreateCompteSendImage;
 }

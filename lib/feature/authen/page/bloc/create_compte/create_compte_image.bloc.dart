@@ -44,3 +44,44 @@ class CreateCompteImageBloc
     }
   }
 }
+
+
+
+class CreateProfileImageBloc
+    extends Bloc<CreateCompteSendImage, ApiState<String>> {
+  CreateProfileImageBloc({required this.createProfileImage})
+    : super(ApiState<String>.initial()) {
+    on<CreateCompteSendImage>(sendPhoto);
+  }
+
+  CreateProfileImageUsercase createProfileImage;
+
+  Future<void> sendPhoto(
+    CreateCompteSendImage event,
+    Emitter<ApiState<String>> emit,
+  ) async {
+    switch (event) {
+      case CreateCompteSendImage(:final file):
+        if (file.isNotEmpty) {
+          emit(ApiState<String>.load());
+
+          final sharedPreferences = await SharedPreferences.getInstance();
+          final localUserSection = sharedPreferences.getString('user_section');
+
+          final response = await createProfileImage.call(
+            CreatProfileImage(
+              profileImage: file,
+              userId: localUserSection.toString(),
+            ),
+          );
+
+          emit(
+            response.fold(
+              (l) => FailedState(l.message),
+              (r) => SuccessState('success'),
+            ),
+          );
+        }
+    }
+  }
+}

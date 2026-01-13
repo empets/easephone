@@ -5,7 +5,6 @@ import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseRf;
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MarchanServiceFirebase {
   // cette mehode permet d'obtenir les information sur un compte actf
@@ -59,11 +58,14 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
     try {
       final response = await db
           .child('likeProfile')
-          .orderByChild('userId')
-          .equalTo(params.userId)
+          .orderByChild('likeId')
+          .equalTo(params.likeId)
           .get();
 
+      log('message====== $response');
+
       if (response.exists) {
+        log('message====== $response');
         return dislike(params);
       } else {
         // 1) Construire l'objet Request
@@ -79,6 +81,15 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
         await ref.set(request.data);
         like = ref.key;
 
+        final Map<String, dynamic> updates = {
+          ...params
+              .copyWith(likeId: ref.key)
+              .toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+        };
+        // 2) Créer une nouvelle entrée
+        await db.child('likeProfile/${ref.key}').update(updates);
+
         // 4) Retourner le key généré
         return FirebaseSuccess(ref.key);
       }
@@ -90,26 +101,17 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
 
   @override
   Future<FirebaseResult<String?>> dislike(RequestLike params) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final localUserSection = sharedPreferences.getString('user_section');
-
     try {
       final response = await db
           .child('likeProfile')
-          .orderByChild('userId')
-          .equalTo(params.userId)
+          .orderByChild('likeId')
+          .equalTo(params.likeId)
           .get();
 
       if (response.exists) {
-        log("🔥 vous avez jamais liker se profile");
+        log("🔥 vous avez jamais liker se profile $response");
 
-        final Map<String, dynamic> updates = {
-          ...params.toJson(), // nouveaux champs simples
-          'serviceLibelle': '',
-          'user': localUserSection.toString(),
-        };
-
-        await db.child('likeProfile/$like').update(updates);
+        await db.child('likeProfile/${params.likeId}').remove();
 
         return FirebaseSuccess(like);
       } else {
@@ -122,7 +124,7 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   }
 
   @override
-  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber()  async{
+  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() async {
     try {
       final snapshot = await db.child('likeProfile').get();
       if (!snapshot.exists || snapshot.value == null) {
@@ -138,28 +140,4 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
       return FirebaseError(e.toString());
     }
   }
-
-  // @override
-  // Stream<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() {
-  //   return db.child('likeProfile').onValue.map((event) {
-  //     try {
-  //       final snapshot = event.snapshot;
-
-  //       if (!snapshot.exists || snapshot.value == null) {
-  //         return FirebaseSuccess<List<LikeResponseModel>>([]);
-  //       }
-
-  //       final data = snapshot.value as Map<dynamic, dynamic>;
-
-  //       final userProfile = data.values.map((e) {
-  //         return LikeResponseModel.fromJson(Map<String, dynamic>.from(e));
-  //       }).toList();
-
-  //       return FirebaseSuccess<List<LikeResponseModel>>(userProfile);
-  //     } catch (e) {
-  //       log('🔥 Firebase stream error: $e');
-  //       return FirebaseError<List<LikeResponseModel>>(e.toString());
-  //     }
-  //   });
-  // }
 }

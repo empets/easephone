@@ -27,6 +27,8 @@ abstract class FirebaseRemoteService {
   Future<FirebaseResult<String>> uploadImage(CreatCompteImage params);
 
   Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList();
+
+  Future<FirebaseResult<String?>> uploadprofileImage(CreatProfileImage params);
 }
 
 @LazySingleton(as: FirebaseRemoteService)
@@ -133,23 +135,40 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   ) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final localUserSection = sharedPreferences.getString('user_section');
+
+    //  final sharedPreferences = await SharedPreferences.getInstance();
+    final localUserSections = sharedPreferences.getString(
+      'user_actif_by_change_profile_photo',
+    );
+
     try {
-      final request = Request<RequestCreateCompteHomeInformation>(
-        data: params.toJson(),
-        user: localUserSection.toString(),
-        serviceLibelle: '',
-      );
+      if (localUserSections != null && localUserSections.isNotEmpty) {
+        final request = Request<RequestCreateCompteHomeInformation>(
+          data: params.toJson(),
+          user: localUserSection.toString(),
+          serviceLibelle: '',
+        );
 
+        // 2) Créer une nouvelle entrée
+        final ref = db.child('hotel').push();
+
+        // 3) Sauvegarder dans Firebase (en convertissant en Map)
+        await ref.set(request.data);
+
+        userKey = ref.key.toString();
+        return FirebaseSuccess(localUserSection);
+      }
+
+      final Map<String, dynamic> updates = {
+        ...params.toJson(), // nouveaux champs simples
+        'serviceLibelle': '',
+        'user': localUserSection.toString(),
+      };
       // 2) Créer une nouvelle entrée
-      final ref = db.child('hotel').push();
-
-      // 3) Sauvegarder dans Firebase (en convertissant en Map)
-      await ref.set(request.data);
-
-      userKey = ref.key.toString();
+      await db.child('hotel/$localUserSection').update(updates);
 
       // 4) Retourner le key généré
-      return FirebaseSuccess(ref.key);
+      return FirebaseSuccess(localUserSection);
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());
@@ -161,19 +180,35 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     RequestCreateCompteHeber params,
   ) async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    final localUserSection = sharedPreferences.getString('user_section');
+    final localUserSectionss = sharedPreferences.getString('user_section');
+    final localUserSection = sharedPreferences.getString(
+      'user_actif_by_change_profile_photo',
+    );
 
     try {
+      if (localUserSection != null && localUserSection.isNotEmpty) {
+        final Map<String, dynamic> updates = {
+          ...params.toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+          'user': localUserSection.toString(),
+        };
+        // 2) Créer une nouvelle entrée
+        await db.child('hotel/$localUserSection').update(updates);
+
+        // 4) Retourner le key généré
+        return FirebaseSuccess(localUserSection);
+      }
+
       final Map<String, dynamic> updates = {
         ...params.toJson(), // nouveaux champs simples
         'serviceLibelle': '',
         'user': localUserSection.toString(),
       };
       // 2) Créer une nouvelle entrée
-      await db.child('hotel/$userKey').update(updates);
+      await db.child('hotel/$localUserSectionss').update(updates);
 
       // 4) Retourner le key généré
-      return FirebaseSuccess(userKey);
+      return FirebaseSuccess(localUserSectionss);
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());
@@ -232,7 +267,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       final reponse = await ref.getDownloadURL();
       log('service ------>>> $reponse');
 
-      saveImageUrl(params.copyWith(file: reponse));
+      saveImageUrl(
+        params.copyWith(file: reponse),
+        path: 'hotel',
+        userId: params.userId,
+      );
       return FirebaseSuccess(reponse);
     } catch (e) {
       log('************$e');
@@ -240,11 +279,51 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
-  Future<void> saveImageUrl(CreatCompteImage params) async {
+  Future<void> saveImageUrl<T extends Object>(
+    T params, {
+    required String path,
+    required String userId,
+  }) async {
+    // CreatCompteImage
     final Map<String, dynamic> updates = {
-      ...params.toJson(), // nouveaux champs simples
+      ...(params as dynamic).toJson(), // nouveaux champs simples
       'serviceLibelle': '',
     };
-    await db.child('hotel/$userKey').update(updates);
+
+    await db.child('$path/$userId').update(updates);
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('user_actif_by_change_profile_photo', userId);
+  }
+
+  @override
+  Future<FirebaseResult<String?>> uploadprofileImage(
+    CreatProfileImage params,
+  ) async {
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('${params.userId}${DateTime.timestamp()}.jpg');
+
+      await ref.putFile(File(params.profileImage));
+
+      final reponse = await ref.getDownloadURL();
+      log('service ------>>> $reponse');
+
+      saveImageUrl(
+        params.copyWith(profileImage: reponse),
+        path: 'hotel',
+        userId: params.userId,
+      );
+      saveImageUrl(
+        params.copyWith(profileImage: reponse),
+        path: 'users',
+        userId: params.userId,
+      );
+      return FirebaseSuccess(reponse);
+    } catch (e) {
+      log('************$e');
+      return FirebaseError(e.toString());
+    }
   }
 }

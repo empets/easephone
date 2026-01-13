@@ -23,7 +23,7 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
     Emitter<ApiState<String?>> emit,
   ) async {
     switch (event) {
-      case LikeProfileProfileEvent(:final bool? like):
+      case LikeProfileProfileEvent(:final bool? like, :final String? userId):
         if (like != null && like == true) {
           emit(ApiState<String?>.load());
           final sharedPreferences = await SharedPreferences.getInstance();
@@ -33,6 +33,7 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
               compter: 1,
               userId: localUserSection.toString(),
               date: DateTime.now().toString(),
+              likeId: userId,
             ),
           );
           emit(
@@ -45,7 +46,10 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
 
         break;
 
-      case DisLikeProfileProfileEvent(:final bool? disLike):
+      case DisLikeProfileProfileEvent(
+        :final bool? disLike,
+        :final String? userId,
+      ):
         if (disLike != null && disLike == false) {
           emit(ApiState<String?>.load());
           final sharedPreferences = await SharedPreferences.getInstance();
@@ -55,6 +59,7 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
               compter: 0,
               userId: localUserSection.toString(),
               date: DateTime.now().toString(),
+              likeId: userId,
             ),
           );
           emit(
@@ -64,7 +69,7 @@ class LikeProfileBloc extends Bloc<LikeProfileEvent, ApiState<String?>> {
                 return ApiState.failed(l.message);
               },
               (r) {
-                log('==== ');
+                log('==== $r');
                 return ApiState.success(r);
               },
             ),

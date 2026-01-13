@@ -25,6 +25,7 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
     required String formTwo,
     required String formTherd,
     required String file,
+    required String  profileImage
   }) = _SActiveUserProfile;
 
   factory ActiveUserProfile.fromJson(Map<String, dynamic> json) =>
@@ -33,7 +34,7 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
 
 @freezed
 abstract class LikeResponse with _$LikeResponse {
-  factory LikeResponse({required int compter, required String userId}) =
+  factory LikeResponse({required int compter, required String userId, required String likeId}) =
       _SLikeResponse;
 
   factory LikeResponse.fromJson(Map<String, dynamic> json) =>

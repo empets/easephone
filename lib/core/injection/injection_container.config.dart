@@ -107,6 +107,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i452.CreateCoompteSendImageUsercase>(
       () => _i452.CreateCoompteSendImageUsercase(gh<_i283.IRepositoryAuthen>()),
     );
+    gh.lazySingleton<_i452.CreateProfileImageUsercase>(
+      () => _i452.CreateProfileImageUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
     gh.lazySingleton<_i933.AuthenByMailUsercase>(
       () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
     );

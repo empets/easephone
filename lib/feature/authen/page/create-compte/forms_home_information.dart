@@ -1,6 +1,7 @@
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/form/form.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
+import 'package:com.example.epbomi/core/map/models/map_location.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_usercase.dart';
@@ -19,7 +20,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 
 class FormsHomeInformation extends StatefulWidget {
-  const FormsHomeInformation({super.key});
+  const FormsHomeInformation({
+    super.key,
+    required this.mapLocation,
+    required this.adress,
+  });
+
+  final MapLocation mapLocation;
+  final String adress;
 
   @override
   State<FormsHomeInformation> createState() => _FormsHomeInformationState();
@@ -77,7 +85,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
                                     letSpace: [],
-                                    textLabel: 'Nom R',
+                                    textLabel: 'Manager name',
                                     errorText:
                                         state.nomResidence.isPure ||
                                             state.nomResidence.isValid
@@ -102,7 +110,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                 return Container(
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
-                                    textLabel: 'Spe',
+                                    textLabel: 'Home Name',
                                     letSpace: [],
                                     errorText:
                                         state.specialite.isPure ||
@@ -131,11 +139,12 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                     textLabel: 'Email',
                                     letSpace: [],
                                     errorText:
-                                        state.specialite.isPure ||
-                                            state.specialite.isValid
+                                        state.email.isPure ||
+                                            state.email.isValid
                                         ? null
                                         : '',
                                     prefixIcon: Icon(Icons.email),
+                                    textInputType: TextInputType.emailAddress,
                                     msgError: 'Veuillez renseigner ce champ',
                                     onChanged: (email) {
                                       context.read<CreateCompteBloc>().add(
@@ -152,12 +161,13 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                 return Container(
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
-                                    textLabel: 'Numéro',
+                                    textLabel: 'Numéro de téléphone',
                                     errorText:
                                         state.telephone.isPure ||
                                             state.telephone.isValid
                                         ? null
                                         : '',
+                                    textInputType: TextInputType.phone,
                                     prefixIcon: Icon(Icons.call),
                                     msgError: 'Veuillez renseigner ce champ',
                                     onChanged: (phone) {
@@ -183,6 +193,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                             state.telephone.isValid
                                         ? null
                                         : '',
+                                    textInputType: TextInputType.phone,
                                     prefixIcon: Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 12.w,
@@ -201,13 +212,12 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                               },
                             ),
 
-                        
                             BlocBuilder<CreateCompteBloc, CreateCompteState>(
                               builder: (context, state) {
                                 return Container(
                                   margin: EdgeInsets.symmetric(vertical: 9.h),
                                   child: ProductionFormCustomer(
-                                    textLabel: 'Facebook',
+                                    textLabel: 'Faceboock name',
                                     letSpace: [],
                                     errorText:
                                         state.adresse.isPure ||
@@ -224,20 +234,19 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                       );
                                       context.read<CreateCompteBloc>().add(
                                         CreateCompteEvent.changeAdresse(
-                                          'rue cocody place two',
+                                          widget.adress,
                                         ),
                                       );
                                       context.read<CreateCompteBloc>().add(
-                                        CreateCompteEvent.changeLat('5.314857'),
+                                        CreateCompteEvent.changeLat(
+                                          widget.mapLocation.latitude
+                                              .toString(),
+                                        ),
                                       );
                                       context.read<CreateCompteBloc>().add(
                                         CreateCompteEvent.changelong(
-                                          '-3.9965971',
-                                        ),
-                                      );
-                                      context.read<CreateCompteBloc>().add(
-                                        CreateCompteEvent.changeEmail(
-                                          'emmail@gmail.com',
+                                          widget.mapLocation.longitude
+                                              .toString(),
                                         ),
                                       );
                                     },

@@ -2643,4 +2643,272 @@ as String,
 
 }
 
+
+/// @nodoc
+mixin _$CreatProfileImage {
+
+ String get profileImage;// mot rechercher
+ String get userId;
+/// Create a copy of CreatProfileImage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreatProfileImageCopyWith<CreatProfileImage> get copyWith => _$CreatProfileImageCopyWithImpl<CreatProfileImage>(this as CreatProfileImage, _$identity);
+
+  /// Serializes this CreatProfileImage to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatProfileImage&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.userId, userId) || other.userId == userId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,profileImage,userId);
+
+@override
+String toString() {
+  return 'CreatProfileImage(profileImage: $profileImage, userId: $userId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CreatProfileImageCopyWith<$Res>  {
+  factory $CreatProfileImageCopyWith(CreatProfileImage value, $Res Function(CreatProfileImage) _then) = _$CreatProfileImageCopyWithImpl;
+@useResult
+$Res call({
+ String profileImage, String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$CreatProfileImageCopyWithImpl<$Res>
+    implements $CreatProfileImageCopyWith<$Res> {
+  _$CreatProfileImageCopyWithImpl(this._self, this._then);
+
+  final CreatProfileImage _self;
+  final $Res Function(CreatProfileImage) _then;
+
+/// Create a copy of CreatProfileImage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? profileImage = null,Object? userId = null,}) {
+  return _then(_self.copyWith(
+profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [CreatProfileImage].
+extension CreatProfileImagePatterns on CreatProfileImage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreatProfileImage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CreatProfileImage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreatProfileImage value)  $default,){
+final _that = this;
+switch (_that) {
+case _CreatProfileImage():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreatProfileImage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CreatProfileImage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String profileImage,  String userId)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CreatProfileImage() when $default != null:
+return $default(_that.profileImage,_that.userId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String profileImage,  String userId)  $default,) {final _that = this;
+switch (_that) {
+case _CreatProfileImage():
+return $default(_that.profileImage,_that.userId);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String profileImage,  String userId)?  $default,) {final _that = this;
+switch (_that) {
+case _CreatProfileImage() when $default != null:
+return $default(_that.profileImage,_that.userId);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _CreatProfileImage implements CreatProfileImage {
+   _CreatProfileImage({required this.profileImage, required this.userId});
+  factory _CreatProfileImage.fromJson(Map<String, dynamic> json) => _$CreatProfileImageFromJson(json);
+
+@override final  String profileImage;
+// mot rechercher
+@override final  String userId;
+
+/// Create a copy of CreatProfileImage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CreatProfileImageCopyWith<_CreatProfileImage> get copyWith => __$CreatProfileImageCopyWithImpl<_CreatProfileImage>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CreatProfileImageToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatProfileImage&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.userId, userId) || other.userId == userId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,profileImage,userId);
+
+@override
+String toString() {
+  return 'CreatProfileImage(profileImage: $profileImage, userId: $userId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CreatProfileImageCopyWith<$Res> implements $CreatProfileImageCopyWith<$Res> {
+  factory _$CreatProfileImageCopyWith(_CreatProfileImage value, $Res Function(_CreatProfileImage) _then) = __$CreatProfileImageCopyWithImpl;
+@override @useResult
+$Res call({
+ String profileImage, String userId
+});
+
+
+
+
+}
+/// @nodoc
+class __$CreatProfileImageCopyWithImpl<$Res>
+    implements _$CreatProfileImageCopyWith<$Res> {
+  __$CreatProfileImageCopyWithImpl(this._self, this._then);
+
+  final _CreatProfileImage _self;
+  final $Res Function(_CreatProfileImage) _then;
+
+/// Create a copy of CreatProfileImage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? profileImage = null,Object? userId = null,}) {
+  return _then(_CreatProfileImage(
+profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 // dart format on

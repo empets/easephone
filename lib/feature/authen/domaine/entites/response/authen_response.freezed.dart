@@ -22,7 +22,7 @@ ProfileUser _$ProfileUserFromJson(
 /// @nodoc
 mixin _$ProfileUser {
 
- String get email; String get password; String get userId;
+ String get email; String get password; String get userId; String get profileImage;
 /// Create a copy of ProfileUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +35,16 @@ $ProfileUserCopyWith<ProfileUser> get copyWith => _$ProfileUserCopyWithImpl<Prof
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileUser&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileUser&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password,userId);
+int get hashCode => Object.hash(runtimeType,email,password,userId,profileImage);
 
 @override
 String toString() {
-  return 'ProfileUser(email: $email, password: $password, userId: $userId)';
+  return 'ProfileUser(email: $email, password: $password, userId: $userId, profileImage: $profileImage)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $ProfileUserCopyWith<$Res>  {
   factory $ProfileUserCopyWith(ProfileUser value, $Res Function(ProfileUser) _then) = _$ProfileUserCopyWithImpl;
 @useResult
 $Res call({
- String email, String password, String userId
+ String email, String password, String userId, String profileImage
 });
 
 
@@ -72,11 +72,12 @@ class _$ProfileUserCopyWithImpl<$Res>
 
 /// Create a copy of ProfileUser
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? userId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? userId = null,Object? profileImage = null,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  String userId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  String userId,  String profileImage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SProfileUser() when $default != null:
-return $default(_that.email,_that.password,_that.userId);case _:
+return $default(_that.email,_that.password,_that.userId,_that.profileImage);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.email,_that.password,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  String userId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  String userId,  String profileImage)  $default,) {final _that = this;
 switch (_that) {
 case _SProfileUser():
-return $default(_that.email,_that.password,_that.userId);case _:
+return $default(_that.email,_that.password,_that.userId,_that.profileImage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.email,_that.password,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  String userId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  String userId,  String profileImage)?  $default,) {final _that = this;
 switch (_that) {
 case _SProfileUser() when $default != null:
-return $default(_that.email,_that.password,_that.userId);case _:
+return $default(_that.email,_that.password,_that.userId,_that.profileImage);case _:
   return null;
 
 }
@@ -218,12 +219,13 @@ return $default(_that.email,_that.password,_that.userId);case _:
 @JsonSerializable()
 
 class _SProfileUser implements ProfileUser {
-   _SProfileUser({required this.email, required this.password, required this.userId});
+   _SProfileUser({required this.email, required this.password, required this.userId, required this.profileImage});
   factory _SProfileUser.fromJson(Map<String, dynamic> json) => _$SProfileUserFromJson(json);
 
 @override final  String email;
 @override final  String password;
 @override final  String userId;
+@override final  String profileImage;
 
 /// Create a copy of ProfileUser
 /// with the given fields replaced by the non-null parameter values.
@@ -238,16 +240,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SProfileUser&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SProfileUser&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password,userId);
+int get hashCode => Object.hash(runtimeType,email,password,userId,profileImage);
 
 @override
 String toString() {
-  return 'ProfileUser(email: $email, password: $password, userId: $userId)';
+  return 'ProfileUser(email: $email, password: $password, userId: $userId, profileImage: $profileImage)';
 }
 
 
@@ -258,7 +260,7 @@ abstract mixin class _$SProfileUserCopyWith<$Res> implements $ProfileUserCopyWit
   factory _$SProfileUserCopyWith(_SProfileUser value, $Res Function(_SProfileUser) _then) = __$SProfileUserCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String password, String userId
+ String email, String password, String userId, String profileImage
 });
 
 
@@ -275,11 +277,12 @@ class __$SProfileUserCopyWithImpl<$Res>
 
 /// Create a copy of ProfileUser
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? userId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? userId = null,Object? profileImage = null,}) {
   return _then(_SProfileUser(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

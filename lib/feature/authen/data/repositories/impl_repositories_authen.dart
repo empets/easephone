@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
@@ -7,7 +6,6 @@ import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/repositorie/I_repository_authen.dart';
-import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -113,5 +111,16 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   ) {
     // TODO: implement userAutheUpdateKey
     throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either<Failure, String?>> uploadprofileImage(CreatProfileImage params) async{
+     final response = await firebaseRemoteService.uploadprofileImage(params);
+    if (response is FirebaseSuccess<String>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
   }
 }
