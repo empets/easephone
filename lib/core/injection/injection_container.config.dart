@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:firebase_database/firebase_database.dart' as _i345;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:http/http.dart' as _i519;
 import 'package:injectable/injectable.dart' as _i526;
@@ -19,6 +20,8 @@ import '../../feature/authen/data/repositories/impl_repositories_authen.dart'
     as _i417;
 import '../../feature/authen/data/service/remote/real_time_authen/firebase_remote_service.dart'
     as _i505;
+import '../../feature/authen/data/service/remote/real_time_authen/request_repository.dart'
+    as _i279;
 import '../../feature/authen/domaine/repositorie/I_repository_authen.dart'
     as _i283;
 import '../../feature/authen/domaine/usercase/authen_by_mail_usercase.dart'
@@ -52,18 +55,26 @@ import 'injection_container.dart' as _i809;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final injectableModule = _$InjectableModule();
-    gh.factory<_i908.AppRouteBloc>(() => _i908.AppRouteBloc());
     gh.lazySingleton<_i345.DatabaseReference>(() => injectableModule.userDb);
     gh.lazySingleton<_i519.Client>(() => injectableModule.httpClient);
-    gh.factory<_i574.AppRoute>(
-      () => _i574.AppRoute(
-        appRouteBloc: gh<_i908.AppRouteBloc>(),
+    gh.lazySingleton<_i558.FlutterSecureStorage>(() => injectableModule.prefs);
+    await gh.lazySingletonAsync<_i460.SharedPreferences>(
+      () => injectableModule.locaDataShared(),
+      preResolve: true,
+    );
+    gh.factory<_i908.AppRouteBloc>(
+      () =>
+          _i908.AppRouteBloc(sharedPreferences: gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i279.FirebaseRemoteService>(
+      () => _i505.ImplFirebaseRemoteService(
+        db: gh<_i345.DatabaseReference>(),
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
@@ -71,32 +82,22 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i35.ImpleMarchantServiceFirebase(db: gh<_i345.DatabaseReference>()),
     );
-    gh.lazySingleton<_i505.FirebaseRemoteService>(
-      () => _i505.ImplFirebaseRemoteService(db: gh<_i345.DatabaseReference>()),
+    gh.lazySingleton<_i283.IRepositoryAuthen>(
+      () => _i417.RepositoriesAuthenImple(
+        firebaseRemoteService: gh<_i279.FirebaseRemoteService>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
     );
     gh.lazySingleton<_i956.IRepositoryMarchant>(
       () => _i772.ImpRepositoryMarchant(
         marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i283.IRepositoryAuthen>(
-      () => _i417.RepositoriesAuthenImple(
-        firebaseRemoteService: gh<_i505.FirebaseRemoteService>(),
+    gh.factory<_i574.AppRoute>(
+      () => _i574.AppRoute(
+        appRouteBloc: gh<_i908.AppRouteBloc>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
-    );
-    gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
-      () => _i774.GetActifCompteInformationUsercase(
-        gh<_i956.IRepositoryMarchant>(),
-      ),
-    );
-    gh.lazySingleton<_i21.LikeProfileUsercase>(
-      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
-    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
-      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
-    gh.lazySingleton<_i832.GetLikeListeUsercase>(
-      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
     gh.lazySingleton<_i228.SigninUsercase>(
       () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -127,6 +128,20 @@ extension GetItInjectableX on _i174.GetIt {
         signinUsercase: gh<_i228.SigninUsercase>(),
         authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
       ),
+    );
+    gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
+      () => _i774.GetActifCompteInformationUsercase(
+        gh<_i956.IRepositoryMarchant>(),
+      ),
+    );
+    gh.lazySingleton<_i21.LikeProfileUsercase>(
+      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
+      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i832.GetLikeListeUsercase>(
+      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
     return this;
   }

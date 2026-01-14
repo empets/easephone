@@ -96,15 +96,16 @@ class _UserMenuContentState extends State<UserMenuContent> {
       child: BlocBuilder<GetActifUserInformationBloc, ApiState<List<ActiveUserProfile>>>(
         builder: (context, activeUserState) {
           if (activeUserState is SuccessState<List<ActiveUserProfile>>) {
-            final isCreatCompte = activeUserState.data.any(
-              (x) =>
-                  x.formOne == 'success' &&
+            final isCreatCompte = activeUserState.data.any((x) {
+              log(
+                '::---------->>online ${x.userId}   personne${widget.userProfileItem}',
+              );
+
+              return x.formOne == 'success' &&
                   x.formTwo == 'success' &&
                   x.formTherd == 'success' &&
-                  x.user == widget.userProfileItem,
-            );
-
-            log('ooooooooo${widget.userProfileItem}');
+                  x.userId == widget.userProfileItem;
+            });
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,6 +173,8 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                         .undrawDeliveryLocationUm5t
                                                         .path,
                                                     fit: BoxFit.cover,
+                                                    height: 0.08.sh,
+                                                    width: 0.08.sh,
                                                   ),
                                               widget.userPrileImage,
                                               fit: BoxFit.cover,
@@ -517,6 +520,9 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                 final sharedPreferences =
                                     await SharedPreferences.getInstance();
                                 sharedPreferences.remove('user_section');
+                                sharedPreferences.remove(
+                                  'user_actif_by_change_profile_photo',
+                                );
                                 showAppSnackBar(
                                   context,
                                   iconRight: Icons.close,
@@ -615,7 +621,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                     ),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: widget.userPrileImage.trim().isNotEmpty
+                                  child: imageFile == null
                                       ? ClipOval(
                                           child: Image.network(
                                             loadingBuilder:
@@ -637,12 +643,22 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                   );
                                                 },
                                             errorBuilder: (_, __, ___) =>
-                                                SvgPicture.asset(
-                                                  MyAssets
-                                                      .icons
-                                                      .undrawDeliveryLocationUm5t
-                                                      .path,
-                                                  fit: BoxFit.cover,
+                                                CircleAvatar(
+                                                  radius: 40.r,
+                                                  backgroundColor:
+                                                      MyColorName.greyAvatar,
+                                                  child: Text(
+                                                    state.data.email.substring(
+                                                      0,
+                                                      2,
+                                                    ),
+                                                    style: GoogleFonts.roboto(
+                                                      color: Colors.black,
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                    ),
+                                                  ),
                                                 ),
                                             widget.userPrileImage,
                                             fit: BoxFit.cover,
@@ -650,20 +666,51 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                             width: 0.08.sh,
                                           ),
                                         )
-                                      : CircleAvatar(
-                                          radius: 40.r,
-                                          backgroundColor:
-                                              MyColorName.greyAvatar,
-                                          child: Text(
-                                            state.data.email.substring(0, 2),
-                                            style: GoogleFonts.roboto(
-                                              color: Colors.black,
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w700,
-                                            ),
+                                      : ClipOval(
+                                          child: Image.file(
+                                            imageFile!,
+                                            fit: BoxFit.cover,
+                                            height: 0.08.sh,
+                                            width: 0.08.sh,
                                           ),
                                         ),
                                 ),
+                              ),
+                              Positioned(
+                                right: 0.32.sw,
+                                bottom: 5.w,
+                                child:
+                                    BlocBuilder<
+                                      CreateProfileImageBloc,
+                                      ApiState<String>
+                                    >(
+                                      builder: (context, state) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            pickImage();
+                                            if (profileImage
+                                                .trim()
+                                                .isNotEmpty) {}
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(top: 4.h),
+                                            padding: const EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              // border: Border.all(
+                                              //   color: MyColorName.greyAvatar,
+                                              // ),
+                                              // color: MyColorName.black,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: FaIcon(
+                                              FontAwesomeIcons.pencil,
+                                              color: MyColorName.black,
+                                              size: 15.h,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
                               ),
                             ],
                           ),
@@ -920,6 +967,9 @@ class _UserMenuContentState extends State<UserMenuContent> {
                               final sharedPreferences =
                                   await SharedPreferences.getInstance();
                               sharedPreferences.remove('user_section');
+                              sharedPreferences.remove(
+                                'user_actif_by_change_profile_photo',
+                              );
                               showAppSnackBar(
                                 context,
                                 iconRight: Icons.close,

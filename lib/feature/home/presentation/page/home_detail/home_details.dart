@@ -3,6 +3,7 @@ import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_maps.dart';
+import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/pages/eligibility_test_page.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart'
     show
@@ -222,13 +223,19 @@ class _HomeDetailsState extends State<HomeDetails>
                         bottom: 0.h,
                         child: GestureDetector(
                           onTap: () {
+                            // Navigator.of(context).push(
+                            //   fadeRoute(
+                            //     HomeMapsOverViewScreen(
+                            //       latitude: double.parse(widget.profile.lat),
+                            //       longitude: double.parse(widget.profile.long),
+                            //       adress: widget.profile.adresse,
+                            //     ),
+                            //   ),
+                            // );
+
                             Navigator.of(context).push(
                               fadeRoute(
-                                HomeMapsOverViewScreen(
-                                  latitude: double.parse(widget.profile.lat),
-                                  longitude: double.parse(widget.profile.long),
-                                  adress: widget.profile.adresse,
-                                ),
+                                EligibilityTestPage(profile: widget.profile),
                               ),
                             );
                           },

@@ -3,42 +3,31 @@ import 'dart:io';
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
+import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_authen/request_repository.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart' as shareData;
 
-abstract class FirebaseRemoteService {
-  Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
-  Future<FirebaseResult<String?>> userAutheUpdateKey(
-    RequestAuthenUpdateKey params,
-  );
-
-  Future<FirebaseResult<String?>> signIn(RequestAuthen params);
-  Future<FirebaseResult<String?>> createCompte(
-    RequestCreateCompteHomeInformation params,
-  );
-  Future<FirebaseResult<String?>> createCompteUpdateFormToher(
-    RequestCreateCompteHeber params,
-  );
-
-  Future<FirebaseResult<ProfileUserModel>> getProfileUser();
-  Future<FirebaseResult<String>> uploadImage(CreatCompteImage params);
-
-  Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList();
-
-  Future<FirebaseResult<String?>> uploadprofileImage(CreatProfileImage params);
-}
-
+// @LazySingleton(as: SecureStorageData<String>)
 @LazySingleton(as: FirebaseRemoteService)
 class ImplFirebaseRemoteService implements FirebaseRemoteService {
-  ImplFirebaseRemoteService({required this.db});
+  ImplFirebaseRemoteService({
+    required this.db,
+    required this.sharedPreferences,
+  });
 
   final databaseReference.DatabaseReference db;
+  final shareData.SharedPreferences sharedPreferences;
+
   late String userKey = '';
   late String authKey = '';
 
+  /*
+  Cette methode permet d'enregister les information d'authentification du user
+  */
   @override
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params) async {
     try {
@@ -59,15 +48,14 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
         );
         log("data ::::  $request");
 
-        // 2) Créer une nouvelle entrée
+        // 2) Créer une nouvelle entré ou table
         final ref = db.child('users').push();
         authKey = ref.key.toString();
 
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
 
-        userAutheUpdateKey(RequestAuthenUpdateKey(userId: authKey));
-
+        userAutheUpdateKey(RequestAuthenUpdateKey(userId: ref.key.toString()));
         // 4) Retourner le key généré
         return FirebaseSuccess(ref.key);
       }
@@ -77,6 +65,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
+  /*
+  Cette methode permet d'enregister la 
+  clé primaire géneré dans lors de l'authentification
+  elle est apeller dans la Methode --->> signIn() 
+  */
   @override
   Future<FirebaseResult<String?>> userAutheUpdateKey(
     RequestAuthenUpdateKey params,
@@ -90,13 +83,16 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       await db.child('users/${params.userId}').update(updates);
 
       // 4) Retourner le key généré
-      return FirebaseSuccess(authKey);
+      return FirebaseSuccess(params.userId);
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());
     }
   }
 
+  /*
+  Cette methode permet de se re authentifier
+  */
   @override
   Future<FirebaseResult<String?>> signIn(RequestAuthen params) async {
     try {
@@ -133,19 +129,15 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
   ) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final localUserSection = sharedPreferences.getString('user_section');
-
-    //  final sharedPreferences = await SharedPreferences.getInstance();
     final localUserSections = sharedPreferences.getString(
       'user_actif_by_change_profile_photo',
     );
 
     try {
-      if (localUserSections != null && localUserSections.isNotEmpty) {
+      if (localUserSections == null && localUserSections!.trim().isEmpty) {
         final request = Request<RequestCreateCompteHomeInformation>(
           data: params.toJson(),
-          user: localUserSection.toString(),
+          user: localUserSections,
           serviceLibelle: '',
         );
 
@@ -154,15 +146,57 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
+        await sharedPreferences.setString(
+          'user_actif_by_change_profile_photo',
+          ref.key.toString(),
+        );
 
-        userKey = ref.key.toString();
+        return FirebaseSuccess(localUserSections);
+      } else {
+        final Map<String, dynamic> updates = {
+          ...params.toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+          'userId': localUserSections.toString(),
+        };
+
+        // 2) Créer une nouvelle entrée
+        await db.child('hotel/$localUserSections').update(updates);
+
+        // 4) Retourner le key généré
+        return FirebaseSuccess(localUserSections);
+      }
+    } catch (e) {
+      log('************$e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> createCompteUpdateFormToher(
+    RequestCreateCompteHeber params,
+  ) async {
+    final localUserSection = sharedPreferences.getString(
+      'user_actif_by_change_profile_photo',
+    );
+
+    try {
+      if (localUserSection != null && localUserSection.isNotEmpty) {
+        final Map<String, dynamic> updates = {
+          ...params.toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+          'userId': localUserSection.toString(),
+        };
+        // 2) Créer une nouvelle entrée
+        await db.child('hotel/$localUserSection').update(updates);
+
+        // 4) Retourner le key généré
         return FirebaseSuccess(localUserSection);
       }
 
       final Map<String, dynamic> updates = {
         ...params.toJson(), // nouveaux champs simples
         'serviceLibelle': '',
-        'user': localUserSection.toString(),
+        'userId': localUserSection.toString(),
       };
       // 2) Créer une nouvelle entrée
       await db.child('hotel/$localUserSection').update(updates);
@@ -176,48 +210,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   }
 
   @override
-  Future<FirebaseResult<String?>> createCompteUpdateFormToher(
-    RequestCreateCompteHeber params,
-  ) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final localUserSectionss = sharedPreferences.getString('user_section');
-    final localUserSection = sharedPreferences.getString(
-      'user_actif_by_change_profile_photo',
-    );
-
-    try {
-      if (localUserSection != null && localUserSection.isNotEmpty) {
-        final Map<String, dynamic> updates = {
-          ...params.toJson(), // nouveaux champs simples
-          'serviceLibelle': '',
-          'user': localUserSection.toString(),
-        };
-        // 2) Créer une nouvelle entrée
-        await db.child('hotel/$localUserSection').update(updates);
-
-        // 4) Retourner le key généré
-        return FirebaseSuccess(localUserSection);
-      }
-
-      final Map<String, dynamic> updates = {
-        ...params.toJson(), // nouveaux champs simples
-        'serviceLibelle': '',
-        'user': localUserSection.toString(),
-      };
-      // 2) Créer une nouvelle entrée
-      await db.child('hotel/$localUserSectionss').update(updates);
-
-      // 4) Retourner le key généré
-      return FirebaseSuccess(localUserSectionss);
-    } catch (e) {
-      log('************$e');
-      return FirebaseError(e.toString());
-    }
-  }
-
-  @override
   Future<FirebaseResult<ProfileUserModel>> getProfileUser() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
+    // final sharedPreferences = await SharedPreferences.getInstance();
+    // final localUserSection = sharedPreferences.getString('user_section');
     final localUserSection = sharedPreferences.getString('user_section');
 
     try {
@@ -279,6 +274,10 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
+  /*
+  Cette methode permet de juste d'enregister la 
+  photo de profile et en local id génerer  
+  */
   Future<void> saveImageUrl<T extends Object>(
     T params, {
     required String path,
@@ -291,10 +290,16 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     };
 
     await db.child('$path/$userId').update(updates);
-    final sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString('user_actif_by_change_profile_photo', userId);
+    log('create compte key:: ------->> ${db.ref.key}');
+
+    // final sharedPreferences = await SharedPreferences.getInstance();
+    // sharedPreferences.setString('user_actif_by_change_profile_photo', userId);
   }
 
+  /*
+  Cette methode permet de update la photo de profile a 
+  la fois dans la table User et hotel  
+  */
   @override
   Future<FirebaseResult<String?>> uploadprofileImage(
     CreatProfileImage params,
@@ -308,7 +313,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       await ref.putFile(File(params.profileImage));
 
       final reponse = await ref.getDownloadURL();
-      log('service ------>>> $reponse');
 
       saveImageUrl(
         params.copyWith(profileImage: reponse),
@@ -320,6 +324,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
         path: 'users',
         userId: params.userId,
       );
+      await sharedPreferences.setString(
+        'user_actif_by_change_profile_photo',
+        params.userId,
+      );
+
       return FirebaseSuccess(reponse);
     } catch (e) {
       log('************$e');

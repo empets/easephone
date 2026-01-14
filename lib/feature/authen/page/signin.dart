@@ -18,6 +18,7 @@ import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.da
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
@@ -84,12 +85,12 @@ class _SignInState extends State<SignIn> {
                     isSignUp = false;
                   });
                 }
-                  showAppSnackBar(
-                    context,
-                    color: MyColorName.errorRed,
-                    iconRight: Icons.close,
-                    message: state.errorMessage,
-                  );
+                showAppSnackBar(
+                  context,
+                  color: MyColorName.errorRed,
+                  iconRight: Icons.close,
+                  message: state.errorMessage,
+                );
               }
             },
           ),
@@ -296,116 +297,158 @@ class _SignInState extends State<SignIn> {
                                     ),
                                   ),
 
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 4.h),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            height: 1
-                                                .h, // Une ligne plus fine et élégante
-                                            color: MyColorName.greyAvatar,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0,
-                                          ),
-                                          child: CustomeText(
-                                            texte:
-                                                'Connect with our service', // Petite correction du wording
-                                            texteSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: MyColorName.white,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            height: 1.h,
-                                            color: MyColorName.greyAvatar,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 10.h,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        BlocBuilder<BlocSignin, SigninState>(
-                                          builder: (context, state) {
-                                            return GestureDetector(
-                                              onTap: state.status.isInProgress
-                                                  ? null
-                                                  : () async {
-                                                      FocusScope.of(
-                                                        context,
-                                                      ).unfocus();
-                                                      // context.read<BlocSignin>().add(
-                                                      //   SigninEvent.googleAuthen(),
-                                                      // );
-
-                                                      showAppSnackBar(
-                                                        context,
-                                                        iconRight: Icons.close,
-                                                        message:
-                                                            'Service momentanement indisponible',
-                                                      );
-                                                    },
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                  horizontal: 20.w,
-                                                ),
-                                                padding: EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color:
-                                                        MyColorName.greyAvatar,
+                                  KeyboardVisibilityBuilder(
+                                    builder: (context, isKey) {
+                                      return !isKey
+                                          ? Column(
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    bottom: 4.h,
                                                   ),
-                                                  shape: BoxShape.circle,
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          height: 1
+                                                              .h, // Une ligne plus fine et élégante
+                                                          color: MyColorName
+                                                              .greyAvatar,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets.symmetric(
+                                                              horizontal: 8.0,
+                                                            ),
+                                                        child: CustomeText(
+                                                          texte:
+                                                              'Connect with our service', // Petite correction du wording
+                                                          texteSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              MyColorName.white,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Container(
+                                                          height: 1.h,
+                                                          color: MyColorName
+                                                              .greyAvatar,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.google,
-                                                  color: MyColorName
-                                                      .backgroundIvory,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
 
-                                        GestureDetector(
-                                          onTap: () async {
-                                            FocusScope.of(context).unfocus();
-                                            showAppSnackBar(
-                                              context,
-                                              iconRight: Icons.close,
-                                              message:
-                                                  'Service momentanement indisponible',
-                                            );
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.all(8.0),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: MyColorName.greyAvatar,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.facebook,
-                                              color:
-                                                  MyColorName.backgroundIvory,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    vertical: 10.h,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      BlocBuilder<
+                                                        BlocSignin,
+                                                        SigninState
+                                                      >(
+                                                        builder: (context, state) {
+                                                          return GestureDetector(
+                                                            onTap:
+                                                                state
+                                                                    .status
+                                                                    .isInProgress
+                                                                ? null
+                                                                : () async {
+                                                                    FocusScope.of(
+                                                                      context,
+                                                                    ).unfocus();
+                                                                    // context.read<BlocSignin>().add(
+                                                                    //   SigninEvent.googleAuthen(),
+                                                                    // );
+
+                                                                    showAppSnackBar(
+                                                                      context,
+                                                                      iconRight:
+                                                                          Icons
+                                                                              .close,
+                                                                      message:
+                                                                          'Service momentanement indisponible',
+                                                                    );
+                                                                  },
+                                                            child: Container(
+                                                              margin:
+                                                                  EdgeInsets.symmetric(
+                                                                    horizontal:
+                                                                        20.w,
+                                                                  ),
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                    8.0,
+                                                                  ),
+                                                              decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                  color: MyColorName
+                                                                      .greyAvatar,
+                                                                ),
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                              ),
+                                                              child: FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .google,
+                                                                color: MyColorName
+                                                                    .backgroundIvory,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+
+                                                      GestureDetector(
+                                                        onTap: () async {
+                                                          FocusScope.of(
+                                                            context,
+                                                          ).unfocus();
+                                                          showAppSnackBar(
+                                                            context,
+                                                            iconRight:
+                                                                Icons.close,
+                                                            message:
+                                                                'Service momentanement indisponible',
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                8.0,
+                                                              ),
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                              color: MyColorName
+                                                                  .greyAvatar,
+                                                            ),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .facebook,
+                                                            color: MyColorName
+                                                                .backgroundIvory,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : SizedBox();
+                                    },
                                   ),
                                 ],
                               ),

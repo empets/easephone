@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppRouteBloc()..add(SigninEvent.googleAuthen()),
+      create: (context) =>
+          AppRouteBloc(sharedPreferences: getIt<SharedPreferences>())
+            ..add(SigninEvent.googleAuthen()),
       child: BlocListener<AppRouteBloc, SigninState>(
         listener: (context, state) {
           if (state.status.isFailure) {

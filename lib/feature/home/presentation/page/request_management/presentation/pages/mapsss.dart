@@ -11,7 +11,6 @@ import 'package:com.example.epbomi/core/map/utils/map_constants.dart';
 import 'package:com.example.epbomi/core/map/widgets/interactive_map.dart';
 import 'package:com.example.epbomi/core/map/widgets/map_controls.dart';
 import 'package:com.example.epbomi/core/services/permission_preferences_service.dart';
-import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/domain/entities/location_suggestion.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/cubit/location_search/location_search_cubit.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/cubit/map_location/map_location_cubit.dart';
@@ -20,20 +19,16 @@ import 'package:com.example.epbomi/feature/home/presentation/page/request_manage
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_denied_message.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_permission_dialog.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_search_content.dart';
-import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 enum PermissionState { notAsked, granted, denied }
 
 enum SheetView { form, locationSearch }
 
-class EligibilityTestPage extends StatelessWidget {
-  const EligibilityTestPage({super.key, required this.profile});
-  final ActiveUserProfile profile;
+class Mapsss extends StatelessWidget {
+  const Mapsss({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +59,13 @@ class EligibilityTestPage extends StatelessWidget {
         //       RequestManagementInjection.createEligibilityCubit(),
         // ),
       ],
-      child: _EligibilityTestPageContent(profile: profile),
+      child: const _EligibilityTestPageContent(),
     );
   }
 }
 
 class _EligibilityTestPageContent extends StatefulWidget {
-  const _EligibilityTestPageContent({required this.profile});
-
-  final ActiveUserProfile profile;
+  const _EligibilityTestPageContent();
 
   @override
   State<_EligibilityTestPageContent> createState() =>
@@ -96,7 +89,7 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
   VoidCallback? _mapRecenter;
 
   // Track sheet extent for dynamic control positioning
-  final double _sheetExtent = 0.6;
+  double _sheetExtent = 0.6;
 
   // Error messages for form validation
   String? _phoneError;
@@ -105,7 +98,6 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
   @override
   void initState() {
     super.initState();
-
     // Check permission preference and show dialog or fetch location
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkPermissionAndInitialize();
@@ -402,27 +394,21 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
             // Map or denied message
             if (_permissionState == PermissionState.granted)
               InteractiveMap(
-                initialLocation: MapLocation(
-                  latitude: double.parse(widget.profile.lat),
-                  longitude: double.parse(widget.profile.long),
-                ),
+                initialLocation: _selectedLocation,
                 markers: [
                   MapMarkerData(
                     location: _selectedLocation,
-                    color: Colors.black,
+                    color: Colors.orange,
                     size: 40,
                   ),
                 ],
-                // onTap: _handleMapTap,
+                onTap: _handleMapTap,
                 onControlsReady: (zoomIn, zoomOut, recenter) {
                   setState(() {
                     _mapZoomIn = zoomIn;
                     _mapZoomOut = zoomOut;
                     _mapRecenter = recenter;
                   });
-                  // _handleManualPosition();
-                  // _handleLocationSearch();
-                  // _handleBackFromSearch();
                 },
               )
             else
@@ -456,149 +442,6 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                 ),
               ),
 
-            if (_permissionState == PermissionState.granted)
-              Positioned(
-                top: 40.h,
-                left: 0.w,
-                right: 0.w,
-                child: Container(
-                  padding: EdgeInsets.all(8.r),
-
-                  margin: EdgeInsets.symmetric(horizontal: 10.w),
-                  decoration: BoxDecoration(
-                    color: MyColorName.white,
-                    borderRadius: BorderRadius.circular(9.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4), // ombre vers le bas
-                      ),
-                    ],
-                  ),
-
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(5.h),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: MyColorName.greyMedium.withValues(
-                                  alpha: 0.1,
-                                ),
-                              ),
-                              color: MyColorName.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 8,
-                                  spreadRadius: 2,
-                                  offset: Offset(0, 4), // ombre vers le bas
-                                ),
-                              ],
-                            ),
-                            child: Icon(
-                              Icons.location_history,
-                              color: MyColorName.black,
-                              size: 15.h,
-                            ),
-                          ),
-                          Container(
-                            width: 1.w,
-                            height: 26.h,
-                            color: Colors.black12,
-                          ),
-
-                          Container(
-                            padding: EdgeInsets.all(5.h),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: MyColorName.greyMedium.withValues(
-                                  alpha: 0.1,
-                                ),
-                              ),
-                              color: MyColorName.white,
-                              shape: BoxShape.circle,
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.black.withOpacity(0.2),
-                              //     blurRadius: 8,
-                              //     spreadRadius: 2,
-                              //     offset: Offset(0, 4), // ombre vers le bas
-                              //   ),
-                              // ],
-                            ),
-                            child: Icon(
-                              Icons.home_work_rounded,
-                              color: Colors.black45,
-                              size: 15.h,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Container(
-                        margin: EdgeInsets.only(left: 14.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Profile destimation",
-                              style: GoogleFonts.roboto(
-                                color: Colors.grey.shade600,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            SizedBox(height: 3.h),
-                            Text(
-                              _addressController.text.isNotEmpty
-                                  ? _addressController.text.substring(0, 8)
-                                  : '',
-                              style: GoogleFonts.roboto(
-                                color: Colors.black,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.right,
-                            ),
-                            Container(
-                              height: 1.h,
-                              width: 0.75.sw,
-                              color: Colors.black12,
-                              margin: EdgeInsets.symmetric(vertical: 8.h),
-                            ),
-                            Text(
-                              "Profile destimation",
-                              style: GoogleFonts.roboto(
-                                color: Colors.grey.shade600,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            SizedBox(height: 3.h),
-                            Text(
-                              widget.profile.adresse.substring(0, 19),
-                              style: GoogleFonts.roboto(
-                                color: Colors.black,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.right,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
             // Map controls with dynamic positioning on the right
             if (_permissionState == PermissionState.granted &&
                 _mapZoomIn != null &&
@@ -614,53 +457,53 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                 ),
               ),
 
-            //   // DraggableScrollableSheet with NotificationListener
-            // NotificationListener<DraggableScrollableNotification>(
-            //   onNotification: (notification) {
-            //     setState(() {
-            //       // _sheetExtent = notification.extent;
-            //     });
-            //     return true;
-            //   },
-            //   child: DraggableScrollableSheet(
-            //     controller: _sheetController,
-            //     initialChildSize: 0.6,
-            //     minChildSize: 0.3,
-            //     maxChildSize: 0.85,
-            //     builder: (context, scrollController) {
-            //       // Switch between form and location search views
-            //       if (_currentView == SheetView.locationSearch) {
-            //         return LocationSearchContent(
-            //           scrollController: scrollController,
-            //           currentLocation: _addressController.text.isEmpty
-            //               ? 'Cocody Ivoire Golf Club'
-            //               : _addressController.text,
-            //           onLocationSelected: _handleLocationSelected,
-            //           onBack: _handleBackFromSearch,
-            //         );
-            //       }
+            // DraggableScrollableSheet with NotificationListener
+            NotificationListener<DraggableScrollableNotification>(
+              onNotification: (notification) {
+                setState(() {
+                  _sheetExtent = notification.extent;
+                });
+                return true;
+              },
+              child: DraggableScrollableSheet(
+                controller: _sheetController,
+                initialChildSize: 0.6,
+                minChildSize: 0.3,
+                maxChildSize: 0.85,
+                builder: (context, scrollController) {
+                  // Switch between form and location search views
+                  if (_currentView == SheetView.locationSearch) {
+                    return LocationSearchContent(
+                      scrollController: scrollController,
+                      currentLocation: _addressController.text.isEmpty
+                          ? 'Cocody Ivoire Golf Club'
+                          : _addressController.text,
+                      onLocationSelected: _handleLocationSelected,
+                      onBack: _handleBackFromSearch,
+                    );
+                  }
 
-            //       return BlocBuilder<MapLocationCubit, MapLocationState>(
-            //         builder: (context, state) {
-            //           final isLoading = state is MapLocationLoading;
+                  return BlocBuilder<MapLocationCubit, MapLocationState>(
+                    builder: (context, state) {
+                      final isLoading = state is MapLocationLoading;
 
-            //           return EligibilityFormContent(
-            //             scrollController: scrollController,
-            //             phoneController: _phoneController,
-            //             addressController: _addressController,
-            //             onValidate: _handleValidate,
-            //             onManualPosition: _handleManualPosition,
-            //             onLocationSearch: _handleLocationSearch,
-            //             isLoadingLocation: isLoading,
-            //             phoneError: _phoneError,
-            //             addressError: _addressError,
-            //             isInProgress: false,
-            //           );
-            //         },
-            //       );
-            //     },
-            //   ),
-            // ),
+                      return EligibilityFormContent(
+                        scrollController: scrollController,
+                        phoneController: _phoneController,
+                        addressController: _addressController,
+                        onValidate: _handleValidate,
+                        onManualPosition: _handleManualPosition,
+                        onLocationSearch: _handleLocationSearch,
+                        isLoadingLocation: isLoading,
+                        phoneError: _phoneError,
+                        addressError: _addressError,
+                        isInProgress: false,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

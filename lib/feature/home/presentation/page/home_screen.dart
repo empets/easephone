@@ -151,6 +151,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                             border: Border.all(color: Colors.grey.shade400),
                           ),
                           child: TextFormField(
+                            style: GoogleFonts.roboto(color: MyColorName.black),
                             decoration: InputDecoration(
                               hintText: 'Recherche une zone',
                               hintStyle: GoogleFonts.roboto(
@@ -177,99 +178,99 @@ class _HomeOverViewState extends State<HomeOverView> {
                       const SizedBox(width: 10),
 
                       // Élément suivant : exemple d'un bouton rond
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8.h,
-                          horizontal: 10.w,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(4.r),
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.black.withOpacity(0.2),
-                          //     offset: const Offset(2, 2),
-                          //     blurRadius: 6,
-                          //   ),
-                          // ],
-                        ),
-                        child: const Icon(
-                          Icons.filter_list,
-                          color: Colors.black,
-                        ),
-                      ),
+                      // Container(
+                      //   padding: EdgeInsets.symmetric(
+                      //     vertical: 8.h,
+                      //     horizontal: 10.w,
+                      //   ),
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.grey.shade300,
+                      //     borderRadius: BorderRadius.circular(4.r),
+                      //     // boxShadow: [
+                      //     //   BoxShadow(
+                      //     //     color: Colors.black.withOpacity(0.2),
+                      //     //     offset: const Offset(2, 2),
+                      //     //     blurRadius: 6,
+                      //     //   ),
+                      //     // ],
+                      //   ),
+                      //   child: const Icon(
+                      //     Icons.filter_list,
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
                     ],
                   ),
 
                   // Section de button
                   SizedBox(height: 20.h),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {},
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8.h,
-                            horizontal: 15.w,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(15.r),
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.black.withOpacity(0.2),
-                            //     offset: const Offset(2, 2),
-                            //     blurRadius: 6,
-                            //   ),
-                            // ],
-                          ),
-                          child: Text(
-                            'All',
-                            style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 9.w),
 
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.of(
-                          //   context,
-                          // ).push(fadeRoute(const EligibilityTestPage()));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8.h,
-                            horizontal: 15.w,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                offset: const Offset(2, 2),
-                                blurRadius: 6,
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            'Vue maps',
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     GestureDetector(
+                  //       onTap: () async {},
+                  //       child: Container(
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 8.h,
+                  //           horizontal: 15.w,
+                  //         ),
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.grey.shade300,
+                  //           borderRadius: BorderRadius.circular(15.r),
+                  //           // boxShadow: [
+                  //           //   BoxShadow(
+                  //           //     color: Colors.black.withOpacity(0.2),
+                  //           //     offset: const Offset(2, 2),
+                  //           //     blurRadius: 6,
+                  //           //   ),
+                  //           // ],
+                  //         ),
+                  //         child: Text(
+                  //           'All',
+                  //           style: GoogleFonts.roboto(
+                  //             color: Colors.black,
+                  //             fontSize: 13.sp,
+                  //             fontWeight: FontWeight.w500,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 9.w),
 
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         // Navigator.of(
+                  //         //   context,
+                  //         // ).push(fadeRoute(const EligibilityTestPage()));
+                  //       },
+                  //       child: Container(
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 8.h,
+                  //           horizontal: 15.w,
+                  //         ),
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.black,
+                  //           borderRadius: BorderRadius.circular(15.r),
+                  //           boxShadow: [
+                  //             BoxShadow(
+                  //               color: Colors.black.withOpacity(0.2),
+                  //               offset: const Offset(2, 2),
+                  //               blurRadius: 6,
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         child: Text(
+                  //           'Vue maps',
+                  //           style: GoogleFonts.roboto(
+                  //             color: Colors.white,
+                  //             fontSize: 13.sp,
+                  //             fontWeight: FontWeight.w500,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 10.h),
 
                   SizedBox(height: 10.h),
@@ -413,7 +414,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                               element,
                                                                             ) {
                                                                               return element.userId ==
-                                                                                  profile.user.toString();
+                                                                                  profile.userId.toString();
                                                                             });
 
                                                                             return InkWell(
@@ -720,7 +721,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                               like,
                                                                                                             ) =>
                                                                                                                 like.userId ==
-                                                                                                                    profile.user &&
+                                                                                                                    profile.userId &&
                                                                                                                 like.compter ==
                                                                                                                     1,
                                                                                                           );
@@ -923,127 +924,101 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                   SizedBox(
                                                                     height: 9.h,
                                                                   ),
-                                                                  BlocBuilder<
-                                                                    GetUserProfileListBloc,
-                                                                    ApiState<
-                                                                      List<
-                                                                        ProfileUser
-                                                                      >
-                                                                    >
-                                                                  >(
-                                                                    builder:
-                                                                        (
-                                                                          context,
-                                                                          userPriflesListState,
-                                                                        ) {
-                                                                          if (userPriflesListState
-                                                                              is SuccessState<
-                                                                                List<
-                                                                                  ProfileUser
-                                                                                >
-                                                                              >) {
-                                                                            return Row(
-                                                                              children: userPriflesListState.data
-                                                                                  .map(
-                                                                                    (
-                                                                                      x,
-                                                                                    ) =>
-                                                                                        x.userId ==
-                                                                                            profile.user
-                                                                                        ? Row(
-                                                                                            children: [
-                                                                                              // CircleAvatar(
-                                                                                              //   radius: 22.r,
-                                                                                              //   child: ClipOval(
-                                                                                              //     child: Image.network(
-                                                                                              //       profile.profileImage,
-                                                                                              //       width: 60.r,
-                                                                                              //       height: 60.r,
-                                                                                              //       fit: BoxFit.cover,
-                                                                                              //     ),
-                                                                                              //   ),
-                                                                                              // ),
-                                                                                              ClipOval(
-                                                                                                child: Image.network(
-                                                                                                  loadingBuilder:
-                                                                                                      (
-                                                                                                        context,
-                                                                                                        child,
-                                                                                                        loadingProgress,
-                                                                                                      ) {
-                                                                                                        if (loadingProgress ==
-                                                                                                            null)
-                                                                                                          return child;
 
-                                                                                                        return ImageShimmer(
-                                                                                                          height: 0.03.sh,
-                                                                                                          width: 0.03.sh,
-                                                                                                          borderRadius: BorderRadius.circular(
-                                                                                                            12,
-                                                                                                          ),
-                                                                                                        );
-                                                                                                      },
-                                                                                                  errorBuilder:
-                                                                                                      (
-                                                                                                        _,
-                                                                                                        __,
-                                                                                                        ___,
-                                                                                                      ) => SvgPicture.asset(
-                                                                                                        MyAssets.icons.undrawDeliveryLocationUm5t.path,
+                                                                  Row(
+                                                                    children: [
+                                                                      // CircleAvatar(
+                                                                      //   radius: 22.r,
+                                                                      //   child: ClipOval(
+                                                                      //     child: Image.network(
+                                                                      //       profile.profileImage,
+                                                                      //       width: 60.r,
+                                                                      //       height: 60.r,
+                                                                      //       fit: BoxFit.cover,
+                                                                      //     ),
+                                                                      //   ),
+                                                                      // ),
+                                                                      ClipOval(
+                                                                        child: Image.network(
+                                                                          loadingBuilder:
+                                                                              (
+                                                                                context,
+                                                                                child,
+                                                                                loadingProgress,
+                                                                              ) {
+                                                                                if (loadingProgress ==
+                                                                                    null)
+                                                                                  return child;
 
-                                                                                                        fit: BoxFit.cover,
-                                                                                                        height: 0.05.sh,
-                                                                                                        width: 0.05.sh,
-                                                                                                      ),
-                                                                                                  profile.profileImage.toString(),
-                                                                                                  fit: BoxFit.cover,
-                                                                                                  height: 0.03.sh,
-                                                                                                  width: 0.03.sh,
-                                                                                                ),
-                                                                                              ),
-                                                                                              SizedBox(
-                                                                                                width: 8.w,
-                                                                                              ),
-                                                                                              Column(
-                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                children: [
-                                                                                                  Column(
-                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                    children: [
-                                                                                                      Text(
-                                                                                                        profile.name,
-                                                                                                        style: GoogleFonts.roboto(
-                                                                                                          color: Colors.grey.shade600,
-                                                                                                          fontSize: 13.sp,
-                                                                                                          fontWeight: FontWeight.w500,
-                                                                                                          letterSpacing: 0.1.sp,
-                                                                                                        ),
-                                                                                                      ),
+                                                                                return ImageShimmer(
+                                                                                  height: 0.03.sh,
+                                                                                  width: 0.03.sh,
+                                                                                  borderRadius: BorderRadius.circular(
+                                                                                    12,
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                          errorBuilder:
+                                                                              (
+                                                                                _,
+                                                                                __,
+                                                                                ___,
+                                                                              ) => SvgPicture.asset(
+                                                                                MyAssets.icons.undrawDeliveryLocationUm5t.path,
 
-                                                                                                      Text(
-                                                                                                        profile.email,
-                                                                                                        style: GoogleFonts.roboto(
-                                                                                                          color: Colors.green,
-                                                                                                          fontSize: 12.sp,
-                                                                                                          fontWeight: FontWeight.w500,
-                                                                                                          letterSpacing: 0.1.sp,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                            ],
-                                                                                          )
-                                                                                        : SizedBox(),
-                                                                                  )
-                                                                                  .toList(),
-                                                                            );
-                                                                          } else {
-                                                                            return SizedBox();
-                                                                          }
-                                                                        },
+                                                                                fit: BoxFit.cover,
+                                                                                height: 0.05.sh,
+                                                                                width: 0.05.sh,
+                                                                              ),
+                                                                          profile
+                                                                              .profileImage
+                                                                              .toString(),
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                          height:
+                                                                              0.05.sh,
+                                                                          width:
+                                                                              0.05.sh,
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8.w,
+                                                                      ),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Column(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text(
+                                                                                profile.name,
+                                                                                style: GoogleFonts.roboto(
+                                                                                  color: Colors.grey.shade600,
+                                                                                  fontSize: 13.sp,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  letterSpacing: 0.1.sp,
+                                                                                ),
+                                                                              ),
+
+                                                                              Text(
+                                                                                profile.email,
+                                                                                style: GoogleFonts.roboto(
+                                                                                  color: Colors.green,
+                                                                                  fontSize: 12.sp,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  letterSpacing: 0.1.sp,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
                                                                   ),
+
                                                                   SizedBox(
                                                                     height:
                                                                         10.h,
@@ -1154,6 +1129,43 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                           ),
                                                                         ],
                                                                       ),
+
+                                                                      //
+                                                                      GestureDetector(
+                                                                        onTap: () {
+                                                                          Navigator.of(
+                                                                            context,
+                                                                          ).push(
+                                                                            fadeRoute(
+                                                                              EligibilityTestPage(
+                                                                                profile: profile,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                        child: Container(
+                                                                          padding: EdgeInsets.all(
+                                                                            8.h,
+                                                                          ),
+                                                                          decoration: BoxDecoration(
+                                                                            color:
+                                                                                MyColorName.black,
+                                                                            borderRadius: BorderRadius.circular(
+                                                                              9.r,
+                                                                            ),
+                                                                          ),
+                                                                          child: CustomeText(
+                                                                            texte:
+                                                                                'Vue Map',
+                                                                            texteSize:
+                                                                                12.sp,
+                                                                            letterSpacing:
+                                                                                0.1.sp,
+                                                                            color:
+                                                                                MyColorName.cardBorder,
+                                                                          ),
+                                                                        ),
+                                                                      ),
                                                                       GestureDetector(
                                                                         onTap: () {
                                                                           showModalBottomSheet(
@@ -1181,25 +1193,24 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                           );
                                                                         },
                                                                         child: Container(
-                                                                          padding: EdgeInsets.all(
-                                                                            8.h,
+                                                                          padding: EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                9.w,
+                                                                            vertical:
+                                                                                6.h,
                                                                           ),
                                                                           decoration: BoxDecoration(
-                                                                            color:
-                                                                                MyColorName.black,
+                                                                            border: Border.all(
+                                                                              color: MyColorName.black,
+                                                                            ),
                                                                             borderRadius: BorderRadius.circular(
                                                                               9.r,
                                                                             ),
                                                                           ),
-                                                                          child: CustomeText(
-                                                                            texte:
-                                                                                'Voir plus',
-                                                                            texteSize:
-                                                                                12.sp,
-                                                                            letterSpacing:
-                                                                                0.1.sp,
-                                                                            color:
-                                                                                MyColorName.cardBorder,
+                                                                          child: Icon(
+                                                                            Icons.arrow_right_alt_sharp,
+                                                                            size:
+                                                                                18.sp,
                                                                           ),
                                                                         ),
                                                                       ),
