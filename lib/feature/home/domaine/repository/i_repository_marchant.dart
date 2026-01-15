@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 abstract class IRepositoryMarchant {
   // cette mehode permet d'obtenir les information sur un compte actf
   Future<Either<Failure, List<ActiveUserProfile>>>
-  getActifUserInformationAboutCompte();
+  getActifUserInformationAboutCompte(RequestFilterProfile request);
 
   // permet de liker un profile
   Future<Either<Failure, String?>> like(RequestLike request);

@@ -14,3 +14,15 @@ abstract class RequestLike with _$RequestLike {
   factory RequestLike.fromJson(Map<String, dynamic> json) =>
       _$RequestLikeFromJson(json);
 }
+
+
+@freezed
+abstract class RequestFilterProfile with _$RequestFilterProfile {
+  factory RequestFilterProfile({
+    required String adresse,
+    required bool filterIsActif,
+  }) = _SRequestFilterProfile;
+
+  factory RequestFilterProfile.fromJson(Map<String, dynamic> json) =>
+      _$RequestFilterProfileFromJson(json);
+}

@@ -5,26 +5,42 @@ import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_r
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GetActifUserInformationBloc extends Bloc<SigninEvent, ApiState<List<ActiveUserProfile>>> {
+class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<ActiveUserProfile>>> {
   GetActifUserInformationBloc({required this.getActifCompteInformationUsercase})
     : super(ApiState<List<ActiveUserProfile>>.initial()) {
-    on<SigninEvent>(getUser);
+    on<FiltreEvent>(getUser);
   }
 
   GetActifCompteInformationUsercase getActifCompteInformationUsercase;
   Future<void> getUser(
-    SigninEvent event,
+    FiltreEvent event,
     Emitter<ApiState<List<ActiveUserProfile>>> emit,
   ) async {
     switch (event) {
-      case GoogleAuthenSigninEvent():
+      case GoogleAuthenFiltreEvent(: final bool filterIsActif, final String adresse):
+
+      if(filterIsActif){
         emit(ApiState<List<ActiveUserProfile>>.load());
         final response = await getActifCompteInformationUsercase.call(
-       NoParams() );
+       RequestFilterProfile(adresse: adresse, filterIsActif: filterIsActif) );
 
         emit(
           response.fold((l) => FailedState(l.message), (r) => SuccessState(r)),
         );
+
+      }
+      else{
+          emit(ApiState<List<ActiveUserProfile>>.load());
+        final response = await getActifCompteInformationUsercase.call(
+        RequestFilterProfile(adresse: "", filterIsActif: false) );
+
+        emit(
+          response.fold((l) => FailedState(l.message), (r) => SuccessState(r)),
+        );
+
+      }
+
+
         break;
     }
   }

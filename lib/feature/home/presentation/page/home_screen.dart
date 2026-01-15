@@ -51,6 +51,7 @@ class HomeOverView extends StatefulWidget {
 
 class _HomeOverViewState extends State<HomeOverView> {
   late bool isLiked = false;
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -70,7 +71,7 @@ class _HomeOverViewState extends State<HomeOverView> {
           create: (context) => GetActifUserInformationBloc(
             getActifCompteInformationUsercase:
                 getIt<GetActifCompteInformationUsercase>(),
-          )..add(SigninEvent.googleAuthen()),
+          )..add(SigninEvent.filtre(filterIsActif: true, adresse: "")),
         ),
 
         BlocProvider(
@@ -150,19 +151,27 @@ class _HomeOverViewState extends State<HomeOverView> {
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(color: Colors.grey.shade400),
                           ),
-                          child: TextFormField(
-                            style: GoogleFonts.roboto(color: MyColorName.black),
-                            decoration: InputDecoration(
-                              hintText: 'Recherche une zone',
-                              hintStyle: GoogleFonts.roboto(
-                                color: Colors.black45,
+                          child: BlocBuilder<GetActifUserInformationBloc, ApiState<List<ActiveUserProfile>>>(
+                            builder: (context, state) {
+                              return TextFormField(
+                                controller: searchController,
+                                style: GoogleFonts.roboto(color: MyColorName.black),
+                                decoration: InputDecoration(
+                                  hintText: 'Recherche une zone',
+                                  hintStyle: GoogleFonts.roboto(
+                                    color: Colors.black45,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
                               ),
-                              suffixIcon: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: state is! LoadingState<List<ActiveUserProfile>> && searchController.text.isNotEmpty ? () {
+                                  context.read<GetActifUserInformationBloc>().add(FiltreEvent.filtre(filterIsActif: true, adresse:searchController.text ));
+                                } : null,
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                ),
+                              )
                               filled: true,
                               isDense: true,
                               fillColor: Colors.grey.shade100,
@@ -171,6 +180,8 @@ class _HomeOverViewState extends State<HomeOverView> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
+                          );
+                            },
                           ),
                         ),
                       ),

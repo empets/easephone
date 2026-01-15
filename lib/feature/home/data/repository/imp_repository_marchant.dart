@@ -17,9 +17,9 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
   // cette mehode permet d'obtenir les information sur un compte actf
   @override
   Future<Either<Failure, List<ActiveUserProfile>>>
-  getActifUserInformationAboutCompte() async {
+  getActifUserInformationAboutCompte(RequestFilterProfile reques) async {
     final response = await marchanServiceFirebase
-        .getActifUserInformationAboutCompte();
+        .getActifUserInformationAboutCompte(reques);
     if (response is FirebaseSuccess<List<ActiveUserProfileModel>>) {
       return Right(
         response.data.map(ActiveUserProfileModel.toDomaine).toList(),

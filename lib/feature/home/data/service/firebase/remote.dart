@@ -9,7 +9,7 @@ import 'package:firebase_database/firebase_database.dart' as databaseRf;
 abstract class MarchanServiceFirebase {
   // cette mehode permet d'obtenir les information sur un compte actf
   Future<FirebaseResult<List<ActiveUserProfileModel>>>
-  getActifUserInformationAboutCompte();
+  getActifUserInformationAboutCompte(RequestFilterProfile params);
 
   Future<FirebaseResult<String?>> likeProfile(RequestLike params);
 
@@ -28,10 +28,13 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
 
   @override
   Future<FirebaseResult<List<ActiveUserProfileModel>>>
-  getActifUserInformationAboutCompte() async {
+  getActifUserInformationAboutCompte(RequestFilterProfile params) async {
     try {
-      final snapshot = await db.child('hotel').get();
 
+      if(params.filterIsActif){
+      final snapshot = await db.child('hotel').orderByChild('adresse').equalTo(params.adresse.toLowerCase().trim()).get();
+
+      if(snapshot.exists){
       final flatUsers = (snapshot.value as Map).values.map((e) {
         final m = Map<String, dynamic>.from(e as Map);
         return {...m, ...Map<String, dynamic>.from(m.remove('herBer') ?? {})};
@@ -45,10 +48,46 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
       final userProfile = (snapshot.value as Map).values.map((e) {
         return ActiveUserProfileModel.fromJson(Map<String, dynamic>.from(e));
       }).toList();
+      return FirebaseSuccess(userProfile);  
+      }
+      else{
+      final snapshot = await db.child('hotel').get();
+      final flatUsers = (snapshot.value as Map).values.map((e) {
+        final m = Map<String, dynamic>.from(e as Map);
+        return {...m, ...Map<String, dynamic>.from(m.remove('herBer') ?? {})};
+      }).toList();
+      log('data:::::::  $flatUsers');
+
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseError("Aucune donnée trouvée");
+      }
+      final userProfile = (snapshot.value as Map).values.map((e) {
+        return ActiveUserProfileModel.fromJson(Map<String, dynamic>.from(e));
+      }).toList();
 
       return FirebaseSuccess(userProfile);
-    } catch (e) {
-      log(':: information:${e.runtimeType.toString()}');
+        
+      }
+    } 
+    else{
+
+      final snapshot = await db.child('hotel').get();
+      final flatUsers = (snapshot.value as Map).values.map((e) {
+        final m = Map<String, dynamic>.from(e as Map);
+        return {...m, ...Map<String, dynamic>.from(m.remove('herBer') ?? {})};
+      }).toList();
+      log('data:::::::  $flatUsers');
+
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseError("Aucune donnée trouvée");
+      }
+      final userProfile = (snapshot.value as Map).values.map((e) {
+        return ActiveUserProfileModel.fromJson(Map<String, dynamic>.from(e));
+      }).toList();
+      return FirebaseSuccess(userProfile);
+    }
+    
+     catch (e) {
       return FirebaseError(e.runtimeType.toString());
     }
   }
