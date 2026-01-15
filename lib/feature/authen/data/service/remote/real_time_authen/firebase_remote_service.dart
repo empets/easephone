@@ -7,20 +7,15 @@ import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart' as shareData;
 
 // @LazySingleton(as: SecureStorageData<String>)
 @LazySingleton(as: FirebaseRemoteService)
 class ImplFirebaseRemoteService implements FirebaseRemoteService {
-  ImplFirebaseRemoteService({
-    required this.db,
-    required this.sharedPreferences,
-  });
+  ImplFirebaseRemoteService({required this.db});
 
   final databaseReference.DatabaseReference db;
-  final shareData.SharedPreferences sharedPreferences;
 
   late String userKey = '';
   late String authKey = '';
@@ -129,7 +124,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
   ) async {
-    final localUserSections = sharedPreferences.getString(
+    final shared = await shareData.SharedPreferences.getInstance();
+
+    final localUserSections = shared.getString(
       'user_actif_by_change_profile_photo',
     );
 
@@ -146,7 +143,7 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
-        await sharedPreferences.setString(
+        await shared.setString(
           'user_actif_by_change_profile_photo',
           ref.key.toString(),
         );
@@ -175,7 +172,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<String?>> createCompteUpdateFormToher(
     RequestCreateCompteHeber params,
   ) async {
-    final localUserSection = sharedPreferences.getString(
+    final shared = await shareData.SharedPreferences.getInstance();
+
+    final localUserSection = shared.getString(
       'user_actif_by_change_profile_photo',
     );
 
@@ -213,7 +212,8 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   Future<FirebaseResult<ProfileUserModel>> getProfileUser() async {
     // final sharedPreferences = await SharedPreferences.getInstance();
     // final localUserSection = sharedPreferences.getString('user_section');
-    final localUserSection = sharedPreferences.getString('user_section');
+    final shared = await shareData.SharedPreferences.getInstance();
+    final localUserSection = shared.getString('user_section');
 
     try {
       final response = await db.child('users/$localUserSection').get();
@@ -292,7 +292,7 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     await db.child('$path/$userId').update(updates);
     log('create compte key:: ------->> ${db.ref.key}');
 
-    // final sharedPreferences = await SharedPreferences.getInstance();
+    // final shared = await SharedPreferences.getInstance();
     // sharedPreferences.setString('user_actif_by_change_profile_photo', userId);
   }
 
@@ -314,20 +314,18 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
       final reponse = await ref.getDownloadURL();
 
-      saveImageUrl(
+      await saveImageUrl(
         params.copyWith(profileImage: reponse),
         path: 'hotel',
         userId: params.userId,
       );
-      saveImageUrl(
+      await saveImageUrl(
         params.copyWith(profileImage: reponse),
         path: 'users',
         userId: params.userId,
       );
-      await sharedPreferences.setString(
-        'user_actif_by_change_profile_photo',
-        params.userId,
-      );
+      final shared = await shareData.SharedPreferences.getInstance();
+      shared.setString('user_actif_by_change_profile_photo', params.userId);
 
       return FirebaseSuccess(reponse);
     } catch (e) {

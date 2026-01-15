@@ -26,6 +26,9 @@ void main() async {
   );
   Bloc.observer = SimpleBlocObserver();
   configureDependencies();
+  // final prefs = await SharedPreferences.getInstance();
+
+  // getIt.registerSingleton<SharedPreferences>(prefs);
   runApp(MyApp());
 }
 
@@ -41,7 +44,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          AppRouteBloc(sharedPreferences: getIt<SharedPreferences>())
+          AppRouteBloc()
             ..add(SigninEvent.googleAuthen()),
       child: BlocListener<AppRouteBloc, SigninState>(
         listener: (context, state) {

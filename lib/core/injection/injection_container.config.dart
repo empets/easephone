@@ -61,6 +61,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final injectableModule = _$InjectableModule();
+    gh.factory<_i908.AppRouteBloc>(() => _i908.AppRouteBloc());
     gh.lazySingleton<_i345.DatabaseReference>(() => injectableModule.userDb);
     gh.lazySingleton<_i519.Client>(() => injectableModule.httpClient);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => injectableModule.prefs);
@@ -68,35 +69,27 @@ extension GetItInjectableX on _i174.GetIt {
       () => injectableModule.locaDataShared(),
       preResolve: true,
     );
-    gh.factory<_i908.AppRouteBloc>(
-      () =>
-          _i908.AppRouteBloc(sharedPreferences: gh<_i460.SharedPreferences>()),
+    gh.factory<_i574.AppRoute>(
+      () => _i574.AppRoute(
+        appRouteBloc: gh<_i908.AppRouteBloc>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
     );
     gh.lazySingleton<_i279.FirebaseRemoteService>(
-      () => _i505.ImplFirebaseRemoteService(
-        db: gh<_i345.DatabaseReference>(),
-        sharedPreferences: gh<_i460.SharedPreferences>(),
+      () => _i505.ImplFirebaseRemoteService(db: gh<_i345.DatabaseReference>()),
+    );
+    gh.lazySingleton<_i283.IRepositoryAuthen>(
+      () => _i417.RepositoriesAuthenImple(
+        firebaseRemoteService: gh<_i279.FirebaseRemoteService>(),
       ),
     );
     gh.lazySingleton<_i35.MarchanServiceFirebase>(
       () =>
           _i35.ImpleMarchantServiceFirebase(db: gh<_i345.DatabaseReference>()),
     );
-    gh.lazySingleton<_i283.IRepositoryAuthen>(
-      () => _i417.RepositoriesAuthenImple(
-        firebaseRemoteService: gh<_i279.FirebaseRemoteService>(),
-        sharedPreferences: gh<_i460.SharedPreferences>(),
-      ),
-    );
     gh.lazySingleton<_i956.IRepositoryMarchant>(
       () => _i772.ImpRepositoryMarchant(
         marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
-      ),
-    );
-    gh.factory<_i574.AppRoute>(
-      () => _i574.AppRoute(
-        appRouteBloc: gh<_i908.AppRouteBloc>(),
-        sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
     gh.lazySingleton<_i228.SigninUsercase>(

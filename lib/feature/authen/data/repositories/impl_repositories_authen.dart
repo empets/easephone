@@ -12,20 +12,17 @@ import 'package:shared_preferences/shared_preferences.dart' as shareData;
 
 @LazySingleton(as: IRepositoryAuthen)
 class RepositoriesAuthenImple implements IRepositoryAuthen {
-  RepositoriesAuthenImple({
-    required this.firebaseRemoteService,
-    required this.sharedPreferences,
-  });
+  RepositoriesAuthenImple({required this.firebaseRemoteService});
   final FirebaseRemoteService firebaseRemoteService;
-  final shareData.SharedPreferences sharedPreferences;
 
   @override
   Future<Either<Failure, String?>> userAuthen(RequestAuthen request) async {
     final response = await firebaseRemoteService.userAuthen(request);
 
     if (response is FirebaseSuccess<String?>) {
-      await sharedPreferences.setString('user_section', response.data ?? '');
-      await sharedPreferences.setString(
+      final shared = await shareData.SharedPreferences.getInstance();
+      shared.setString('user_section', response.data ?? '');
+      shared.setString(
         'user_actif_by_change_profile_photo',
         response.data ?? '',
       );
@@ -40,8 +37,10 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   Future<Either<Failure, String?>> signIn(RequestAuthen request) async {
     final response = await firebaseRemoteService.signIn(request);
     if (response is FirebaseSuccess<String?>) {
-      await sharedPreferences.setString('user_section', response.data ?? '');
-      await sharedPreferences.setString(
+      final shared = await shareData.SharedPreferences.getInstance();
+
+      shared.setString('user_section', response.data ?? '');
+      shared.setString(
         'user_actif_by_change_profile_photo',
         response.data ?? '',
       );

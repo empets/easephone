@@ -29,6 +29,10 @@ class $AssetsIconLauncherGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/back_image.jpeg
+  AssetGenImage get backImage =>
+      const AssetGenImage('assets/icons/back_image.jpeg');
+
   /// File path: assets/icons/empty_data.json
   LottieGenImage get emptyData =>
       const LottieGenImage('assets/icons/empty_data.json');
@@ -63,6 +67,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    backImage,
     emptyData,
     iconArrowFelt,
     undrawDeliveryLocationUm5t,
