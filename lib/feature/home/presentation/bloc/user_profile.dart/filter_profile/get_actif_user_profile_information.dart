@@ -1,8 +1,10 @@
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<ActiveUserProfile>>> {
@@ -17,7 +19,7 @@ class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<Active
     Emitter<ApiState<List<ActiveUserProfile>>> emit,
   ) async {
     switch (event) {
-      case GoogleAuthenFiltreEvent(: final bool filterIsActif, final String adresse):
+      case FilterFiltreEvent(: final bool filterIsActif,: final String adresse):
 
       if(filterIsActif){
         emit(ApiState<List<ActiveUserProfile>>.load());

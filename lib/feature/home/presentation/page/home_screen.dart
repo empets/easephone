@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/check_connexion/checking.dart';
+import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
-import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_authen/firebase_stream_service.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_user_list_usercase.dart';
@@ -15,7 +15,6 @@ import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.da
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/user_list/get_user_list_bloc.dart';
-import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_information.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/dis_like_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
@@ -26,7 +25,8 @@ import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_like_number.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/like_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/get_actif_user_profile_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_user_profile_information.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/pages/eligibility_test_page.dart';
@@ -71,7 +71,7 @@ class _HomeOverViewState extends State<HomeOverView> {
           create: (context) => GetActifUserInformationBloc(
             getActifCompteInformationUsercase:
                 getIt<GetActifCompteInformationUsercase>(),
-          )..add(SigninEvent.filtre(filterIsActif: true, adresse: "")),
+          )..add(FiltreEvent.filtre(filterIsActif: false, adresse: "")),
         ),
 
         BlocProvider(
@@ -151,38 +151,65 @@ class _HomeOverViewState extends State<HomeOverView> {
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(color: Colors.grey.shade400),
                           ),
-                          child: BlocBuilder<GetActifUserInformationBloc, ApiState<List<ActiveUserProfile>>>(
-                            builder: (context, state) {
-                              return TextFormField(
-                                controller: searchController,
-                                style: GoogleFonts.roboto(color: MyColorName.black),
-                                decoration: InputDecoration(
-                                  hintText: 'Recherche une zone',
-                                  hintStyle: GoogleFonts.roboto(
-                                    color: Colors.black45,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
+                          child:
+                              BlocBuilder<
+                                GetActifUserInformationBloc,
+                                ApiState<List<ActiveUserProfile>>
+                              >(
+                                builder: (context, state) {
+                                  return TextFormField(
+                                    controller: searchController,
+                                    style: GoogleFonts.roboto(
+                                      color: MyColorName.black,
+                                    ),
+                                    decoration: InputDecoration(
+                                      hintText: 'Recherche une zone',
+                                      hintStyle: GoogleFonts.roboto(
+                                        color: Colors.black45,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      suffixIcon: GestureDetector(
+                                        onTap:
+                                            state
+                                                    is LoadState<
+                                                      List<ActiveUserProfile>
+                                                    > &&
+                                                searchController.text.isEmpty
+                                            ? null
+                                            : () {
+                                                context
+                                                    .read<
+                                                      GetActifUserInformationBloc
+                                                    >()
+                                                    .add(
+                                                      FiltreEvent.filtre(
+                                                        filterIsActif: true,
+                                                        adresse:
+                                                            searchController
+                                                                .text,
+                                                      ),
+                                                    );
+                                                FocusScope.of(
+                                                  context,
+                                                ).unfocus();
+                                              },
+                                        child: Icon(
+                                          Icons.search,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      isDense: true,
+                                      fillColor: Colors.grey.shade100,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                              suffixIcon: GestureDetector(
-                                onTap: state is! LoadingState<List<ActiveUserProfile>> && searchController.text.isNotEmpty ? () {
-                                  context.read<GetActifUserInformationBloc>().add(FiltreEvent.filtre(filterIsActif: true, adresse:searchController.text ));
-                                } : null,
-                                child: Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                ),
-                              )
-                              filled: true,
-                              isDense: true,
-                              fillColor: Colors.grey.shade100,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          );
-                            },
-                          ),
                         ),
                       ),
 
@@ -304,6 +331,90 @@ class _HomeOverViewState extends State<HomeOverView> {
                                 is SuccessState<List<ActiveUserProfile>>) {
                               return KeyboardVisibilityBuilder(
                                 builder: (context, isKey) {
+                                  if (state.data.isEmpty) {
+                                    return RefreshIndicator(
+                                      onRefresh: () async {
+                                        // context
+                                        //     .read<GetActifUserInformationBloc>()
+                                        //     .add(
+                                        //       FiltreEvent.filtre(
+                                        //         filterIsActif: false,
+                                        //         adresse: "",
+                                        //       ),
+                                        //     );
+                                      },
+                                      child: SizedBox(
+                                        height: 0.6.sh,
+                                        // color: MyColorName.black,
+                                        child: ListView.builder(
+                                          itemCount: 1,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 50.h,
+                                                    ),
+                                                    child: Lottie.asset(
+                                                      MyAssets
+                                                          .icons
+                                                          .emptyData
+                                                          .path,
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment: AlignmentGeometry
+                                                        .center,
+                                                    child: CustomeText(
+                                                      texte:
+                                                          "Aucune donnée disponible rafechiser la page",
+
+                                                      texteSize: 14.sp,
+                                                    ),
+                                                  ),
+
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 0.26.sh,
+                                                    ),
+                                                    child: CustomeButton(
+                                                      btnBackground:
+                                                          MyColorName.black,
+                                                      btnTextColor:
+                                                          MyColorName.white,
+                                                      btnText: 'Rafrechir',
+                                                      btnTextSize: 13.sp,
+                                                      onTap: () {
+                                                        context
+                                                            .read<
+                                                              GetActifUserInformationBloc
+                                                            >()
+                                                            .add(
+                                                              FiltreEvent.filtre(
+                                                                filterIsActif:
+                                                                    false,
+                                                                adresse: "",
+                                                              ),
+                                                            );
+                                                        FocusScope.of(
+                                                          context,
+                                                        ).unfocus();
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  }
                                   return isKey
                                       ? SizedBox()
                                       : SizedBox(
@@ -312,6 +423,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                             itemCount: state.data.length,
                                             itemBuilder: (context, index) {
                                               final profile = state.data[index];
+
                                               return (profile.formOne ==
                                                           'success' &&
                                                       profile.formTwo ==

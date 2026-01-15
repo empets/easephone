@@ -13,7 +13,7 @@ import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/get_actif_user_profile_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_user_profile_information.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/historie_profile.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/polique_screen.dart';

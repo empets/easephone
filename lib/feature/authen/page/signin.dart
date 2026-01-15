@@ -200,6 +200,8 @@ class _SignInState extends State<SignIn> {
                                                     readOnly: state
                                                         .status
                                                         .isInProgress,
+                                                    textInputType:
+                                                        TextInputType.number,
                                                     prefixIcon: Icon(
                                                       Icons.phone_outlined,
                                                     ),

@@ -290,4 +290,277 @@ as String?,
 
 }
 
+RequestFilterProfile _$RequestFilterProfileFromJson(
+  Map<String, dynamic> json
+) {
+    return _SRequestFilterProfile.fromJson(
+      json
+    );
+}
+
+/// @nodoc
+mixin _$RequestFilterProfile {
+
+ String get adresse; bool get filterIsActif;
+/// Create a copy of RequestFilterProfile
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestFilterProfileCopyWith<RequestFilterProfile> get copyWith => _$RequestFilterProfileCopyWithImpl<RequestFilterProfile>(this as RequestFilterProfile, _$identity);
+
+  /// Serializes this RequestFilterProfile to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestFilterProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.filterIsActif, filterIsActif) || other.filterIsActif == filterIsActif));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,adresse,filterIsActif);
+
+@override
+String toString() {
+  return 'RequestFilterProfile(adresse: $adresse, filterIsActif: $filterIsActif)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestFilterProfileCopyWith<$Res>  {
+  factory $RequestFilterProfileCopyWith(RequestFilterProfile value, $Res Function(RequestFilterProfile) _then) = _$RequestFilterProfileCopyWithImpl;
+@useResult
+$Res call({
+ String adresse, bool filterIsActif
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestFilterProfileCopyWithImpl<$Res>
+    implements $RequestFilterProfileCopyWith<$Res> {
+  _$RequestFilterProfileCopyWithImpl(this._self, this._then);
+
+  final RequestFilterProfile _self;
+  final $Res Function(RequestFilterProfile) _then;
+
+/// Create a copy of RequestFilterProfile
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? adresse = null,Object? filterIsActif = null,}) {
+  return _then(_self.copyWith(
+adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as String,filterIsActif: null == filterIsActif ? _self.filterIsActif : filterIsActif // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [RequestFilterProfile].
+extension RequestFilterProfilePatterns on RequestFilterProfile {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestFilterProfile value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SRequestFilterProfile() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestFilterProfile value)  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestFilterProfile():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestFilterProfile value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestFilterProfile() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String adresse,  bool filterIsActif)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SRequestFilterProfile() when $default != null:
+return $default(_that.adresse,_that.filterIsActif);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String adresse,  bool filterIsActif)  $default,) {final _that = this;
+switch (_that) {
+case _SRequestFilterProfile():
+return $default(_that.adresse,_that.filterIsActif);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String adresse,  bool filterIsActif)?  $default,) {final _that = this;
+switch (_that) {
+case _SRequestFilterProfile() when $default != null:
+return $default(_that.adresse,_that.filterIsActif);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SRequestFilterProfile implements RequestFilterProfile {
+   _SRequestFilterProfile({required this.adresse, required this.filterIsActif});
+  factory _SRequestFilterProfile.fromJson(Map<String, dynamic> json) => _$SRequestFilterProfileFromJson(json);
+
+@override final  String adresse;
+@override final  bool filterIsActif;
+
+/// Create a copy of RequestFilterProfile
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SRequestFilterProfileCopyWith<_SRequestFilterProfile> get copyWith => __$SRequestFilterProfileCopyWithImpl<_SRequestFilterProfile>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SRequestFilterProfileToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestFilterProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.filterIsActif, filterIsActif) || other.filterIsActif == filterIsActif));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,adresse,filterIsActif);
+
+@override
+String toString() {
+  return 'RequestFilterProfile(adresse: $adresse, filterIsActif: $filterIsActif)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SRequestFilterProfileCopyWith<$Res> implements $RequestFilterProfileCopyWith<$Res> {
+  factory _$SRequestFilterProfileCopyWith(_SRequestFilterProfile value, $Res Function(_SRequestFilterProfile) _then) = __$SRequestFilterProfileCopyWithImpl;
+@override @useResult
+$Res call({
+ String adresse, bool filterIsActif
+});
+
+
+
+
+}
+/// @nodoc
+class __$SRequestFilterProfileCopyWithImpl<$Res>
+    implements _$SRequestFilterProfileCopyWith<$Res> {
+  __$SRequestFilterProfileCopyWithImpl(this._self, this._then);
+
+  final _SRequestFilterProfile _self;
+  final $Res Function(_SRequestFilterProfile) _then;
+
+/// Create a copy of RequestFilterProfile
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? adresse = null,Object? filterIsActif = null,}) {
+  return _then(_SRequestFilterProfile(
+adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
+as String,filterIsActif: null == filterIsActif ? _self.filterIsActif : filterIsActif // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
 // dart format on

@@ -21,3 +21,17 @@ Map<String, dynamic> _$SRequestLikeToJson(_SRequestLike instance) =>
       'date': instance.date,
       'likeId': instance.likeId,
     };
+
+_SRequestFilterProfile _$SRequestFilterProfileFromJson(
+  Map<String, dynamic> json,
+) => _SRequestFilterProfile(
+  adresse: json['adresse'] as String,
+  filterIsActif: json['filterIsActif'] as bool,
+);
+
+Map<String, dynamic> _$SRequestFilterProfileToJson(
+  _SRequestFilterProfile instance,
+) => <String, dynamic>{
+  'adresse': instance.adresse,
+  'filterIsActif': instance.filterIsActif,
+};
