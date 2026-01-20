@@ -371,31 +371,6 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
               }
             },
           ),
-          // BlocListener<EligibilityCubit, EligibilityState>(
-          //   listener: (context, state) {
-          //     if (state is EligibilitySuccess) {
-          //       // Navigation vers OffersListPage
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => OffersListPage(
-          //             location: _selectedLocation,
-          //             eligibilityResult: state.result,
-          //             phoneNumber: _phoneController.text.trim(),
-          //             address: _addressController.text.trim(),
-          //           ),
-          //         ),
-          //       );
-          //     } else if (state is EligibilityError) {
-          //       ScaffoldMessenger.of(context).showSnackBar(
-          //         SnackBar(
-          //           content: Text(state.message),
-          //           backgroundColor: AppColors.error,
-          //         ),
-          //       );
-          //     }
-          //   },
-          // ),
         ],
         child: Stack(
           children: [
@@ -412,6 +387,15 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                     color: Colors.black,
                     size: 40,
                   ),
+
+                  MapMarkerData(
+                    location: MapLocation(
+                      latitude: double.parse(widget.profile.lat),
+                      longitude: double.parse(widget.profile.long),
+                    ),
+                    color: Colors.black,
+                    size: 40,
+                  ),
                 ],
                 // onTap: _handleMapTap,
                 onControlsReady: (zoomIn, zoomOut, recenter) {
@@ -420,9 +404,6 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                     _mapZoomOut = zoomOut;
                     _mapRecenter = recenter;
                   });
-                  // _handleManualPosition();
-                  // _handleLocationSearch();
-                  // _handleBackFromSearch();
                 },
               )
             else

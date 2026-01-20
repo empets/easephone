@@ -29,6 +29,9 @@ class $AssetsIconLauncherGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/authen.svg
+  SvgGenImage get authen => const SvgGenImage('assets/icons/authen.svg');
+
   /// File path: assets/icons/back_image.jpeg
   AssetGenImage get backImage =>
       const AssetGenImage('assets/icons/back_image.jpeg');
@@ -67,6 +70,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    authen,
     backImage,
     emptyData,
     iconArrowFelt,

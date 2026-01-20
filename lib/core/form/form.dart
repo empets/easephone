@@ -173,19 +173,21 @@ class CustomeFormsSigin extends StatelessWidget {
           filled: true,
           errorText: errorText,
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.withOpacity(.5)),
+            borderSide: BorderSide(color: Colors.grey.withOpacity(.3)),
             borderRadius: BorderRadius.circular(17.r),
           ),
           errorBorder: OutlineInputBorder(
             gapPadding: 0.2,
             borderSide: BorderSide(
               width: 0.1.w,
-              color: (isCancel != null) ? MyColorName.errorRed : Colors.red,
+              color: (isCancel != null)
+                  ? MyColorName.errorRed.withValues(alpha: 0.2)
+                  : Colors.red.withValues(alpha: 0.2),
             ),
             borderRadius: BorderRadius.circular(17.r),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.withOpacity(.5)),
+            borderSide: BorderSide(color: Colors.grey.withOpacity(.3)),
             gapPadding: 2,
             borderRadius: BorderRadius.circular(17.r),
           ),
@@ -304,7 +306,9 @@ class ProductionFormCustomer extends StatelessWidget {
           borderRadius: BorderRadius.circular(7.r),
         ),
         errorStyle: GoogleFonts.roboto(
-          color: (isCancel != null) ? MyColorName.backgroundIvory : Colors.red,
+          color: (isCancel != null)
+              ? MyColorName.backgroundIvory
+              : Colors.red.withValues(alpha: 0.2),
           fontWeight: FontWeight.bold,
         ),
         hintStyle: GoogleFonts.roboto(

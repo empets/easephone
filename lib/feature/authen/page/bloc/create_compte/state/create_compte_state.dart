@@ -1,3 +1,4 @@
+import 'package:com.example.epbomi/core/extension/email_extension.dart';
 import 'package:com.example.epbomi/core/extension/extension_form.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:formz/formz.dart';
@@ -8,11 +9,11 @@ abstract class CreateCompteState with _$CreateCompteState {
   factory CreateCompteState({
     required TextFormz nomResidence,
     required TextFormz specialite,
-    required TextFormz telephone,
+    required PhoneFormz telephone,
     required TextFormz adresse,
     required TextFormz lat,
     required TextFormz long,
-    required TextFormz whatsapp,
+    required PhoneFormz whatsapp,
     required TextFormz facebok,
     required TextFormz email,
     required FormzSubmissionStatus status,
@@ -23,11 +24,11 @@ abstract class CreateCompteState with _$CreateCompteState {
   factory CreateCompteState.initial() => CreateCompteState(
     nomResidence: const TextFormz.pure(),
     specialite: const TextFormz.pure(),
-    telephone: const TextFormz.pure(),
+    telephone: const PhoneFormz.pure(),
     adresse: const TextFormz.pure(),
     lat: const TextFormz.pure(),
     long: const TextFormz.pure(),
-    whatsapp: const TextFormz.pure(),
+    whatsapp: const PhoneFormz.pure(),
     facebok: const TextFormz.pure(),
     email: const TextFormz.pure(),
     status: FormzSubmissionStatus.initial,

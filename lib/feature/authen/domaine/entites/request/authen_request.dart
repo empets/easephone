@@ -5,8 +5,11 @@ part 'authen_request.g.dart';
 
 @freezed
 abstract class RequestAuthen with _$RequestAuthen {
-  factory RequestAuthen({required String email, required String password}) =
-      _SRequestAuthen;
+  factory RequestAuthen({
+    required String email,
+    required String password,
+    required bool isgoogleAuthen,
+  }) = _SRequestAuthen;
 
   factory RequestAuthen.fromJson(Map<String, dynamic> json) =>
       _$RequestAuthenFromJson(json);

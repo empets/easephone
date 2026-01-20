@@ -11,7 +11,7 @@ class GetUserProfileBloc extends Bloc<SigninEvent, ApiState<ProfileUser>> {
     on<SigninEvent>(getUser);
   }
 
-  GetUserProfileUsercase getUserProfileUsercase;
+  final GetUserProfileUsercase getUserProfileUsercase;
   Future<void> getUser(
     SigninEvent event,
     Emitter<ApiState<ProfileUser>> emit,
@@ -19,8 +19,7 @@ class GetUserProfileBloc extends Bloc<SigninEvent, ApiState<ProfileUser>> {
     switch (event) {
       case GoogleAuthenSigninEvent():
         emit(ApiState<ProfileUser>.load());
-        final response = await getUserProfileUsercase.call(
-       NoParams() );
+        final response = await getUserProfileUsercase.call(NoParams());
 
         emit(
           response.fold((l) => FailedState(l.message), (r) => SuccessState(r)),

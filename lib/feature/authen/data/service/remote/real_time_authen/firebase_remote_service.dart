@@ -16,6 +16,8 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   ImplFirebaseRemoteService({required this.db});
 
   final databaseReference.DatabaseReference db;
+  // static final FirebaseAuth _auth = FirebaseAuth.instance;
+  // static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   late String userKey = '';
   late String authKey = '';

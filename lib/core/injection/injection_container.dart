@@ -1,5 +1,5 @@
-import 'package:com.example.epbomi/core/injection/injection_container.config.dart';
 
+import 'package:com.example.epbomi/core/injection/injection_container.config.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -16,7 +16,7 @@ final GetIt getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: true, // default
 )
-void configureDependencies() => getIt.init();
+Future<void> configureDependencies() => getIt.init();
 Future<void> configureDependenciesTest() async {}
 
 @module

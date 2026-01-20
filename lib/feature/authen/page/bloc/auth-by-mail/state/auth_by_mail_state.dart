@@ -8,7 +8,7 @@ part 'auth_by_mail_state.freezed.dart';
 abstract class AuthByMailState with _$AuthByMailState {
   factory AuthByMailState({
     required EmailFormz email,
-    required TextFormz password,
+    required PhoneFormz password,
     required FormzSubmissionStatus status,
     required String errorMessage,
     required bool isValide,
@@ -16,7 +16,7 @@ abstract class AuthByMailState with _$AuthByMailState {
 
   factory AuthByMailState.initiale() => AuthByMailState(
     email: EmailFormz.pure(),
-    password: TextFormz.pure(),
+    password: PhoneFormz.pure(),
     status: FormzSubmissionStatus.initial,
     errorMessage: '',
     isValide: false,

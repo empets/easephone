@@ -25,7 +25,7 @@ void main() async {
     ),
   );
   Bloc.observer = SimpleBlocObserver();
-  configureDependencies();
+    await configureDependencies();
   // final prefs = await SharedPreferences.getInstance();
 
   // getIt.registerSingleton<SharedPreferences>(prefs);

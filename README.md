@@ -18,3 +18,9 @@ samples, guidance on mobile development, and a full API reference.
 ## Cette CMd permet de génere des Apk
 -  flutter build apk --split-per-abi --release
 
+## Cette CMd permet de faire des build
+-  flutter pub run build_runner build
+
+## Cette CMd permet de lancer l'application en mode release
+-  flutter run --release
+

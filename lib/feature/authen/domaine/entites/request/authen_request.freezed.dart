@@ -22,7 +22,7 @@ RequestAuthen _$RequestAuthenFromJson(
 /// @nodoc
 mixin _$RequestAuthen {
 
- String get email; String get password;
+ String get email; String get password; bool get isgoogleAuthen;
 /// Create a copy of RequestAuthen
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +35,16 @@ $RequestAuthenCopyWith<RequestAuthen> get copyWith => _$RequestAuthenCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,isgoogleAuthen);
 
 @override
 String toString() {
-  return 'RequestAuthen(email: $email, password: $password)';
+  return 'RequestAuthen(email: $email, password: $password, isgoogleAuthen: $isgoogleAuthen)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $RequestAuthenCopyWith<$Res>  {
   factory $RequestAuthenCopyWith(RequestAuthen value, $Res Function(RequestAuthen) _then) = _$RequestAuthenCopyWithImpl;
 @useResult
 $Res call({
- String email, String password
+ String email, String password, bool isgoogleAuthen
 });
 
 
@@ -72,11 +72,12 @@ class _$RequestAuthenCopyWithImpl<$Res>
 
 /// Create a copy of RequestAuthen
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? isgoogleAuthen = null,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isgoogleAuthen: null == isgoogleAuthen ? _self.isgoogleAuthen : isgoogleAuthen // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  bool isgoogleAuthen)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SRequestAuthen() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  bool isgoogleAuthen)  $default,) {final _that = this;
 switch (_that) {
 case _SRequestAuthen():
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  bool isgoogleAuthen)?  $default,) {final _that = this;
 switch (_that) {
 case _SRequestAuthen() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
   return null;
 
 }
@@ -217,11 +218,12 @@ return $default(_that.email,_that.password);case _:
 @JsonSerializable()
 
 class _SRequestAuthen implements RequestAuthen {
-   _SRequestAuthen({required this.email, required this.password});
+   _SRequestAuthen({required this.email, required this.password, required this.isgoogleAuthen});
   factory _SRequestAuthen.fromJson(Map<String, dynamic> json) => _$SRequestAuthenFromJson(json);
 
 @override final  String email;
 @override final  String password;
+@override final  bool isgoogleAuthen;
 
 /// Create a copy of RequestAuthen
 /// with the given fields replaced by the non-null parameter values.
@@ -236,16 +238,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,isgoogleAuthen);
 
 @override
 String toString() {
-  return 'RequestAuthen(email: $email, password: $password)';
+  return 'RequestAuthen(email: $email, password: $password, isgoogleAuthen: $isgoogleAuthen)';
 }
 
 
@@ -256,7 +258,7 @@ abstract mixin class _$SRequestAuthenCopyWith<$Res> implements $RequestAuthenCop
   factory _$SRequestAuthenCopyWith(_SRequestAuthen value, $Res Function(_SRequestAuthen) _then) = __$SRequestAuthenCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String password
+ String email, String password, bool isgoogleAuthen
 });
 
 
@@ -273,11 +275,12 @@ class __$SRequestAuthenCopyWithImpl<$Res>
 
 /// Create a copy of RequestAuthen
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? isgoogleAuthen = null,}) {
   return _then(_SRequestAuthen(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isgoogleAuthen: null == isgoogleAuthen ? _self.isgoogleAuthen : isgoogleAuthen // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

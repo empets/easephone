@@ -44,6 +44,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -78,6 +79,22 @@ class _HomeDetailsState extends State<HomeDetails>
       await launchUrl(phoneUri);
     } else {
       throw 'Impossible de lancer l’appel';
+    }
+  }
+
+  Future<void> makePhoneCall({required String phoneNumber}) async {
+    // Vérifie et demande la permission
+    var status = await Permission.phone.status;
+    if (!status.isGranted) {
+      status = await Permission.phone.request();
+    }
+
+    if (status.isGranted) {
+      // await FlutterPhoneDirectCaller.callNumber(phoneNumber);
+      final launchUri = Uri(scheme: 'tel', path: '+225$phoneNumber');
+      await launchUrl(launchUri);
+    } else {
+      throw 'Permission CALL_PHONE refusée';
     }
   }
 
@@ -304,7 +321,7 @@ class _HomeDetailsState extends State<HomeDetails>
                         radius: 26.r,
                         child: ClipOval(
                           child: Image.network(
-                            'https://media.istockphoto.com/id/2206641809/photo/side-view-of-handsome-young-ma.jpg?s=612x612&w=0&k=20&c=PPap8uU-zXdxZmjjKt-IEH0NGSq04qOAn_8uSRZcxxQ=',
+                            widget.profile.profileImage,
                             width: 60.r,
                             height: 60.r,
                             fit: BoxFit.cover,
@@ -569,8 +586,8 @@ class _HomeDetailsState extends State<HomeDetails>
                                 btnText: 'Contacter',
                                 btnTextSize: 13,
                                 onTap: () {
-                                  launchPhoneCall(
-                                    "+225${widget.profile.telephone}",
+                                  makePhoneCall(
+                                    phoneNumber: widget.profile.telephone,
                                   );
                                 },
                               ),

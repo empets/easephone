@@ -1,4 +1,3 @@
-
 import 'package:com.example.epbomi/core/extension/email_extension.dart';
 import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:com.example.epbomi/core/extension/extension_form.dart';
@@ -42,7 +41,7 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
       case ChangePasswordAuthByMailEvent(:final password):
         emit(
           state.copyWith(
-            password: TextFormz.dirty(password),
+            password: PhoneFormz.dirty(password),
             status: FormzSubmissionStatus.initial,
             isValide: Formz.validate([TextFormz.dirty(password), state.email]),
           ),
@@ -54,12 +53,11 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
           await Future.delayed(Duration(seconds: 4));
 
-
-
           final response = await authenByMailUsercase.call(
             RequestAuthen(
               email: state.email.value,
               password: state.password.value,
+              isgoogleAuthen: false,
             ),
           );
 
@@ -67,7 +65,7 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
             response.fold(
               (l) => state.copyWith(
                 status: FormzSubmissionStatus.failure,
-                errorMessage: l.message.getOrEmpty(),
+                errorMessage: 'Cet utilisateur existe déja connecter vous',
               ),
               (r) => state.copyWith(
                 status: FormzSubmissionStatus.success,
@@ -82,12 +80,11 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
           emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
           await Future.delayed(Duration(seconds: 4));
 
-     
-
           final response = await signinUsercase.call(
             RequestAuthen(
               email: state.email.value,
               password: state.password.value,
+              isgoogleAuthen: false,
             ),
           );
 
@@ -95,7 +92,8 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
             response.fold(
               (l) => state.copyWith(
                 status: FormzSubmissionStatus.failure,
-                errorMessage: l.message.getOrEmpty(),
+                errorMessage: 'Cet utilisateur existe pas créer un compte',
+                // l.message.getOrEmpty(),
               ),
               (r) => state.copyWith(
                 status: FormzSubmissionStatus.success,

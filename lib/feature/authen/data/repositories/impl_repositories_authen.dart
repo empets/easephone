@@ -21,8 +21,8 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
 
     if (response is FirebaseSuccess<String?>) {
       final shared = await shareData.SharedPreferences.getInstance();
-      shared.setString('user_section', response.data ?? '');
-      shared.setString(
+      await shared.setString('user_section', response.data ?? '');
+      await shared.setString(
         'user_actif_by_change_profile_photo',
         response.data ?? '',
       );
@@ -39,8 +39,8 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     if (response is FirebaseSuccess<String?>) {
       final shared = await shareData.SharedPreferences.getInstance();
 
-      shared.setString('user_section', response.data ?? '');
-      shared.setString(
+      await shared.setString('user_section', response.data ?? '');
+      await shared.setString(
         'user_actif_by_change_profile_photo',
         response.data ?? '',
       );
