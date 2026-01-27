@@ -1,5 +1,6 @@
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/observer/bloc_observer.dart';
+import 'package:com.example.epbomi/core/push_notification/repo.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/state/signin_state.dart';
@@ -24,8 +25,9 @@ void main() async {
       storageBucket: "authenfication-9fc25.appspot.com",
     ),
   );
+  // await LocalNotificationService.init();
   Bloc.observer = SimpleBlocObserver();
-    await configureDependencies();
+  await configureDependencies();
   // final prefs = await SharedPreferences.getInstance();
 
   // getIt.registerSingleton<SharedPreferences>(prefs);
@@ -43,9 +45,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          AppRouteBloc()
-            ..add(SigninEvent.googleAuthen()),
+      create: (context) => AppRouteBloc()..add(SigninEvent.googleAuthen()),
       child: BlocListener<AppRouteBloc, SigninState>(
         listener: (context, state) {
           if (state.status.isFailure) {

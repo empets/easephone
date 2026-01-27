@@ -6,6 +6,7 @@ import 'package:com.example.epbomi/core/form/form.dart';
 import 'package:com.example.epbomi/core/global_params/global_params.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
+import 'package:com.example.epbomi/core/push_notification/repo.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/google_authen/service_firebase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/authen_by_mail_usercase.dart';
@@ -15,6 +16,7 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/auth-by-mail/event/a
 import 'package:com.example.epbomi/feature/authen/page/bloc/auth-by-mail/state/auth_by_mail_state.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/bloc_signin.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/state/signin_state.dart';
+import 'package:com.example.epbomi/feature/authen/page/forgot_password.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
@@ -62,10 +64,14 @@ class _SignInState extends State<SignIn> {
                   fadeRoute(const HomeOverView()),
                   (route) => false,
                 );
+                // LocalNotificationService.showNotification(
+                //     title: 'Bonjour 👋',
+                //     body: 'Ceci est une notification locale',
+                //   );
               }
 
               if (state.status.isFailure) {
-             showAppSnackBar(
+                showAppSnackBar(
                   context,
                   color: MyColorName.errorRed,
                   iconRight: Icons.close,
@@ -345,9 +351,49 @@ class _SignInState extends State<SignIn> {
                                 },
                               ),
                             ),
+
+                            isSignUp
+                                ? CustomeText(
+                                    texte:
+                                        'By create ancount, you agree to our privacy policy',
+                                    color: MyColorName.black,
+                                    fontWeight: FontWeight.w400,
+                                    texteSize: 12.sp,
+                                    textAlign: TextAlign.center,
+                                  )
+                                : SizedBox(),
                           ],
                         ),
                       ),
+
+                      !isSignUp
+                          ? KeyboardVisibilityBuilder(
+                              builder: (context, keybord) {
+                                return keybord
+                                    ? SizedBox()
+                                    : TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            fadeRoute(OtpScreen()),
+                                          );
+                                          GoogleAuthService.sendOtp(
+                                            '+2250788884118',
+                                          );
+                                          // GoogleAuthService.registerUser(
+                                          //   'emmanuelpeters965@gmail.com',
+                                          //   "0788884118",
+                                          // );
+                                        },
+                                        child: CustomeText(
+                                          texte: 'Forgot connexion access',
+                                          texteSize: 13.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      );
+                              },
+                            )
+                          : SizedBox(),
                     ],
                   ),
                 ),
