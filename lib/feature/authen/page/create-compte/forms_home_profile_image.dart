@@ -49,7 +49,8 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
       body: BlocListener<CreateCompteImageBloc, ApiState<String>>(
         listener: (context, state) {
           if (state is SuccessState<String>) {
-            Navigator.of(context).push(fadeRoute(const HomeOverView()));
+            Navigator.of(context).pushAndRemoveUntil(fadeRoute(const HomeOverView()), (route) => false);
+             
           }
           if (state is FailedState<String>) {
             return showAppSnackBar(
@@ -152,7 +153,7 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
                                               : SvgPicture.asset(
                                                   MyAssets
                                                       .icons
-                                                      .undrawNewsfeed8ms9
+                                                      .undrawFilesUploadingQf8u
                                                       .path,
                                                   fit: BoxFit.cover,
                                                 ),

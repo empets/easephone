@@ -96,10 +96,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                     bottom: 26.h,
                                   ),
                                   child: SvgPicture.asset(
-                                    MyAssets
-                                        .icons
-                                        .undrawDeliveryLocationUm5t
-                                        .path,
+                                    MyAssets.icons.undrawToDoListO3jf.path,
                                     height: 200.h,
                                   ),
                                 ),

@@ -678,30 +678,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  flutter_local_notifications:
-    dependency: "direct main"
-    description:
-      name: flutter_local_notifications
-      sha256: "674173fd3c9eda9d4c8528da2ce0ea69f161577495a9cc835a2a4ecd7eadeb35"
-      url: "https://pub.dev"
-    source: hosted
-    version: "17.2.4"
-  flutter_local_notifications_linux:
-    dependency: transitive
-    description:
-      name: flutter_local_notifications_linux
-      sha256: c49bd06165cad9beeb79090b18cd1eb0296f4bf4b23b84426e37dd7c027fc3af
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
-  flutter_local_notifications_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_local_notifications_platform_interface
-      sha256: "85f8d07fe708c1bdcf45037f2c0109753b26ae077e9d9e899d55971711a4ea66"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.2.0"
   flutter_map:
     dependency: "direct main"
     description:
@@ -920,6 +896,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.2.0"
+  glassmorphism:
+    dependency: "direct main"
+    description:
+      name: glassmorphism
+      sha256: c0f65ea2681d4ee6d4125b947946d983335cd44765e835cdc039894b076a6e31
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   glob:
     dependency: transitive
     description:
@@ -1316,10 +1300,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   mgrs_dart:
     dependency: transitive
     description:
@@ -1785,26 +1769,26 @@ packages:
     dependency: transitive
     description:
       name: test
-      sha256: "65e29d831719be0591f7b3b1a32a3cda258ec98c58c7b25f7b84241bc31215bb"
+      sha256: "75906bf273541b676716d1ca7627a17e4c4070a3a16272b7a3dc7da3b9f3f6b7"
       url: "https://pub.dev"
     source: hosted
-    version: "1.26.2"
+    version: "1.26.3"
   test_api:
     dependency: transitive
     description:
       name: test_api
-      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
+      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.6"
+    version: "0.7.7"
   test_core:
     dependency: transitive
     description:
       name: test_core
-      sha256: "80bf5a02b60af04b09e14f6fe68b921aad119493e26e490deaca5993fef1b05a"
+      sha256: "0cc24b5ff94b38d2ae73e1eb43cc302b77964fbf67abad1e296025b78deb53d0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.11"
+    version: "0.6.12"
   time:
     dependency: transitive
     description:

@@ -41,6 +41,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:glassmorphism/glassmorphism.dart';
+import 'dart:ui';
 
 class HomeOverView extends StatefulWidget {
   const HomeOverView({super.key});
@@ -404,9 +406,9 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                       bottom: 15.h,
                                                     ),
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: Colors.black12,
-                                                      ),
+                                                      // border: Border.all(
+                                                      //   color: Colors.black12,
+                                                      // ),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                             9.r,
@@ -417,7 +419,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                         Stack(
                                                           children: [
                                                             Container(
-                                                              height: 0.19.sh,
+                                                              height: 0.26.sh,
                                                               margin:
                                                                   EdgeInsetsGeometry.only(
                                                                     bottom: 9.h,
@@ -475,6 +477,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                   profile.file,
                                                                   fit: BoxFit
                                                                       .cover,
+                                                              
                                                                 ),
                                                               ),
                                                             ),
@@ -607,9 +610,9 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                               right: 10.w,
                                                                             ),
                                                                             decoration: BoxDecoration(
-                                                                              color: MyColorName.cardBorder.withValues(
-                                                                                alpha: 0.3,
-                                                                              ),
+                                                                              // color: MyColorName.cardBorder.withValues(
+                                                                              //   alpha: 0.3,
+                                                                              // ),
                                                                               borderRadius: BorderRadius.circular(
                                                                                 7.r,
                                                                               ),
@@ -851,11 +854,229 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                     }
                                                                   },
                                                             ),
+                                                            Positioned(
+                                                              bottom: 8.h,
+                                                              left: 4.w,
+                                                              right: 4.w,
+                                                              child: Stack(
+                                                                children: [
+                                                                
+                                                                  Container(
+                                                            
+                                                                   
+                                                                    child: Container(
+                                                                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
+                                                                          height: 0.11.sh,
+                                                                      width: 1.sw,
+                                                                        decoration: BoxDecoration(
+                                                                              color: MyColorName.cardBorder.withValues(
+                                                                                alpha: 0.3,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(
+                                                                                7.r,
+                                                                              ),
+                                                                            ),
+                                                                    
+                                                                      
+                                                                      child: Padding(
+                                                                        padding: const EdgeInsets.all(4.0),
+                                                                        child: Column(
+                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                                          children: [
+                                                                            Row(
+                                                                              children: [
+                                                                                Text(
+                                                                                      profile
+                                                                                          .specialite,
+                                                                                      style: GoogleFonts.roboto(
+                                                                                        color:
+                                                                                            Colors.white,
+                                                                                        fontSize:
+                                                                                            18.sp,
+                                                                                        fontWeight:
+                                                                                            FontWeight.w500,
+                                                                                      ),
+                                                                                    ),
+                                                                                     SizedBox(width: 10.w,),
+
+                                                                                  Row(
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      Icons.star_rounded,
+                                                                                      color: Colors.amber,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "19k",
+                                                                                      style: GoogleFonts.roboto(
+                                                                                        color: Colors.black,
+                                                                                        fontSize: 12.sp,
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+
+                                                                                SizedBox(width: 7.w),
+
+                                                                                 Row(
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      Icons.remove_red_eye,
+                                                                                      color: Colors.grey.shade400,
+                                                                                       fontWeight: FontWeight.w500,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "Vues: 123",
+                                                                                      style: GoogleFonts.roboto(
+                                                                                        color: Colors.black,
+                                                                                        fontSize: 12.sp,
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+
+                                                                                 
+                                                                              ],
+                                                                            ),
+                                                                                SizedBox(height: 5.h,),
+                                                                            Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                              children: [
+                                                                                Row(
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      Icons.location_on_rounded,
+                                                                                      color: Colors.grey.shade400,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      profile.adresse.substring(
+                                                                                        0,
+                                                                                        20,
+                                                                                      ),
+                                                                                      style: GoogleFonts.roboto(
+                                                                                        color: Colors.black,
+                                                                                        fontSize: 12.sp,
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                                SizedBox(width: 10.w,),
+                                                                             
+                                                                                   
+                                                                              
+                                                                                SizedBox(width: 3.w),
+                                                                                 Row(
+                                                                                   children: [
+                                                                                  
+                                                                                     GestureDetector(
+                                                                                      onTap: () {
+                                                                                           showModalBottomSheet(
+                                                              context: context,
+                                                              backgroundColor:
+                                                                  MyColorName.white,
+                                                              isScrollControlled: true,
+                                                              shape: const RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.vertical(
+                                                                      top:
+                                                                          Radius.circular(
+                                                                            25,
+                                                                          ),
+                                                                    ),
+                                                              ),
+                                                              builder:
+                                                                  (
+                                                                    BuildContext
+                                                                    context,
+                                                                  ) {
+                                                                    return HomeDetails(
+                                                                      profile: profile,
+                                                                    );
+                                                                  },
+                                                            );
+                                                                                        
+                                                                                      },
+                                                                                       child: Container(
+                                                                                        padding: EdgeInsets.symmetric(vertical: 9.h, horizontal: 12.w),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: MyColorName.backgroundIvory,
+                                                                                          borderRadius: BorderRadius.circular(8.r),
+                                                                                        ),
+                                                                                         child: Text(
+                                                                                              "Voir plus",
+                                                                                              style: GoogleFonts.roboto(
+                                                                                                color: Colors.black,
+                                                                                                fontSize: 12.sp,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                              ),
+                                                                                            ),
+                                                                                       ),
+                                                                                     ),
+                                                                                   ],
+                                                                                 )
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                   
+                                                                    ),
+                                                                  ),
+                                                                  // Positioned(
+                                                                  //   bottom: 4.h,
+                                                                  //   child: Container(
+                                                                  //     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                                                                  //     child: Column(
+                                                                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  //       mainAxisAlignment: MainAxisAlignment.end,
+                                                                  //       children: [
+                                                                  //         Text(
+                                                                  //               profile
+                                                                  //                   .specialite,
+                                                                  //               style: GoogleFonts.roboto(
+                                                                  //                 color:
+                                                                  //                     Colors.white,
+                                                                  //                 fontSize:
+                                                                  //                     18.sp,
+                                                                  //                 fontWeight:
+                                                                  //                     FontWeight.w500,
+                                                                  //               ),
+                                                                  //             ),
+                                                                  //             SizedBox(height: 5.h,),
+                                                                  //         Row(
+                                                                  //           children: [
+                                                                  //             Icon(
+                                                                  //               Icons.location_on_rounded,
+                                                                  //               color: Colors.grey.shade400,
+                                                                  //             ),
+                                                                  //             Text(
+                                                                  //               profile.adresse.substring(
+                                                                  //                 0,
+                                                                  //                 20,
+                                                                  //               ),
+                                                                  //               style: GoogleFonts.roboto(
+                                                                  //                 color: Colors.grey.shade600,
+                                                                  //                 fontSize: 12.sp,
+                                                                  //                 fontWeight: FontWeight.w400,
+                                                                  //               ),
+                                                                  //             ),
+                                                                  //           ],
+                                                                  //         ),
+                                                                  //       ],
+                                                                  //     ),
+                                                                  //   ),
+                                                                  // ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           ],
                                                         ),
 
-                                                        GestureDetector(
-                                                          onTap: () {
+                                                        // GestureDetector(
+                                                        //   onTap: () {
                                                             // showModalBottomSheet(
                                                             //   context: context,
                                                             //   backgroundColor:
@@ -880,439 +1101,440 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                             //         );
                                                             //       },
                                                             // );
-                                                          },
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsetsGeometry.symmetric(
-                                                                  vertical: 4.h,
-                                                                  horizontal:
-                                                                      8.w,
-                                                                ),
-                                                            child: Column(
-                                                              children: [
-                                                                // SizedBox(height: 2.h),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .bottomLeft,
-                                                                      child: Text(
-                                                                        profile
-                                                                            .specialite,
-                                                                        style: GoogleFonts.roboto(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontSize:
-                                                                              18.sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    BlocBuilder<
-                                                                      GetUserProfileBloc,
-                                                                      ApiState<
-                                                                        ProfileUser
-                                                                      >
-                                                                    >(
-                                                                      builder:
-                                                                          (
-                                                                            context,
-                                                                            profileDataState,
-                                                                          ) {
-                                                                            if (profileDataState
-                                                                                is SuccessState<
-                                                                                  ProfileUser
-                                                                                >) {
-                                                                              return BlocBuilder<
-                                                                                GetLikeNumberBloc,
-                                                                                ApiState<
-                                                                                  List<
-                                                                                    LikeResponse
-                                                                                  >
-                                                                                >
-                                                                              >(
-                                                                                builder:
-                                                                                    (
-                                                                                      context,
-                                                                                      likeState,
-                                                                                    ) {
-                                                                                      if (likeState
-                                                                                          is SuccessState<
-                                                                                            List<
-                                                                                              LikeResponse
-                                                                                            >
-                                                                                          >) {
-                                                                                        final likeNumber = likeState.data.where(
-                                                                                          (
-                                                                                            like,
-                                                                                          ) =>
-                                                                                              like.compter ==
-                                                                                              1,
-                                                                                        );
+                                                        //   },
+                                                        //   child: Container(
+                                                        //     padding:
+                                                        //         EdgeInsetsGeometry.symmetric(
+                                                        //           vertical: 4.h,
+                                                        //           horizontal:
+                                                        //               8.w,
+                                                        //         ),
+                                                        //     child: Column(
+                                                        //       children: [
+                                                        //         // SizedBox(height: 2.h),
+                                                        //         Row(
+                                                        //           mainAxisAlignment:
+                                                        //               MainAxisAlignment
+                                                        //                   .spaceBetween,
+                                                        //           children: [
+                                                        //             Align(
+                                                        //               alignment:
+                                                        //                   Alignment
+                                                        //                       .bottomLeft,
+                                                                      // child: Text(
+                                                                      //   profile
+                                                                      //       .specialite,
+                                                                      //   style: GoogleFonts.roboto(
+                                                                      //     color:
+                                                                      //         Colors.black,
+                                                                      //     fontSize:
+                                                                      //         18.sp,
+                                                                      //     fontWeight:
+                                                                      //         FontWeight.w500,
+                                                                      //   ),
+                                                                      // ),
+                                                        //             ),
+                                                        //             BlocBuilder<
+                                                        //               GetUserProfileBloc,
+                                                        //               ApiState<
+                                                        //                 ProfileUser
+                                                        //               >
+                                                        //             >(
+                                                        //               builder:
+                                                        //                   (
+                                                        //                     context,
+                                                        //                     profileDataState,
+                                                        //                   ) {
+                                                        //                     if (profileDataState
+                                                        //                         is SuccessState<
+                                                        //                           ProfileUser
+                                                        //                         >) {
+                                                        //                       return BlocBuilder<
+                                                        //                         GetLikeNumberBloc,
+                                                        //                         ApiState<
+                                                        //                           List<
+                                                        //                             LikeResponse
+                                                        //                           >
+                                                        //                         >
+                                                        //                       >(
+                                                        //                         builder:
+                                                        //                             (
+                                                        //                               context,
+                                                        //                               likeState,
+                                                        //                             ) {
+                                                        //                               if (likeState
+                                                        //                                   is SuccessState<
+                                                        //                                     List<
+                                                        //                                       LikeResponse
+                                                        //                                     >
+                                                        //                                   >) {
+                                                        //                                 final likeNumber = likeState.data.where(
+                                                        //                                   (
+                                                        //                                     like,
+                                                        //                                   ) =>
+                                                        //                                       like.compter ==
+                                                        //                                       1,
+                                                        //                                 );
 
-                                                                                        return Row(
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              likeNumber.length.toString(),
-                                                                                              style: GoogleFonts.roboto(
-                                                                                                color: Colors.grey.shade600,
-                                                                                                fontSize: 14.sp,
-                                                                                                fontWeight: FontWeight.w700,
-                                                                                                letterSpacing: 0.1.sp,
-                                                                                              ),
-                                                                                            ),
-                                                                                            SizedBox(
-                                                                                              width: 2.w,
-                                                                                            ),
-                                                                                            Icon(
-                                                                                              likeNumber ==
-                                                                                                      0
-                                                                                                  ? Icons.star_border_rounded
-                                                                                                  : Icons.star_half_rounded,
-                                                                                              color: Colors.amber,
-                                                                                            ),
-                                                                                          ],
-                                                                                        );
-                                                                                      } else {
-                                                                                        return Row(
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              '0',
-                                                                                              style: GoogleFonts.roboto(
-                                                                                                color: Colors.grey.shade600,
-                                                                                                fontSize: 14.sp,
-                                                                                                fontWeight: FontWeight.w700,
-                                                                                                letterSpacing: 0.1.sp,
-                                                                                              ),
-                                                                                            ),
-                                                                                            SizedBox(
-                                                                                              width: 2.w,
-                                                                                            ),
-                                                                                            Icon(
-                                                                                              Icons.star_border_rounded,
-                                                                                              color: Colors.amber,
-                                                                                            ),
-                                                                                          ],
-                                                                                        );
-                                                                                      }
-                                                                                    },
-                                                                              );
-                                                                            } else {
-                                                                              return SizedBox();
-                                                                            }
-                                                                          },
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 9.h,
-                                                                ),
+                                                        //                                 return Row(
+                                                        //                                   children: [
+                                                        //                                     Text(
+                                                        //                                       likeNumber.length.toString(),
+                                                        //                                       style: GoogleFonts.roboto(
+                                                        //                                         color: Colors.grey.shade600,
+                                                        //                                         fontSize: 14.sp,
+                                                        //                                         fontWeight: FontWeight.w700,
+                                                        //                                         letterSpacing: 0.1.sp,
+                                                        //                                       ),
+                                                        //                                     ),
+                                                        //                                     SizedBox(
+                                                        //                                       width: 2.w,
+                                                        //                                     ),
+                                                        //                                     Icon(
+                                                        //                                       likeNumber ==
+                                                        //                                               0
+                                                        //                                           ? Icons.star_border_rounded
+                                                        //                                           : Icons.star_half_rounded,
+                                                        //                                       color: Colors.amber,
+                                                        //                                     ),
+                                                        //                                   ],
+                                                        //                                 );
+                                                        //                               } else {
+                                                        //                                 return Row(
+                                                        //                                   children: [
+                                                        //                                     Text(
+                                                        //                                       '0',
+                                                        //                                       style: GoogleFonts.roboto(
+                                                        //                                         color: Colors.grey.shade600,
+                                                        //                                         fontSize: 14.sp,
+                                                        //                                         fontWeight: FontWeight.w700,
+                                                        //                                         letterSpacing: 0.1.sp,
+                                                        //                                       ),
+                                                        //                                     ),
+                                                        //                                     SizedBox(
+                                                        //                                       width: 2.w,
+                                                        //                                     ),
+                                                        //                                     Icon(
+                                                        //                                       Icons.star_border_rounded,
+                                                        //                                       color: Colors.amber,
+                                                        //                                     ),
+                                                        //                                   ],
+                                                        //                                 );
+                                                        //                               }
+                                                        //                             },
+                                                        //                       );
+                                                        //                     } else {
+                                                        //                       return SizedBox();
+                                                        //                     }
+                                                        //                   },
+                                                        //             ),
+                                                        //           ],
+                                                        //         ),
+                                                        //         SizedBox(
+                                                        //           height: 9.h,
+                                                        //         ),
 
-                                                                Row(
-                                                                  children: [
-                                                                    // CircleAvatar(
-                                                                    //   radius: 22.r,
-                                                                    //   child: ClipOval(
-                                                                    //     child: Image.network(
-                                                                    //       profile.profileImage,
-                                                                    //       width: 60.r,
-                                                                    //       height: 60.r,
-                                                                    //       fit: BoxFit.cover,
-                                                                    //     ),
-                                                                    //   ),
-                                                                    // ),
-                                                                    ClipOval(
-                                                                      child: Image.network(
-                                                                        loadingBuilder:
-                                                                            (
-                                                                              context,
-                                                                              child,
-                                                                              loadingProgress,
-                                                                            ) {
-                                                                              if (loadingProgress ==
-                                                                                  null)
-                                                                                return child;
+                                                        //         Row(
+                                                        //           children: [
+                                                        //             // CircleAvatar(
+                                                        //             //   radius: 22.r,
+                                                        //             //   child: ClipOval(
+                                                        //             //     child: Image.network(
+                                                        //             //       profile.profileImage,
+                                                        //             //       width: 60.r,
+                                                        //             //       height: 60.r,
+                                                        //             //       fit: BoxFit.cover,
+                                                        //             //     ),
+                                                        //             //   ),
+                                                        //             // ),
+                                                        //             ClipOval(
+                                                        //               child: Image.network(
+                                                        //                 loadingBuilder:
+                                                        //                     (
+                                                        //                       context,
+                                                        //                       child,
+                                                        //                       loadingProgress,
+                                                        //                     ) {
+                                                        //                       if (loadingProgress ==
+                                                        //                           null)
+                                                        //                         return child;
 
-                                                                              return ImageShimmer(
-                                                                                height: 0.03.sh,
-                                                                                width: 0.03.sh,
-                                                                                borderRadius: BorderRadius.circular(
-                                                                                  12,
-                                                                                ),
-                                                                              );
-                                                                            },
-                                                                        errorBuilder:
-                                                                            (
-                                                                              _,
-                                                                              __,
-                                                                              ___,
-                                                                            ) => SvgPicture.asset(
-                                                                              MyAssets.icons.undrawDeliveryLocationUm5t.path,
+                                                        //                       return ImageShimmer(
+                                                        //                         height: 0.03.sh,
+                                                        //                         width: 0.03.sh,
+                                                        //                         borderRadius: BorderRadius.circular(
+                                                        //                           12,
+                                                        //                         ),
+                                                        //                       );
+                                                        //                     },
+                                                        //                 errorBuilder:
+                                                        //                     (
+                                                        //                       _,
+                                                        //                       __,
+                                                        //                       ___,
+                                                        //                     ) => SvgPicture.asset(
+                                                        //                       MyAssets.icons.undrawDeliveryLocationUm5t.path,
 
-                                                                              fit: BoxFit.cover,
-                                                                              height: 0.05.sh,
-                                                                              width: 0.05.sh,
-                                                                            ),
-                                                                        profile
-                                                                            .profileImage
-                                                                            .toString(),
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        height:
-                                                                            0.05.sh,
-                                                                        width: 0.05
-                                                                            .sh,
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                          8.w,
-                                                                    ),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              profile.name,
-                                                                              style: GoogleFonts.roboto(
-                                                                                color: Colors.grey.shade600,
-                                                                                fontSize: 13.sp,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                letterSpacing: 0.1.sp,
-                                                                              ),
-                                                                            ),
+                                                        //                       fit: BoxFit.cover,
+                                                        //                       height: 0.05.sh,
+                                                        //                       width: 0.05.sh,
+                                                        //                     ),
+                                                        //                 profile
+                                                        //                     .profileImage
+                                                        //                     .toString(),
+                                                        //                 fit: BoxFit
+                                                        //                     .cover,
+                                                        //                 height:
+                                                        //                     0.05.sh,
+                                                        //                 width: 0.05
+                                                        //                     .sh,
+                                                        //               ),
+                                                        //             ),
+                                                        //             SizedBox(
+                                                        //               width:
+                                                        //                   8.w,
+                                                        //             ),
+                                                        //             Column(
+                                                        //               crossAxisAlignment:
+                                                        //                   CrossAxisAlignment
+                                                        //                       .start,
+                                                        //               children: [
+                                                        //                 Column(
+                                                        //                   crossAxisAlignment:
+                                                        //                       CrossAxisAlignment.start,
+                                                        //                   children: [
+                                                        //                     Text(
+                                                        //                       profile.name,
+                                                        //                       style: GoogleFonts.roboto(
+                                                        //                         color: Colors.grey.shade600,
+                                                        //                         fontSize: 13.sp,
+                                                        //                         fontWeight: FontWeight.w500,
+                                                        //                         letterSpacing: 0.1.sp,
+                                                        //                       ),
+                                                        //                     ),
 
-                                                                            Text(
-                                                                              profile.email,
-                                                                              style: GoogleFonts.roboto(
-                                                                                color: Colors.green,
-                                                                                fontSize: 12.sp,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                letterSpacing: 0.1.sp,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
+                                                        //                     Text(
+                                                        //                       profile.email,
+                                                        //                       style: GoogleFonts.roboto(
+                                                        //                         color: Colors.green,
+                                                        //                         fontSize: 12.sp,
+                                                        //                         fontWeight: FontWeight.w500,
+                                                        //                         letterSpacing: 0.1.sp,
+                                                        //                       ),
+                                                        //                     ),
+                                                        //                   ],
+                                                        //                 ),
+                                                        //               ],
+                                                        //             ),
+                                                        //           ],
+                                                        //         ),
 
-                                                                SizedBox(
-                                                                  height: 10.h,
-                                                                ),
+                                                        //         SizedBox(
+                                                        //           height: 10.h,
+                                                        //         ),
 
-                                                                // Row(
-                                                                //   mainAxisAlignment:
-                                                                //       MainAxisAlignment
-                                                                //           .spaceBetween,
-                                                                //   children: [
-                                                                //     Flexible(
-                                                                //       child: Text(
-                                                                //         '',
-                                                                //         style:
-                                                                //             GoogleFonts.roboto(
-                                                                //               color: Colors
-                                                                //                   .grey
-                                                                //                   .shade600,
-                                                                //               fontSize: 15.sp,
-                                                                //               fontWeight:
-                                                                //                   FontWeight
-                                                                //                       .w500,
-                                                                //             ),
-                                                                //       ),
-                                                                //     ),
-                                                                //     Text(
-                                                                //       '2000 f',
-                                                                //       style:
-                                                                //           GoogleFonts.roboto(
-                                                                //             color:
-                                                                //                 Colors.green,
-                                                                //             fontSize: 20.sp,
-                                                                //             fontWeight:
-                                                                //                 FontWeight
-                                                                //                     .w500,
-                                                                //           ),
-                                                                //     ),
-                                                                //   ],
-                                                                // ),
-                                                                // SizedBox(height: 10.h),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            Row(
-                                                                              children: [
-                                                                                Icon(
-                                                                                  Icons.home_work_rounded,
-                                                                                  color: Colors.grey.shade600,
-                                                                                  size: 18.sp,
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: 5.w,
-                                                                                ),
-                                                                                Text(
-                                                                                  profile.adresse.substring(
-                                                                                    0,
-                                                                                    20,
-                                                                                  ),
-                                                                                  style: GoogleFonts.roboto(
-                                                                                    color: Colors.grey.shade600,
-                                                                                    fontSize: 12.sp,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        ),
+                                                        //         // Row(
+                                                        //         //   mainAxisAlignment:
+                                                        //         //       MainAxisAlignment
+                                                        //         //           .spaceBetween,
+                                                        //         //   children: [
+                                                        //         //     Flexible(
+                                                        //         //       child: Text(
+                                                        //         //         '',
+                                                        //         //         style:
+                                                        //         //             GoogleFonts.roboto(
+                                                        //         //               color: Colors
+                                                        //         //                   .grey
+                                                        //         //                   .shade600,
+                                                        //         //               fontSize: 15.sp,
+                                                        //         //               fontWeight:
+                                                        //         //                   FontWeight
+                                                        //         //                       .w500,
+                                                        //         //             ),
+                                                        //         //       ),
+                                                        //         //     ),
+                                                        //         //     Text(
+                                                        //         //       '2000 f',
+                                                        //         //       style:
+                                                        //         //           GoogleFonts.roboto(
+                                                        //         //             color:
+                                                        //         //                 Colors.green,
+                                                        //         //             fontSize: 20.sp,
+                                                        //         //             fontWeight:
+                                                        //         //                 FontWeight
+                                                        //         //                     .w500,
+                                                        //         //           ),
+                                                        //         //     ),
+                                                        //         //   ],
+                                                        //         // ),
+                                                        //         // SizedBox(height: 10.h),
+                                                        //         Row(
+                                                        //           mainAxisAlignment:
+                                                        //               MainAxisAlignment
+                                                        //                   .spaceBetween,
+                                                        //           children: [
+                                                        //             Column(
+                                                        //               crossAxisAlignment:
+                                                        //                   CrossAxisAlignment
+                                                        //                       .start,
+                                                        //               children: [
+                                                        //                 Row(
+                                                        //                   children: [
+                                                        //                     Row(
+                                                        //                       children: [
+                                                        //                         Icon(
+                                                        //                           Icons.home_work_rounded,
+                                                        //                           color: Colors.grey.shade600,
+                                                        //                           size: 18.sp,
+                                                        //                         ),
+                                                        //                         SizedBox(
+                                                        //                           width: 5.w,
+                                                        //                         ),
+                                                                                // Text(
+                                                                                //   profile.adresse.substring(
+                                                                                //     0,
+                                                                                //     20,
+                                                                                //   ),
+                                                                                //   style: GoogleFonts.roboto(
+                                                                                //     color: Colors.grey.shade600,
+                                                                                //     fontSize: 12.sp,
+                                                                                //     fontWeight: FontWeight.w400,
+                                                                                //   ),
+                                                                                // ),
+                                                        //                       ],
+                                                        //                     ),
+                                                        //                   ],
+                                                        //                 ),
 
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Container(
-                                                                              margin: EdgeInsets.only(
-                                                                                top: 7.h,
-                                                                              ),
-                                                                              child: Row(
-                                                                                children: [
-                                                                                  Icon(
-                                                                                    Icons.person_pin,
-                                                                                    color: Colors.grey.shade600,
-                                                                                    size: 18.sp,
-                                                                                  ),
-                                                                                  SizedBox(
-                                                                                    width: 5.w,
-                                                                                  ),
-                                                                                  Text(
-                                                                                    profile.telephone,
-                                                                                    style: GoogleFonts.roboto(
-                                                                                      color: Colors.grey.shade600,
-                                                                                      fontSize: 12.sp,
-                                                                                      fontWeight: FontWeight.w400,
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
+                                                        //                 Row(
+                                                        //                   mainAxisAlignment:
+                                                        //                       MainAxisAlignment.spaceBetween,
+                                                        //                   children: [
+                                                        //                     Container(
+                                                        //                       margin: EdgeInsets.only(
+                                                        //                         top: 7.h,
+                                                        //                       ),
+                                                        //                       child: Row(
+                                                        //                         children: [
+                                                        //                           Icon(
+                                                        //                             Icons.person_pin,
+                                                        //                             color: Colors.grey.shade600,
+                                                        //                             size: 18.sp,
+                                                        //                           ),
+                                                        //                           SizedBox(
+                                                        //                             width: 5.w,
+                                                        //                           ),
+                                                        //                           Text(
+                                                        //                             profile.telephone,
+                                                        //                             style: GoogleFonts.roboto(
+                                                        //                               color: Colors.grey.shade600,
+                                                        //                               fontSize: 12.sp,
+                                                        //                               fontWeight: FontWeight.w400,
+                                                        //                             ),
+                                                        //                           ),
+                                                        //                         ],
+                                                        //                       ),
+                                                        //                     ),
+                                                        //                   ],
+                                                        //                 ),
+                                                        //               ],
+                                                        //             ),
 
-                                                                    //
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        Navigator.of(
-                                                                          context,
-                                                                        ).push(
-                                                                          fadeRoute(
-                                                                            EligibilityTestPage(
-                                                                              profile: profile,
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                      child: Container(
-                                                                        padding:
-                                                                            EdgeInsets.all(
-                                                                              8.h,
-                                                                            ),
-                                                                        decoration: BoxDecoration(
-                                                                          color:
-                                                                              MyColorName.black,
-                                                                          borderRadius: BorderRadius.circular(
-                                                                            9.r,
-                                                                          ),
-                                                                        ),
-                                                                        child: CustomeText(
-                                                                          texte:
-                                                                              'Vue Map',
-                                                                          texteSize:
-                                                                              12.sp,
-                                                                          letterSpacing:
-                                                                              0.1.sp,
-                                                                          color:
-                                                                              MyColorName.cardBorder,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        showModalBottomSheet(
-                                                                          context:
-                                                                              context,
-                                                                          backgroundColor:
-                                                                              MyColorName.white,
-                                                                          isScrollControlled:
-                                                                              true,
-                                                                          shape: const RoundedRectangleBorder(
-                                                                            borderRadius: BorderRadius.vertical(
-                                                                              top: Radius.circular(
-                                                                                25,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          builder:
-                                                                              (
-                                                                                BuildContext
-                                                                                context,
-                                                                              ) {
-                                                                                return HomeDetails(
-                                                                                  profile: profile,
-                                                                                );
-                                                                              },
-                                                                        );
-                                                                      },
-                                                                      child: Container(
-                                                                        padding: EdgeInsets.symmetric(
-                                                                          horizontal:
-                                                                              9.w,
-                                                                          vertical:
-                                                                              6.h,
-                                                                        ),
-                                                                        decoration: BoxDecoration(
-                                                                          border: Border.all(
-                                                                            color:
-                                                                                MyColorName.black,
-                                                                          ),
-                                                                          borderRadius: BorderRadius.circular(
-                                                                            9.r,
-                                                                          ),
-                                                                        ),
-                                                                        child: Icon(
-                                                                          Icons
-                                                                              .arrow_right_alt_sharp,
-                                                                          size:
-                                                                              18.sp,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        //             //
+                                                        //             GestureDetector(
+                                                        //               onTap: () {
+                                                        //                 Navigator.of(
+                                                        //                   context,
+                                                        //                 ).push(
+                                                        //                   fadeRoute(
+                                                        //                     EligibilityTestPage(
+                                                        //                       profile: profile,
+                                                        //                     ),
+                                                        //                   ),
+                                                        //                 );
+                                                        //               },
+                                                        //               child: Container(
+                                                        //                 padding:
+                                                        //                     EdgeInsets.all(
+                                                        //                       8.h,
+                                                        //                     ),
+                                                        //                 decoration: BoxDecoration(
+                                                        //                   color:
+                                                        //                       MyColorName.black,
+                                                        //                   borderRadius: BorderRadius.circular(
+                                                        //                     9.r,
+                                                        //                   ),
+                                                        //                 ),
+                                                        //                 child: CustomeText(
+                                                        //                   texte:
+                                                        //                       'Vue Map',
+                                                        //                   texteSize:
+                                                        //                       12.sp,
+                                                        //                   letterSpacing:
+                                                        //                       0.1.sp,
+                                                        //                   color:
+                                                        //                       MyColorName.cardBorder,
+                                                        //                 ),
+                                                        //               ),
+                                                        //             ),
+                                                        //             GestureDetector(
+                                                        //               onTap: () {
+                                                        //                 showModalBottomSheet(
+                                                        //                   context:
+                                                        //                       context,
+                                                        //                   backgroundColor:
+                                                        //                       MyColorName.white,
+                                                        //                   isScrollControlled:
+                                                        //                       true,
+                                                        //                   shape: const RoundedRectangleBorder(
+                                                        //                     borderRadius: BorderRadius.vertical(
+                                                        //                       top: Radius.circular(
+                                                        //                         25,
+                                                        //                       ),
+                                                        //                     ),
+                                                        //                   ),
+                                                        //                   builder:
+                                                        //                       (
+                                                        //                         BuildContext
+                                                        //                         context,
+                                                        //                       ) {
+                                                        //                         return HomeDetails(
+                                                        //                           profile: profile,
+                                                        //                         );
+                                                        //                       },
+                                                        //                 );
+                                                        //               },
+                                                        //               child: Container(
+                                                        //                 padding: EdgeInsets.symmetric(
+                                                        //                   horizontal:
+                                                        //                       9.w,
+                                                        //                   vertical:
+                                                        //                       6.h,
+                                                        //                 ),
+                                                        //                 decoration: BoxDecoration(
+                                                        //                   border: Border.all(
+                                                        //                     color:
+                                                        //                         MyColorName.black,
+                                                        //                   ),
+                                                        //                   borderRadius: BorderRadius.circular(
+                                                        //                     9.r,
+                                                        //                   ),
+                                                        //                 ),
+                                                        //                 child: Icon(
+                                                        //                   Icons
+                                                        //                       .arrow_right_alt_sharp,
+                                                        //                   size:
+                                                        //                       18.sp,
+                                                        //                 ),
+                                                        //               ),
+                                                        //             ),
+                                                        //           ],
+                                                        //         ),
+                                                        //       ],
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
+                                                     
                                                       ],
                                                     ),
                                                   )
@@ -1538,8 +1760,7 @@ class _UserProfileState extends State<UserProfile> {
                                               SvgPicture.asset(
                                                 MyAssets
                                                     .icons
-                                                    .undrawDeliveryLocationUm5t
-                                                    .path,
+                                                    .undrawToDoListO3jf                                                    .path,
                                                 fit: BoxFit.cover,
                                               ),
                                           snapshot.data!.profileImage
@@ -1549,18 +1770,53 @@ class _UserProfileState extends State<UserProfile> {
                                           width: 0.08.sh,
                                         ),
                                       )
-                                    : CircleAvatar(
-                                        radius: 27.r,
-                                        backgroundColor: MyColorName.greyAvatar,
-                                        child: Text(
-                                          state.data.email.substring(0, 2),
-                                          style: GoogleFonts.roboto(
-                                            color: Colors.black,
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                    : ClipOval(
+                                        child: Image.network(
+                                          loadingBuilder:
+                                              (
+                                                context,
+                                                child,
+                                                loadingProgress,
+                                              ) {
+                                                if (loadingProgress == null)
+                                                  return child;
+
+                                                return ImageShimmer(
+                                                  height: 0.08.sh,
+                                                  width: 0.08.sh,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                );
+                                              },
+                                          errorBuilder: (_, __, ___) =>
+                                              SvgPicture.asset(
+                                                MyAssets
+                                                    .icons
+                                                    .undrawCloudsBmtk                                                .path,
+                                                fit: BoxFit.cover,
+                                                height: 0.08.sh,
+                                                width: 0.08.sh,
+                                              ),
+                                          snapshot.data!.profileImage
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                          height: 0.08.sh,
+                                          width: 0.08.sh,
                                         ),
                                       );
+                                    
+                                    // CircleAvatar(
+                                    //     radius: 27.r,
+                                    //     backgroundColor: MyColorName.greyAvatar,
+                                    //     child: Text(
+                                    //       state.data.email.substring(0, 2),
+                                    //       style: GoogleFonts.roboto(
+                                    //         color: Colors.black,
+                                    //         fontSize: 18.sp,
+                                    //         fontWeight: FontWeight.w700,
+                                    //       ),
+                                    //     ),
+                                    //   );
                               },
                             ),
                           ),

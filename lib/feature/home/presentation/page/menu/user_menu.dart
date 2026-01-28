@@ -170,7 +170,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                   SvgPicture.asset(
                                                     MyAssets
                                                         .icons
-                                                        .undrawDeliveryLocationUm5t
+                                                        .undrawCloudsBmtk
                                                         .path,
                                                     fit: BoxFit.cover,
                                                     height: 0.08.sh,

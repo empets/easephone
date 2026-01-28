@@ -70,10 +70,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                         bottom: 30.h,
                                       ),
                                       child: SvgPicture.asset(
-                                        MyAssets
-                                            .icons
-                                            .undrawDeliveryLocationUm5t
-                                            .path,
+                                        MyAssets.icons.undrawFitnessGuyAvatar50y6.path,
                                         height: 200.h,
                                       ),
                                     ),

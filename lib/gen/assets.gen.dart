@@ -44,9 +44,25 @@ class $AssetsIconsGen {
   SvgGenImage get iconArrowFelt =>
       const SvgGenImage('assets/icons/icon_arrow_felt.svg');
 
+  /// File path: assets/icons/undraw_a-woman-avatar_ifsl.svg
+  SvgGenImage get undrawAWomanAvatarIfsl =>
+      const SvgGenImage('assets/icons/undraw_a-woman-avatar_ifsl.svg');
+
+  /// File path: assets/icons/undraw_clouds_bmtk.svg
+  SvgGenImage get undrawCloudsBmtk =>
+      const SvgGenImage('assets/icons/undraw_clouds_bmtk.svg');
+
   /// File path: assets/icons/undraw_delivery-location_um5t.svg
   SvgGenImage get undrawDeliveryLocationUm5t =>
       const SvgGenImage('assets/icons/undraw_delivery-location_um5t.svg');
+
+  /// File path: assets/icons/undraw_files-uploading_qf8u.svg
+  SvgGenImage get undrawFilesUploadingQf8u =>
+      const SvgGenImage('assets/icons/undraw_files-uploading_qf8u.svg');
+
+  /// File path: assets/icons/undraw_fitness-guy-avatar_50y6.svg
+  SvgGenImage get undrawFitnessGuyAvatar50y6 =>
+      const SvgGenImage('assets/icons/undraw_fitness-guy-avatar_50y6.svg');
 
   /// File path: assets/icons/undraw_mobile-content_yz21.svg
   SvgGenImage get undrawMobileContentYz21 =>
@@ -68,18 +84,32 @@ class $AssetsIconsGen {
   SvgGenImage get undrawPushNotifications5z1s =>
       const SvgGenImage('assets/icons/undraw_push-notifications_5z1s.svg');
 
+  /// File path: assets/icons/undraw_sign-here_lxua.svg
+  SvgGenImage get undrawSignHereLxua =>
+      const SvgGenImage('assets/icons/undraw_sign-here_lxua.svg');
+
+  /// File path: assets/icons/undraw_to-do-list_o3jf.svg
+  SvgGenImage get undrawToDoListO3jf =>
+      const SvgGenImage('assets/icons/undraw_to-do-list_o3jf.svg');
+
   /// List of all assets
   List<dynamic> get values => [
     authen,
     backImage,
     emptyData,
     iconArrowFelt,
+    undrawAWomanAvatarIfsl,
+    undrawCloudsBmtk,
     undrawDeliveryLocationUm5t,
+    undrawFilesUploadingQf8u,
+    undrawFitnessGuyAvatar50y6,
     undrawMobileContentYz21,
     undrawNewsfeed8ms9,
     undrawPhoneCallOv3z,
     undrawProfilePicFatv,
     undrawPushNotifications5z1s,
+    undrawSignHereLxua,
+    undrawToDoListO3jf,
   ];
 }
 
