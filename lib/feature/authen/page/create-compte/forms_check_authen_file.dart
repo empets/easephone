@@ -22,7 +22,7 @@ import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:gscankit/gscankit.dart';
+// import 'package:gscankit/gscankit.dart';
 
 class FormsCheckAuthenFile extends StatefulWidget {
   const FormsCheckAuthenFile({super.key});

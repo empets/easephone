@@ -1,3 +1,4 @@
 {
-    "dart.flutterSdkPath": "/Users/studiotv/oci/ma-box-flutter/.fvm/versions/stable"
+    "dart.flutterSdkPath": "/Users/studiotv/oci/ma-box-flutter/.fvm/versions/stable",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
