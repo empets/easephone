@@ -9,6 +9,7 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_hebergement.dart';
+import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_hotel.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
         listener: (context, state) {
           if (state.status.isSuccess) {
             Navigator.of(context).push(fadeRoute(const FormsHomeHebergement()));
+            // FormsHomeHebergement
           }
         },
         child: Scaffold(

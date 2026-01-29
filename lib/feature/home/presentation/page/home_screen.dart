@@ -1789,13 +1789,16 @@ class _UserProfileState extends State<UserProfile> {
                                                 );
                                               },
                                           errorBuilder: (_, __, ___) =>
-                                              SvgPicture.asset(
-                                                MyAssets
-                                                    .icons
-                                                    .undrawCloudsBmtk                                                .path,
-                                                fit: BoxFit.cover,
-                                                height: 0.08.sh,
-                                                width: 0.08.sh,
+                                              ClipOval(
+                                                child: SvgPicture.asset(
+                                                  MyAssets
+                                                      .icons
+                                                      .undrawFitnessGuyAvatar50y6
+                                                      .path,
+                                                  fit: BoxFit.contain,
+                                                  height: 0.08.sh,
+                                                  width: 0.08.sh,
+                                                ),
                                               ),
                                           snapshot.data!.profileImage
                                               .toString(),
