@@ -28,6 +28,9 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
     required String? formTherd,
     required String? file,
     required String? profileImage,
+    required String? recto,
+    required String? verso,
+    required String? formFive,
 
     // required String? formTherd,
   }) = _SActiveUserProfileModel;
@@ -58,6 +61,9 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
       formTherd: model.formTherd.getOrEmpty(),
       file: model.file.getOrEmpty(),
       profileImage: model.profileImage.getOrEmpty(),
+      recto: model.recto.getOrEmpty(),
+      verso: model.verso.getOrEmpty(),
+      formFive: model.formFive.getOrEmpty(),
 
       // formTherd: model.formTherd.getOrEmpty(),
     );

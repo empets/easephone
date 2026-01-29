@@ -2,6 +2,7 @@
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IRepositoryAuthen {
@@ -30,6 +31,7 @@ abstract class IRepositoryAuthen {
 
   Future<Either<Failure, String>> uploadImage(CreatCompteImage params);
   Future<Either<Failure, String?>> uploadprofileImage(CreatProfileImage params);
+  Future<Either<Failure, String?>> formFiveUpdate(RequestFormsCheckFile request);
   // current position
   //  Future<Either<Failure, LocationData?>> getLocation();
 

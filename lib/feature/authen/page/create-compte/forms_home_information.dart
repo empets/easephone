@@ -4,10 +4,13 @@ import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/map/models/map_location.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_check_file.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_usercase.dart';
+import 'package:com.example.epbomi/feature/authen/page/bloc/check_file/check_file_bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
+import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_check_authen_file.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_hebergement.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
@@ -44,7 +47,15 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
       child: BlocListener<CreateCompteBloc, CreateCompteState>(
         listener: (context, state) {
           if (state.status.isSuccess) {
-            Navigator.of(context).push(fadeRoute(const FormsHomeHebergement()));
+            Navigator.of(context).push(
+              fadeRoute(
+                BlocProvider(
+                  create: (context) => CheckFileBloc(compteCheckFile: getIt<CreateCompteCheckFile>()),
+                  child: const FormsCheckAuthenFile(),
+                ),
+              ),
+            );
+            // FormsHomeHebergement
           }
         },
         child: Scaffold(
@@ -70,7 +81,10 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                         bottom: 30.h,
                                       ),
                                       child: SvgPicture.asset(
-                                        MyAssets.icons.undrawFitnessGuyAvatar50y6.path,
+                                        MyAssets
+                                            .icons
+                                            .undrawFitnessGuyAvatar50y6
+                                            .path,
                                         height: 200.h,
                                       ),
                                     ),
@@ -186,7 +200,7 @@ class _FormsHomeInformationState extends State<FormsHomeInformation>
                                   child: ProductionFormCustomer(
                                     textLabel: "What'sapp contact",
                                     errorText:
-                                        state.telephone.isPure ||
+                                        state.whatsapp.isPure ||
                                             state.telephone.isValid
                                         ? null
                                         : '',

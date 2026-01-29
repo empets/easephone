@@ -11,6 +11,7 @@
         android:label="epbomie_hear"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <activity android:name="id.mncinnovation.ocr.CaptureOCRActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

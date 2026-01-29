@@ -5,6 +5,7 @@ import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_authen/request_repository.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseReference;
 import 'package:firebase_storage/firebase_storage.dart';
@@ -330,6 +331,44 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       shared.setString('user_actif_by_change_profile_photo', params.userId);
 
       return FirebaseSuccess(reponse);
+    } catch (e) {
+      log('************$e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> formFiveUpdate(RequestFormsCheckFile params) async{
+      final shared = await shareData.SharedPreferences.getInstance();
+
+    final localUserSection = shared.getString(
+      'user_actif_by_change_profile_photo',
+    );
+
+    try {
+      if (localUserSection != null && localUserSection.isNotEmpty) {
+        final Map<String, dynamic> updates = {
+          ...params.toJson(), // nouveaux champs simples
+          'serviceLibelle': '',
+          'userId': localUserSection.toString(),
+        };
+        // 2) Créer une nouvelle entrée
+        await db.child('hotel/$localUserSection').update(updates);
+
+        // 4) Retourner le key généré
+        return FirebaseSuccess(localUserSection);
+      }
+
+      final Map<String, dynamic> updates = {
+        ...params.toJson(), // nouveaux champs simples
+        'serviceLibelle': '',
+        'userId': localUserSection.toString(),
+      };
+      // 2) Créer une nouvelle entrée
+      await db.child('hotel/$localUserSection').update(updates);
+
+      // 4) Retourner le key généré
+      return FirebaseSuccess(localUserSection);
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());

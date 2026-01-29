@@ -26,6 +26,8 @@ import '../../feature/authen/domaine/repositorie/I_repository_authen.dart'
     as _i283;
 import '../../feature/authen/domaine/usercase/authen_by_mail_usercase.dart'
     as _i933;
+import '../../feature/authen/domaine/usercase/create_compte_check_file.dart'
+    as _i473;
 import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
     as _i700;
 import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
@@ -92,20 +94,11 @@ extension GetItInjectableX on _i174.GetIt {
         marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i933.AuthenByMailUsercase>(
-      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i228.SigninUsercase>(
+      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
-      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i470.GetUserListUsercase>(
-      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i973.GetUserProfileUsercase>(
-      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i452.CreateCoompteSendImageUsercase>(
       () => _i452.CreateCoompteSendImageUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -113,8 +106,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i452.CreateProfileImageUsercase>(
       () => _i452.CreateProfileImageUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i228.SigninUsercase>(
-      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i933.AuthenByMailUsercase>(
+      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i973.GetUserProfileUsercase>(
+      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i473.CreateCompteCheckFile>(
+      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
+      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i470.GetUserListUsercase>(
+      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i622.AuthByMailBloc>(
       () => _i622.AuthByMailBloc(
@@ -122,19 +127,19 @@ extension GetItInjectableX on _i174.GetIt {
         authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
       ),
     );
-    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
-      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
     gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
       () => _i774.GetActifCompteInformationUsercase(
         gh<_i956.IRepositoryMarchant>(),
       ),
     );
-    gh.lazySingleton<_i832.GetLikeListeUsercase>(
-      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
     gh.lazySingleton<_i21.LikeProfileUsercase>(
       () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
+      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i832.GetLikeListeUsercase>(
+      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
     return this;
   }

@@ -59,3 +59,27 @@ abstract class CreateCompteHbState with _$CreateCompteHbState {
     isValide: false,
   );
 }
+
+@freezed
+abstract class CreateCompteCheckingFileState
+    with _$CreateCompteCheckingFileState {
+  const factory CreateCompteCheckingFileState({
+    required TextFormz cnRecto,
+    required TextFormz cnvecso,
+    required TextFormz formFive,
+
+    required FormzSubmissionStatus status,
+    required String errorMessage,
+    required bool isValide,
+  }) = _CreateCompteCheckingFileState;
+
+  factory CreateCompteCheckingFileState.initial() =>
+      const CreateCompteCheckingFileState(
+        cnRecto: TextFormz.pure(),
+        cnvecso: TextFormz.pure(),
+        formFive: TextFormz.pure(),
+        status: FormzSubmissionStatus.initial,
+        errorMessage: '',
+        isValide: false,
+      );
+}

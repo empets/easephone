@@ -30,6 +30,9 @@ _SActiveUserProfileModel _$SActiveUserProfileModelFromJson(
   formTherd: json['formTherd'] as String?,
   file: json['file'] as String?,
   profileImage: json['profileImage'] as String?,
+  recto: json['recto'] as String?,
+  verso: json['verso'] as String?,
+  formFive: json['formFive'] as String?,
 );
 
 Map<String, dynamic> _$SActiveUserProfileModelToJson(
@@ -56,6 +59,9 @@ Map<String, dynamic> _$SActiveUserProfileModelToJson(
   'formTherd': instance.formTherd,
   'file': instance.file,
   'profileImage': instance.profileImage,
+  'recto': instance.recto,
+  'verso': instance.verso,
+  'formFive': instance.formFive,
 };
 
 _SLikeResponseModel _$SLikeResponseModelFromJson(Map<String, dynamic> json) =>

@@ -35,3 +35,19 @@ Map<String, dynamic> _$SRequestFilterProfileToJson(
   'adresse': instance.adresse,
   'filterIsActif': instance.filterIsActif,
 };
+
+_SRequestFormsCheckFile _$SRequestFormsCheckFileFromJson(
+  Map<String, dynamic> json,
+) => _SRequestFormsCheckFile(
+  recto: json['recto'] as String,
+  verso: json['verso'] as String,
+  formFive: json['formFive'] as String,
+);
+
+Map<String, dynamic> _$SRequestFormsCheckFileToJson(
+  _SRequestFormsCheckFile instance,
+) => <String, dynamic>{
+  'recto': instance.recto,
+  'verso': instance.verso,
+  'formFive': instance.formFive,
+};
