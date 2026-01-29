@@ -2,12 +2,14 @@ import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/form/form.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
+import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/create_compte_herb_usercase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
+import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_check_authen_file.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_profile_image.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
@@ -111,19 +113,30 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
             //   ),
             //   c
             // );
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider(
+            Navigator.of(context).push(
+              fadeRoute(
+                BlocProvider(
                   create: (context) => CreateCompteImageBloc(
                     compteSendImageUsercase:
                         getIt<CreateCoompteSendImageUsercase>(),
                   ),
-                  child: FormsHomeProfileImage(),
+                  child: const FormsHomeProfileImage(),
                 ),
               ),
             );
+
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => BlocProvider(
+            //       create: (context) => CreateCompteImageBloc(
+            //         compteSendImageUsercase:
+            //             getIt<CreateCoompteSendImageUsercase>(),
+            //       ),
+            //       child: FormsHomeProfileImage(),
+            //     ),
+            //   ),
+            // );
           }
         },
         child: Scaffold(

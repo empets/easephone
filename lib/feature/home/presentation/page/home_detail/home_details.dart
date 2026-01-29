@@ -3,7 +3,9 @@ import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_maps.dart';
+import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/pages/eligibility_test_page.dart';
+import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart'
     show
@@ -42,6 +44,7 @@ import 'package:flutter/material.dart'
         PageController;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -225,10 +228,40 @@ class _HomeDetailsState extends State<HomeDetails>
                                 borderRadius: BorderRadiusGeometry.circular(
                                   7.r,
                                 ),
-                                child: Image.network(
-                                  widget.profile.file,
+                                child:  Image.network(
+                                  loadingBuilder:
+                                      (
+                                        context,
+                                        child,
+                                        loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                
+                                        return ImageShimmer(
+                                          height: 0.08.sh,
+                                          width: 0.08.sh,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        );
+                                      },
+                                  errorBuilder: (_, __, ___) =>
+                                      SvgPicture.asset(
+                                        MyAssets
+                                            .icons
+                                            .undrawToDoListO3jf                                                    .path,
+                                        fit: BoxFit.cover,
+                                      ),
+                                  widget.profile.file
+                                      .toString(),
                                   fit: BoxFit.cover,
-                                ),
+                                  height: 0.08.sh,
+                                  width: 0.08.sh,
+                                )
+                                   
+                                
+                                
+                               
                               ),
                             );
                           },
@@ -320,25 +353,53 @@ class _HomeDetailsState extends State<HomeDetails>
                       CircleAvatar(
                         radius: 26.r,
                         child: ClipOval(
-                          child: Image.network(
-                            widget.profile.profileImage,
-                            width: 60.r,
-                            height: 60.r,
-                            fit: BoxFit.cover,
-                          ),
+                          child:Image.network(
+                                  loadingBuilder:
+                                      (
+                                        context,
+                                        child,
+                                        loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                
+                                        return ImageShimmer(
+                                          height: 0.08.sh,
+                                          width: 0.08.sh,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        );
+                                      },
+                                  errorBuilder: (_, __, ___) =>
+                                  Image.asset(
+                                    MyAssets.icons.profileAvatarPlaceholderLarge.path,
+                                    fit: BoxFit.cover,
+                                    height: 0.08.sh,
+                                    width: 0.08.sh,
+                                  ),
+                                     
+                                  widget.profile.profileImage,
+                                  fit: BoxFit.cover,
+                                  height: 0.08.sh,
+                                  width: 0.08.sh,
+                                )
+                          
+                          
+                          
+                          
+                          //  Image.network(
+                          //   widget.profile.profileImage,
+                          //   width: 60.r,
+                          //   height: 60.r,
+                          //   fit: BoxFit.cover,
+                          // ),
                         ),
                       ),
                       SizedBox(width: 8.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // CustomeText(
-                          //   texte: 'Matching your Selected area',
-                          //   texteSize: 11.sp,
-                          //   fontWeight: FontWeight.w600,
-                          //   color: Colors.amber,
-                          //   letterSpacing: 0.1.sp,
-                          // ),
+                       
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -355,9 +416,9 @@ class _HomeDetailsState extends State<HomeDetails>
                               Text(
                                 widget.profile.email,
                                 style: GoogleFonts.roboto(
-                                  color: Colors.green,
+                                  color: Colors.grey.shade600,
                                   fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                   letterSpacing: 0.1.sp,
                                 ),
                               ),
@@ -367,12 +428,16 @@ class _HomeDetailsState extends State<HomeDetails>
                       ),
                     ],
                   ),
-                  SizedBox(height: 15.h),
-                  CustomeText(
-                    texte: widget.profile.specialite,
-                    texteSize: 24.sp,
-                    fontWeight: FontWeight.w800,
-                    color: MyColorName.black,
+                  SizedBox(height: 4.h),
+                  Container(
+                    margin: EdgeInsets.only(top: 7.h, left: 8.w),
+                    child: CustomeText(
+                      texte: widget.profile.specialite,
+                      texteSize: 18.sp,
+                      fontWeight: FontWeight.w500,
+                      color: MyColorName.black,
+                      letterSpacing: 0.5.sp,
+                    ),
                   ),
 
                   Container(
@@ -381,7 +446,7 @@ class _HomeDetailsState extends State<HomeDetails>
                       children: [
                         Icon(
                           Icons.location_on_outlined,
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade500,
                         ),
                         SizedBox(width: 2.w),
                         Flexible(
@@ -408,7 +473,7 @@ class _HomeDetailsState extends State<HomeDetails>
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.whatsapp,
-                                color: Colors.grey.shade600,
+                                color: Colors.grey.shade500,
                                 size: 18.sp,
                               ),
 
@@ -430,8 +495,8 @@ class _HomeDetailsState extends State<HomeDetails>
                           child: Row(
                             children: [
                               Icon(
-                                Icons.phone_callback,
-                                color: Colors.grey.shade600,
+                                Icons.call_outlined,
+                                color: Colors.grey.shade500,
                                 size: 18.sp,
                               ),
                               SizedBox(width: 5.w),
@@ -450,14 +515,58 @@ class _HomeDetailsState extends State<HomeDetails>
                       ],
                     ),
                   ),
+                     Container(
+                        margin: EdgeInsets.symmetric(vertical: 1.h),
+                       child: Row(
+                         children: [
+                          Container(
+                                   margin: EdgeInsets.only(
+                                     top: 3.h,
+                                     left: 8.w,
+                                   ),
+                                   child:  Row(
+                                     children: [
+                                        CustomeText(
+                       texte: 'Prix',
+                       texteSize: 13.sp,
+                       color: MyColorName.black,
+                       fontWeight: FontWeight.w600,
+                       letterSpacing: 0.3.sp,
+                     ),
+                     SizedBox(width: 5.w),
+                                       Icon(
+                                         Icons.bed_rounded,
+                                         color: Colors.grey.shade500,
+                                         // size: 18.sp,
+                                       ),
+                                       SizedBox(width: 2.w),
+                                       Text(
+                                         ': ${widget.profile.prixMin} fcfa à ${widget.profile.prixMax} fcfa la nuité',
+                                         style: GoogleFonts.roboto(
+                                           fontSize: 12.sp,
+                                           color: MyColorName.black,
+                                           fontWeight: FontWeight.w400,
+                                           letterSpacing: 0.3.sp,
+                                         ),
+                                       ),
+                                     ],
+                                   ) 
+                                 )
+                         ],
+                       ),
+                     ),
+
                   Row(
                     children: [
-                      CustomeText(
-                        texte: 'Caratéristique:',
-                        texteSize: 13.sp,
-                        color: MyColorName.black,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.3.sp,
+                      Container(
+                        margin: EdgeInsets.only(top: 8.h, left: 8.w),
+                        child: CustomeText(
+                          texte: 'Caratéristique:',
+                          texteSize: 13.sp,
+                          color: MyColorName.black,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.3.sp,
+                        ),
                       ),
                       Container(
                         // margin: EdgeInsets.symmetric(vertical: 5.h),
@@ -470,11 +579,11 @@ class _HomeDetailsState extends State<HomeDetails>
                                       top: 7.h,
                                       left: 8.w,
                                     ),
-                                    child: Row(
+                                    child: widget.profile.averageBed != '0' ? Row(
                                       children: [
                                         Icon(
                                           Icons.bed_rounded,
-                                          color: Colors.grey.shade600,
+                                          color: Colors.grey.shade500,
                                           size: 18.sp,
                                         ),
                                         SizedBox(width: 5.w),
@@ -488,7 +597,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                           ),
                                         ),
                                       ],
-                                    ),
+                                    ): SizedBox()
                                   )
                                 : index == 0
                                 ? Container(
@@ -550,12 +659,12 @@ class _HomeDetailsState extends State<HomeDetails>
 
                   // description
                   Container(
-                    margin: EdgeInsets.only(top: 8.h),
+                    margin: EdgeInsets.only(top: 8.h, left: 8.w),
                     child: CustomeText(
                       texte: 'Description:',
                       texteSize: 13.sp,
                       color: MyColorName.black,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       letterSpacing: 0.3.sp,
                     ),
                   ),
@@ -563,8 +672,8 @@ class _HomeDetailsState extends State<HomeDetails>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 0.1.sh,
-                        margin: EdgeInsets.only(top: 9.h, bottom: 10.h),
+                        height: 0.08.sh,
+                        margin: EdgeInsets.only(top: 8.h, left: 8.w,  bottom: 10.h),
                         child: CustomeText(
                           texte: widget.profile.description,
                           texteSize: 12.sp,
@@ -603,7 +712,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                   openWhatsApp(
                                     '225${widget.profile.whatsappContact}',
                                     message:
-                                        'Bonjour, je vous contacte depuis l’application',
+                                        '',
                                   );
                                 },
                               ),

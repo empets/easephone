@@ -585,4 +585,276 @@ as bool,
 
 }
 
+/// @nodoc
+mixin _$CreateCompteCheckingFileState {
+
+ TextFormz get cnRecto; TextFormz get cnvecso; TextFormz get formFive; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
+/// Create a copy of CreateCompteCheckingFileState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateCompteCheckingFileStateCopyWith<CreateCompteCheckingFileState> get copyWith => _$CreateCompteCheckingFileStateCopyWithImpl<CreateCompteCheckingFileState>(this as CreateCompteCheckingFileState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,status,errorMessage,isValide);
+
+@override
+String toString() {
+  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CreateCompteCheckingFileStateCopyWith<$Res>  {
+  factory $CreateCompteCheckingFileStateCopyWith(CreateCompteCheckingFileState value, $Res Function(CreateCompteCheckingFileState) _then) = _$CreateCompteCheckingFileStateCopyWithImpl;
+@useResult
+$Res call({
+ TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, FormzSubmissionStatus status, String errorMessage, bool isValide
+});
+
+
+
+
+}
+/// @nodoc
+class _$CreateCompteCheckingFileStateCopyWithImpl<$Res>
+    implements $CreateCompteCheckingFileStateCopyWith<$Res> {
+  _$CreateCompteCheckingFileStateCopyWithImpl(this._self, this._then);
+
+  final CreateCompteCheckingFileState _self;
+  final $Res Function(CreateCompteCheckingFileState) _then;
+
+/// Create a copy of CreateCompteCheckingFileState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+  return _then(_self.copyWith(
+cnRecto: null == cnRecto ? _self.cnRecto : cnRecto // ignore: cast_nullable_to_non_nullable
+as TextFormz,cnvecso: null == cnvecso ? _self.cnvecso : cnvecso // ignore: cast_nullable_to_non_nullable
+as TextFormz,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [CreateCompteCheckingFileState].
+extension CreateCompteCheckingFileStatePatterns on CreateCompteCheckingFileState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateCompteCheckingFileState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateCompteCheckingFileState value)  $default,){
+final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateCompteCheckingFileState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState() when $default != null:
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState():
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
+switch (_that) {
+case _CreateCompteCheckingFileState() when $default != null:
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _CreateCompteCheckingFileState implements CreateCompteCheckingFileState {
+  const _CreateCompteCheckingFileState({required this.cnRecto, required this.cnvecso, required this.formFive, required this.status, required this.errorMessage, required this.isValide});
+  
+
+@override final  TextFormz cnRecto;
+@override final  TextFormz cnvecso;
+@override final  TextFormz formFive;
+@override final  FormzSubmissionStatus status;
+@override final  String errorMessage;
+@override final  bool isValide;
+
+/// Create a copy of CreateCompteCheckingFileState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CreateCompteCheckingFileStateCopyWith<_CreateCompteCheckingFileState> get copyWith => __$CreateCompteCheckingFileStateCopyWithImpl<_CreateCompteCheckingFileState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,status,errorMessage,isValide);
+
+@override
+String toString() {
+  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CreateCompteCheckingFileStateCopyWith<$Res> implements $CreateCompteCheckingFileStateCopyWith<$Res> {
+  factory _$CreateCompteCheckingFileStateCopyWith(_CreateCompteCheckingFileState value, $Res Function(_CreateCompteCheckingFileState) _then) = __$CreateCompteCheckingFileStateCopyWithImpl;
+@override @useResult
+$Res call({
+ TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, FormzSubmissionStatus status, String errorMessage, bool isValide
+});
+
+
+
+
+}
+/// @nodoc
+class __$CreateCompteCheckingFileStateCopyWithImpl<$Res>
+    implements _$CreateCompteCheckingFileStateCopyWith<$Res> {
+  __$CreateCompteCheckingFileStateCopyWithImpl(this._self, this._then);
+
+  final _CreateCompteCheckingFileState _self;
+  final $Res Function(_CreateCompteCheckingFileState) _then;
+
+/// Create a copy of CreateCompteCheckingFileState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+  return _then(_CreateCompteCheckingFileState(
+cnRecto: null == cnRecto ? _self.cnRecto : cnRecto // ignore: cast_nullable_to_non_nullable
+as TextFormz,cnvecso: null == cnvecso ? _self.cnvecso : cnvecso // ignore: cast_nullable_to_non_nullable
+as TextFormz,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
 // dart format on

@@ -563,4 +563,280 @@ as bool,
 
 }
 
+RequestFormsCheckFile _$RequestFormsCheckFileFromJson(
+  Map<String, dynamic> json
+) {
+    return _SRequestFormsCheckFile.fromJson(
+      json
+    );
+}
+
+/// @nodoc
+mixin _$RequestFormsCheckFile {
+
+ String get recto; String get verso; String get formFive;
+/// Create a copy of RequestFormsCheckFile
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestFormsCheckFileCopyWith<RequestFormsCheckFile> get copyWith => _$RequestFormsCheckFileCopyWithImpl<RequestFormsCheckFile>(this as RequestFormsCheckFile, _$identity);
+
+  /// Serializes this RequestFormsCheckFile to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,recto,verso,formFive);
+
+@override
+String toString() {
+  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestFormsCheckFileCopyWith<$Res>  {
+  factory $RequestFormsCheckFileCopyWith(RequestFormsCheckFile value, $Res Function(RequestFormsCheckFile) _then) = _$RequestFormsCheckFileCopyWithImpl;
+@useResult
+$Res call({
+ String recto, String verso, String formFive
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestFormsCheckFileCopyWithImpl<$Res>
+    implements $RequestFormsCheckFileCopyWith<$Res> {
+  _$RequestFormsCheckFileCopyWithImpl(this._self, this._then);
+
+  final RequestFormsCheckFile _self;
+  final $Res Function(RequestFormsCheckFile) _then;
+
+/// Create a copy of RequestFormsCheckFile
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,}) {
+  return _then(_self.copyWith(
+recto: null == recto ? _self.recto : recto // ignore: cast_nullable_to_non_nullable
+as String,verso: null == verso ? _self.verso : verso // ignore: cast_nullable_to_non_nullable
+as String,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [RequestFormsCheckFile].
+extension RequestFormsCheckFilePatterns on RequestFormsCheckFile {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestFormsCheckFile value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestFormsCheckFile value)  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestFormsCheckFile value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile() when $default != null:
+return $default(_that.recto,_that.verso,_that.formFive);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive)  $default,) {final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile():
+return $default(_that.recto,_that.verso,_that.formFive);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String recto,  String verso,  String formFive)?  $default,) {final _that = this;
+switch (_that) {
+case _SRequestFormsCheckFile() when $default != null:
+return $default(_that.recto,_that.verso,_that.formFive);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SRequestFormsCheckFile implements RequestFormsCheckFile {
+   _SRequestFormsCheckFile({required this.recto, required this.verso, required this.formFive});
+  factory _SRequestFormsCheckFile.fromJson(Map<String, dynamic> json) => _$SRequestFormsCheckFileFromJson(json);
+
+@override final  String recto;
+@override final  String verso;
+@override final  String formFive;
+
+/// Create a copy of RequestFormsCheckFile
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SRequestFormsCheckFileCopyWith<_SRequestFormsCheckFile> get copyWith => __$SRequestFormsCheckFileCopyWithImpl<_SRequestFormsCheckFile>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SRequestFormsCheckFileToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,recto,verso,formFive);
+
+@override
+String toString() {
+  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SRequestFormsCheckFileCopyWith<$Res> implements $RequestFormsCheckFileCopyWith<$Res> {
+  factory _$SRequestFormsCheckFileCopyWith(_SRequestFormsCheckFile value, $Res Function(_SRequestFormsCheckFile) _then) = __$SRequestFormsCheckFileCopyWithImpl;
+@override @useResult
+$Res call({
+ String recto, String verso, String formFive
+});
+
+
+
+
+}
+/// @nodoc
+class __$SRequestFormsCheckFileCopyWithImpl<$Res>
+    implements _$SRequestFormsCheckFileCopyWith<$Res> {
+  __$SRequestFormsCheckFileCopyWithImpl(this._self, this._then);
+
+  final _SRequestFormsCheckFile _self;
+  final $Res Function(_SRequestFormsCheckFile) _then;
+
+/// Create a copy of RequestFormsCheckFile
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,}) {
+  return _then(_SRequestFormsCheckFile(
+recto: null == recto ? _self.recto : recto // ignore: cast_nullable_to_non_nullable
+as String,verso: null == verso ? _self.verso : verso // ignore: cast_nullable_to_non_nullable
+as String,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 // dart format on

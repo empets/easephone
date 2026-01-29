@@ -827,7 +827,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                         Icons.favorite_rounded,
                                                                                                         color: isLiked
                                                                                                             ? Colors.red
-                                                                                                            : Colors.grey,
+                                                                                                            : Colors.red,
                                                                                                       ),
                                                                                                     );
                                                                                                   } else {
@@ -837,7 +837,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                       ),
                                                                                                       child: Icon(
                                                                                                         Icons.favorite_rounded,
-                                                                                                        color: Colors.grey,
+                                                                                                        color: Colors.red,
                                                                                                       ),
                                                                                                     );
                                                                                                   }
@@ -900,44 +900,22 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                     ),
                                                                                      SizedBox(width: 10.w,),
 
-                                                                                  Row(
-                                                                                  children: [
-                                                                                    Icon(
-                                                                                      Icons.star_rounded,
-                                                                                      color: Colors.amber,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      "19k",
-                                                                                      style: GoogleFonts.roboto(
-                                                                                        color: Colors.black,
-                                                                                        fontSize: 12.sp,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-
-                                                                                SizedBox(width: 7.w),
-
-                                                                                 Row(
-                                                                                  children: [
-                                                                                    Icon(
-                                                                                      Icons.remove_red_eye,
-                                                                                      color: Colors.grey.shade400,
-                                                                                       fontWeight: FontWeight.w500,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      "Vues: 123",
-                                                                                      style: GoogleFonts.roboto(
-                                                                                        color: Colors.black,
-                                                                                        fontSize: 12.sp,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-
-                                                                                 
+                                                                                //   Row(
+                                                                                //   children: [
+                                                                                //     Icon(
+                                                                                //       Icons.star_rounded,
+                                                                                //       color: Colors.amber,
+                                                                                //     ),
+                                                                                //     Text(
+                                                                                //       "19k",
+                                                                                //       style: GoogleFonts.roboto(
+                                                                                //         color: Colors.white,
+                                                                                //         fontSize: 12.sp,
+                                                                                //         fontWeight: FontWeight.w600,
+                                                                                //       ),
+                                                                                //     ),
+                                                                                //   ],
+                                                                                // ),
                                                                               ],
                                                                             ),
                                                                                 SizedBox(height: 5.h,),
@@ -948,7 +926,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                   children: [
                                                                                     Icon(
                                                                                       Icons.location_on_rounded,
-                                                                                      color: Colors.grey.shade400,
+                                                                                      color: Colors.amber,
                                                                                     ),
                                                                                     Text(
                                                                                       profile.adresse.substring(
@@ -956,7 +934,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                         20,
                                                                                       ),
                                                                                       style: GoogleFonts.roboto(
-                                                                                        color: Colors.black,
+                                                                                        color: Colors.white,
                                                                                         fontSize: 12.sp,
                                                                                         fontWeight: FontWeight.w400,
                                                                                       ),
@@ -1538,7 +1516,63 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                       ],
                                                     ),
                                                   )
-                                                : SizedBox();
+                                                :   Container(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 50.h,
+                                                ),
+                                                child: Lottie.asset(
+                                                  MyAssets.icons.emptyData.path,
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment:
+                                                    AlignmentGeometry.center,
+                                                child: CustomeText(
+                                                  texte:
+                                                      "Aucune donnée disponible rafechiser la page",
+
+                                                  texteSize: 14.sp,
+                                                ),
+                                              ),
+
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 0.26.sh,
+                                                ),
+                                                child: CustomeButton(
+                                                  btnBackground:
+                                                      MyColorName.black,
+                                                  btnTextColor:
+                                                      MyColorName.white,
+                                                  btnText: 'Rafrechir',
+                                                  btnTextSize: 13.sp,
+                                                  onTap: () {
+                                                    context
+                                                        .read<
+                                                          GetActifUserInformationBloc
+                                                        >()
+                                                        .add(
+                                                          FiltreEvent.filtre(
+                                                            filterIsActif:
+                                                                false,
+                                                            adresse: "",
+                                                          ),
+                                                        );
+                                                    FocusScope.of(
+                                                      context,
+                                                    ).unfocus();
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                     
                                           },
                                         ),
                                       );
@@ -1790,11 +1824,8 @@ class _UserProfileState extends State<UserProfile> {
                                               },
                                           errorBuilder: (_, __, ___) =>
                                               ClipOval(
-                                                child: SvgPicture.asset(
-                                                  MyAssets
-                                                      .icons
-                                                      .undrawFitnessGuyAvatar50y6
-                                                      .path,
+                                                child: Image.asset(
+                                                  MyAssets.icons.profileAvatarPlaceholderLarge.path,
                                                   fit: BoxFit.contain,
                                                   height: 0.08.sh,
                                                   width: 0.08.sh,
@@ -1808,6 +1839,7 @@ class _UserProfileState extends State<UserProfile> {
                                         ),
                                       );
                                     
+                                     
                                     // CircleAvatar(
                                     //     radius: 27.r,
                                     //     backgroundColor: MyColorName.greyAvatar,

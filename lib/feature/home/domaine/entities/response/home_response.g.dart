@@ -32,6 +32,9 @@ _SActiveUserProfile _$SActiveUserProfileFromJson(Map<String, dynamic> json) =>
       prixMax: json['prixMax'] as String,
       prixMin: json['prixMin'] as String,
       typeHome: json['typeHome'] as String,
+      recto: json['recto'] as String,
+      verso: json['verso'] as String,
+      formFive: json['formFive'] as String,
     );
 
 Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
@@ -60,6 +63,9 @@ Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
       'prixMax': instance.prixMax,
       'prixMin': instance.prixMin,
       'typeHome': instance.typeHome,
+      'recto': instance.recto,
+      'verso': instance.verso,
+      'formFive': instance.formFive,
     };
 
 _SLikeResponse _$SLikeResponseFromJson(Map<String, dynamic> json) =>

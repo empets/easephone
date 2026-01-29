@@ -15,7 +15,6 @@ abstract class RequestLike with _$RequestLike {
       _$RequestLikeFromJson(json);
 }
 
-
 @freezed
 abstract class RequestFilterProfile with _$RequestFilterProfile {
   factory RequestFilterProfile({
@@ -25,4 +24,16 @@ abstract class RequestFilterProfile with _$RequestFilterProfile {
 
   factory RequestFilterProfile.fromJson(Map<String, dynamic> json) =>
       _$RequestFilterProfileFromJson(json);
+}
+
+@freezed
+abstract class RequestFormsCheckFile with _$RequestFormsCheckFile {
+  factory RequestFormsCheckFile({
+    required String recto,
+    required String verso,
+    required String formFive,
+  }) = _SRequestFormsCheckFile;
+
+  factory RequestFormsCheckFile.fromJson(Map<String, dynamic> json) =>
+      _$RequestFormsCheckFileFromJson(json);
 }

@@ -29,6 +29,9 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
     required String prixMax,
     required String prixMin,
     required String typeHome,
+    required String recto,
+    required String verso,
+    required String formFive,
   }) = _SActiveUserProfile;
 
   factory ActiveUserProfile.fromJson(Map<String, dynamic> json) =>

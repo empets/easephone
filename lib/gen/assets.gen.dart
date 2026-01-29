@@ -29,6 +29,10 @@ class $AssetsIconLauncherGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Profile_avatar_placeholder_large.png
+  AssetGenImage get profileAvatarPlaceholderLarge =>
+      const AssetGenImage('assets/icons/Profile_avatar_placeholder_large.png');
+
   /// File path: assets/icons/authen.svg
   SvgGenImage get authen => const SvgGenImage('assets/icons/authen.svg');
 
@@ -44,9 +48,26 @@ class $AssetsIconsGen {
   SvgGenImage get iconArrowFelt =>
       const SvgGenImage('assets/icons/icon_arrow_felt.svg');
 
+  /// File path: assets/icons/pexels-cottonbro-4065165 (1).jpg
+  AssetGenImage get pexelsCottonbro40651651 =>
+      const AssetGenImage('assets/icons/pexels-cottonbro-4065165 (1).jpg');
+
+  /// File path: assets/icons/pexels-cottonbro-4065165.jpg
+  AssetGenImage get pexelsCottonbro4065165 =>
+      const AssetGenImage('assets/icons/pexels-cottonbro-4065165.jpg');
+
+  /// File path: assets/icons/pexels-vruyr-martirosyan-1447354-2792902.jpg
+  AssetGenImage get pexelsVruyrMartirosyan14473542792902 => const AssetGenImage(
+    'assets/icons/pexels-vruyr-martirosyan-1447354-2792902.jpg',
+  );
+
   /// File path: assets/icons/undraw_a-woman-avatar_ifsl.svg
   SvgGenImage get undrawAWomanAvatarIfsl =>
       const SvgGenImage('assets/icons/undraw_a-woman-avatar_ifsl.svg');
+
+  /// File path: assets/icons/undraw_add-files_d04y.svg
+  SvgGenImage get undrawAddFilesD04y =>
+      const SvgGenImage('assets/icons/undraw_add-files_d04y.svg');
 
   /// File path: assets/icons/undraw_clouds_bmtk.svg
   SvgGenImage get undrawCloudsBmtk =>
@@ -64,6 +85,14 @@ class $AssetsIconsGen {
   SvgGenImage get undrawFitnessGuyAvatar50y6 =>
       const SvgGenImage('assets/icons/undraw_fitness-guy-avatar_50y6.svg');
 
+  /// File path: assets/icons/undraw_hiring_8szx.svg
+  SvgGenImage get undrawHiring8szx =>
+      const SvgGenImage('assets/icons/undraw_hiring_8szx.svg');
+
+  /// File path: assets/icons/undraw_live-photo_t8nz.svg
+  SvgGenImage get undrawLivePhotoT8nz =>
+      const SvgGenImage('assets/icons/undraw_live-photo_t8nz.svg');
+
   /// File path: assets/icons/undraw_mobile-content_yz21.svg
   SvgGenImage get undrawMobileContentYz21 =>
       const SvgGenImage('assets/icons/undraw_mobile-content_yz21.svg');
@@ -71,6 +100,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/undraw_newsfeed_8ms9.svg
   SvgGenImage get undrawNewsfeed8ms9 =>
       const SvgGenImage('assets/icons/undraw_newsfeed_8ms9.svg');
+
+  /// File path: assets/icons/undraw_no-data_ig65.svg
+  SvgGenImage get undrawNoDataIg65 =>
+      const SvgGenImage('assets/icons/undraw_no-data_ig65.svg');
 
   /// File path: assets/icons/undraw_phone-call_ov3z.svg
   SvgGenImage get undrawPhoneCallOv3z =>
@@ -84,9 +117,17 @@ class $AssetsIconsGen {
   SvgGenImage get undrawPushNotifications5z1s =>
       const SvgGenImage('assets/icons/undraw_push-notifications_5z1s.svg');
 
+  /// File path: assets/icons/undraw_qr-code-scan_bewe.svg
+  SvgGenImage get undrawQrCodeScanBewe =>
+      const SvgGenImage('assets/icons/undraw_qr-code-scan_bewe.svg');
+
   /// File path: assets/icons/undraw_sign-here_lxua.svg
   SvgGenImage get undrawSignHereLxua =>
       const SvgGenImage('assets/icons/undraw_sign-here_lxua.svg');
+
+  /// File path: assets/icons/undraw_tabs_tlxz.svg
+  SvgGenImage get undrawTabsTlxz =>
+      const SvgGenImage('assets/icons/undraw_tabs_tlxz.svg');
 
   /// File path: assets/icons/undraw_to-do-list_o3jf.svg
   SvgGenImage get undrawToDoListO3jf =>
@@ -94,21 +135,31 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    profileAvatarPlaceholderLarge,
     authen,
     backImage,
     emptyData,
     iconArrowFelt,
+    pexelsCottonbro40651651,
+    pexelsCottonbro4065165,
+    pexelsVruyrMartirosyan14473542792902,
     undrawAWomanAvatarIfsl,
+    undrawAddFilesD04y,
     undrawCloudsBmtk,
     undrawDeliveryLocationUm5t,
     undrawFilesUploadingQf8u,
     undrawFitnessGuyAvatar50y6,
+    undrawHiring8szx,
+    undrawLivePhotoT8nz,
     undrawMobileContentYz21,
     undrawNewsfeed8ms9,
+    undrawNoDataIg65,
     undrawPhoneCallOv3z,
     undrawProfilePicFatv,
     undrawPushNotifications5z1s,
+    undrawQrCodeScanBewe,
     undrawSignHereLxua,
+    undrawTabsTlxz,
     undrawToDoListO3jf,
   ];
 }

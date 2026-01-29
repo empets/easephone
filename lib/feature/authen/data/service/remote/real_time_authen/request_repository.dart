@@ -1,6 +1,7 @@
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/authen/data/domaine/authen_model.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen_request.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 
 abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
@@ -22,4 +23,6 @@ abstract class FirebaseRemoteService {
   Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList();
 
   Future<FirebaseResult<String?>> uploadprofileImage(CreatProfileImage params);
+
+  Future<FirebaseResult<String?>> formFiveUpdate(RequestFormsCheckFile params);
 }

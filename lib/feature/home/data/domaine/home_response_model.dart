@@ -31,6 +31,9 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
     required String? prixMax,
     required String? prixMin,
     required String? typeHome,
+    required String? recto,
+    required String? verso,
+    required String? formFive,
 
     // required String? formTherd,
   }) = _SActiveUserProfileModel;
@@ -64,6 +67,9 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
       prixMax: model.prixMax.getOrEmpty(),
       prixMin: model.prixMin.getOrEmpty(),
       typeHome: model.typeHome.getOrEmpty(),
+      recto: model.recto.getOrEmpty(),
+      verso: model.verso.getOrEmpty(),
+      formFive: model.formFive.getOrEmpty(),
 
       // formTherd: model.formTherd.getOrEmpty(),
     );

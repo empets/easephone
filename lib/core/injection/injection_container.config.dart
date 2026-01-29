@@ -26,6 +26,8 @@ import '../../feature/authen/domaine/repositorie/I_repository_authen.dart'
     as _i283;
 import '../../feature/authen/domaine/usercase/authen_by_mail_usercase.dart'
     as _i933;
+import '../../feature/authen/domaine/usercase/create_compte_check_file.dart'
+    as _i473;
 import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
     as _i700;
 import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
@@ -94,6 +96,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i933.AuthenByMailUsercase>(
       () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i473.CreateCompteCheckFile>(
+      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),

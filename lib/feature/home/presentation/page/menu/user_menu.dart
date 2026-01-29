@@ -1,15 +1,12 @@
 import 'dart:developer';
 
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
-import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
-import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/Forms_lacation.dart';
-import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_information.dart';
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
@@ -147,42 +144,39 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                 .isNotEmpty &&
                                             imageFile == null
                                         ? ClipOval(
-                                            child: Image.network(
-                                              loadingBuilder:
-                                                  (
-                                                    context,
-                                                    child,
-                                                    loadingProgress,
-                                                  ) {
-                                                    if (loadingProgress == null)
-                                                      return child;
+                                        child: Image.network(
+                                          loadingBuilder:
+                                              (
+                                                context,
+                                                child,
+                                                loadingProgress,
+                                              ) {
+                                                if (loadingProgress == null)
+                                                  return child;
 
-                                                    return ImageShimmer(
-                                                      height: 0.08.sh,
-                                                      width: 0.08.sh,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            12,
-                                                          ),
-                                                    );
-                                                  },
-                                              errorBuilder: (_, __, ___) =>
-                                                  SvgPicture.asset(
-                                                    MyAssets
-                                                        .icons
-                                                        .undrawCloudsBmtk
-                                                        .path,
-                                                    fit: BoxFit.cover,
-                                                    height: 0.08.sh,
-                                                    width: 0.08.sh,
-                                                  ),
-                                              widget.userPrileImage,
-                                              fit: BoxFit.cover,
-                                              height: 0.08.sh,
-                                              width: 0.08.sh,
-                                            ),
-                                          )
-                                        : ClipOval(
+                                                return ImageShimmer(
+                                                  height: 0.08.sh,
+                                                  width: 0.08.sh,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                );
+                                              },
+                                          errorBuilder: (_, __, ___) =>
+                                              ClipOval(
+                                                child: Image.asset(
+                                                  MyAssets.icons.profileAvatarPlaceholderLarge.path,
+                                                  fit: BoxFit.contain,
+                                                  height: 0.08.sh,
+                                                  width: 0.08.sh,
+                                                ),
+                                              ),
+                                          widget.userPrileImage.toString(),
+                                          fit: BoxFit.cover,
+                                          height: 0.08.sh,
+                                          width: 0.08.sh,
+                                        ),
+                                      )
+                                    : ClipOval(
                                             child: imageFile != null
                                                 ? Image.file(
                                                     imageFile!,
