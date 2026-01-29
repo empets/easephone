@@ -49,14 +49,14 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
 
   final List<Map<String, dynamic>> itemss = [
     {
-      'title': 'Suite',
+      'title': 'Résidence neblé',
       'subtitle': 'Service haut débit avec installation rapide',
-      'value': 'oui',
+      'value': 'Hôtel',
     },
     {
-      'title': 'Hotel',
+      'title': 'Hôtel',
       'subtitle': 'Support disponible 24h/24 et 7j/7',
-      'value': 'non',
+      'value': 'Résidence',
     },
   ];
 
@@ -158,7 +158,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                               margin: EdgeInsets.only(top: 9.h),
                               child: Column(
                                 children: List.generate(itemss.length, (index) {
-                                  final item = items[index];
+                                  final item = itemss[index];
 
                                   final isSelected =
                                       item['title'] == ['subtitle'];
@@ -201,14 +201,19 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                                       isSelectedHotel =! isSelectedHotel;
                                                     },
                                                   );
+                                                  if(isSelectedHotel) {
+                                                    context.read<CreateCompteHBloc>().add(
+                                                      CreateCompteHebEvent.changeAverageBed('0'),
+                                                    );
+                                                  }
                                                 }
-                                                // context
-                                                //     .read<CreateCompteHBloc>()
-                                                //     .add(
-                                                //       CreateCompteHebEvent.changeSelectedOption(
-                                                //         option.toString(),
-                                                //       ),
-                                                //     );
+                                                context
+                                                    .read<CreateCompteHBloc>()
+                                                    .add(
+                                                      CreateCompteHebEvent.changeTypeHome(
+                                                        option.toString(),
+                                                      ),
+                                                    );
                                               },
                                             ),
                                           ],
@@ -251,7 +256,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                           },
                         ),
                          
-                        if (!isSelectedHotel)
+                       
                         BlocBuilder<CreateCompteHBloc, CreateCompteHbState>(
                           builder: (context, state) {
                             return Container(
@@ -268,14 +273,14 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                 msgError: 'Veuillez renseigner ce champ',
                                 onChanged: (rom) {
                                   context.read<CreateCompteHBloc>().add(
-                                    CreateCompteHebEvent.changeRoomNumber(!isSelectedHotel ? rom : '0'),
+                                    CreateCompteHebEvent.changeRoomNumber( rom ),
                                   );
                                 },
                               ),
                             );
                           },
                         ),
-
+                        if (!isSelectedHotel)
                         BlocBuilder<CreateCompteHBloc, CreateCompteHbState>(
                           builder: (context, state) {
                             return Container(
@@ -293,7 +298,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                 onChanged: (averageBed) {
                                   context.read<CreateCompteHBloc>().add(
                                     CreateCompteHebEvent.changeAverageBed(
-                                      averageBed,
+                                      !isSelectedHotel ? averageBed : "0",
                                     ),
                                   );
                                 },
@@ -396,75 +401,89 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                             );
                           },
                         ),
-                          Container(
-                    margin: EdgeInsets.symmetric(vertical: 9.h),
-                padding:  EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withOpacity(.5)),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    dropdownColor: MyColorName.white,
-                    hint: Text(
-                      "Prix maximum par nuit",
-                      style: GoogleFonts.roboto(color: Colors.grey, fontSize: 14.sp),
-                    ),
-                    value: selectedValue,
-                     style: GoogleFonts.roboto(color: Colors.black, fontSize: 14.sp),
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: options
-                        .map(
-                          (item) => DropdownMenuItem<String>(
-                            value: item["id"],
-                            child: Text(item["label"]!),
+                          BlocBuilder<CreateCompteHBloc, CreateCompteHbState>(
+                            builder: (context, state) {
+                              return Container(
+                                              margin: EdgeInsets.symmetric(vertical: 9.h),
+                                          padding:  EdgeInsets.symmetric(horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey.withOpacity(.5)),
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton<String>(
+                                              isExpanded: true,
+                                              dropdownColor: MyColorName.white,
+                                              hint: Text(
+                                                "Prix maximum par nuit",
+                                                style: GoogleFonts.roboto(color: Colors.grey, fontSize: 14.sp),
+                                              ),
+                                              value: selectedValue,
+                                               style: GoogleFonts.roboto(color: Colors.black, fontSize: 14.sp),
+                                              icon: const Icon(Icons.keyboard_arrow_down),
+                                              items: options
+                                                  .map(
+                                                    (item) => DropdownMenuItem<String>(
+                                                      value: item["id"],
+                                                      child: Text(item["label"]!),
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedValue = value;
+                                                });
+                                                context.read<CreateCompteHBloc>().add(
+                                                  CreateCompteHebEvent.changPrixMin(value!),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        );
+                            },
                           ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value;
-                      });
-                    },
-                  ),
-                ),
-              ),
 
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 9.h),
-                padding:  EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withOpacity(.5)),
-                  borderRadius: BorderRadius.circular(10),
+                BlocBuilder<CreateCompteHBloc, CreateCompteHbState>(
+                  builder: (context, state) {
+                    return Container(
+                                    margin: EdgeInsets.symmetric(vertical: 9.h),
+                                padding:  EdgeInsets.symmetric(horizontal: 12),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey.withOpacity(.5)),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    isExpanded: true,
+                                    dropdownColor: MyColorName.white,
+                                    hint: Text(
+                                      "Prix maximum par nuit",
+                                      style: GoogleFonts.roboto(color: Colors.grey, fontSize: 14.sp),
+                                    ),
+                                    value: selectedValues,
+                                     style: GoogleFonts.roboto(color: Colors.black, fontSize: 14.sp),
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: optionss
+                                        .map(
+                                          (item) => DropdownMenuItem<String>(
+                                            value: item["id"],
+                                            child: Text(item["label"]!),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedValues = value;
+                                      });
+                                       context.read<CreateCompteHBloc>().add(
+                                        CreateCompteHebEvent.changPrixMax(value!),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                  },
                 ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    dropdownColor: MyColorName.white,
-                    hint: Text(
-                      "Prix maximum par nuit",
-                      style: GoogleFonts.roboto(color: Colors.grey, fontSize: 14.sp),
-                    ),
-                    value: selectedValues,
-                     style: GoogleFonts.roboto(color: Colors.black, fontSize: 14.sp),
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: optionss
-                        .map(
-                          (item) => DropdownMenuItem<String>(
-                            value: item["id"],
-                            child: Text(item["label"]!),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValues = value;
-                      });
-                    },
-                  ),
-                ),
-              ),
           
           
 
