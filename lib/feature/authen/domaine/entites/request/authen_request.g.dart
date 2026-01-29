@@ -82,6 +82,9 @@ _SRequestCreateCompteHeber _$SRequestCreateCompteHeberFromJson(
   option: json['option'] as String,
   description: json['description'] as String,
   formTwo: json['formTwo'] as String,
+  prixMax: json['prixMax'] as String,
+  prixMin: json['prixMin'] as String,
+  typeHome: json['typeHome'] as String,
 );
 
 Map<String, dynamic> _$SRequestCreateCompteHeberToJson(
@@ -92,6 +95,9 @@ Map<String, dynamic> _$SRequestCreateCompteHeberToJson(
   'option': instance.option,
   'description': instance.description,
   'formTwo': instance.formTwo,
+  'prixMax': instance.prixMax,
+  'prixMin': instance.prixMin,
+  'typeHome': instance.typeHome,
 };
 
 _Coordonne _$CoordonneFromJson(Map<String, dynamic> json) => _Coordonne(

@@ -889,7 +889,7 @@ RequestCreateCompteHeber _$RequestCreateCompteHeberFromJson(
 /// @nodoc
 mixin _$RequestCreateCompteHeber {
 
- String get roomNumber; String get averageBed; String get option; String get description; String get formTwo;
+ String get roomNumber; String get averageBed; String get option; String get description; String get formTwo; String get prixMax; String get prixMin; String get typeHome;
 /// Create a copy of RequestCreateCompteHeber
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -902,16 +902,16 @@ $RequestCreateCompteHeberCopyWith<RequestCreateCompteHeber> get copyWith => _$Re
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCreateCompteHeber&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCreateCompteHeber&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,option,description,formTwo);
+int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,option,description,formTwo,prixMax,prixMin,typeHome);
 
 @override
 String toString() {
-  return 'RequestCreateCompteHeber(roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, formTwo: $formTwo)';
+  return 'RequestCreateCompteHeber(roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, formTwo: $formTwo, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome)';
 }
 
 
@@ -922,7 +922,7 @@ abstract mixin class $RequestCreateCompteHeberCopyWith<$Res>  {
   factory $RequestCreateCompteHeberCopyWith(RequestCreateCompteHeber value, $Res Function(RequestCreateCompteHeber) _then) = _$RequestCreateCompteHeberCopyWithImpl;
 @useResult
 $Res call({
- String roomNumber, String averageBed, String option, String description, String formTwo
+ String roomNumber, String averageBed, String option, String description, String formTwo, String prixMax, String prixMin, String typeHome
 });
 
 
@@ -939,13 +939,16 @@ class _$RequestCreateCompteHeberCopyWithImpl<$Res>
 
 /// Create a copy of RequestCreateCompteHeber
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? roomNumber = null,Object? averageBed = null,Object? option = null,Object? description = null,Object? formTwo = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? roomNumber = null,Object? averageBed = null,Object? option = null,Object? description = null,Object? formTwo = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,}) {
   return _then(_self.copyWith(
 roomNumber: null == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
 as String,averageBed: null == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
 as String,option: null == option ? _self.option : option // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,formTwo: null == formTwo ? _self.formTwo : formTwo // ignore: cast_nullable_to_non_nullable
+as String,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as String,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as String,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -1031,10 +1034,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo,  String prixMax,  String prixMin,  String typeHome)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHeber() when $default != null:
-return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   return orElse();
 
 }
@@ -1052,10 +1055,10 @@ return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo,  String prixMax,  String prixMin,  String typeHome)  $default,) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHeber():
-return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1072,10 +1075,10 @@ return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String roomNumber,  String averageBed,  String option,  String description,  String formTwo,  String prixMax,  String prixMin,  String typeHome)?  $default,) {final _that = this;
 switch (_that) {
 case _SRequestCreateCompteHeber() when $default != null:
-return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description,_that.formTwo,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   return null;
 
 }
@@ -1087,7 +1090,7 @@ return $default(_that.roomNumber,_that.averageBed,_that.option,_that.description
 @JsonSerializable()
 
 class _SRequestCreateCompteHeber implements RequestCreateCompteHeber {
-   _SRequestCreateCompteHeber({required this.roomNumber, required this.averageBed, required this.option, required this.description, required this.formTwo});
+   _SRequestCreateCompteHeber({required this.roomNumber, required this.averageBed, required this.option, required this.description, required this.formTwo, required this.prixMax, required this.prixMin, required this.typeHome});
   factory _SRequestCreateCompteHeber.fromJson(Map<String, dynamic> json) => _$SRequestCreateCompteHeberFromJson(json);
 
 @override final  String roomNumber;
@@ -1095,6 +1098,9 @@ class _SRequestCreateCompteHeber implements RequestCreateCompteHeber {
 @override final  String option;
 @override final  String description;
 @override final  String formTwo;
+@override final  String prixMax;
+@override final  String prixMin;
+@override final  String typeHome;
 
 /// Create a copy of RequestCreateCompteHeber
 /// with the given fields replaced by the non-null parameter values.
@@ -1109,16 +1115,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestCreateCompteHeber&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestCreateCompteHeber&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.option, option) || other.option == option)&&(identical(other.description, description) || other.description == description)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,option,description,formTwo);
+int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,option,description,formTwo,prixMax,prixMin,typeHome);
 
 @override
 String toString() {
-  return 'RequestCreateCompteHeber(roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, formTwo: $formTwo)';
+  return 'RequestCreateCompteHeber(roomNumber: $roomNumber, averageBed: $averageBed, option: $option, description: $description, formTwo: $formTwo, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome)';
 }
 
 
@@ -1129,7 +1135,7 @@ abstract mixin class _$SRequestCreateCompteHeberCopyWith<$Res> implements $Reque
   factory _$SRequestCreateCompteHeberCopyWith(_SRequestCreateCompteHeber value, $Res Function(_SRequestCreateCompteHeber) _then) = __$SRequestCreateCompteHeberCopyWithImpl;
 @override @useResult
 $Res call({
- String roomNumber, String averageBed, String option, String description, String formTwo
+ String roomNumber, String averageBed, String option, String description, String formTwo, String prixMax, String prixMin, String typeHome
 });
 
 
@@ -1146,13 +1152,16 @@ class __$SRequestCreateCompteHeberCopyWithImpl<$Res>
 
 /// Create a copy of RequestCreateCompteHeber
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? roomNumber = null,Object? averageBed = null,Object? option = null,Object? description = null,Object? formTwo = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? roomNumber = null,Object? averageBed = null,Object? option = null,Object? description = null,Object? formTwo = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,}) {
   return _then(_SRequestCreateCompteHeber(
 roomNumber: null == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
 as String,averageBed: null == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
 as String,option: null == option ? _self.option : option // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,formTwo: null == formTwo ? _self.formTwo : formTwo // ignore: cast_nullable_to_non_nullable
+as String,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as String,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as String,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

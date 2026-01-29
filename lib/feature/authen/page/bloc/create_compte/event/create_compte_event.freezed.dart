@@ -895,14 +895,17 @@ extension CreateCompteHebEventPatterns on CreateCompteHebEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeRoomNumberCreateCompteHebEvent value)?  changeRoomNumber,TResult Function( ChangeAverageBedCreateCompteHebEvent value)?  changeAverageBed,TResult Function( ChangeSelectedOptionCreateCompteHebEvent value)?  changeSelectedOption,TResult Function( ChangeDescriptionCreateCompteHebEvent value)?  changeDescription,TResult Function( SubmitCreateCompteHebEvent value)?  submit,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeRoomNumberCreateCompteHebEvent value)?  changeRoomNumber,TResult Function( ChangeAverageBedCreateCompteHebEvent value)?  changeAverageBed,TResult Function( ChangeSelectedOptionCreateCompteHebEvent value)?  changeSelectedOption,TResult Function( ChangeDescriptionCreateCompteHebEvent value)?  changeDescription,TResult Function( ChangeTypeHomeCreateCompteHebEvent value)?  changeTypeHome,TResult Function( ChangePrixMaxCreateCompteHebEvent value)?  changPrixMax,TResult Function( ChangePrixMinCreateCompteHebEvent value)?  changPrixMin,TResult Function( SubmitCreateCompteHebEvent value)?  submit,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent() when changeRoomNumber != null:
 return changeRoomNumber(_that);case ChangeAverageBedCreateCompteHebEvent() when changeAverageBed != null:
 return changeAverageBed(_that);case ChangeSelectedOptionCreateCompteHebEvent() when changeSelectedOption != null:
 return changeSelectedOption(_that);case ChangeDescriptionCreateCompteHebEvent() when changeDescription != null:
-return changeDescription(_that);case SubmitCreateCompteHebEvent() when submit != null:
+return changeDescription(_that);case ChangeTypeHomeCreateCompteHebEvent() when changeTypeHome != null:
+return changeTypeHome(_that);case ChangePrixMaxCreateCompteHebEvent() when changPrixMax != null:
+return changPrixMax(_that);case ChangePrixMinCreateCompteHebEvent() when changPrixMin != null:
+return changPrixMin(_that);case SubmitCreateCompteHebEvent() when submit != null:
 return submit(_that);case _:
   return orElse();
 
@@ -921,14 +924,17 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeRoomNumberCreateCompteHebEvent value)  changeRoomNumber,required TResult Function( ChangeAverageBedCreateCompteHebEvent value)  changeAverageBed,required TResult Function( ChangeSelectedOptionCreateCompteHebEvent value)  changeSelectedOption,required TResult Function( ChangeDescriptionCreateCompteHebEvent value)  changeDescription,required TResult Function( SubmitCreateCompteHebEvent value)  submit,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeRoomNumberCreateCompteHebEvent value)  changeRoomNumber,required TResult Function( ChangeAverageBedCreateCompteHebEvent value)  changeAverageBed,required TResult Function( ChangeSelectedOptionCreateCompteHebEvent value)  changeSelectedOption,required TResult Function( ChangeDescriptionCreateCompteHebEvent value)  changeDescription,required TResult Function( ChangeTypeHomeCreateCompteHebEvent value)  changeTypeHome,required TResult Function( ChangePrixMaxCreateCompteHebEvent value)  changPrixMax,required TResult Function( ChangePrixMinCreateCompteHebEvent value)  changPrixMin,required TResult Function( SubmitCreateCompteHebEvent value)  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent():
 return changeRoomNumber(_that);case ChangeAverageBedCreateCompteHebEvent():
 return changeAverageBed(_that);case ChangeSelectedOptionCreateCompteHebEvent():
 return changeSelectedOption(_that);case ChangeDescriptionCreateCompteHebEvent():
-return changeDescription(_that);case SubmitCreateCompteHebEvent():
+return changeDescription(_that);case ChangeTypeHomeCreateCompteHebEvent():
+return changeTypeHome(_that);case ChangePrixMaxCreateCompteHebEvent():
+return changPrixMax(_that);case ChangePrixMinCreateCompteHebEvent():
+return changPrixMin(_that);case SubmitCreateCompteHebEvent():
 return submit(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -946,14 +952,17 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeRoomNumberCreateCompteHebEvent value)?  changeRoomNumber,TResult? Function( ChangeAverageBedCreateCompteHebEvent value)?  changeAverageBed,TResult? Function( ChangeSelectedOptionCreateCompteHebEvent value)?  changeSelectedOption,TResult? Function( ChangeDescriptionCreateCompteHebEvent value)?  changeDescription,TResult? Function( SubmitCreateCompteHebEvent value)?  submit,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeRoomNumberCreateCompteHebEvent value)?  changeRoomNumber,TResult? Function( ChangeAverageBedCreateCompteHebEvent value)?  changeAverageBed,TResult? Function( ChangeSelectedOptionCreateCompteHebEvent value)?  changeSelectedOption,TResult? Function( ChangeDescriptionCreateCompteHebEvent value)?  changeDescription,TResult? Function( ChangeTypeHomeCreateCompteHebEvent value)?  changeTypeHome,TResult? Function( ChangePrixMaxCreateCompteHebEvent value)?  changPrixMax,TResult? Function( ChangePrixMinCreateCompteHebEvent value)?  changPrixMin,TResult? Function( SubmitCreateCompteHebEvent value)?  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent() when changeRoomNumber != null:
 return changeRoomNumber(_that);case ChangeAverageBedCreateCompteHebEvent() when changeAverageBed != null:
 return changeAverageBed(_that);case ChangeSelectedOptionCreateCompteHebEvent() when changeSelectedOption != null:
 return changeSelectedOption(_that);case ChangeDescriptionCreateCompteHebEvent() when changeDescription != null:
-return changeDescription(_that);case SubmitCreateCompteHebEvent() when submit != null:
+return changeDescription(_that);case ChangeTypeHomeCreateCompteHebEvent() when changeTypeHome != null:
+return changeTypeHome(_that);case ChangePrixMaxCreateCompteHebEvent() when changPrixMax != null:
+return changPrixMax(_that);case ChangePrixMinCreateCompteHebEvent() when changPrixMin != null:
+return changPrixMin(_that);case SubmitCreateCompteHebEvent() when submit != null:
 return submit(_that);case _:
   return null;
 
@@ -971,13 +980,16 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String roomNumber)?  changeRoomNumber,TResult Function( String averageBed)?  changeAverageBed,TResult Function( String option)?  changeSelectedOption,TResult Function( String description)?  changeDescription,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String roomNumber)?  changeRoomNumber,TResult Function( String averageBed)?  changeAverageBed,TResult Function( String option)?  changeSelectedOption,TResult Function( String description)?  changeDescription,TResult Function( String typeHome)?  changeTypeHome,TResult Function( String prixMax)?  changPrixMax,TResult Function( String prixMin)?  changPrixMin,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent() when changeRoomNumber != null:
 return changeRoomNumber(_that.roomNumber);case ChangeAverageBedCreateCompteHebEvent() when changeAverageBed != null:
 return changeAverageBed(_that.averageBed);case ChangeSelectedOptionCreateCompteHebEvent() when changeSelectedOption != null:
 return changeSelectedOption(_that.option);case ChangeDescriptionCreateCompteHebEvent() when changeDescription != null:
-return changeDescription(_that.description);case SubmitCreateCompteHebEvent() when submit != null:
+return changeDescription(_that.description);case ChangeTypeHomeCreateCompteHebEvent() when changeTypeHome != null:
+return changeTypeHome(_that.typeHome);case ChangePrixMaxCreateCompteHebEvent() when changPrixMax != null:
+return changPrixMax(_that.prixMax);case ChangePrixMinCreateCompteHebEvent() when changPrixMin != null:
+return changPrixMin(_that.prixMin);case SubmitCreateCompteHebEvent() when submit != null:
 return submit();case _:
   return orElse();
 
@@ -996,13 +1008,16 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String roomNumber)  changeRoomNumber,required TResult Function( String averageBed)  changeAverageBed,required TResult Function( String option)  changeSelectedOption,required TResult Function( String description)  changeDescription,required TResult Function()  submit,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String roomNumber)  changeRoomNumber,required TResult Function( String averageBed)  changeAverageBed,required TResult Function( String option)  changeSelectedOption,required TResult Function( String description)  changeDescription,required TResult Function( String typeHome)  changeTypeHome,required TResult Function( String prixMax)  changPrixMax,required TResult Function( String prixMin)  changPrixMin,required TResult Function()  submit,}) {final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent():
 return changeRoomNumber(_that.roomNumber);case ChangeAverageBedCreateCompteHebEvent():
 return changeAverageBed(_that.averageBed);case ChangeSelectedOptionCreateCompteHebEvent():
 return changeSelectedOption(_that.option);case ChangeDescriptionCreateCompteHebEvent():
-return changeDescription(_that.description);case SubmitCreateCompteHebEvent():
+return changeDescription(_that.description);case ChangeTypeHomeCreateCompteHebEvent():
+return changeTypeHome(_that.typeHome);case ChangePrixMaxCreateCompteHebEvent():
+return changPrixMax(_that.prixMax);case ChangePrixMinCreateCompteHebEvent():
+return changPrixMin(_that.prixMin);case SubmitCreateCompteHebEvent():
 return submit();case _:
   throw StateError('Unexpected subclass');
 
@@ -1020,13 +1035,16 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String roomNumber)?  changeRoomNumber,TResult? Function( String averageBed)?  changeAverageBed,TResult? Function( String option)?  changeSelectedOption,TResult? Function( String description)?  changeDescription,TResult? Function()?  submit,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String roomNumber)?  changeRoomNumber,TResult? Function( String averageBed)?  changeAverageBed,TResult? Function( String option)?  changeSelectedOption,TResult? Function( String description)?  changeDescription,TResult? Function( String typeHome)?  changeTypeHome,TResult? Function( String prixMax)?  changPrixMax,TResult? Function( String prixMin)?  changPrixMin,TResult? Function()?  submit,}) {final _that = this;
 switch (_that) {
 case ChangeRoomNumberCreateCompteHebEvent() when changeRoomNumber != null:
 return changeRoomNumber(_that.roomNumber);case ChangeAverageBedCreateCompteHebEvent() when changeAverageBed != null:
 return changeAverageBed(_that.averageBed);case ChangeSelectedOptionCreateCompteHebEvent() when changeSelectedOption != null:
 return changeSelectedOption(_that.option);case ChangeDescriptionCreateCompteHebEvent() when changeDescription != null:
-return changeDescription(_that.description);case SubmitCreateCompteHebEvent() when submit != null:
+return changeDescription(_that.description);case ChangeTypeHomeCreateCompteHebEvent() when changeTypeHome != null:
+return changeTypeHome(_that.typeHome);case ChangePrixMaxCreateCompteHebEvent() when changPrixMax != null:
+return changPrixMax(_that.prixMax);case ChangePrixMinCreateCompteHebEvent() when changPrixMin != null:
+return changPrixMin(_that.prixMin);case SubmitCreateCompteHebEvent() when submit != null:
 return submit();case _:
   return null;
 
@@ -1292,6 +1310,204 @@ class _$ChangeDescriptionCreateCompteHebEventCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? description = null,}) {
   return _then(ChangeDescriptionCreateCompteHebEvent(
 null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeTypeHomeCreateCompteHebEvent implements CreateCompteHebEvent {
+   ChangeTypeHomeCreateCompteHebEvent(this.typeHome);
+  
+
+ final  String typeHome;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeTypeHomeCreateCompteHebEventCopyWith<ChangeTypeHomeCreateCompteHebEvent> get copyWith => _$ChangeTypeHomeCreateCompteHebEventCopyWithImpl<ChangeTypeHomeCreateCompteHebEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeTypeHomeCreateCompteHebEvent&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,typeHome);
+
+@override
+String toString() {
+  return 'CreateCompteHebEvent.changeTypeHome(typeHome: $typeHome)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeTypeHomeCreateCompteHebEventCopyWith<$Res> implements $CreateCompteHebEventCopyWith<$Res> {
+  factory $ChangeTypeHomeCreateCompteHebEventCopyWith(ChangeTypeHomeCreateCompteHebEvent value, $Res Function(ChangeTypeHomeCreateCompteHebEvent) _then) = _$ChangeTypeHomeCreateCompteHebEventCopyWithImpl;
+@useResult
+$Res call({
+ String typeHome
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeTypeHomeCreateCompteHebEventCopyWithImpl<$Res>
+    implements $ChangeTypeHomeCreateCompteHebEventCopyWith<$Res> {
+  _$ChangeTypeHomeCreateCompteHebEventCopyWithImpl(this._self, this._then);
+
+  final ChangeTypeHomeCreateCompteHebEvent _self;
+  final $Res Function(ChangeTypeHomeCreateCompteHebEvent) _then;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? typeHome = null,}) {
+  return _then(ChangeTypeHomeCreateCompteHebEvent(
+null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangePrixMaxCreateCompteHebEvent implements CreateCompteHebEvent {
+   ChangePrixMaxCreateCompteHebEvent(this.prixMax);
+  
+
+ final  String prixMax;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangePrixMaxCreateCompteHebEventCopyWith<ChangePrixMaxCreateCompteHebEvent> get copyWith => _$ChangePrixMaxCreateCompteHebEventCopyWithImpl<ChangePrixMaxCreateCompteHebEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangePrixMaxCreateCompteHebEvent&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,prixMax);
+
+@override
+String toString() {
+  return 'CreateCompteHebEvent.changPrixMax(prixMax: $prixMax)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangePrixMaxCreateCompteHebEventCopyWith<$Res> implements $CreateCompteHebEventCopyWith<$Res> {
+  factory $ChangePrixMaxCreateCompteHebEventCopyWith(ChangePrixMaxCreateCompteHebEvent value, $Res Function(ChangePrixMaxCreateCompteHebEvent) _then) = _$ChangePrixMaxCreateCompteHebEventCopyWithImpl;
+@useResult
+$Res call({
+ String prixMax
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangePrixMaxCreateCompteHebEventCopyWithImpl<$Res>
+    implements $ChangePrixMaxCreateCompteHebEventCopyWith<$Res> {
+  _$ChangePrixMaxCreateCompteHebEventCopyWithImpl(this._self, this._then);
+
+  final ChangePrixMaxCreateCompteHebEvent _self;
+  final $Res Function(ChangePrixMaxCreateCompteHebEvent) _then;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? prixMax = null,}) {
+  return _then(ChangePrixMaxCreateCompteHebEvent(
+null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangePrixMinCreateCompteHebEvent implements CreateCompteHebEvent {
+   ChangePrixMinCreateCompteHebEvent(this.prixMin);
+  
+
+ final  String prixMin;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangePrixMinCreateCompteHebEventCopyWith<ChangePrixMinCreateCompteHebEvent> get copyWith => _$ChangePrixMinCreateCompteHebEventCopyWithImpl<ChangePrixMinCreateCompteHebEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangePrixMinCreateCompteHebEvent&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,prixMin);
+
+@override
+String toString() {
+  return 'CreateCompteHebEvent.changPrixMin(prixMin: $prixMin)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangePrixMinCreateCompteHebEventCopyWith<$Res> implements $CreateCompteHebEventCopyWith<$Res> {
+  factory $ChangePrixMinCreateCompteHebEventCopyWith(ChangePrixMinCreateCompteHebEvent value, $Res Function(ChangePrixMinCreateCompteHebEvent) _then) = _$ChangePrixMinCreateCompteHebEventCopyWithImpl;
+@useResult
+$Res call({
+ String prixMin
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangePrixMinCreateCompteHebEventCopyWithImpl<$Res>
+    implements $ChangePrixMinCreateCompteHebEventCopyWith<$Res> {
+  _$ChangePrixMinCreateCompteHebEventCopyWithImpl(this._self, this._then);
+
+  final ChangePrixMinCreateCompteHebEvent _self;
+  final $Res Function(ChangePrixMinCreateCompteHebEvent) _then;
+
+/// Create a copy of CreateCompteHebEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? prixMin = null,}) {
+  return _then(ChangePrixMinCreateCompteHebEvent(
+null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

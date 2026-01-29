@@ -29,6 +29,9 @@ _SActiveUserProfile _$SActiveUserProfileFromJson(Map<String, dynamic> json) =>
       formTherd: json['formTherd'] as String,
       file: json['file'] as String,
       profileImage: json['profileImage'] as String,
+      prixMax: json['prixMax'] as String,
+      prixMin: json['prixMin'] as String,
+      typeHome: json['typeHome'] as String,
     );
 
 Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
@@ -54,6 +57,9 @@ Map<String, dynamic> _$SActiveUserProfileToJson(_SActiveUserProfile instance) =>
       'formTherd': instance.formTherd,
       'file': instance.file,
       'profileImage': instance.profileImage,
+      'prixMax': instance.prixMax,
+      'prixMin': instance.prixMin,
+      'typeHome': instance.typeHome,
     };
 
 _SLikeResponse _$SLikeResponseFromJson(Map<String, dynamic> json) =>

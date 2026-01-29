@@ -268,6 +268,9 @@ class CreateCompteHBloc
               state.averageBed,
               state.selectedOption,
               state.description,
+              state.prixMax,
+              state.prixMin,
+              state.typeHome,
             ]),
           ),
         );
@@ -283,6 +286,9 @@ class CreateCompteHBloc
               TextFormz.dirty(averageBed),
               state.selectedOption,
               state.description,
+              state.prixMax,
+              state.prixMin,
+              state.typeHome,
             ]),
           ),
         );
@@ -298,6 +304,9 @@ class CreateCompteHBloc
               state.averageBed,
               TextFormz.dirty(option),
               state.description,
+              state.prixMax,
+              state.prixMin,
+              state.typeHome,
             ]),
           ),
         );
@@ -313,6 +322,60 @@ class CreateCompteHBloc
               state.averageBed,
               state.selectedOption,
               TextFormz.dirty(description),
+              state.prixMax,
+              state.prixMin,
+              state.typeHome,
+            ]),
+          ),
+        );
+        break;
+        case ChangePrixMaxCreateCompteHebEvent(:final prixMax):
+        emit(
+          state.copyWith(
+            prixMax: TextFormz.dirty(prixMax),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              state.roomNumber,
+              state.averageBed,
+              state.selectedOption,
+              state.description,
+              TextFormz.dirty(prixMax),
+              state.prixMin,
+              state.typeHome,
+            ]),
+          ),
+        );
+        break;
+         case ChangePrixMinCreateCompteHebEvent(:final prixMin):
+        emit(
+          state.copyWith(
+            prixMin: TextFormz.dirty(prixMin),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              state.roomNumber,
+              state.averageBed,
+              state.selectedOption,
+              state.description,
+              TextFormz.dirty(prixMin),
+              state.prixMax,
+              state.typeHome,
+            ]),
+          ),
+        );
+        break;
+          case ChangeTypeHomeCreateCompteHebEvent(:final typeHome):
+        emit(
+          state.copyWith(
+            typeHome: TextFormz.dirty(typeHome),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              state.roomNumber,
+              state.averageBed,
+              state.selectedOption,
+              state.description,
+              TextFormz.dirty(typeHome),
+              state.prixMax,
+              state.prixMin,
             ]),
           ),
         );
@@ -330,6 +393,9 @@ class CreateCompteHBloc
               option: state.selectedOption.value,
               description: state.description.value,
               formTwo: 'success',
+              prixMax: state.prixMax.value,
+              prixMin: state.prixMin.value,
+              typeHome: state.typeHome.value,
             ),
           );
 

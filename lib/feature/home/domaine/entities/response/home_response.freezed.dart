@@ -22,7 +22,7 @@ ActiveUserProfile _$ActiveUserProfileFromJson(
 /// @nodoc
 mixin _$ActiveUserProfile {
 
- String get adresse; String get autherKey; String get email; String get name; String get serviceLibelle; String get specialite; String get telephone; String get userId; String get averageBed; String get description; String get option; String get roomNumber; String get facebookLinck; String get lat; String get long; String get whatsappContact; String get formOne; String get formTwo; String get formTherd; String get file; String get profileImage;
+ String get adresse; String get autherKey; String get email; String get name; String get serviceLibelle; String get specialite; String get telephone; String get userId; String get averageBed; String get description; String get option; String get roomNumber; String get facebookLinck; String get lat; String get long; String get whatsappContact; String get formOne; String get formTwo; String get formTherd; String get file; String get profileImage; String get prixMax; String get prixMin; String get typeHome;
 /// Create a copy of ActiveUserProfile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +35,16 @@ $ActiveUserProfileCopyWith<ActiveUserProfile> get copyWith => _$ActiveUserProfil
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ActiveUserProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.serviceLibelle, serviceLibelle) || other.serviceLibelle == serviceLibelle)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.description, description) || other.description == description)&&(identical(other.option, option) || other.option == option)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.facebookLinck, facebookLinck) || other.facebookLinck == facebookLinck)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsappContact, whatsappContact) || other.whatsappContact == whatsappContact)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd)&&(identical(other.file, file) || other.file == file)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ActiveUserProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.serviceLibelle, serviceLibelle) || other.serviceLibelle == serviceLibelle)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.description, description) || other.description == description)&&(identical(other.option, option) || other.option == option)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.facebookLinck, facebookLinck) || other.facebookLinck == facebookLinck)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsappContact, whatsappContact) || other.whatsappContact == whatsappContact)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd)&&(identical(other.file, file) || other.file == file)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adresse,autherKey,email,name,serviceLibelle,specialite,telephone,userId,averageBed,description,option,roomNumber,facebookLinck,lat,long,whatsappContact,formOne,formTwo,formTherd,file,profileImage]);
+int get hashCode => Object.hashAll([runtimeType,adresse,autherKey,email,name,serviceLibelle,specialite,telephone,userId,averageBed,description,option,roomNumber,facebookLinck,lat,long,whatsappContact,formOne,formTwo,formTherd,file,profileImage,prixMax,prixMin,typeHome]);
 
 @override
 String toString() {
-  return 'ActiveUserProfile(adresse: $adresse, autherKey: $autherKey, email: $email, name: $name, serviceLibelle: $serviceLibelle, specialite: $specialite, telephone: $telephone, userId: $userId, averageBed: $averageBed, description: $description, option: $option, roomNumber: $roomNumber, facebookLinck: $facebookLinck, lat: $lat, long: $long, whatsappContact: $whatsappContact, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd, file: $file, profileImage: $profileImage)';
+  return 'ActiveUserProfile(adresse: $adresse, autherKey: $autherKey, email: $email, name: $name, serviceLibelle: $serviceLibelle, specialite: $specialite, telephone: $telephone, userId: $userId, averageBed: $averageBed, description: $description, option: $option, roomNumber: $roomNumber, facebookLinck: $facebookLinck, lat: $lat, long: $long, whatsappContact: $whatsappContact, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd, file: $file, profileImage: $profileImage, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $ActiveUserProfileCopyWith<$Res>  {
   factory $ActiveUserProfileCopyWith(ActiveUserProfile value, $Res Function(ActiveUserProfile) _then) = _$ActiveUserProfileCopyWithImpl;
 @useResult
 $Res call({
- String adresse, String autherKey, String email, String name, String serviceLibelle, String specialite, String telephone, String userId, String averageBed, String description, String option, String roomNumber, String facebookLinck, String lat, String long, String whatsappContact, String formOne, String formTwo, String formTherd, String file, String profileImage
+ String adresse, String autherKey, String email, String name, String serviceLibelle, String specialite, String telephone, String userId, String averageBed, String description, String option, String roomNumber, String facebookLinck, String lat, String long, String whatsappContact, String formOne, String formTwo, String formTherd, String file, String profileImage, String prixMax, String prixMin, String typeHome
 });
 
 
@@ -72,7 +72,7 @@ class _$ActiveUserProfileCopyWithImpl<$Res>
 
 /// Create a copy of ActiveUserProfile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? adresse = null,Object? autherKey = null,Object? email = null,Object? name = null,Object? serviceLibelle = null,Object? specialite = null,Object? telephone = null,Object? userId = null,Object? averageBed = null,Object? description = null,Object? option = null,Object? roomNumber = null,Object? facebookLinck = null,Object? lat = null,Object? long = null,Object? whatsappContact = null,Object? formOne = null,Object? formTwo = null,Object? formTherd = null,Object? file = null,Object? profileImage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? adresse = null,Object? autherKey = null,Object? email = null,Object? name = null,Object? serviceLibelle = null,Object? specialite = null,Object? telephone = null,Object? userId = null,Object? averageBed = null,Object? description = null,Object? option = null,Object? roomNumber = null,Object? facebookLinck = null,Object? lat = null,Object? long = null,Object? whatsappContact = null,Object? formOne = null,Object? formTwo = null,Object? formTherd = null,Object? file = null,Object? profileImage = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,}) {
   return _then(_self.copyWith(
 adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
 as String,autherKey: null == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
@@ -95,6 +95,9 @@ as String,formTwo: null == formTwo ? _self.formTwo : formTwo // ignore: cast_nul
 as String,formTherd: null == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
 as String,file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
 as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as String,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as String,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -180,10 +183,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage,  String prixMax,  String prixMin,  String typeHome)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SActiveUserProfile() when $default != null:
-return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage);case _:
+return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   return orElse();
 
 }
@@ -201,10 +204,10 @@ return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.servi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage,  String prixMax,  String prixMin,  String typeHome)  $default,) {final _that = this;
 switch (_that) {
 case _SActiveUserProfile():
-return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage);case _:
+return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -221,10 +224,10 @@ return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.servi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String adresse,  String autherKey,  String email,  String name,  String serviceLibelle,  String specialite,  String telephone,  String userId,  String averageBed,  String description,  String option,  String roomNumber,  String facebookLinck,  String lat,  String long,  String whatsappContact,  String formOne,  String formTwo,  String formTherd,  String file,  String profileImage,  String prixMax,  String prixMin,  String typeHome)?  $default,) {final _that = this;
 switch (_that) {
 case _SActiveUserProfile() when $default != null:
-return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage);case _:
+return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.serviceLibelle,_that.specialite,_that.telephone,_that.userId,_that.averageBed,_that.description,_that.option,_that.roomNumber,_that.facebookLinck,_that.lat,_that.long,_that.whatsappContact,_that.formOne,_that.formTwo,_that.formTherd,_that.file,_that.profileImage,_that.prixMax,_that.prixMin,_that.typeHome);case _:
   return null;
 
 }
@@ -236,7 +239,7 @@ return $default(_that.adresse,_that.autherKey,_that.email,_that.name,_that.servi
 @JsonSerializable()
 
 class _SActiveUserProfile implements ActiveUserProfile {
-   _SActiveUserProfile({required this.adresse, required this.autherKey, required this.email, required this.name, required this.serviceLibelle, required this.specialite, required this.telephone, required this.userId, required this.averageBed, required this.description, required this.option, required this.roomNumber, required this.facebookLinck, required this.lat, required this.long, required this.whatsappContact, required this.formOne, required this.formTwo, required this.formTherd, required this.file, required this.profileImage});
+   _SActiveUserProfile({required this.adresse, required this.autherKey, required this.email, required this.name, required this.serviceLibelle, required this.specialite, required this.telephone, required this.userId, required this.averageBed, required this.description, required this.option, required this.roomNumber, required this.facebookLinck, required this.lat, required this.long, required this.whatsappContact, required this.formOne, required this.formTwo, required this.formTherd, required this.file, required this.profileImage, required this.prixMax, required this.prixMin, required this.typeHome});
   factory _SActiveUserProfile.fromJson(Map<String, dynamic> json) => _$SActiveUserProfileFromJson(json);
 
 @override final  String adresse;
@@ -260,6 +263,9 @@ class _SActiveUserProfile implements ActiveUserProfile {
 @override final  String formTherd;
 @override final  String file;
 @override final  String profileImage;
+@override final  String prixMax;
+@override final  String prixMin;
+@override final  String typeHome;
 
 /// Create a copy of ActiveUserProfile
 /// with the given fields replaced by the non-null parameter values.
@@ -274,16 +280,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SActiveUserProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.serviceLibelle, serviceLibelle) || other.serviceLibelle == serviceLibelle)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.description, description) || other.description == description)&&(identical(other.option, option) || other.option == option)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.facebookLinck, facebookLinck) || other.facebookLinck == facebookLinck)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsappContact, whatsappContact) || other.whatsappContact == whatsappContact)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd)&&(identical(other.file, file) || other.file == file)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SActiveUserProfile&&(identical(other.adresse, adresse) || other.adresse == adresse)&&(identical(other.autherKey, autherKey) || other.autherKey == autherKey)&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.serviceLibelle, serviceLibelle) || other.serviceLibelle == serviceLibelle)&&(identical(other.specialite, specialite) || other.specialite == specialite)&&(identical(other.telephone, telephone) || other.telephone == telephone)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.description, description) || other.description == description)&&(identical(other.option, option) || other.option == option)&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.facebookLinck, facebookLinck) || other.facebookLinck == facebookLinck)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.long, long) || other.long == long)&&(identical(other.whatsappContact, whatsappContact) || other.whatsappContact == whatsappContact)&&(identical(other.formOne, formOne) || other.formOne == formOne)&&(identical(other.formTwo, formTwo) || other.formTwo == formTwo)&&(identical(other.formTherd, formTherd) || other.formTherd == formTherd)&&(identical(other.file, file) || other.file == file)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adresse,autherKey,email,name,serviceLibelle,specialite,telephone,userId,averageBed,description,option,roomNumber,facebookLinck,lat,long,whatsappContact,formOne,formTwo,formTherd,file,profileImage]);
+int get hashCode => Object.hashAll([runtimeType,adresse,autherKey,email,name,serviceLibelle,specialite,telephone,userId,averageBed,description,option,roomNumber,facebookLinck,lat,long,whatsappContact,formOne,formTwo,formTherd,file,profileImage,prixMax,prixMin,typeHome]);
 
 @override
 String toString() {
-  return 'ActiveUserProfile(adresse: $adresse, autherKey: $autherKey, email: $email, name: $name, serviceLibelle: $serviceLibelle, specialite: $specialite, telephone: $telephone, userId: $userId, averageBed: $averageBed, description: $description, option: $option, roomNumber: $roomNumber, facebookLinck: $facebookLinck, lat: $lat, long: $long, whatsappContact: $whatsappContact, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd, file: $file, profileImage: $profileImage)';
+  return 'ActiveUserProfile(adresse: $adresse, autherKey: $autherKey, email: $email, name: $name, serviceLibelle: $serviceLibelle, specialite: $specialite, telephone: $telephone, userId: $userId, averageBed: $averageBed, description: $description, option: $option, roomNumber: $roomNumber, facebookLinck: $facebookLinck, lat: $lat, long: $long, whatsappContact: $whatsappContact, formOne: $formOne, formTwo: $formTwo, formTherd: $formTherd, file: $file, profileImage: $profileImage, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome)';
 }
 
 
@@ -294,7 +300,7 @@ abstract mixin class _$SActiveUserProfileCopyWith<$Res> implements $ActiveUserPr
   factory _$SActiveUserProfileCopyWith(_SActiveUserProfile value, $Res Function(_SActiveUserProfile) _then) = __$SActiveUserProfileCopyWithImpl;
 @override @useResult
 $Res call({
- String adresse, String autherKey, String email, String name, String serviceLibelle, String specialite, String telephone, String userId, String averageBed, String description, String option, String roomNumber, String facebookLinck, String lat, String long, String whatsappContact, String formOne, String formTwo, String formTherd, String file, String profileImage
+ String adresse, String autherKey, String email, String name, String serviceLibelle, String specialite, String telephone, String userId, String averageBed, String description, String option, String roomNumber, String facebookLinck, String lat, String long, String whatsappContact, String formOne, String formTwo, String formTherd, String file, String profileImage, String prixMax, String prixMin, String typeHome
 });
 
 
@@ -311,7 +317,7 @@ class __$SActiveUserProfileCopyWithImpl<$Res>
 
 /// Create a copy of ActiveUserProfile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? adresse = null,Object? autherKey = null,Object? email = null,Object? name = null,Object? serviceLibelle = null,Object? specialite = null,Object? telephone = null,Object? userId = null,Object? averageBed = null,Object? description = null,Object? option = null,Object? roomNumber = null,Object? facebookLinck = null,Object? lat = null,Object? long = null,Object? whatsappContact = null,Object? formOne = null,Object? formTwo = null,Object? formTherd = null,Object? file = null,Object? profileImage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? adresse = null,Object? autherKey = null,Object? email = null,Object? name = null,Object? serviceLibelle = null,Object? specialite = null,Object? telephone = null,Object? userId = null,Object? averageBed = null,Object? description = null,Object? option = null,Object? roomNumber = null,Object? facebookLinck = null,Object? lat = null,Object? long = null,Object? whatsappContact = null,Object? formOne = null,Object? formTwo = null,Object? formTherd = null,Object? file = null,Object? profileImage = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,}) {
   return _then(_SActiveUserProfile(
 adresse: null == adresse ? _self.adresse : adresse // ignore: cast_nullable_to_non_nullable
 as String,autherKey: null == autherKey ? _self.autherKey : autherKey // ignore: cast_nullable_to_non_nullable
@@ -334,6 +340,9 @@ as String,formTwo: null == formTwo ? _self.formTwo : formTwo // ignore: cast_nul
 as String,formTherd: null == formTherd ? _self.formTherd : formTherd // ignore: cast_nullable_to_non_nullable
 as String,file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
 as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as String,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as String,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

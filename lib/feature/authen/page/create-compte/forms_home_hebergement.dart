@@ -92,6 +92,9 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
   },
 );
 
+  late bool isSelectedHotel = false;
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -192,8 +195,11 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                               onChanged: (option) {
                                                 if (option != null) {
                                                   setState(
-                                                    () => selectedOptionss =
-                                                        option,
+                                                    () {
+                                                      selectedOptionss =
+                                                        option;
+                                                      isSelectedHotel =! isSelectedHotel;
+                                                    },
                                                   );
                                                 }
                                                 // context
@@ -245,7 +251,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                           },
                         ),
                          
-
+                        if (!isSelectedHotel)
                         BlocBuilder<CreateCompteHBloc, CreateCompteHbState>(
                           builder: (context, state) {
                             return Container(
@@ -262,7 +268,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                                 msgError: 'Veuillez renseigner ce champ',
                                 onChanged: (rom) {
                                   context.read<CreateCompteHBloc>().add(
-                                    CreateCompteHebEvent.changeRoomNumber(rom),
+                                    CreateCompteHebEvent.changeRoomNumber(!isSelectedHotel ? rom : '0'),
                                   );
                                 },
                               ),

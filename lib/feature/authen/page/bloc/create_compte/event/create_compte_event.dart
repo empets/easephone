@@ -55,6 +55,15 @@ class CreateCompteHebEvent with _$CreateCompteHebEvent {
 
   factory CreateCompteHebEvent.changeDescription(String description) =
       ChangeDescriptionCreateCompteHebEvent;
+
+  factory CreateCompteHebEvent.changeTypeHome(String typeHome) =
+      ChangeTypeHomeCreateCompteHebEvent;
+  factory CreateCompteHebEvent.changPrixMax(String prixMax) =
+      ChangePrixMaxCreateCompteHebEvent;
+
+  factory CreateCompteHebEvent.changPrixMin(String prixMin) =
+      ChangePrixMinCreateCompteHebEvent;
+
   factory CreateCompteHebEvent.submit() = SubmitCreateCompteHebEvent;
 }
 

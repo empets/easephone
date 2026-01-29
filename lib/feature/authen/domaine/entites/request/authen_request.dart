@@ -61,6 +61,9 @@ abstract class RequestCreateCompteHeber with _$RequestCreateCompteHeber {
     required String option,
     required String description,
     required String formTwo,
+    required String prixMax,
+    required String prixMin,
+    required String typeHome,
   }) = _SRequestCreateCompteHeber;
 
   factory RequestCreateCompteHeber.fromJson(Map<String, dynamic> json) =>

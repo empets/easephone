@@ -304,7 +304,7 @@ as bool,
 /// @nodoc
 mixin _$CreateCompteHbState {
 
- TextFormz get roomNumber; TextFormz get averageBed; TextFormz get selectedOption; TextFormz get description; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
+ TextFormz get roomNumber; TextFormz get averageBed; TextFormz get selectedOption; TextFormz get description; TextFormz get prixMax; TextFormz get prixMin; TextFormz get typeHome; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
 /// Create a copy of CreateCompteHbState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -315,16 +315,16 @@ $CreateCompteHbStateCopyWith<CreateCompteHbState> get copyWith => _$CreateCompte
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteHbState&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&(identical(other.description, description) || other.description == description)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteHbState&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&(identical(other.description, description) || other.description == description)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,selectedOption,description,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,selectedOption,description,prixMax,prixMin,typeHome,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteHbState(roomNumber: $roomNumber, averageBed: $averageBed, selectedOption: $selectedOption, description: $description, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteHbState(roomNumber: $roomNumber, averageBed: $averageBed, selectedOption: $selectedOption, description: $description, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -335,7 +335,7 @@ abstract mixin class $CreateCompteHbStateCopyWith<$Res>  {
   factory $CreateCompteHbStateCopyWith(CreateCompteHbState value, $Res Function(CreateCompteHbState) _then) = _$CreateCompteHbStateCopyWithImpl;
 @useResult
 $Res call({
- TextFormz roomNumber, TextFormz averageBed, TextFormz selectedOption, TextFormz description, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz roomNumber, TextFormz averageBed, TextFormz selectedOption, TextFormz description, TextFormz prixMax, TextFormz prixMin, TextFormz typeHome, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -352,12 +352,15 @@ class _$CreateCompteHbStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteHbState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? roomNumber = null,Object? averageBed = null,Object? selectedOption = null,Object? description = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? roomNumber = null,Object? averageBed = null,Object? selectedOption = null,Object? description = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_self.copyWith(
 roomNumber: null == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
 as TextFormz,averageBed: null == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
 as TextFormz,selectedOption: null == selectedOption ? _self.selectedOption : selectedOption // ignore: cast_nullable_to_non_nullable
 as TextFormz,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as TextFormz,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as TextFormz,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as TextFormz,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
@@ -446,10 +449,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  TextFormz prixMax,  TextFormz prixMin,  TextFormz typeHome,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreateCompteHbState() when $default != null:
-return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.prixMax,_that.prixMin,_that.typeHome,_that.status,_that.errorMessage,_that.isValide);case _:
   return orElse();
 
 }
@@ -467,10 +470,10 @@ return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.des
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  TextFormz prixMax,  TextFormz prixMin,  TextFormz typeHome,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
 switch (_that) {
 case _CreateCompteHbState():
-return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.prixMax,_that.prixMin,_that.typeHome,_that.status,_that.errorMessage,_that.isValide);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -487,10 +490,10 @@ return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.des
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz roomNumber,  TextFormz averageBed,  TextFormz selectedOption,  TextFormz description,  TextFormz prixMax,  TextFormz prixMin,  TextFormz typeHome,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
 switch (_that) {
 case _CreateCompteHbState() when $default != null:
-return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.description,_that.prixMax,_that.prixMin,_that.typeHome,_that.status,_that.errorMessage,_that.isValide);case _:
   return null;
 
 }
@@ -502,13 +505,16 @@ return $default(_that.roomNumber,_that.averageBed,_that.selectedOption,_that.des
 
 
 class _CreateCompteHbState implements CreateCompteHbState {
-  const _CreateCompteHbState({required this.roomNumber, required this.averageBed, required this.selectedOption, required this.description, required this.status, required this.errorMessage, required this.isValide});
+  const _CreateCompteHbState({required this.roomNumber, required this.averageBed, required this.selectedOption, required this.description, required this.prixMax, required this.prixMin, required this.typeHome, required this.status, required this.errorMessage, required this.isValide});
   
 
 @override final  TextFormz roomNumber;
 @override final  TextFormz averageBed;
 @override final  TextFormz selectedOption;
 @override final  TextFormz description;
+@override final  TextFormz prixMax;
+@override final  TextFormz prixMin;
+@override final  TextFormz typeHome;
 @override final  FormzSubmissionStatus status;
 @override final  String errorMessage;
 @override final  bool isValide;
@@ -523,16 +529,16 @@ _$CreateCompteHbStateCopyWith<_CreateCompteHbState> get copyWith => __$CreateCom
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateCompteHbState&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&(identical(other.description, description) || other.description == description)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateCompteHbState&&(identical(other.roomNumber, roomNumber) || other.roomNumber == roomNumber)&&(identical(other.averageBed, averageBed) || other.averageBed == averageBed)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&(identical(other.description, description) || other.description == description)&&(identical(other.prixMax, prixMax) || other.prixMax == prixMax)&&(identical(other.prixMin, prixMin) || other.prixMin == prixMin)&&(identical(other.typeHome, typeHome) || other.typeHome == typeHome)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,selectedOption,description,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,roomNumber,averageBed,selectedOption,description,prixMax,prixMin,typeHome,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteHbState(roomNumber: $roomNumber, averageBed: $averageBed, selectedOption: $selectedOption, description: $description, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteHbState(roomNumber: $roomNumber, averageBed: $averageBed, selectedOption: $selectedOption, description: $description, prixMax: $prixMax, prixMin: $prixMin, typeHome: $typeHome, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -543,7 +549,7 @@ abstract mixin class _$CreateCompteHbStateCopyWith<$Res> implements $CreateCompt
   factory _$CreateCompteHbStateCopyWith(_CreateCompteHbState value, $Res Function(_CreateCompteHbState) _then) = __$CreateCompteHbStateCopyWithImpl;
 @override @useResult
 $Res call({
- TextFormz roomNumber, TextFormz averageBed, TextFormz selectedOption, TextFormz description, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz roomNumber, TextFormz averageBed, TextFormz selectedOption, TextFormz description, TextFormz prixMax, TextFormz prixMin, TextFormz typeHome, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -560,12 +566,15 @@ class __$CreateCompteHbStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteHbState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? roomNumber = null,Object? averageBed = null,Object? selectedOption = null,Object? description = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? roomNumber = null,Object? averageBed = null,Object? selectedOption = null,Object? description = null,Object? prixMax = null,Object? prixMin = null,Object? typeHome = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_CreateCompteHbState(
 roomNumber: null == roomNumber ? _self.roomNumber : roomNumber // ignore: cast_nullable_to_non_nullable
 as TextFormz,averageBed: null == averageBed ? _self.averageBed : averageBed // ignore: cast_nullable_to_non_nullable
 as TextFormz,selectedOption: null == selectedOption ? _self.selectedOption : selectedOption // ignore: cast_nullable_to_non_nullable
 as TextFormz,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as TextFormz,prixMax: null == prixMax ? _self.prixMax : prixMax // ignore: cast_nullable_to_non_nullable
+as TextFormz,prixMin: null == prixMin ? _self.prixMin : prixMin // ignore: cast_nullable_to_non_nullable
+as TextFormz,typeHome: null == typeHome ? _self.typeHome : typeHome // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
