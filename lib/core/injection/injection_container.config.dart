@@ -18,6 +18,8 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../feature/authen/data/repositories/impl_repositories_authen.dart'
     as _i417;
+import '../../feature/authen/data/service/remote/google_authen/service_firebase.dart'
+    as _i623;
 import '../../feature/authen/data/service/remote/real_time_authen/firebase_remote_service.dart'
     as _i505;
 import '../../feature/authen/data/service/remote/real_time_authen/request_repository.dart'
@@ -71,6 +73,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => injectableModule.locaDataShared(),
       preResolve: true,
     );
+    gh.lazySingleton<_i623.GoogleAuthService>(() => _i623.GoogleAuthService());
     gh.factory<_i574.AppRoute>(
       () => _i574.AppRoute(
         appRouteBloc: gh<_i908.AppRouteBloc>(),
@@ -94,23 +97,11 @@ extension GetItInjectableX on _i174.GetIt {
         marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i933.AuthenByMailUsercase>(
-      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i473.CreateCompteCheckFile>(
-      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i228.SigninUsercase>(
+      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
-      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i470.GetUserListUsercase>(
-      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i973.GetUserProfileUsercase>(
-      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i452.CreateCoompteSendImageUsercase>(
       () => _i452.CreateCoompteSendImageUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -118,28 +109,41 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i452.CreateProfileImageUsercase>(
       () => _i452.CreateProfileImageUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i228.SigninUsercase>(
-      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i933.AuthenByMailUsercase>(
+      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i622.AuthByMailBloc>(
-      () => _i622.AuthByMailBloc(
-        signinUsercase: gh<_i228.SigninUsercase>(),
-        authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
-      ),
+    gh.lazySingleton<_i973.GetUserProfileUsercase>(
+      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
-      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    gh.lazySingleton<_i473.CreateCompteCheckFile>(
+      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
+      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i470.GetUserListUsercase>(
+      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
       () => _i774.GetActifCompteInformationUsercase(
         gh<_i956.IRepositoryMarchant>(),
       ),
     );
+    gh.lazySingleton<_i21.LikeProfileUsercase>(
+      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
+      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
     gh.lazySingleton<_i832.GetLikeListeUsercase>(
       () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
-    gh.lazySingleton<_i21.LikeProfileUsercase>(
-      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    gh.lazySingleton<_i622.AuthByMailBloc>(
+      () => _i622.AuthByMailBloc(
+        signinUsercase: gh<_i228.SigninUsercase>(),
+        authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
+        googleAuthService: gh<_i623.GoogleAuthService>(),
+      ),
     );
     return this;
   }

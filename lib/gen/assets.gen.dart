@@ -61,6 +61,12 @@ class $AssetsIconsGen {
     'assets/icons/pexels-vruyr-martirosyan-1447354-2792902.jpg',
   );
 
+  /// File path: assets/icons/premium_photo-1661776594516-6895a89de126.png
+  AssetGenImage get premiumPhoto16617765945166895a89de126 =>
+      const AssetGenImage(
+        'assets/icons/premium_photo-1661776594516-6895a89de126.png',
+      );
+
   /// File path: assets/icons/undraw_a-woman-avatar_ifsl.svg
   SvgGenImage get undrawAWomanAvatarIfsl =>
       const SvgGenImage('assets/icons/undraw_a-woman-avatar_ifsl.svg');
@@ -143,6 +149,7 @@ class $AssetsIconsGen {
     pexelsCottonbro40651651,
     pexelsCottonbro4065165,
     pexelsVruyrMartirosyan14473542792902,
+    premiumPhoto16617765945166895a89de126,
     undrawAWomanAvatarIfsl,
     undrawAddFilesD04y,
     undrawCloudsBmtk,

@@ -1,7 +1,11 @@
 import 'dart:developer';
+import 'package:com.example.epbomi/core/data_process/failure.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class GoogleAuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -103,7 +107,95 @@ class GoogleAuthService {
       print('Erreur: $e');
     }
   }
-}
 
+  // creation de compte via email et passe word
+  Future<Either<Failure, User>> createAccountIfNotExists({
+    required String email,
+    required String password,
+  }) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
 
+    // 1️⃣ Vérifier si l'email existe déjà
+    final List<String> methods = await auth.fetchSignInMethodsForEmail(email);
 
+    if (methods.isNotEmpty) {
+      // 🔴 Compte déjà existant → ERREUR
+      throw Left(
+        FirebaseAuthException(
+          code: 'email-already-in-use',
+          message: 'Un compte existe déjà avec cet email',
+        ),
+      );
+    }
+
+    // 2️⃣ Créer le compte
+    UserCredential credential = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    User user = credential.user!;
+
+    // 3️⃣ Envoyer email de vérification
+    if (!user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+
+    return Right(user);
+  }
+
+  // VERFIER SUR LE MAIL EXISTE ET ENVOIE DE LIENK
+  Future<Either<Failure, String>> sendActionEmailIfUserExists({
+    required String email,
+  }) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    // 1️⃣ Vérifier si le compte existe
+    final methods = await auth.fetchSignInMethodsForEmail(email);
+
+    if (methods.isEmpty) {
+      throw Left(
+        FirebaseAuthException(
+          code: 'user-not-foun',
+          message: 'Aucun compte trouvé avec cet email',
+        ),
+      );
+    }
+
+    // 2️⃣ Configurer le lien d’action
+    final ActionCodeSettings actionCodeSettings = ActionCodeSettings(
+      url: 'https://authenfication-9fc25.firebaseapp.com/email-action',
+      handleCodeInApp: true,
+      androidPackageName: 'com.example.epbomi',
+      androidInstallApp: true,
+      androidMinimumVersion: '1',
+    );
+
+    // 3️⃣ Envoyer l’email avec lien
+    await auth.sendSignInLinkToEmail(
+      email: email,
+      actionCodeSettings: actionCodeSettings,
+    );
+    return Right('-----(....)------');
+  }
+
+  Future<Either<Failure, String>> sendActionEmail({
+    required String email,
+  }) async {
+    final auth = FirebaseAuth.instance;
+
+    final ActionCodeSettings actionCodeSettings = ActionCodeSettings(
+      url: 'https://https://authenfication-9fc25.firebaseapp.com/email-action',
+      handleCodeInApp: true,
+      androidPackageName: 'com.example.app',
+      androidInstallApp: true,
+      androidMinimumVersion: '1',
+      iOSBundleId: 'com.example.app',
+    );
+
+    await auth.sendSignInLinkToEmail(
+      email: email,
+      actionCodeSettings: actionCodeSettings,
+    );
+    return Right('-----(....)------');
+  }}

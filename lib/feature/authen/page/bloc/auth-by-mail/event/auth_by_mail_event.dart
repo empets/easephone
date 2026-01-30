@@ -12,4 +12,7 @@ class AuthByMailEvent with _$AuthByMailEvent {
   factory AuthByMailEvent.submitSignup() = SubmitAuthByMailEvent;
 
   factory AuthByMailEvent.submitSignin() = SubmitSigninMailEvent;
+
+  factory AuthByMailEvent.resetAuthentification() =
+      ResetAuthentificationSigninMailEvent;
 }

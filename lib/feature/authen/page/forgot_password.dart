@@ -37,8 +37,6 @@ class _OtpScreenState extends State<OtpScreen> {
   late bool isSignUp = false;
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -47,6 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
           create: (context) => AuthByMailBloc(
             signinUsercase: getIt<SigninUsercase>(),
             authenByMailUsercase: getIt<AuthenByMailUsercase>(),
+            googleAuthService: getIt<GoogleAuthService>(),
           ),
         ),
         BlocProvider(
@@ -128,10 +127,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
 
                       CustomeText(
-                        texte: GlobalParams.poliqueOfConfidentialite.substring(
-                          0,
-                          100,
-                        ),
+                        texte:
+                            "Nous vous avons envoyer un lien de validation dans votre adresse mail veuillez lique la dessur",
                         color: MyColorName.black,
                         fontWeight: FontWeight.w400,
                         texteSize: 13.sp,
@@ -139,11 +136,34 @@ class _OtpScreenState extends State<OtpScreen> {
                         textAlign: TextAlign.center,
                       ),
 
-                      SizedBox(height: 7.h),
+                      SizedBox(height: 0.05.sh),
                       Form(
                         key: globalKey,
                         child: Column(
                           children: [
+                            BlocBuilder<AuthByMailBloc, AuthByMailState>(
+                              builder: (context, state) {
+                                return CustomeFormsSigin(
+                                  textInputType: TextInputType.emailAddress,
+                                  readOnly: state.status.isInProgress,
+                                  prefixIcon: Icon(Icons.email_outlined),
+                                  textLabel: 'Email',
+                                  errorText:
+                                      state.email.isPure || state.email.isValid
+                                      ? null
+                                      : '',
+                                  msgError: '',
+                                  onChanged: (email) {
+                                    context.read<AuthByMailBloc>().add(
+                                      AuthByMailEvent.changeEmail(email),
+                                    );
+                                    context.read<AuthByMailBloc>().add(
+                                      AuthByMailEvent.changePassword("1"),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                             Container(
                               margin: EdgeInsets.only(top: 17.h, bottom: 20.h),
 
@@ -175,19 +195,11 @@ class _OtpScreenState extends State<OtpScreen> {
                                           ? null
                                           : () {
                                               FocusScope.of(context).unfocus();
-                                              if (!isSignUp) {
-                                                // deja un compte
-                                                log('// deja un compte');
-                                                context.read<AuthByMailBloc>().add(
-                                                  AuthByMailEvent.submitSignin(),
-                                                );
-                                              } else {
-                                                log(' // creer un compte');
-                                                // creer un compte
-                                                context.read<AuthByMailBloc>().add(
-                                                  AuthByMailEvent.submitSignup(),
-                                                );
-                                              }
+
+                                              log('// deja un compte');
+                                              context.read<AuthByMailBloc>().add(
+                                                AuthByMailEvent.resetAuthentification(),
+                                              );
                                             },
                                       btnBackground: state.status.isInProgress
                                           ? Colors.black12
@@ -195,9 +207,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                       btnTextColor: state.status.isInProgress
                                           ? MyColorName.black
                                           : MyColorName.white,
-                                      btnText: !isSignUp
-                                          ? "Sign in"
-                                          : "Sign Up",
+                                      btnText: "Envoie de lien",
                                       btnTextSize: 13.sp,
                                       elevation: 19.h,
                                     ),

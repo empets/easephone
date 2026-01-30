@@ -92,8 +92,7 @@ class _HomeOverViewState extends State<HomeOverView> {
         backgroundColor: MyColorName.backgroundIvory,
         body: SafeArea(
           top: true,
-          child: 
-          Container(
+          child: Container(
             padding: EdgeInsetsGeometry.symmetric(
               vertical: 12.h,
               horizontal: 10.w,
@@ -182,9 +181,19 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                   );
                                               FocusScope.of(context).unfocus();
                                             },
-                                      child: Icon(
-                                        Icons.search,
-                                        color: Colors.black,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 3.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: MyColorName.greyAvatar,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.search,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
                                     ),
                                     filled: true,
@@ -477,7 +486,6 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                   profile.file,
                                                                   fit: BoxFit
                                                                       .cover,
-                                                              
                                                                 ),
                                                               ),
                                                             ),
@@ -860,45 +868,54 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                               right: 4.w,
                                                               child: Stack(
                                                                 children: [
-                                                                
                                                                   Container(
-                                                            
-                                                                   
                                                                     child: Container(
-                                                                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
-                                                                          height: 0.11.sh,
-                                                                      width: 1.sw,
-                                                                        decoration: BoxDecoration(
-                                                                              color: MyColorName.cardBorder.withValues(
-                                                                                alpha: 0.3,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(
-                                                                                7.r,
-                                                                              ),
+                                                                      padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            4.w,
+                                                                        vertical:
+                                                                            5.h,
+                                                                      ),
+                                                                      height:
+                                                                          0.11.sh,
+                                                                      width:
+                                                                          1.sw,
+                                                                      decoration: BoxDecoration(
+                                                                        color: MyColorName
+                                                                            .cardBorder
+                                                                            .withValues(
+                                                                              alpha: 0.3,
                                                                             ),
-                                                                    
-                                                                      
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                              7.r,
+                                                                            ),
+                                                                      ),
+
                                                                       child: Padding(
-                                                                        padding: const EdgeInsets.all(4.0),
+                                                                        padding:
+                                                                            const EdgeInsets.all(
+                                                                              4.0,
+                                                                            ),
                                                                         child: Column(
-                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.end,
                                                                           children: [
                                                                             Row(
                                                                               children: [
                                                                                 Text(
-                                                                                      profile
-                                                                                          .specialite,
-                                                                                      style: GoogleFonts.roboto(
-                                                                                        color:
-                                                                                            Colors.white,
-                                                                                        fontSize:
-                                                                                            18.sp,
-                                                                                        fontWeight:
-                                                                                            FontWeight.w500,
-                                                                                      ),
-                                                                                    ),
-                                                                                     SizedBox(width: 10.w,),
+                                                                                  profile.specialite,
+                                                                                  style: GoogleFonts.roboto(
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 18.sp,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                  ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 10.w,
+                                                                                ),
 
                                                                                 //   Row(
                                                                                 //   children: [
@@ -918,7 +935,9 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                 // ),
                                                                               ],
                                                                             ),
-                                                                                SizedBox(height: 5.h,),
+                                                                            SizedBox(
+                                                                              height: 5.h,
+                                                                            ),
                                                                             Row(
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
@@ -941,66 +960,66 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                     ),
                                                                                   ],
                                                                                 ),
-                                                                                SizedBox(width: 10.w,),
-                                                                             
-                                                                                   
-                                                                              
-                                                                                SizedBox(width: 3.w),
-                                                                                 Row(
-                                                                                   children: [
-                                                                                  
-                                                                                     GestureDetector(
+                                                                                SizedBox(
+                                                                                  width: 10.w,
+                                                                                ),
+
+                                                                                SizedBox(
+                                                                                  width: 3.w,
+                                                                                ),
+                                                                                Row(
+                                                                                  children: [
+                                                                                    GestureDetector(
                                                                                       onTap: () {
-                                                                                           showModalBottomSheet(
-                                                              context: context,
-                                                              backgroundColor:
-                                                                  MyColorName.white,
-                                                              isScrollControlled: true,
-                                                              shape: const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius.vertical(
-                                                                      top:
-                                                                          Radius.circular(
-                                                                            25,
-                                                                          ),
-                                                                    ),
-                                                              ),
-                                                              builder:
-                                                                  (
-                                                                    BuildContext
-                                                                    context,
-                                                                  ) {
-                                                                    return HomeDetails(
-                                                                      profile: profile,
-                                                                    );
-                                                                  },
-                                                            );
-                                                                                        
-                                                                                      },
-                                                                                       child: Container(
-                                                                                        padding: EdgeInsets.symmetric(vertical: 9.h, horizontal: 12.w),
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: MyColorName.backgroundIvory,
-                                                                                          borderRadius: BorderRadius.circular(8.r),
-                                                                                        ),
-                                                                                         child: Text(
-                                                                                              "Voir plus",
-                                                                                              style: GoogleFonts.roboto(
-                                                                                                color: Colors.black,
-                                                                                                fontSize: 12.sp,
-                                                                                                fontWeight: FontWeight.w500,
+                                                                                        showModalBottomSheet(
+                                                                                          context: context,
+                                                                                          backgroundColor: MyColorName.white,
+                                                                                          isScrollControlled: true,
+                                                                                          shape: const RoundedRectangleBorder(
+                                                                                            borderRadius: BorderRadius.vertical(
+                                                                                              top: Radius.circular(
+                                                                                                25,
                                                                                               ),
                                                                                             ),
-                                                                                       ),
-                                                                                     ),
-                                                                                   ],
-                                                                                 )
+                                                                                          ),
+                                                                                          builder:
+                                                                                              (
+                                                                                                BuildContext context,
+                                                                                              ) {
+                                                                                                return HomeDetails(
+                                                                                                  profile: profile,
+                                                                                                );
+                                                                                              },
+                                                                                        );
+                                                                                      },
+                                                                                      child: Container(
+                                                                                        padding: EdgeInsets.symmetric(
+                                                                                          vertical: 9.h,
+                                                                                          horizontal: 12.w,
+                                                                                        ),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: MyColorName.backgroundIvory,
+                                                                                          borderRadius: BorderRadius.circular(
+                                                                                            8.r,
+                                                                                          ),
+                                                                                        ),
+                                                                                        child: Text(
+                                                                                          "Voir plus",
+                                                                                          style: GoogleFonts.roboto(
+                                                                                            color: Colors.black,
+                                                                                            fontSize: 12.sp,
+                                                                                            fontWeight: FontWeight.w500,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
                                                                               ],
                                                                             ),
                                                                           ],
                                                                         ),
                                                                       ),
-                                                                   
                                                                     ),
                                                                   ),
                                                                   // Positioned(
@@ -1055,30 +1074,30 @@ class _HomeOverViewState extends State<HomeOverView> {
 
                                                         // GestureDetector(
                                                         //   onTap: () {
-                                                            // showModalBottomSheet(
-                                                            //   context: context,
-                                                            //   backgroundColor:
-                                                            //       MyColorName.white,
-                                                            //   isScrollControlled: true,
-                                                            //   shape: const RoundedRectangleBorder(
-                                                            //     borderRadius:
-                                                            //         BorderRadius.vertical(
-                                                            //           top:
-                                                            //               Radius.circular(
-                                                            //                 25,
-                                                            //               ),
-                                                            //         ),
-                                                            //   ),
-                                                            //   builder:
-                                                            //       (
-                                                            //         BuildContext
-                                                            //         context,
-                                                            //       ) {
-                                                            //         return HomeDetails(
-                                                            //           profile: profile,
-                                                            //         );
-                                                            //       },
-                                                            // );
+                                                        // showModalBottomSheet(
+                                                        //   context: context,
+                                                        //   backgroundColor:
+                                                        //       MyColorName.white,
+                                                        //   isScrollControlled: true,
+                                                        //   shape: const RoundedRectangleBorder(
+                                                        //     borderRadius:
+                                                        //         BorderRadius.vertical(
+                                                        //           top:
+                                                        //               Radius.circular(
+                                                        //                 25,
+                                                        //               ),
+                                                        //         ),
+                                                        //   ),
+                                                        //   builder:
+                                                        //       (
+                                                        //         BuildContext
+                                                        //         context,
+                                                        //       ) {
+                                                        //         return HomeDetails(
+                                                        //           profile: profile,
+                                                        //         );
+                                                        //       },
+                                                        // );
                                                         //   },
                                                         //   child: Container(
                                                         //     padding:
@@ -1099,18 +1118,18 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                         //               alignment:
                                                         //                   Alignment
                                                         //                       .bottomLeft,
-                                                                      // child: Text(
-                                                                      //   profile
-                                                                      //       .specialite,
-                                                                      //   style: GoogleFonts.roboto(
-                                                                      //     color:
-                                                                      //         Colors.black,
-                                                                      //     fontSize:
-                                                                      //         18.sp,
-                                                                      //     fontWeight:
-                                                                      //         FontWeight.w500,
-                                                                      //   ),
-                                                                      // ),
+                                                        // child: Text(
+                                                        //   profile
+                                                        //       .specialite,
+                                                        //   style: GoogleFonts.roboto(
+                                                        //     color:
+                                                        //         Colors.black,
+                                                        //     fontSize:
+                                                        //         18.sp,
+                                                        //     fontWeight:
+                                                        //         FontWeight.w500,
+                                                        //   ),
+                                                        // ),
                                                         //             ),
                                                         //             BlocBuilder<
                                                         //               GetUserProfileBloc,
@@ -1368,17 +1387,17 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                         //                         SizedBox(
                                                         //                           width: 5.w,
                                                         //                         ),
-                                                                                // Text(
-                                                                                //   profile.adresse.substring(
-                                                                                //     0,
-                                                                                //     20,
-                                                                                //   ),
-                                                                                //   style: GoogleFonts.roboto(
-                                                                                //     color: Colors.grey.shade600,
-                                                                                //     fontSize: 12.sp,
-                                                                                //     fontWeight: FontWeight.w400,
-                                                                                //   ),
-                                                                                // ),
+                                                        // Text(
+                                                        //   profile.adresse.substring(
+                                                        //     0,
+                                                        //     20,
+                                                        //   ),
+                                                        //   style: GoogleFonts.roboto(
+                                                        //     color: Colors.grey.shade600,
+                                                        //     fontSize: 12.sp,
+                                                        //     fontWeight: FontWeight.w400,
+                                                        //   ),
+                                                        // ),
                                                         //                       ],
                                                         //                     ),
                                                         //                   ],
@@ -1512,67 +1531,76 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                         //     ),
                                                         //   ),
                                                         // ),
-                                                     
                                                       ],
                                                     ),
                                                   )
-                                                :   Container(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 50.h,
-                                                ),
-                                                child: Lottie.asset(
-                                                  MyAssets.icons.emptyData.path,
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                    AlignmentGeometry.center,
-                                                child: CustomeText(
-                                                  texte:
-                                                      "Aucune donnée disponible rafechiser la page",
-
-                                                  texteSize: 14.sp,
-                                                ),
-                                              ),
-
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 0.26.sh,
-                                                ),
-                                                child: CustomeButton(
-                                                  btnBackground:
-                                                      MyColorName.black,
-                                                  btnTextColor:
-                                                      MyColorName.white,
-                                                  btnText: 'Rafrechir',
-                                                  btnTextSize: 13.sp,
-                                                  onTap: () {
-                                                    context
-                                                        .read<
-                                                          GetActifUserInformationBloc
-                                                        >()
-                                                        .add(
-                                                          FiltreEvent.filtre(
-                                                            filterIsActif:
-                                                                false,
-                                                            adresse: "",
+                                                : Container(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                top: 50.h,
+                                                              ),
+                                                          child: Lottie.asset(
+                                                            MyAssets
+                                                                .icons
+                                                                .emptyData
+                                                                .path,
                                                           ),
-                                                        );
-                                                    FocusScope.of(
-                                                      context,
-                                                    ).unfocus();
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                     
+                                                        ),
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentGeometry
+                                                                  .center,
+                                                          child: CustomeText(
+                                                            texte:
+                                                                "Aucune donnée disponible rafechiser la page",
+
+                                                            texteSize: 14.sp,
+                                                          ),
+                                                        ),
+
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                top: 0.26.sh,
+                                                              ),
+                                                          child: CustomeButton(
+                                                            btnBackground:
+                                                                MyColorName
+                                                                    .black,
+                                                            btnTextColor:
+                                                                MyColorName
+                                                                    .white,
+                                                            btnText:
+                                                                'Rafrechir',
+                                                            btnTextSize: 13.sp,
+                                                            onTap: () {
+                                                              context
+                                                                  .read<
+                                                                    GetActifUserInformationBloc
+                                                                  >()
+                                                                  .add(
+                                                                    FiltreEvent.filtre(
+                                                                      filterIsActif:
+                                                                          false,
+                                                                      adresse:
+                                                                          "",
+                                                                    ),
+                                                                  );
+                                                              FocusScope.of(
+                                                                context,
+                                                              ).unfocus();
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
                                           },
                                         ),
                                       );
@@ -1794,7 +1822,8 @@ class _UserProfileState extends State<UserProfile> {
                                               SvgPicture.asset(
                                                 MyAssets
                                                     .icons
-                                                    .undrawToDoListO3jf                                                    .path,
+                                                    .undrawToDoListO3jf
+                                                    .path,
                                                 fit: BoxFit.cover,
                                               ),
                                           snapshot.data!.profileImage
@@ -1822,15 +1851,17 @@ class _UserProfileState extends State<UserProfile> {
                                                       BorderRadius.circular(12),
                                                 );
                                               },
-                                          errorBuilder: (_, __, ___) =>
-                                              ClipOval(
-                                                child: Image.asset(
-                                                  MyAssets.icons.profileAvatarPlaceholderLarge.path,
-                                                  fit: BoxFit.contain,
-                                                  height: 0.08.sh,
-                                                  width: 0.08.sh,
-                                                ),
-                                              ),
+                                          errorBuilder: (_, __, ___) => ClipOval(
+                                            child: Image.asset(
+                                              MyAssets
+                                                  .icons
+                                                  .profileAvatarPlaceholderLarge
+                                                  .path,
+                                              fit: BoxFit.contain,
+                                              height: 0.08.sh,
+                                              width: 0.08.sh,
+                                            ),
+                                          ),
                                           snapshot.data!.profileImage
                                               .toString(),
                                           fit: BoxFit.cover,
@@ -1838,20 +1869,19 @@ class _UserProfileState extends State<UserProfile> {
                                           width: 0.08.sh,
                                         ),
                                       );
-                                    
-                                     
-                                    // CircleAvatar(
-                                    //     radius: 27.r,
-                                    //     backgroundColor: MyColorName.greyAvatar,
-                                    //     child: Text(
-                                    //       state.data.email.substring(0, 2),
-                                    //       style: GoogleFonts.roboto(
-                                    //         color: Colors.black,
-                                    //         fontSize: 18.sp,
-                                    //         fontWeight: FontWeight.w700,
-                                    //       ),
-                                    //     ),
-                                    //   );
+
+                                // CircleAvatar(
+                                //     radius: 27.r,
+                                //     backgroundColor: MyColorName.greyAvatar,
+                                //     child: Text(
+                                //       state.data.email.substring(0, 2),
+                                //       style: GoogleFonts.roboto(
+                                //         color: Colors.black,
+                                //         fontSize: 18.sp,
+                                //         fontWeight: FontWeight.w700,
+                                //       ),
+                                //     ),
+                                //   );
                               },
                             ),
                           ),

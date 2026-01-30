@@ -1,6 +1,5 @@
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
-import 'package:com.example.epbomi/core/global_params/global_params.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
@@ -22,6 +21,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   late bool isSignUp = false;
   final FocusNode _focusNode = FocusNode();
 
+  List<Map<String, dynamic>> onboardingItem = [
+    {
+      'image': MyAssets.icons.backImage.path,
+      'title': 'Bienvenue dans votre hôtel',
+      'description':
+          'Commandez des services, découvrez les profils et profitez pleinement de votre séjour, directement depuis l’application.',
+    },
+    {
+      'image': MyAssets.icons.pexelsCottonbro4065165.path,
+      'title': 'Reservez, en toute simplicité',
+      'description':
+          'Room service, ménage, blanchisserie ou assistance : passez vos reservation en quelques clics, sans appeler la réception.',
+    },
+    {
+      'image': MyAssets.icons.pexelsVruyrMartirosyan14473542792902.path,
+      'title': 'Un séjour plus agréable',
+      'description':
+          'Gagnez du temps, évitez les déplacements et profitez d’un service rapide et personnalisé.',
+    },
+  ];
+
   @override
   void dispose() {
     _focusNode.dispose();
@@ -38,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
 
       body: ListView.builder(
-        itemCount: 3,
+        itemCount: onboardingItem.length,
         controller: controller,
         scrollDirection: Axis.horizontal, // 🔥 horizontal
         physics: const PageScrollPhysics(), // 🔥 effet page
@@ -52,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Stack(
                   children: [
                     Image.asset(
-                      MyAssets.icons.backImage.path,
+                      onboardingItem[index]['image'],
                       fit: BoxFit.cover,
                       height: 0.5.sh,
                       width: MediaQuery.of(context).size.width,
@@ -85,7 +105,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SizedBox(height: 0.03.sh),
 
                 CustomeText(
-                  texte: 'Casa new place is here',
+                  texte: onboardingItem[index]['title'],
                   color: MyColorName.black,
                   fontWeight: FontWeight.w400,
                   texteSize: 20.sp,
@@ -93,16 +113,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                 SizedBox(height: 15.h),
 
-                CustomeText(
-                  texte: GlobalParams.poliqueOfConfidentialite.substring(
-                    0,
-                    100,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: CustomeText(
+                    texte: onboardingItem[index]['description'],
+                    color: MyColorName.black,
+                    fontWeight: FontWeight.w400,
+                    texteSize: 13.sp,
+                    letterSpacing: 0.2.sp,
+                    textAlign: TextAlign.center,
                   ),
-                  color: MyColorName.black,
-                  fontWeight: FontWeight.w400,
-                  texteSize: 13.sp,
-                  letterSpacing: 0.2.sp,
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),
@@ -120,7 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               alignment: Alignment.bottomRight,
               child: SmoothPageIndicator(
                 controller: controller,
-                count: 3,
+                count: onboardingItem.length,
                 effect: ColorTransitionEffect(
                   dotColor: MyColorName.greyBorder,
                   activeDotColor: Colors.black,

@@ -228,40 +228,30 @@ class _HomeDetailsState extends State<HomeDetails>
                                 borderRadius: BorderRadiusGeometry.circular(
                                   7.r,
                                 ),
-                                child:  Image.network(
+                                child: Image.network(
                                   loadingBuilder:
-                                      (
-                                        context,
-                                        child,
-                                        loadingProgress,
-                                      ) {
+                                      (context, child, loadingProgress) {
                                         if (loadingProgress == null)
                                           return child;
-                                
+
                                         return ImageShimmer(
                                           height: 0.08.sh,
                                           width: 0.08.sh,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         );
                                       },
                                   errorBuilder: (_, __, ___) =>
                                       SvgPicture.asset(
-                                        MyAssets
-                                            .icons
-                                            .undrawToDoListO3jf                                                    .path,
+                                        MyAssets.icons.undrawToDoListO3jf.path,
                                         fit: BoxFit.cover,
                                       ),
-                                  widget.profile.file
-                                      .toString(),
+                                  widget.profile.file.toString(),
                                   fit: BoxFit.cover,
                                   height: 0.08.sh,
                                   width: 0.08.sh,
-                                )
-                                   
-                                
-                                
-                               
+                                ),
                               ),
                             );
                           },
@@ -353,40 +343,29 @@ class _HomeDetailsState extends State<HomeDetails>
                       CircleAvatar(
                         radius: 26.r,
                         child: ClipOval(
-                          child:Image.network(
-                                  loadingBuilder:
-                                      (
-                                        context,
-                                        child,
-                                        loadingProgress,
-                                      ) {
-                                        if (loadingProgress == null)
-                                          return child;
-                                
-                                        return ImageShimmer(
-                                          height: 0.08.sh,
-                                          width: 0.08.sh,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        );
-                                      },
-                                  errorBuilder: (_, __, ___) =>
-                                  Image.asset(
-                                    MyAssets.icons.profileAvatarPlaceholderLarge.path,
-                                    fit: BoxFit.cover,
-                                    height: 0.08.sh,
-                                    width: 0.08.sh,
-                                  ),
-                                     
-                                  widget.profile.profileImage,
-                                  fit: BoxFit.cover,
-                                  height: 0.08.sh,
-                                  width: 0.08.sh,
-                                )
-                          
-                          
-                          
-                          
+                          child: Image.network(
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+
+                              return ImageShimmer(
+                                height: 0.08.sh,
+                                width: 0.08.sh,
+                                borderRadius: BorderRadius.circular(12),
+                              );
+                            },
+                            errorBuilder: (_, __, ___) => Image.asset(
+                              MyAssets.icons.profileAvatarPlaceholderLarge.path,
+                              fit: BoxFit.cover,
+                              height: 0.08.sh,
+                              width: 0.08.sh,
+                            ),
+
+                            widget.profile.profileImage,
+                            fit: BoxFit.cover,
+                            height: 0.08.sh,
+                            width: 0.08.sh,
+                          ),
+
                           //  Image.network(
                           //   widget.profile.profileImage,
                           //   width: 60.r,
@@ -399,7 +378,6 @@ class _HomeDetailsState extends State<HomeDetails>
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                       
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -515,53 +493,50 @@ class _HomeDetailsState extends State<HomeDetails>
                       ],
                     ),
                   ),
-                     Container(
-                        margin: EdgeInsets.symmetric(vertical: 1.h),
-                       child: Row(
-                         children: [
-                          Container(
-                                   margin: EdgeInsets.only(
-                                     top: 3.h,
-                                     left: 8.w,
-                                   ),
-                                   child:  Row(
-                                     children: [
-                                        CustomeText(
-                       texte: 'Prix',
-                       texteSize: 13.sp,
-                       color: MyColorName.black,
-                       fontWeight: FontWeight.w600,
-                       letterSpacing: 0.3.sp,
-                     ),
-                     SizedBox(width: 5.w),
-                                       Icon(
-                                         Icons.bed_rounded,
-                                         color: Colors.grey.shade500,
-                                         // size: 18.sp,
-                                       ),
-                                       SizedBox(width: 2.w),
-                                       Text(
-                                         ': ${widget.profile.prixMin} fcfa à ${widget.profile.prixMax} fcfa la nuité',
-                                         style: GoogleFonts.roboto(
-                                           fontSize: 12.sp,
-                                           color: MyColorName.black,
-                                           fontWeight: FontWeight.w400,
-                                           letterSpacing: 0.3.sp,
-                                         ),
-                                       ),
-                                     ],
-                                   ) 
-                                 )
-                         ],
-                       ),
-                     ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 1.h),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 3.h, left: 8.w),
+                          child: Row(
+                            children: [
+                              CustomeText(
+                                texte: 'Prix',
+                                texteSize: 13.sp,
+                                color: MyColorName.black,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.3.sp,
+                              ),
+                              SizedBox(width: 5.w),
+                              Icon(
+                                Icons.bed_rounded,
+                                color: Colors.grey.shade500,
+                                // size: 18.sp,
+                              ),
+                              SizedBox(width: 0.w),
+                              Text(
+                                ': ${widget.profile.prixMin} à ${widget.profile.prixMax} fcfa la nuité',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 12.sp,
+                                  color: MyColorName.black,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 0.3.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   Row(
                     children: [
                       Container(
                         margin: EdgeInsets.only(top: 8.h, left: 8.w),
                         child: CustomeText(
-                          texte: 'Caratéristique:',
+                          texte: 'Caratéristique',
                           texteSize: 13.sp,
                           color: MyColorName.black,
                           fontWeight: FontWeight.w600,
@@ -579,25 +554,27 @@ class _HomeDetailsState extends State<HomeDetails>
                                       top: 7.h,
                                       left: 8.w,
                                     ),
-                                    child: widget.profile.averageBed != '0' ? Row(
-                                      children: [
-                                        Icon(
-                                          Icons.bed_rounded,
-                                          color: Colors.grey.shade500,
-                                          size: 18.sp,
-                                        ),
-                                        SizedBox(width: 5.w),
-                                        Text(
-                                          'Lit : ${widget.profile.averageBed}',
-                                          style: GoogleFonts.roboto(
-                                            fontSize: 12.sp,
-                                            color: MyColorName.black,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 0.3.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    ): SizedBox()
+                                    child: widget.profile.averageBed != '0'
+                                        ? Row(
+                                            children: [
+                                              Icon(
+                                                Icons.bed_rounded,
+                                                color: Colors.grey.shade500,
+                                                size: 18.sp,
+                                              ),
+                                              SizedBox(width: 5.w),
+                                              Text(
+                                                'Lit : ${widget.profile.averageBed}',
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 12.sp,
+                                                  color: MyColorName.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  letterSpacing: 0.3.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox(),
                                   )
                                 : index == 0
                                 ? Container(
@@ -615,7 +592,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          'Roome : ${widget.profile.roomNumber}',
+                                          'Chambre: ${widget.profile.roomNumber}',
                                           style: GoogleFonts.roboto(
                                             fontSize: 12.sp,
                                             color: MyColorName.black,
@@ -634,13 +611,13 @@ class _HomeDetailsState extends State<HomeDetails>
                                     child: Row(
                                       children: [
                                         Icon(
-                                          Icons.restaurant_menu_sharp,
+                                          Icons.fastfood,
                                           color: Colors.grey.shade600,
                                           size: 18.sp,
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
-                                          ': ${widget.profile.option}',
+                                          'restoration: ${widget.profile.option}',
                                           style: GoogleFonts.roboto(
                                             fontSize: 12.sp,
                                             color: MyColorName.black,
@@ -673,7 +650,11 @@ class _HomeDetailsState extends State<HomeDetails>
                     children: [
                       Container(
                         height: 0.08.sh,
-                        margin: EdgeInsets.only(top: 8.h, left: 8.w,  bottom: 10.h),
+                        margin: EdgeInsets.only(
+                          top: 8.h,
+                          left: 8.w,
+                          bottom: 10.h,
+                        ),
                         child: CustomeText(
                           texte: widget.profile.description,
                           texteSize: 12.sp,
@@ -711,8 +692,7 @@ class _HomeDetailsState extends State<HomeDetails>
                                 onTap: () {
                                   openWhatsApp(
                                     '225${widget.profile.whatsappContact}',
-                                    message:
-                                        '',
+                                    message: '',
                                   );
                                 },
                               ),

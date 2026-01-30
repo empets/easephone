@@ -55,14 +55,15 @@ extension AuthByMailEventPatterns on AuthByMailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult Function( SubmitAuthByMailEvent value)?  submitSignup,TResult Function( SubmitSigninMailEvent value)?  submitSignin,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult Function( SubmitAuthByMailEvent value)?  submitSignup,TResult Function( SubmitSigninMailEvent value)?  submitSignin,TResult Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that);case ChangePasswordAuthByMailEvent() when changePassword != null:
 return changePassword(_that);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup(_that);case SubmitSigninMailEvent() when submitSignin != null:
-return submitSignin(_that);case _:
+return submitSignin(_that);case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
+return resetAuthentification(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return submitSignin(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeEmailAuthByMailEvent value)  changeEmail,required TResult Function( ChangePasswordAuthByMailEvent value)  changePassword,required TResult Function( SubmitAuthByMailEvent value)  submitSignup,required TResult Function( SubmitSigninMailEvent value)  submitSignin,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeEmailAuthByMailEvent value)  changeEmail,required TResult Function( ChangePasswordAuthByMailEvent value)  changePassword,required TResult Function( SubmitAuthByMailEvent value)  submitSignup,required TResult Function( SubmitSigninMailEvent value)  submitSignin,required TResult Function( ResetAuthentificationSigninMailEvent value)  resetAuthentification,}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent():
 return changeEmail(_that);case ChangePasswordAuthByMailEvent():
 return changePassword(_that);case SubmitAuthByMailEvent():
 return submitSignup(_that);case SubmitSigninMailEvent():
-return submitSignin(_that);case _:
+return submitSignin(_that);case ResetAuthentificationSigninMailEvent():
+return resetAuthentification(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return submitSignin(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult? Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult? Function( SubmitAuthByMailEvent value)?  submitSignup,TResult? Function( SubmitSigninMailEvent value)?  submitSignin,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult? Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult? Function( SubmitAuthByMailEvent value)?  submitSignup,TResult? Function( SubmitSigninMailEvent value)?  submitSignin,TResult? Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that);case ChangePasswordAuthByMailEvent() when changePassword != null:
 return changePassword(_that);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup(_that);case SubmitSigninMailEvent() when submitSignin != null:
-return submitSignin(_that);case _:
+return submitSignin(_that);case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
+return resetAuthentification(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return submitSignin(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email)?  changeEmail,TResult Function( String password)?  changePassword,TResult Function()?  submitSignup,TResult Function()?  submitSignin,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email)?  changeEmail,TResult Function( String password)?  changePassword,TResult Function()?  submitSignup,TResult Function()?  submitSignin,TResult Function()?  resetAuthentification,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent() when changePassword != null:
 return changePassword(_that.password);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup();case SubmitSigninMailEvent() when submitSignin != null:
-return submitSignin();case _:
+return submitSignin();case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
+return resetAuthentification();case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return submitSignin();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email)  changeEmail,required TResult Function( String password)  changePassword,required TResult Function()  submitSignup,required TResult Function()  submitSignin,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email)  changeEmail,required TResult Function( String password)  changePassword,required TResult Function()  submitSignup,required TResult Function()  submitSignin,required TResult Function()  resetAuthentification,}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent():
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent():
 return changePassword(_that.password);case SubmitAuthByMailEvent():
 return submitSignup();case SubmitSigninMailEvent():
-return submitSignin();case _:
+return submitSignin();case ResetAuthentificationSigninMailEvent():
+return resetAuthentification();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return submitSignin();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email)?  changeEmail,TResult? Function( String password)?  changePassword,TResult? Function()?  submitSignup,TResult? Function()?  submitSignin,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email)?  changeEmail,TResult? Function( String password)?  changePassword,TResult? Function()?  submitSignup,TResult? Function()?  submitSignin,TResult? Function()?  resetAuthentification,}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent() when changePassword != null:
 return changePassword(_that.password);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup();case SubmitSigninMailEvent() when submitSignin != null:
-return submitSignin();case _:
+return submitSignin();case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
+return resetAuthentification();case _:
   return null;
 
 }
@@ -377,6 +383,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'AuthByMailEvent.submitSignin()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class ResetAuthentificationSigninMailEvent implements AuthByMailEvent {
+   ResetAuthentificationSigninMailEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetAuthentificationSigninMailEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthByMailEvent.resetAuthentification()';
 }
 
 

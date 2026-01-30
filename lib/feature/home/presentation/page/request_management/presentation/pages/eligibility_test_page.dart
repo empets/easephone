@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:com.example.epbomi/core/geocoding/data/datasources/nominatim_datasource.dart';
 import 'package:com.example.epbomi/core/geocoding/data/repositories/geocoding_repository_impl.dart';
@@ -23,9 +25,12 @@ import 'package:com.example.epbomi/feature/home/presentation/page/request_manage
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:latlong2/latlong.dart';
 
 enum PermissionState { notAsked, granted, denied }
 
@@ -79,7 +84,8 @@ class _EligibilityTestPageContent extends StatefulWidget {
       _EligibilityTestPageState();
 }
 
-class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
+class _EligibilityTestPageState extends State<_EligibilityTestPageContent>
+    with TickerProviderStateMixin {
   PermissionState _permissionState = PermissionState.notAsked;
   SheetView _currentView = SheetView.form;
   MapLocation _selectedLocation = MapConstants.defaultLocation;
@@ -105,6 +111,7 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
   @override
   void initState() {
     super.initState();
+    loadRoute();
 
     // Check permission preference and show dialog or fetch location
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -346,6 +353,139 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
     return (screenHeight * _sheetExtent) + 12;
   }
 
+  String distanceBetweenTowPoint(
+    double startLatitude,
+    double startLongitude,
+    double endLatitude,
+    double endLongitude,
+  ) {
+    final distances = Geolocator.distanceBetween(
+      startLatitude,
+      startLongitude,
+      endLatitude,
+      endLongitude,
+    );
+
+    return "${(distances / 1000).toStringAsFixed(2)} ";
+  }
+
+  String formatDistance(double meters) {
+    if (meters < 1000) {
+      return "${meters.round()} m";
+    } else {
+      double km = meters / 1000;
+      return "${km % 1 == 0 ? km.toInt() : km.toStringAsFixed(1)} km";
+    }
+  }
+
+  final MapController _mapController = MapController();
+  late MapController mapController;
+
+  void _animatedMapMove(LatLng destLocation, double dezoomer) {
+    // Décalage pour que le marqueur soit plus haut dans l’écran
+    const double offsetLatitude = -0.002;
+
+    // Nouveau point où la caméra doit aller (un peu plus haut que le marqueur)
+    final LatLng cameraTarget = LatLng(
+      destLocation.latitude + offsetLatitude,
+      destLocation.longitude,
+    );
+
+    final latTween = Tween<double>(
+      begin: mapController.camera.center.latitude,
+      end: cameraTarget.latitude,
+    );
+    final lngTween = Tween<double>(
+      begin: mapController.camera.center.longitude,
+      end: cameraTarget.longitude,
+    );
+    final zoomTween = Tween<double>(
+      begin: mapController.camera.zoom,
+      end: dezoomer,
+    );
+
+    final controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    final animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.fastOutSlowIn,
+    );
+
+    controller.addListener(() {
+      mapController.move(
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
+    });
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
+        controller.dispose();
+      }
+    });
+
+    controller.forward();
+  }
+
+  Future<List<LatLng>> getRouteOSRM(LatLng start, LatLng end) async {
+    final url =
+        'https://router.project-osrm.org/route/v1/driving/'
+        '${start.longitude},${start.latitude};'
+        '${end.longitude},${end.latitude}'
+        '?overview=full&geometries=geojson';
+
+    final response = await http.get(Uri.parse(url));
+
+    final data = jsonDecode(response.body);
+
+    final List coordinates = data['routes'][0]['geometry']['coordinates'];
+
+    return coordinates.map<LatLng>((c) => LatLng(c[1], c[0])).toList();
+  }
+
+  List<LatLng> routePoints = [];
+
+  Future<void> loadRoute() async {
+    routePoints = await getRouteOSRM(
+      LatLng(5.345317, -4.024429),
+      LatLng(5.360000, -4.008300),
+    );
+    setState(() {});
+  }
+
+  // /// Calcule la distance entre deux points et retourne un texte avec unité
+  // String distanceBetweenTwoPoints(
+  //   double startLatitude,
+  //   double startLongitude,
+  //   double endLatitude,
+  //   double endLongitude,
+  // ) {
+  //   // distance en mètres
+  //   final distanceInMeters = Geolocator.distanceBetween(
+  //     startLatitude,
+  //     startLongitude,
+  //     endLatitude,
+  //     endLongitude,
+  //   );
+
+  //   // formate avec m ou km
+  //   return formatDistances(distanceInMeters);
+  // }
+
+  // /// Formate une distance en mètres ou kilomètres
+  // String formatDistances(double meters) {
+  //   if (meters < 1000) {
+  //     return "${meters.round()} mk"; // < 1 km → m
+  //   } else {
+  //     double km = meters / 1000;
+  //     return "${km % 1 == 0 ? km.toInt() : km.toStringAsFixed(1)} km"; // ≥ 1 km → km
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -387,7 +527,6 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                     color: Colors.black,
                     size: 40,
                   ),
-
                   MapMarkerData(
                     location: MapLocation(
                       latitude: double.parse(widget.profile.lat),
@@ -406,6 +545,78 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                   });
                 },
               )
+            // FlutterMap(
+            //   mapController: _mapController,
+            //   options: MapOptions(
+            //     onTap: (tapPosition, point) {
+            //       _animatedMapMove(point, 17);
+            //     },
+            //     initialCenter: LatLng(
+            //       double.parse(widget.profile.lat),
+            //       double.parse(widget.profile.long),
+            //     ),
+            //     initialZoom: 18,
+            //     maxZoom: 23,
+            //     minZoom: 16,
+            //   ),
+            //   children: [
+            //     TileLayer(
+            //       urlTemplate:
+            //           'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            //       userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+            //     ),
+            //     MarkerLayer(
+            //       alignment: Alignment.topCenter,
+            //       markers: [
+            //         Marker(
+            //           rotate: true,
+            //           // width: 100.h,
+            //           // height: 100.h,
+            //           point: LatLng(
+            //             _selectedLocation.latitude,
+            //             _selectedLocation.longitude,
+            //           ),
+            //           child: Icon(
+            //             Icons.location_history,
+            //             color: Colors.black,
+            //           ),
+            //         ),
+            //         Marker(
+            //           rotate: true,
+            //           // width: 100.h,
+            //           // height: 100.h,
+            //           point: LatLng(
+            //             double.parse(widget.profile.lat),
+            //             double.parse(widget.profile.long),
+            //           ),
+            //           child: Icon(
+            //             Icons.home_work_rounded,
+            //             size: 20.r,
+            //             color: Colors.black,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //     // PolylineLayer(
+            //     //   polylines: [
+            //     //     Polyline(
+            //     //       points: [
+            //     //         LatLng(
+            //     //           double.parse(widget.profile.lat),
+            //     //           double.parse(widget.profile.long),
+            //     //         ),
+            //     //         LatLng(
+            //     //           _selectedLocation.latitude,
+            //     //           _selectedLocation.longitude,
+            //     //         ),
+            //     //       ],
+            //     //       color: Colors.blue,
+            //     //       strokeWidth: 4,
+            //     //     ),
+            //     //   ],
+            //     // ),
+            //   ],
+            // )
             else
               LocationDeniedMessage(onAuthorize: _handleAuthorize),
 
@@ -594,6 +805,53 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent> {
                   onRecenter: _mapRecenter!,
                 ),
               ),
+
+            // Positioned(
+            //   left: 16,
+            //   bottom: 60.h,
+            //   child: Material(
+            //     elevation: 4,
+            //     shape: const CircleBorder(),
+            //     child: InkWell(
+            //       onTap: () => Navigator.maybePop(context),
+            //       borderRadius: BorderRadius.circular(24),
+            //       child: Container(
+            //         padding: EdgeInsets.symmetric(
+            //           vertical: 6.h,
+            //           horizontal: 10.w,
+            //         ),
+            //         decoration: BoxDecoration(
+            //           color: Colors.white,
+            //           borderRadius: BorderRadius.circular(7.r),
+            //           boxShadow: [
+            //             BoxShadow(
+            //               color: Colors.black.withOpacity(0.08),
+            //               blurRadius: 10,
+            //               offset: const Offset(0, 4),
+            //             ),
+            //           ],
+            //         ),
+            //         child: Row(
+            //           children: [
+            //             Icon(
+            //               Icons.directions_run_rounded,
+            //               color: Colors.black,
+            //               size: 24,
+            //             ),
+            //             Text(
+            //               "Distance ${distanceBetweenTowPoint(double.parse(widget.profile.lat), double.parse(widget.profile.long), _selectedLocation.latitude, _selectedLocation.longitude)}",
+            //               style: GoogleFonts.roboto(
+            //                 color: Colors.grey.shade600,
+            //                 fontSize: 12.sp,
+            //                 fontWeight: FontWeight.w400,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             //   // DraggableScrollableSheet with NotificationListener
             // NotificationListener<DraggableScrollableNotification>(

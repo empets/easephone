@@ -41,7 +41,7 @@ class LocationDeniedMessage extends StatelessWidget {
               icon: const Icon(Icons.location_on),
               label: const Text('Autoriser la localisation'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,

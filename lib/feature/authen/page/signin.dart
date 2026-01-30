@@ -46,6 +46,7 @@ class _SignInState extends State<SignIn> {
           create: (context) => AuthByMailBloc(
             signinUsercase: getIt<SigninUsercase>(),
             authenByMailUsercase: getIt<AuthenByMailUsercase>(),
+            googleAuthService: getIt<GoogleAuthService>(),
           ),
         ),
         BlocProvider(
@@ -377,12 +378,17 @@ class _SignInState extends State<SignIn> {
                                             context,
                                             fadeRoute(OtpScreen()),
                                           );
-                                          GoogleAuthService.sendOtp(
-                                            '+2250788884118',
-                                          );
+                                          // GoogleAuthService.sendOtp(
+                                          //   '+2250788884118',
+                                          // );
                                           // GoogleAuthService.registerUser(
-                                          //   'emmanuelpeters965@gmail.com',
-                                          //   "0788884118",
+                                          // 'emmanuelpeters965@gmail.com',
+                                          // "Walker965@#.",
+                                          // );
+                                          // GoogleAuthService.createAccountIfNotExists(
+                                          //   email:
+                                          //       'emmanuelpeters965@gmail.com',
+                                          //   password: 'Walker965@#.',
                                           // );
                                         },
                                         child: CustomeText(
