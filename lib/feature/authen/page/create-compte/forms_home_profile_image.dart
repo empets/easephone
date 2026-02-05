@@ -50,7 +50,6 @@ class _FormsHomeProfileImageState extends State<FormsHomeProfileImage>
         listener: (context, state) {
           if (state is SuccessState<String>) {
             Navigator.of(context).pushAndRemoveUntil(fadeRoute(const HomeOverView()), (route) => false);
-             
           }
           if (state is FailedState<String>) {
             return showAppSnackBar(

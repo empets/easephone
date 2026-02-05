@@ -194,12 +194,15 @@ class _OtpScreenState extends State<OtpScreen> {
                                       onTap: state.status.isInProgress
                                           ? null
                                           : () {
-                                              FocusScope.of(context).unfocus();
-
-                                              log('// deja un compte');
-                                              context.read<AuthByMailBloc>().add(
-                                                AuthByMailEvent.resetAuthentification(),
+                                              // FocusScope.of(context).unfocus();
+                                              GoogleAuthService.sendCode(
+                                                '+2250788884118',
                                               );
+
+                                              // log('// deja un compte');
+                                              // context.read<AuthByMailBloc>().add(
+                                              //   AuthByMailEvent.resetAuthentification(),
+                                              // );
                                             },
                                       btnBackground: state.status.isInProgress
                                           ? Colors.black12

@@ -32,11 +32,6 @@ abstract class IRepositoryAuthen {
   Future<Either<Failure, String>> uploadImage(CreatCompteImage params);
   Future<Either<Failure, String?>> uploadprofileImage(CreatProfileImage params);
   Future<Either<Failure, String?>> formFiveUpdate(RequestFormsCheckFile request);
-  // current position
-  //  Future<Either<Failure, LocationData?>> getLocation();
-
-  //    Future< Either<Failure, Coordonne>> searchLocationByLatLng(
-  //   double lat,
-  //   double lon,
-  // );
+  Future<Either<Failure, String?>> uploadAdministrativeFile(RequestFormsCheckFile params);
+  
 }

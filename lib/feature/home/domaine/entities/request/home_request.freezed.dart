@@ -574,7 +574,7 @@ RequestFormsCheckFile _$RequestFormsCheckFileFromJson(
 /// @nodoc
 mixin _$RequestFormsCheckFile {
 
- String get recto; String get verso; String get formFive;
+ String get recto; String get verso; String get formFive; String get userId;
 /// Create a copy of RequestFormsCheckFile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -587,16 +587,16 @@ $RequestFormsCheckFileCopyWith<RequestFormsCheckFile> get copyWith => _$RequestF
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,recto,verso,formFive);
+int get hashCode => Object.hash(runtimeType,recto,verso,formFive,userId);
 
 @override
 String toString() {
-  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive)';
+  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive, userId: $userId)';
 }
 
 
@@ -607,7 +607,7 @@ abstract mixin class $RequestFormsCheckFileCopyWith<$Res>  {
   factory $RequestFormsCheckFileCopyWith(RequestFormsCheckFile value, $Res Function(RequestFormsCheckFile) _then) = _$RequestFormsCheckFileCopyWithImpl;
 @useResult
 $Res call({
- String recto, String verso, String formFive
+ String recto, String verso, String formFive, String userId
 });
 
 
@@ -624,11 +624,12 @@ class _$RequestFormsCheckFileCopyWithImpl<$Res>
 
 /// Create a copy of RequestFormsCheckFile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,Object? userId = null,}) {
   return _then(_self.copyWith(
 recto: null == recto ? _self.recto : recto // ignore: cast_nullable_to_non_nullable
 as String,verso: null == verso ? _self.verso : verso // ignore: cast_nullable_to_non_nullable
 as String,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -714,10 +715,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive,  String userId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SRequestFormsCheckFile() when $default != null:
-return $default(_that.recto,_that.verso,_that.formFive);case _:
+return $default(_that.recto,_that.verso,_that.formFive,_that.userId);case _:
   return orElse();
 
 }
@@ -735,10 +736,10 @@ return $default(_that.recto,_that.verso,_that.formFive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String recto,  String verso,  String formFive,  String userId)  $default,) {final _that = this;
 switch (_that) {
 case _SRequestFormsCheckFile():
-return $default(_that.recto,_that.verso,_that.formFive);case _:
+return $default(_that.recto,_that.verso,_that.formFive,_that.userId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -755,10 +756,10 @@ return $default(_that.recto,_that.verso,_that.formFive);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String recto,  String verso,  String formFive)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String recto,  String verso,  String formFive,  String userId)?  $default,) {final _that = this;
 switch (_that) {
 case _SRequestFormsCheckFile() when $default != null:
-return $default(_that.recto,_that.verso,_that.formFive);case _:
+return $default(_that.recto,_that.verso,_that.formFive,_that.userId);case _:
   return null;
 
 }
@@ -770,12 +771,13 @@ return $default(_that.recto,_that.verso,_that.formFive);case _:
 @JsonSerializable()
 
 class _SRequestFormsCheckFile implements RequestFormsCheckFile {
-   _SRequestFormsCheckFile({required this.recto, required this.verso, required this.formFive});
+   _SRequestFormsCheckFile({required this.recto, required this.verso, required this.formFive, required this.userId});
   factory _SRequestFormsCheckFile.fromJson(Map<String, dynamic> json) => _$SRequestFormsCheckFileFromJson(json);
 
 @override final  String recto;
 @override final  String verso;
 @override final  String formFive;
+@override final  String userId;
 
 /// Create a copy of RequestFormsCheckFile
 /// with the given fields replaced by the non-null parameter values.
@@ -790,16 +792,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestFormsCheckFile&&(identical(other.recto, recto) || other.recto == recto)&&(identical(other.verso, verso) || other.verso == verso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,recto,verso,formFive);
+int get hashCode => Object.hash(runtimeType,recto,verso,formFive,userId);
 
 @override
 String toString() {
-  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive)';
+  return 'RequestFormsCheckFile(recto: $recto, verso: $verso, formFive: $formFive, userId: $userId)';
 }
 
 
@@ -810,7 +812,7 @@ abstract mixin class _$SRequestFormsCheckFileCopyWith<$Res> implements $RequestF
   factory _$SRequestFormsCheckFileCopyWith(_SRequestFormsCheckFile value, $Res Function(_SRequestFormsCheckFile) _then) = __$SRequestFormsCheckFileCopyWithImpl;
 @override @useResult
 $Res call({
- String recto, String verso, String formFive
+ String recto, String verso, String formFive, String userId
 });
 
 
@@ -827,11 +829,12 @@ class __$SRequestFormsCheckFileCopyWithImpl<$Res>
 
 /// Create a copy of RequestFormsCheckFile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? recto = null,Object? verso = null,Object? formFive = null,Object? userId = null,}) {
   return _then(_SRequestFormsCheckFile(
 recto: null == recto ? _self.recto : recto // ignore: cast_nullable_to_non_nullable
 as String,verso: null == verso ? _self.verso : verso // ignore: cast_nullable_to_non_nullable
 as String,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -5,6 +5,7 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckFileBloc
     extends Bloc<CheckFileEvent, CreateCompteCheckingFileState> {
@@ -46,10 +47,13 @@ class CheckFileBloc
 
       case SubmitCheckFileEvent():
         emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+        final sharedPreferences = await SharedPreferences.getInstance();
+        final localUserSection = sharedPreferences.getString('user_section');
         final response = await compteCheckFile.call(
           RequestFormsCheckFile(
             recto: state.cnRecto.value,
             verso: state.cnvecso.value,
+            userId: localUserSection.toString(),
             formFive: 'Success',
           ),
         );

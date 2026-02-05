@@ -338,8 +338,10 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   }
 
   @override
-  Future<FirebaseResult<String?>> formFiveUpdate(RequestFormsCheckFile params) async{
-      final shared = await shareData.SharedPreferences.getInstance();
+  Future<FirebaseResult<String?>> formFiveUpdate(
+    RequestFormsCheckFile params,
+  ) async {
+    final shared = await shareData.SharedPreferences.getInstance();
 
     final localUserSection = shared.getString(
       'user_actif_by_change_profile_photo',
@@ -369,6 +371,87 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
       // 4) Retourner le key généré
       return FirebaseSuccess(localUserSection);
+    } catch (e) {
+      log('************$e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  // @override
+  // Future<FirebaseResult<String?>> uploadAdministrativeFile(
+  //   RequestFormsCheckFile params,
+  // ) async {
+
+  //      final shared = await shareData.SharedPreferences.getInstance();
+
+  //   final localUserSection = shared.getString(
+  //     'user_actif_by_change_profile_photo',
+  //   );
+
+  //   try {
+  //     final ref = FirebaseStorage.instance
+  //         .ref()
+  //         .child('profile_images')
+  //         .child('${params.userId}${DateTime.timestamp()}.jpg');
+
+  //     // final refs = FirebaseStorage.instance
+  //     //     .ref()
+  //     //     .child('profile_images')
+  //     //     .child('${params.userId}${DateTime.timestamp()}.jpg');
+
+  //     await ref.putFile(File(params.recto));
+  //     final reponse = await ref.getDownloadURL();
+
+  //     // await ref.putFile(File(params.verso));
+  //     // final tester = await refs.getDownloadURL();
+
+  //     saveImageUrl(
+  //       params.copyWith(verso: reponse),
+  //       path: 'hotel',
+  //       userId: params.userId,
+  //     );
+
+  //     // saveImageUrl(
+  //     //   params.copyWith(recto: tester),
+  //     //   path: 'hotel',
+  //     //   userId: params.userId,
+  //     // );
+  //     return FirebaseSuccess(reponse);
+  //   } catch (e) {
+  //     log('************$e');
+  //     return FirebaseError(e.toString());
+  //   }
+  // }
+
+  @override
+  Future<FirebaseResult<String?>> uploadAdministrativeFile(
+    RequestFormsCheckFile params,
+  ) async {
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('verso${params.userId}${DateTime.timestamp()}.jpg');
+
+      final refs = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('recto${params.userId}${DateTime.timestamp()}.jpg');
+
+      await ref.putFile(File(params.recto));
+      await refs.putFile(File(params.verso));
+
+      final reponse = await ref.getDownloadURL();
+      final reponses = await refs.getDownloadURL();
+
+      log('service ------>>> $reponse');
+
+      saveImageUrl(
+        params.copyWith(recto: reponse, verso: reponses),
+        path: 'hotel',
+        userId: params.userId,
+      );
+      return FirebaseSuccess(reponses);
     } catch (e) {
       log('************$e');
       return FirebaseError(e.toString());

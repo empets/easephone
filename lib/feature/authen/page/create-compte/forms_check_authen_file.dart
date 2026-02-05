@@ -13,7 +13,9 @@ import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
@@ -62,6 +64,9 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
   late String selectedOptions = "";
   TextEditingController controller = TextEditingController();
 
+  String rectoOne = "";
+  String vectoOne = "";
+
   Future<void> _imagePikers(
     ImageSource source,
     void Function(File) onImageSelected,
@@ -78,6 +83,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
       final selectedFile = File(pickedImage.path);
 
       setState(() {
+        rectoOne = pickedImage.path;
         onImageSelected(selectedFile);
       });
 
@@ -150,6 +156,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
       final selectedFile = File(pickedImage.path);
 
       setState(() {
+        vectoOne = pickedImage.path;
         onImageSelected(selectedFile);
       });
 
@@ -244,14 +251,12 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
         rawText.contains("PASSPORT");
 
     if (isCNI) {
-     
       showAppSnackBar(
         context,
         color: MyColorName.successGreen,
         iconRight: Icons.check,
         message: "Document authentifié ✅",
       );
-       
     } else {
       // Remise à l’état initial
       showAppSnackBar(
@@ -263,11 +268,57 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
+  Future<void> scanDocument() async {
+    //by default way they fetch pdf for android and png for iOS
+    dynamic scannedDocuments;
+    try {
+      scannedDocuments =
+          await FlutterDocScanner().getScanDocuments(page: 1) ??
+          'Unknown platform documents';
+
+      final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        maxWidth: 800.w, // pour réduire la taille si besoin
+        maxHeight: 800.h,
+        imageQuality: 80,
+      );
+      log('=======${pickedImage.toString()}');
+
+      if (pickedImage == null) return;
+
+      final selectedFile = File(pickedImage.path);
+
+      log('=======${selectedFile.toString()}');
+
+      setState(() {
+        rectoOne = pickedImage.path;
+      });
+    } on PlatformException {
+      scannedDocuments = 'Failed to get scanned documents.';
+    }
+    // log(scannedDocuments.toString());
+    // await _textReconginition(File(scannedDocuments));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<CheckFileBloc, CreateCompteCheckingFileState>(
       listener: (context, state) {
         if (state.status.isSuccess) {
+          Future.delayed(Duration(seconds: 1)).then((value) {
+            Navigator.push(
+              context,
+              fadeRoute(
+                BlocProvider(
+                  create: (context) => CheckFileBloc(
+                    compteCheckFile: getIt<CreateCompteCheckFile>(),
+                  ),
+                  child: const FormsHomeHebergement(),
+                ),
+              ),
+            );
+          });
+        } else if (state.errorMessage.contains('Erreur inconnue')) {
           Future.delayed(Duration(seconds: 1)).then((value) {
             Navigator.push(
               context,
@@ -296,233 +347,270 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
         body: SafeArea(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                SizedBox(height: 10.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomeText(
-                    texte: "Document d'atestation",
-                    texteSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                    color: MyColorName.textPrimaryDark,
-                  ),
-                ),
-
-                SizedBox(height: 14.h),
-
-                CustomeText(
-                  texte:
-                      "Veuillez ajouter les différentent facette de carte d'identité (CNI)",
-                  texteSize: 13.sp,
-                  fontWeight: FontWeight.w300,
-                  color: MyColorName.textPrimaryDark,
-                ),
-                SizedBox(height: 17.h),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        BlocBuilder<
-                          CheckFileBloc,
-                          CreateCompteCheckingFileState
-                        >(
-                          builder: (context, state) {
-                            return GestureDetector(
-                              onTap: () async {
-                                await _imagePikers(ImageSource.camera, (file) {
-                                  _imageFileRecto = file;
-                                  if (_imageFileRecto != null) {
-                                    context.read<CheckFileBloc>().add(
-                                      CheckFileEvent.changeGetRecto(
-                                        file.toString(),
-                                      ),
-                                    );
-                                  }
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                   vertical: 6.h,
-                                  horizontal: 10.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: MyColorName.black.withValues(
-                                    alpha: 0.05,
-                                  ),
-                                  borderRadius: BorderRadius.circular(3.r),
-                                ),
-                                child: Row(
-                                  children: [
-                                    CustomeText(
-                                      texte: "Recto",
-                                      texteSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: MyColorName.textPrimaryDark,
-                                    ),
-                                    SizedBox(width: 5.w),
-                                    Icon(Icons.camera_alt_outlined),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(height: 7.h),
-                        ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(4),
-                          child: _imageFileRecto != null
-                              ? Image.file(
-                                  _imageFileRecto!,
-                                  fit: BoxFit.cover,
-                                  height: 0.2.sh,
-                                  width: 0.2.sh,
-                                )
-                              : SvgPicture.asset(
-                                  MyAssets
-                                      .icons
-                                      .undrawTabsTlxz
-                                      .path,
-                                  fit: BoxFit.cover,
-                                  height: 0.17.sh,
-                                  width: 0.03.sh,
-                                ),
-                        ),
-                      ],
+                    SizedBox(height: 10.h),
+                    Align(
+                      alignment: Alignment.center,
+                      child: CustomeText(
+                        texte: "Document d'atestation",
+                        texteSize: 20.sp,
+                        fontWeight: FontWeight.w500,
+                        color: MyColorName.textPrimaryDark,
+                      ),
                     ),
-                    Column(
-                      children: [
-                        BlocBuilder<
-                          CheckFileBloc,
-                          CreateCompteCheckingFileState
-                        >(
-                          builder: (context, state) {
-                            return GestureDetector(
-                              onTap: () async {
-                                await _imagePikersVerso(ImageSource.camera, (
-                                  file,
-                                ) {
-                                  _imageFileVerso = file;
-                                  if (_imageFileVerso != null) {
-                                    context.read<CheckFileBloc>().add(
-                                      CheckFileEvent.changeGetVerso(
-                                        file.toString(),
-                                      ),
-                                    );
-                                  }
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 6.h,
-                                  horizontal: 10.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: MyColorName.black.withValues(
-                                    alpha: 0.05,
-                                  ),
-                                  borderRadius: BorderRadius.circular(3.r),
-                                ),
-                                child: Row(
-                                  children: [
-                                    CustomeText(
-                                      texte: "Vecto ",
-                                      texteSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: MyColorName.textPrimaryDark,
-                                    ),
 
-                                    SizedBox(width: 5.w),
-                                    Icon(Icons.camera_alt_outlined),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(height: 7.h),
-                        ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(4),
-                          child: _imageFileVerso != null
-                              ? Image.file(
-                                  _imageFileVerso!,
-                                  fit: BoxFit.cover,
-                                  height: 0.2.sh,
-                                  width: 0.2.sh,
-                                )
-                              : SvgPicture.asset(
-                                  MyAssets
-                                      .icons
-                                      .undrawHiring8szx
-                                      .path,
-                                  fit: BoxFit.cover,
-                                  height: 0.17.sh,
-                                  width: 0.015.sh,
-                                ),
-                        ),
-                      ],
+                    SizedBox(height: 14.h),
+
+                    CustomeText(
+                      texte:
+                          "Veuillez ajouter les différentent facette de carte d'identité (CNI)",
+                      texteSize: 13.sp,
+                      fontWeight: FontWeight.w300,
+                      color: MyColorName.textPrimaryDark,
                     ),
-                  ],
-                ),
-                SizedBox(height: 0.1.sh),
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomeText(
-                    texte: "Titre de propriété ",
-                    texteSize: 17.sp,
-                    fontWeight: FontWeight.w500,
-                    color: MyColorName.textPrimaryDark,
-                  ),
-                ),
-                SizedBox(height: 5.h),
-                CustomeText(
-                  texte:
-                      "Afin de vérifier votre titre de propriété nous vous prions de scaner votre document de proprité terrain.",
-                  texteSize: 13.sp,
-                  fontWeight: FontWeight.w300,
-                  color: MyColorName.textPrimaryDark,
-                ),
-                SizedBox(height: 50.h),
-                BlocBuilder<CheckFileBloc, CreateCompteCheckingFileState>(
-                  builder: (context, state) {
-                    return GestureDetector(
-                      onTap: () async {
-                        // context.read<CheckFileBloc>().add(
-                        //   CheckFileEvent.submit(),
-                        // );
-                         context.read<CheckFileBloc>().add(CheckFileEvent.submit());
-                      
-                        // await _imagePikers(ImageSource.camera, (file) {
-                        //   if (_imageFileRecto != null) {
-                           
-                        //   }
-                        // });
-                      },
-                      child: Container(
-                        child: Column(
+                    SizedBox(height: 17.h),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: CustomeText(
-                                texte: "Document de propriété",
-                                texteSize: 12.sp,
-                                fontWeight: FontWeight.w300,
-                                color: MyColorName.textPrimaryDark,
-                              ),
+                            BlocBuilder<
+                              CheckFileBloc,
+                              CreateCompteCheckingFileState
+                            >(
+                              builder: (context, state) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    await _imagePikers(ImageSource.camera, (
+                                      file,
+                                    ) {
+                                      _imageFileRecto = file;
+                                      if (_imageFileRecto != null) {
+                                        context.read<CheckFileBloc>().add(
+                                          CheckFileEvent.changeGetRecto(
+                                            rectoOne.trim().isNotEmpty
+                                                ? rectoOne
+                                                : file.toString(),
+                                          ),
+                                        );
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 6.h,
+                                      horizontal: 10.w,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: MyColorName.black.withValues(
+                                        alpha: 0.05,
+                                      ),
+                                      borderRadius: BorderRadius.circular(3.r),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        CustomeText(
+                                          texte: "Recto",
+                                          texteSize: 15.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: MyColorName.textPrimaryDark,
+                                        ),
+                                        SizedBox(width: 5.w),
+                                        Icon(Icons.camera_alt_outlined),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            SizedBox(height: 15.h),
-                            Icon(
-                              Icons.document_scanner_outlined,
-                              color: MyColorName.black.withValues(alpha: 0.5),
-                              size: 50.h,
+                            SizedBox(height: 7.h),
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(4),
+                              child: _imageFileRecto != null
+                                  ? Image.file(
+                                      _imageFileRecto!,
+                                      fit: BoxFit.cover,
+                                      height: 0.2.sh,
+                                      width: 0.2.sh,
+                                    )
+                                  : SvgPicture.asset(
+                                      MyAssets.icons.undrawTabsTlxz.path,
+                                      fit: BoxFit.cover,
+                                      height: 0.17.sh,
+                                      width: 0.03.sh,
+                                    ),
                             ),
                           ],
                         ),
+                        Column(
+                          children: [
+                            BlocBuilder<
+                              CheckFileBloc,
+                              CreateCompteCheckingFileState
+                            >(
+                              builder: (context, state) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    await _imagePikersVerso(
+                                      ImageSource.camera,
+                                      (file) {
+                                        _imageFileVerso = file;
+                                        if (_imageFileVerso != null) {
+                                          context.read<CheckFileBloc>().add(
+                                            CheckFileEvent.changeGetVerso(
+                                              vectoOne.trim().isNotEmpty
+                                                  ? vectoOne
+                                                  : file.toString(),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 6.h,
+                                      horizontal: 10.w,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: MyColorName.black.withValues(
+                                        alpha: 0.05,
+                                      ),
+                                      borderRadius: BorderRadius.circular(3.r),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        CustomeText(
+                                          texte: "Vecto ",
+                                          texteSize: 15.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: MyColorName.textPrimaryDark,
+                                        ),
+
+                                        SizedBox(width: 5.w),
+                                        Icon(Icons.camera_alt_outlined),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(height: 7.h),
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(4),
+                              child: _imageFileVerso != null
+                                  ? Image.file(
+                                      _imageFileVerso!,
+                                      fit: BoxFit.cover,
+                                      height: 0.2.sh,
+                                      width: 0.2.sh,
+                                    )
+                                  : SvgPicture.asset(
+                                      MyAssets.icons.undrawHiring8szx.path,
+                                      fit: BoxFit.cover,
+                                      height: 0.17.sh,
+                                      width: 0.015.sh,
+                                    ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 0.1.sh),
+                    Align(
+                      alignment: Alignment.center,
+                      child: CustomeText(
+                        texte: "Titre de propriété ",
+                        texteSize: 17.sp,
+                        fontWeight: FontWeight.w500,
+                        color: MyColorName.textPrimaryDark,
                       ),
-                    );
+                    ),
+                    SizedBox(height: 5.h),
+                    CustomeText(
+                      texte:
+                          "Afin de vérifier votre titre de propriété nous vous prions de scaner votre document de proprité terrain.",
+                      texteSize: 13.sp,
+                      fontWeight: FontWeight.w300,
+                      color: MyColorName.textPrimaryDark,
+                    ),
+                    SizedBox(height: 50.h),
+                    BlocBuilder<CheckFileBloc, CreateCompteCheckingFileState>(
+                      builder: (context, state) {
+                        return GestureDetector(
+                          onTap: () async {
+                            scanDocument();
+                            // context.read<CheckFileBloc>().add(
+                            //   CheckFileEvent.submit(),
+                            // );
+                            // context.read<CheckFileBloc>().add(
+                            //   CheckFileEvent.submit(),
+                            // );
+
+                            // await _imagePikers(ImageSource.camera, (file) {
+                            //   if (_imageFileRecto != null) {
+
+                            //   }
+                            // });
+                          },
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: CustomeText(
+                                    texte: "Document de propriété",
+                                    texteSize: 12.sp,
+                                    fontWeight: FontWeight.w300,
+                                    color: MyColorName.textPrimaryDark,
+                                  ),
+                                ),
+                                SizedBox(height: 15.h),
+                                Icon(
+                                  Icons.document_scanner_outlined,
+                                  color: MyColorName.black.withValues(
+                                    alpha: 0.5,
+                                  ),
+                                  size: 50.h,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+
+                BlocBuilder<CheckFileBloc, CreateCompteCheckingFileState>(
+                  builder: (context, state) {
+                    return state.status.isInProgress
+                        ? Positioned(
+                            top: 10.h,
+                            bottom: 10.h,
+                            width: 1.sw,
+                            child: Container(
+                              color: Colors.white30,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator.adaptive(
+                                    backgroundColor: MyColorName.black,
+                                    valueColor: AlwaysStoppedAnimation(
+                                      MyColorName.greyAvatar,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : SizedBox();
                   },
                 ),
               ],

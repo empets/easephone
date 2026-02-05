@@ -7,6 +7,7 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/state/
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/onboarding.dart';
 import 'package:com.example.epbomi/router/bloc/app_bloc.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,11 +29,17 @@ void main() async {
   // await LocalNotificationService.init();
   Bloc.observer = SimpleBlocObserver();
   await configureDependencies();
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
   // final prefs = await SharedPreferences.getInstance();
 
   // getIt.registerSingleton<SharedPreferences>(prefs);
   runApp(MyApp());
 }
+// await FirebaseAppCheck.instance.activate(
+//   androidProvider: AndroidProvider.playIntegrity,
+// );
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

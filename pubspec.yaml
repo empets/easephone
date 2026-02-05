@@ -158,6 +158,8 @@ dependencies:
   mnc_identifier_ocr: ^1.0.23
   insta_image_viewer: ^1.0.4
   google_mlkit_text_recognition: ^0.15.0
+  firebase_app_check: any
+  flutter_doc_scanner: ^0.0.17
  # gscankit: ^1.0.3
 
   

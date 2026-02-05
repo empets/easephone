@@ -5,7 +5,6 @@ import 'package:com.example.epbomi/core/check_connexion/checking.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
-import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_authen/firebase_stream_service.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
@@ -16,20 +15,16 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/user_list/get_user_list_bloc.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/domaine/usercase/dis_like_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_like_number.dart';
-import 'package:com.example.epbomi/feature/home/domaine/usercase/liker_profile.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/check_internet/check_connexion_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/event/like_profile_event.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_like_number.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/like_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_user_profile_information.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
-import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/pages/eligibility_test_page.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +36,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 import 'dart:ui';
 
 class HomeOverView extends StatefulWidget {

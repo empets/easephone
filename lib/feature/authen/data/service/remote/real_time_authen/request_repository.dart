@@ -25,4 +25,6 @@ abstract class FirebaseRemoteService {
   Future<FirebaseResult<String?>> uploadprofileImage(CreatProfileImage params);
 
   Future<FirebaseResult<String?>> formFiveUpdate(RequestFormsCheckFile params);
+
+   Future<FirebaseResult<String?>> uploadAdministrativeFile(RequestFormsCheckFile params);
 }

@@ -144,39 +144,44 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                 .isNotEmpty &&
                                             imageFile == null
                                         ? ClipOval(
-                                        child: Image.network(
-                                          loadingBuilder:
-                                              (
-                                                context,
-                                                child,
-                                                loadingProgress,
-                                              ) {
-                                                if (loadingProgress == null)
-                                                  return child;
+                                            child: Image.network(
+                                              loadingBuilder:
+                                                  (
+                                                    context,
+                                                    child,
+                                                    loadingProgress,
+                                                  ) {
+                                                    if (loadingProgress == null)
+                                                      return child;
 
-                                                return ImageShimmer(
-                                                  height: 0.08.sh,
-                                                  width: 0.08.sh,
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                );
-                                              },
-                                          errorBuilder: (_, __, ___) =>
-                                              ClipOval(
-                                                child: Image.asset(
-                                                  MyAssets.icons.profileAvatarPlaceholderLarge.path,
-                                                  fit: BoxFit.contain,
-                                                  height: 0.08.sh,
-                                                  width: 0.08.sh,
-                                                ),
-                                              ),
-                                          widget.userPrileImage.toString(),
-                                          fit: BoxFit.cover,
-                                          height: 0.08.sh,
-                                          width: 0.08.sh,
-                                        ),
-                                      )
-                                    : ClipOval(
+                                                    return ImageShimmer(
+                                                      height: 0.08.sh,
+                                                      width: 0.08.sh,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            12,
+                                                          ),
+                                                    );
+                                                  },
+                                              errorBuilder: (_, __, ___) =>
+                                                  ClipOval(
+                                                    child: Image.asset(
+                                                      MyAssets
+                                                          .icons
+                                                          .profileAvatarPlaceholderLarge
+                                                          .path,
+                                                      fit: BoxFit.contain,
+                                                      height: 0.08.sh,
+                                                      width: 0.08.sh,
+                                                    ),
+                                                  ),
+                                              widget.userPrileImage.toString(),
+                                              fit: BoxFit.cover,
+                                              height: 0.08.sh,
+                                              width: 0.08.sh,
+                                            ),
+                                          )
+                                        : ClipOval(
                                             child: imageFile != null
                                                 ? Image.file(
                                                     imageFile!,
@@ -184,20 +189,14 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                     height: 0.1.sh,
                                                     width: 0.1.sh,
                                                   )
-                                                : CircleAvatar(
-                                                    radius: 40.r,
-                                                    backgroundColor:
-                                                        MyColorName.greyAvatar,
-                                                    child: Text(
-                                                      state.data.email
-                                                          .substring(0, 2),
-                                                      style: GoogleFonts.roboto(
-                                                        color: Colors.black,
-                                                        fontSize: 18.sp,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
-                                                    ),
+                                                : Image.asset(
+                                                    MyAssets
+                                                        .icons
+                                                        .undrawToDoListO3jf
+                                                        .path,
+                                                    fit: BoxFit.contain,
+                                                    height: 0.08.sh,
+                                                    width: 0.08.sh,
                                                   ),
                                           ),
                                   ),
@@ -255,7 +254,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 25.h),
+                            SizedBox(height: 10.h),
                             Text(
                               state.data.email,
                               style: GoogleFonts.roboto(
@@ -636,24 +635,18 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                                         ),
                                                   );
                                                 },
-                                            errorBuilder: (_, __, ___) =>
-                                                CircleAvatar(
-                                                  radius: 40.r,
-                                                  backgroundColor:
-                                                      MyColorName.greyAvatar,
-                                                  child: Text(
-                                                    state.data.email.substring(
-                                                      0,
-                                                      2,
-                                                    ),
-                                                    style: GoogleFonts.roboto(
-                                                      color: Colors.black,
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
+                                            errorBuilder: (_, __, ___) => ClipOval(
+                                              child: Image.asset(
+                                                MyAssets
+                                                    .icons
+                                                    .profileAvatarPlaceholderLarge
+                                                    .path,
+                                                fit: BoxFit.contain,
+                                                height: 0.08.sh,
+                                                width: 0.08.sh,
+                                              ),
+                                            ),
+
                                             widget.userPrileImage,
                                             fit: BoxFit.cover,
                                             height: 0.08.sh,
@@ -708,7 +701,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 25.h),
+                          SizedBox(height: 10.h),
                           Text(
                             state.data.email,
                             style: GoogleFonts.roboto(

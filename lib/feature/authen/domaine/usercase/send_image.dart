@@ -30,3 +30,21 @@ class CreateProfileImageUsercase
     return repository.uploadprofileImage(params);
   }
 }
+
+
+
+@lazySingleton
+class CreateAdminitrativeFileUsercase
+    implements UseCase<String?, CreatProfileImage> {
+  CreateAdminitrativeFileUsercase(this.repository);
+
+  final IRepositoryAuthen repository;
+
+  @override
+  Future<Either<Failure, String?>> call(CreatProfileImage params) {
+    return repository.uploadprofileImage(params);
+  }
+}
+
+
+

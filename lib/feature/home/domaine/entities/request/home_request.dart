@@ -32,6 +32,7 @@ abstract class RequestFormsCheckFile with _$RequestFormsCheckFile {
     required String recto,
     required String verso,
     required String formFive,
+    required String userId,
   }) = _SRequestFormsCheckFile;
 
   factory RequestFormsCheckFile.fromJson(Map<String, dynamic> json) =>

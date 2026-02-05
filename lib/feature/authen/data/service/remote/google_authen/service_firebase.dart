@@ -198,4 +198,33 @@ class GoogleAuthService {
       actionCodeSettings: actionCodeSettings,
     );
     return Right('-----(....)------');
-  }}
+  }
+
+  static Future<void> sendCode(String phoneNumber) async {
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phoneNumber, // ex: +2250700000000
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Connexion automatique (Android)
+          await FirebaseAuth.instance.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print("Erreur: ${e.message}");
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          // Sauvegarde pour l’étape suivante
+          // _verificationId = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // _verificationId = verificationId;
+        },
+      );
+    } catch (e) {
+      FirebaseAuthException(
+        code: 'user-not-foun',
+        message: 'Aucun compte trouvé avec cet email',
+      );
+      log('--->> $e');
+    }
+  }
+}
