@@ -1,3 +1,4 @@
+import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 
 class LocationPermissionDialog extends StatelessWidget {
@@ -17,19 +18,13 @@ class LocationPermissionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.location_on,
-              size: 64,
-              color: Colors.orange,
-            ),
+            const Icon(Icons.location_on, size: 64, color: Colors.black),
             const SizedBox(height: 16),
             const Text(
               'Autoriser la localisation',
@@ -57,7 +52,7 @@ class LocationPermissionDialog extends StatelessWidget {
                 ElevatedButton(
                   onPressed: onAlwaysAllow,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
@@ -66,28 +61,26 @@ class LocationPermissionDialog extends StatelessWidget {
                   ),
                   child: const Text(
                     'Toujours autoriser',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton(
                   onPressed: onAccept,
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.orange,
-                    side: const BorderSide(color: Colors.orange),
+                    foregroundColor: Colors.grey.shade700,
+                    side: BorderSide(color: Colors.grey.shade400),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Autoriser une fois',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: MyColorName.black,
                     ),
                   ),
                 ),
@@ -107,6 +100,7 @@ class LocationPermissionDialog extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: MyColorName.black,
                     ),
                   ),
                 ),

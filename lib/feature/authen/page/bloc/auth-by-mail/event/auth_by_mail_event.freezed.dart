@@ -55,12 +55,13 @@ extension AuthByMailEventPatterns on AuthByMailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult Function( SubmitAuthByMailEvent value)?  submitSignup,TResult Function( SubmitSigninMailEvent value)?  submitSignin,TResult Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult Function( ChangeRemenberAuthByMailEvent value)?  changeRemenber,TResult Function( SubmitAuthByMailEvent value)?  submitSignup,TResult Function( SubmitSigninMailEvent value)?  submitSignin,TResult Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that);case ChangePasswordAuthByMailEvent() when changePassword != null:
-return changePassword(_that);case SubmitAuthByMailEvent() when submitSignup != null:
+return changePassword(_that);case ChangeRemenberAuthByMailEvent() when changeRemenber != null:
+return changeRemenber(_that);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup(_that);case SubmitSigninMailEvent() when submitSignin != null:
 return submitSignin(_that);case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
 return resetAuthentification(_that);case _:
@@ -81,12 +82,13 @@ return resetAuthentification(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeEmailAuthByMailEvent value)  changeEmail,required TResult Function( ChangePasswordAuthByMailEvent value)  changePassword,required TResult Function( SubmitAuthByMailEvent value)  submitSignup,required TResult Function( SubmitSigninMailEvent value)  submitSignin,required TResult Function( ResetAuthentificationSigninMailEvent value)  resetAuthentification,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeEmailAuthByMailEvent value)  changeEmail,required TResult Function( ChangePasswordAuthByMailEvent value)  changePassword,required TResult Function( ChangeRemenberAuthByMailEvent value)  changeRemenber,required TResult Function( SubmitAuthByMailEvent value)  submitSignup,required TResult Function( SubmitSigninMailEvent value)  submitSignin,required TResult Function( ResetAuthentificationSigninMailEvent value)  resetAuthentification,}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent():
 return changeEmail(_that);case ChangePasswordAuthByMailEvent():
-return changePassword(_that);case SubmitAuthByMailEvent():
+return changePassword(_that);case ChangeRemenberAuthByMailEvent():
+return changeRemenber(_that);case SubmitAuthByMailEvent():
 return submitSignup(_that);case SubmitSigninMailEvent():
 return submitSignin(_that);case ResetAuthentificationSigninMailEvent():
 return resetAuthentification(_that);case _:
@@ -106,12 +108,13 @@ return resetAuthentification(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult? Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult? Function( SubmitAuthByMailEvent value)?  submitSignup,TResult? Function( SubmitSigninMailEvent value)?  submitSignin,TResult? Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeEmailAuthByMailEvent value)?  changeEmail,TResult? Function( ChangePasswordAuthByMailEvent value)?  changePassword,TResult? Function( ChangeRemenberAuthByMailEvent value)?  changeRemenber,TResult? Function( SubmitAuthByMailEvent value)?  submitSignup,TResult? Function( SubmitSigninMailEvent value)?  submitSignin,TResult? Function( ResetAuthentificationSigninMailEvent value)?  resetAuthentification,}){
 final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that);case ChangePasswordAuthByMailEvent() when changePassword != null:
-return changePassword(_that);case SubmitAuthByMailEvent() when submitSignup != null:
+return changePassword(_that);case ChangeRemenberAuthByMailEvent() when changeRemenber != null:
+return changeRemenber(_that);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup(_that);case SubmitSigninMailEvent() when submitSignin != null:
 return submitSignin(_that);case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
 return resetAuthentification(_that);case _:
@@ -131,11 +134,12 @@ return resetAuthentification(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email)?  changeEmail,TResult Function( String password)?  changePassword,TResult Function()?  submitSignup,TResult Function()?  submitSignin,TResult Function()?  resetAuthentification,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email)?  changeEmail,TResult Function( String password)?  changePassword,TResult Function( String remenber)?  changeRemenber,TResult Function()?  submitSignup,TResult Function()?  submitSignin,TResult Function()?  resetAuthentification,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent() when changePassword != null:
-return changePassword(_that.password);case SubmitAuthByMailEvent() when submitSignup != null:
+return changePassword(_that.password);case ChangeRemenberAuthByMailEvent() when changeRemenber != null:
+return changeRemenber(_that.remenber);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup();case SubmitSigninMailEvent() when submitSignin != null:
 return submitSignin();case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
 return resetAuthentification();case _:
@@ -156,11 +160,12 @@ return resetAuthentification();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email)  changeEmail,required TResult Function( String password)  changePassword,required TResult Function()  submitSignup,required TResult Function()  submitSignin,required TResult Function()  resetAuthentification,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email)  changeEmail,required TResult Function( String password)  changePassword,required TResult Function( String remenber)  changeRemenber,required TResult Function()  submitSignup,required TResult Function()  submitSignin,required TResult Function()  resetAuthentification,}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent():
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent():
-return changePassword(_that.password);case SubmitAuthByMailEvent():
+return changePassword(_that.password);case ChangeRemenberAuthByMailEvent():
+return changeRemenber(_that.remenber);case SubmitAuthByMailEvent():
 return submitSignup();case SubmitSigninMailEvent():
 return submitSignin();case ResetAuthentificationSigninMailEvent():
 return resetAuthentification();case _:
@@ -180,11 +185,12 @@ return resetAuthentification();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email)?  changeEmail,TResult? Function( String password)?  changePassword,TResult? Function()?  submitSignup,TResult? Function()?  submitSignin,TResult? Function()?  resetAuthentification,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email)?  changeEmail,TResult? Function( String password)?  changePassword,TResult? Function( String remenber)?  changeRemenber,TResult? Function()?  submitSignup,TResult? Function()?  submitSignin,TResult? Function()?  resetAuthentification,}) {final _that = this;
 switch (_that) {
 case ChangeEmailAuthByMailEvent() when changeEmail != null:
 return changeEmail(_that.email);case ChangePasswordAuthByMailEvent() when changePassword != null:
-return changePassword(_that.password);case SubmitAuthByMailEvent() when submitSignup != null:
+return changePassword(_that.password);case ChangeRemenberAuthByMailEvent() when changeRemenber != null:
+return changeRemenber(_that.remenber);case SubmitAuthByMailEvent() when submitSignup != null:
 return submitSignup();case SubmitSigninMailEvent() when submitSignin != null:
 return submitSignin();case ResetAuthentificationSigninMailEvent() when resetAuthentification != null:
 return resetAuthentification();case _:
@@ -320,6 +326,72 @@ class _$ChangePasswordAuthByMailEventCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? password = null,}) {
   return _then(ChangePasswordAuthByMailEvent(
 null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeRemenberAuthByMailEvent implements AuthByMailEvent {
+   ChangeRemenberAuthByMailEvent(this.remenber);
+  
+
+ final  String remenber;
+
+/// Create a copy of AuthByMailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeRemenberAuthByMailEventCopyWith<ChangeRemenberAuthByMailEvent> get copyWith => _$ChangeRemenberAuthByMailEventCopyWithImpl<ChangeRemenberAuthByMailEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeRemenberAuthByMailEvent&&(identical(other.remenber, remenber) || other.remenber == remenber));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,remenber);
+
+@override
+String toString() {
+  return 'AuthByMailEvent.changeRemenber(remenber: $remenber)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeRemenberAuthByMailEventCopyWith<$Res> implements $AuthByMailEventCopyWith<$Res> {
+  factory $ChangeRemenberAuthByMailEventCopyWith(ChangeRemenberAuthByMailEvent value, $Res Function(ChangeRemenberAuthByMailEvent) _then) = _$ChangeRemenberAuthByMailEventCopyWithImpl;
+@useResult
+$Res call({
+ String remenber
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeRemenberAuthByMailEventCopyWithImpl<$Res>
+    implements $ChangeRemenberAuthByMailEventCopyWith<$Res> {
+  _$ChangeRemenberAuthByMailEventCopyWithImpl(this._self, this._then);
+
+  final ChangeRemenberAuthByMailEvent _self;
+  final $Res Function(ChangeRemenberAuthByMailEvent) _then;
+
+/// Create a copy of AuthByMailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? remenber = null,}) {
+  return _then(ChangeRemenberAuthByMailEvent(
+null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

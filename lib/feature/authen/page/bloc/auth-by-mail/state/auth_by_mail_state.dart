@@ -9,6 +9,7 @@ abstract class AuthByMailState with _$AuthByMailState {
   factory AuthByMailState({
     required EmailFormz email,
     required PhoneFormz password,
+    required TextFormz remenber,
     required FormzSubmissionStatus status,
     required String errorMessage,
     required bool isValide,
@@ -17,6 +18,7 @@ abstract class AuthByMailState with _$AuthByMailState {
   factory AuthByMailState.initiale() => AuthByMailState(
     email: EmailFormz.pure(),
     password: PhoneFormz.pure(),
+    remenber: TextFormz.pure(),
     status: FormzSubmissionStatus.initial,
     errorMessage: '',
     isValide: false,

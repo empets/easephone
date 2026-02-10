@@ -1,9 +1,7 @@
-import 'dart:developer';
 
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/form/form.dart';
-import 'package:com.example.epbomi/core/global_params/global_params.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';

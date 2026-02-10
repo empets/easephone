@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthByMailState {
 
- EmailFormz get email; PhoneFormz get password; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
+ EmailFormz get email; PhoneFormz get password; TextFormz get remenber; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
 /// Create a copy of AuthByMailState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthByMailStateCopyWith<AuthByMailState> get copyWith => _$AuthByMailStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthByMailState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthByMailState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,password,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,email,password,remenber,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'AuthByMailState(email: $email, password: $password, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'AuthByMailState(email: $email, password: $password, remenber: $remenber, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthByMailStateCopyWith<$Res>  {
   factory $AuthByMailStateCopyWith(AuthByMailState value, $Res Function(AuthByMailState) _then) = _$AuthByMailStateCopyWithImpl;
 @useResult
 $Res call({
- EmailFormz email, PhoneFormz password, FormzSubmissionStatus status, String errorMessage, bool isValide
+ EmailFormz email, PhoneFormz password, TextFormz remenber, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -62,11 +62,12 @@ class _$AuthByMailStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthByMailState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? remenber = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as EmailFormz,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as PhoneFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as PhoneFormz,remenber: null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
+as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( EmailFormz email,  PhoneFormz password,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( EmailFormz email,  PhoneFormz password,  TextFormz remenber,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SAuthByMailState() when $default != null:
-return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.email,_that.password,_that.remenber,_that.status,_that.errorMessage,_that.isValide);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( EmailFormz email,  PhoneFormz password,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( EmailFormz email,  PhoneFormz password,  TextFormz remenber,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
 switch (_that) {
 case SAuthByMailState():
-return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.email,_that.password,_that.remenber,_that.status,_that.errorMessage,_that.isValide);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( EmailFormz email,  PhoneFormz password,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( EmailFormz email,  PhoneFormz password,  TextFormz remenber,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
 switch (_that) {
 case SAuthByMailState() when $default != null:
-return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.email,_that.password,_that.remenber,_that.status,_that.errorMessage,_that.isValide);case _:
   return null;
 
 }
@@ -210,11 +211,12 @@ return $default(_that.email,_that.password,_that.status,_that.errorMessage,_that
 
 
 class SAuthByMailState implements AuthByMailState {
-   SAuthByMailState({required this.email, required this.password, required this.status, required this.errorMessage, required this.isValide});
+   SAuthByMailState({required this.email, required this.password, required this.remenber, required this.status, required this.errorMessage, required this.isValide});
   
 
 @override final  EmailFormz email;
 @override final  PhoneFormz password;
+@override final  TextFormz remenber;
 @override final  FormzSubmissionStatus status;
 @override final  String errorMessage;
 @override final  bool isValide;
@@ -229,16 +231,16 @@ $SAuthByMailStateCopyWith<SAuthByMailState> get copyWith => _$SAuthByMailStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SAuthByMailState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SAuthByMailState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,password,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,email,password,remenber,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'AuthByMailState(email: $email, password: $password, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'AuthByMailState(email: $email, password: $password, remenber: $remenber, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class $SAuthByMailStateCopyWith<$Res> implements $AuthByMailState
   factory $SAuthByMailStateCopyWith(SAuthByMailState value, $Res Function(SAuthByMailState) _then) = _$SAuthByMailStateCopyWithImpl;
 @override @useResult
 $Res call({
- EmailFormz email, PhoneFormz password, FormzSubmissionStatus status, String errorMessage, bool isValide
+ EmailFormz email, PhoneFormz password, TextFormz remenber, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -266,11 +268,12 @@ class _$SAuthByMailStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthByMailState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? remenber = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(SAuthByMailState(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as EmailFormz,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as PhoneFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as PhoneFormz,remenber: null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
+as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
 as bool,

@@ -9,6 +9,9 @@ class AuthByMailEvent with _$AuthByMailEvent {
   factory AuthByMailEvent.changePassword(String password) =
       ChangePasswordAuthByMailEvent;
 
+  factory AuthByMailEvent.changeRemenber(String remenber) =
+      ChangeRemenberAuthByMailEvent;
+
   factory AuthByMailEvent.submitSignup() = SubmitAuthByMailEvent;
 
   factory AuthByMailEvent.submitSignin() = SubmitSigninMailEvent;

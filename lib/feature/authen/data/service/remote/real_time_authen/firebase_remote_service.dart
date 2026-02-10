@@ -438,16 +438,27 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
           .child('profile_images')
           .child('recto${params.userId}${DateTime.timestamp()}.jpg');
 
+      final ref3 = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('recto${params.userId}${DateTime.timestamp()}.jpg');
+
       await ref.putFile(File(params.recto));
       await refs.putFile(File(params.verso));
+      await ref3.putFile(File(params.verso));
 
       final reponse = await ref.getDownloadURL();
       final reponses = await refs.getDownloadURL();
+      final reponses3 = await ref3.getDownloadURL();
 
       log('service ------>>> $reponse');
 
       saveImageUrl(
-        params.copyWith(recto: reponse, verso: reponses),
+        params.copyWith(
+          recto: reponse,
+          verso: reponses,
+          attestation: reponses3,
+        ),
         path: 'hotel',
         userId: params.userId,
       );

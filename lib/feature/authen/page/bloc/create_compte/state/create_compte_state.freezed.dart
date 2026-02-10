@@ -588,7 +588,7 @@ as bool,
 /// @nodoc
 mixin _$CreateCompteCheckingFileState {
 
- TextFormz get cnRecto; TextFormz get cnvecso; TextFormz get formFive; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
+ TextFormz get cnRecto; TextFormz get cnvecso; TextFormz get formFive; TextFormz get attestation; FormzSubmissionStatus get status; String get errorMessage; bool get isValide;
 /// Create a copy of CreateCompteCheckingFileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -599,16 +599,16 @@ $CreateCompteCheckingFileStateCopyWith<CreateCompteCheckingFileState> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.attestation, attestation) || other.attestation == attestation)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,attestation,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, attestation: $attestation, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -619,7 +619,7 @@ abstract mixin class $CreateCompteCheckingFileStateCopyWith<$Res>  {
   factory $CreateCompteCheckingFileStateCopyWith(CreateCompteCheckingFileState value, $Res Function(CreateCompteCheckingFileState) _then) = _$CreateCompteCheckingFileStateCopyWithImpl;
 @useResult
 $Res call({
- TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, TextFormz attestation, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -636,11 +636,12 @@ class _$CreateCompteCheckingFileStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteCheckingFileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? attestation = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_self.copyWith(
 cnRecto: null == cnRecto ? _self.cnRecto : cnRecto // ignore: cast_nullable_to_non_nullable
 as TextFormz,cnvecso: null == cnvecso ? _self.cnvecso : cnvecso // ignore: cast_nullable_to_non_nullable
 as TextFormz,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as TextFormz,attestation: null == attestation ? _self.attestation : attestation // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable
@@ -729,10 +730,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  TextFormz attestation,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreateCompteCheckingFileState() when $default != null:
-return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.attestation,_that.status,_that.errorMessage,_that.isValide);case _:
   return orElse();
 
 }
@@ -750,10 +751,10 @@ return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.er
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  TextFormz attestation,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)  $default,) {final _that = this;
 switch (_that) {
 case _CreateCompteCheckingFileState():
-return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.attestation,_that.status,_that.errorMessage,_that.isValide);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -770,10 +771,10 @@ return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.er
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( TextFormz cnRecto,  TextFormz cnvecso,  TextFormz formFive,  TextFormz attestation,  FormzSubmissionStatus status,  String errorMessage,  bool isValide)?  $default,) {final _that = this;
 switch (_that) {
 case _CreateCompteCheckingFileState() when $default != null:
-return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.errorMessage,_that.isValide);case _:
+return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.attestation,_that.status,_that.errorMessage,_that.isValide);case _:
   return null;
 
 }
@@ -785,12 +786,13 @@ return $default(_that.cnRecto,_that.cnvecso,_that.formFive,_that.status,_that.er
 
 
 class _CreateCompteCheckingFileState implements CreateCompteCheckingFileState {
-  const _CreateCompteCheckingFileState({required this.cnRecto, required this.cnvecso, required this.formFive, required this.status, required this.errorMessage, required this.isValide});
+  const _CreateCompteCheckingFileState({required this.cnRecto, required this.cnvecso, required this.formFive, required this.attestation, required this.status, required this.errorMessage, required this.isValide});
   
 
 @override final  TextFormz cnRecto;
 @override final  TextFormz cnvecso;
 @override final  TextFormz formFive;
+@override final  TextFormz attestation;
 @override final  FormzSubmissionStatus status;
 @override final  String errorMessage;
 @override final  bool isValide;
@@ -805,16 +807,16 @@ _$CreateCompteCheckingFileStateCopyWith<_CreateCompteCheckingFileState> get copy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateCompteCheckingFileState&&(identical(other.cnRecto, cnRecto) || other.cnRecto == cnRecto)&&(identical(other.cnvecso, cnvecso) || other.cnvecso == cnvecso)&&(identical(other.formFive, formFive) || other.formFive == formFive)&&(identical(other.attestation, attestation) || other.attestation == attestation)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isValide, isValide) || other.isValide == isValide));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,status,errorMessage,isValide);
+int get hashCode => Object.hash(runtimeType,cnRecto,cnvecso,formFive,attestation,status,errorMessage,isValide);
 
 @override
 String toString() {
-  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
+  return 'CreateCompteCheckingFileState(cnRecto: $cnRecto, cnvecso: $cnvecso, formFive: $formFive, attestation: $attestation, status: $status, errorMessage: $errorMessage, isValide: $isValide)';
 }
 
 
@@ -825,7 +827,7 @@ abstract mixin class _$CreateCompteCheckingFileStateCopyWith<$Res> implements $C
   factory _$CreateCompteCheckingFileStateCopyWith(_CreateCompteCheckingFileState value, $Res Function(_CreateCompteCheckingFileState) _then) = __$CreateCompteCheckingFileStateCopyWithImpl;
 @override @useResult
 $Res call({
- TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, FormzSubmissionStatus status, String errorMessage, bool isValide
+ TextFormz cnRecto, TextFormz cnvecso, TextFormz formFive, TextFormz attestation, FormzSubmissionStatus status, String errorMessage, bool isValide
 });
 
 
@@ -842,11 +844,12 @@ class __$CreateCompteCheckingFileStateCopyWithImpl<$Res>
 
 /// Create a copy of CreateCompteCheckingFileState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? cnRecto = null,Object? cnvecso = null,Object? formFive = null,Object? attestation = null,Object? status = null,Object? errorMessage = null,Object? isValide = null,}) {
   return _then(_CreateCompteCheckingFileState(
 cnRecto: null == cnRecto ? _self.cnRecto : cnRecto // ignore: cast_nullable_to_non_nullable
 as TextFormz,cnvecso: null == cnvecso ? _self.cnvecso : cnvecso // ignore: cast_nullable_to_non_nullable
 as TextFormz,formFive: null == formFive ? _self.formFive : formFive // ignore: cast_nullable_to_non_nullable
+as TextFormz,attestation: null == attestation ? _self.attestation : attestation // ignore: cast_nullable_to_non_nullable
 as TextFormz,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,isValide: null == isValide ? _self.isValide : isValide // ignore: cast_nullable_to_non_nullable

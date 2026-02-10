@@ -9,6 +9,8 @@ class CheckFileEvent with _$CheckFileEvent {
 
   factory CheckFileEvent.changeGetVerso(String cniVeso) =
       ChangeGetVersoCheckFileEvent;
+  factory CheckFileEvent.changeAttestAtion(String attestation) =
+      ChangeAttestAtionCheckFileEvent;
 
   factory CheckFileEvent.submit() = SubmitCheckFileEvent;
 }

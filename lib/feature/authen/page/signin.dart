@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/form/form.dart';
 import 'package:com.example.epbomi/core/global_params/global_params.dart';
 import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
-import 'package:com.example.epbomi/core/push_notification/repo.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/google_authen/service_firebase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/authen_by_mail_usercase.dart';
@@ -26,6 +24,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -37,6 +36,52 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   late bool isSignUp = false;
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  late String selectedOptionss = "";
+
+  final List<Map<String, dynamic>> items = [
+    {
+      'title': 'Numéro de téléphone utilisé lors de l’inscription',
+      'subtitle': 'Numéro associé à votre compte au moment de la création',
+      'value': 'signup_phone',
+    },
+    {
+      'title': 'Adresse email utilisée lors de l’inscription',
+      'subtitle': 'Email renseigné lors de la création du compte',
+      'value': 'signup_email',
+    },
+    {
+      'title': 'Ville de création du compte',
+      'subtitle': 'Ville où vous vous trouviez lors de l’inscription',
+      'value': 'signup_city',
+    },
+    {
+      'title': 'Année de création du compte',
+      'subtitle': 'Indiquez l’année approximative',
+      'value': 'signup_year',
+    },
+    {
+      'title': 'Nom de votre établissement scolaire',
+      'subtitle': 'École, collège, lycée ou université fréquenté',
+      'value': 'school_name',
+    },
+    {
+      'title': 'Prénom d’un proche de confiance',
+      'subtitle': 'Personne renseignée dans votre profil',
+      'value': 'trusted_person',
+    },
+    {
+      'title': 'Dernier appareil utilisé',
+      'subtitle': 'Android, iPhone ou Web',
+      'value': 'last_device',
+    },
+    {
+      'title': 'Ancien mot de passe',
+      'subtitle': 'Un mot de passe précédemment utilisé sur ce compte',
+      'value': 'old_password',
+    },
+  ];
+
+  String? selectedValues;
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +110,6 @@ class _SignInState extends State<SignIn> {
                   fadeRoute(const HomeOverView()),
                   (route) => false,
                 );
-                // LocalNotificationService.showNotification(
-                //     title: 'Bonjour 👋',
-                //     body: 'Ceci est une notification locale',
-                //   );
               }
 
               if (state.status.isFailure) {
@@ -261,7 +302,7 @@ class _SignInState extends State<SignIn> {
                               },
                             ),
 
-                            SizedBox(height: 9.h),
+                            SizedBox(height: 4.h),
 
                             Container(
                               margin: EdgeInsets.symmetric(vertical: 5.h),
@@ -290,6 +331,105 @@ class _SignInState extends State<SignIn> {
                                     },
                                   ),
                             ),
+                            if (isSignUp)
+                              KeyboardVisibilityBuilder(
+                                builder: (context, keyer) {
+                                  return BlocBuilder<
+                                    AuthByMailBloc,
+                                    AuthByMailState
+                                  >(
+                                    builder: (context, state) {
+                                      return !keyer
+                                          ? Container(
+                                              margin: EdgeInsets.symmetric(
+                                                vertical: 9.h,
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 12,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: MyColorName.white,
+                                                border: Border.all(
+                                                  color:
+                                                      state.remenber.isPure ||
+                                                          !state
+                                                              .password
+                                                              .isValid
+                                                      ? Colors.grey.withOpacity(
+                                                          .5,
+                                                        )
+                                                      : MyColorName.errorRed,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black
+                                                        .withOpacity(.08),
+                                                    blurRadius: 10,
+                                                    spreadRadius: 1,
+                                                    offset: const Offset(
+                                                      0,
+                                                      4,
+                                                    ), // 👉 Ombre uniquement en bas
+                                                  ),
+                                                ],
+                                              ),
+                                              child: DropdownButtonHideUnderline(
+                                                child: DropdownButton<String>(
+                                                  isExpanded: true,
+                                                  dropdownColor:
+                                                      MyColorName.white,
+                                                  hint: Text(
+                                                    "Pour recupération de compte",
+                                                    style: GoogleFonts.roboto(
+                                                      color: Colors.black,
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                  value: selectedValues,
+                                                  style: GoogleFonts.roboto(
+                                                    color: Colors.black,
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                  icon: const Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                  ),
+                                                  items: items
+                                                      .map(
+                                                        (item) =>
+                                                            DropdownMenuItem<
+                                                              String
+                                                            >(
+                                                              value:
+                                                                  item["value"],
+                                                              child: Text(
+                                                                item["title"]!,
+                                                              ),
+                                                            ),
+                                                      )
+                                                      .toList(),
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      selectedValues = value;
+                                                    });
+
+                                                    context
+                                                        .read<AuthByMailBloc>()
+                                                        .add(
+                                                          AuthByMailEvent.changeRemenber(
+                                                            value!,
+                                                          ),
+                                                        );
+                                                  },
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox();
+                                    },
+                                  );
+                                },
+                              ),
 
                             Container(
                               margin: EdgeInsets.only(top: 17.h, bottom: 20.h),
@@ -378,18 +518,6 @@ class _SignInState extends State<SignIn> {
                                             context,
                                             fadeRoute(OtpScreen()),
                                           );
-                                          // GoogleAuthService.sendOtp(
-                                          //   '+2250788884118',
-                                          // );
-                                          // GoogleAuthService.registerUser(
-                                          // 'emmanuelpeters965@gmail.com',
-                                          // "Walker965@#.",
-                                          // );
-                                          // GoogleAuthService.createAccountIfNotExists(
-                                          //   email:
-                                          //       'emmanuelpeters965@gmail.com',
-                                          //   password: 'Walker965@#.',
-                                          // );
                                         },
                                         child: CustomeText(
                                           texte: 'Forgot connexion access',

@@ -73,6 +73,8 @@ abstract class CreateCompteCheckingFileState
     required TextFormz cnRecto,
     required TextFormz cnvecso,
     required TextFormz formFive,
+    required TextFormz attestation,
+
 
     required FormzSubmissionStatus status,
     required String errorMessage,
@@ -84,6 +86,7 @@ abstract class CreateCompteCheckingFileState
         cnRecto: TextFormz.pure(),
         cnvecso: TextFormz.pure(),
         formFive: TextFormz.pure(),
+        attestation: TextFormz.pure(),
         status: FormzSubmissionStatus.initial,
         errorMessage: '',
         isValide: false,

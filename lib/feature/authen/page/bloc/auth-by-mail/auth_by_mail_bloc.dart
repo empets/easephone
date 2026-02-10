@@ -35,7 +35,11 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
           state.copyWith(
             email: EmailFormz.dirty(email),
             status: FormzSubmissionStatus.initial,
-            isValide: Formz.validate([EmailFormz.dirty(email), state.password]),
+            isValide: Formz.validate([
+              EmailFormz.dirty(email),
+              state.password,
+              // state.remenber,
+            ]),
           ),
         );
 
@@ -46,7 +50,24 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
           state.copyWith(
             password: PhoneFormz.dirty(password),
             status: FormzSubmissionStatus.initial,
-            isValide: Formz.validate([TextFormz.dirty(password), state.email]),
+            isValide: Formz.validate([
+              TextFormz.dirty(password),
+              state.email,
+              // state.remenber,
+            ]),
+          ),
+        );
+        break;
+      case ChangeRemenberAuthByMailEvent(:final remenber):
+        emit(
+          state.copyWith(
+            password: PhoneFormz.dirty(remenber),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(remenber),
+              state.email,
+              state.password,
+            ]),
           ),
         );
         break;
@@ -80,6 +101,7 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
                 RequestAuthen(
                   email: state.email.value,
                   password: state.password.value,
+                  remenber: state.remenber.value,
                   isgoogleAuthen: false,
                 ),
               );
@@ -156,54 +178,3 @@ class AuthByMailBloc extends Bloc<AuthByMailEvent, AuthByMailState> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (userResponse) {
-          // final response = await authenByMailUsercase.call(
-          //   RequestAuthen(
-          //     email: state.email.value,
-          //     password: state.password.value,
-          //     isgoogleAuthen: false,
-          //   ),
-          // );
-
-          //   emit(
-          //     response.fold(
-          //       (l) => state.copyWith(
-          //         status: FormzSubmissionStatus.failure,
-          //         errorMessage: 'Cet utilisateur existe déja connecter vous',
-          //       ),
-          // (r) => state.copyWith(
-          //   status: FormzSubmissionStatus.success,
-          //   errorMessage: r.getOrEmpty(),
-          // ),
-          //     ),
-          //   );
-          // } else {
-          //   emit(state.copyWith(status: FormzSubmissionStatus.failure));
-          // }
-       

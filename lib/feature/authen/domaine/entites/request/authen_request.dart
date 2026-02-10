@@ -8,6 +8,7 @@ abstract class RequestAuthen with _$RequestAuthen {
   factory RequestAuthen({
     required String email,
     required String password,
+    @Default('') String remenber,
     required bool isgoogleAuthen,
   }) = _SRequestAuthen;
 

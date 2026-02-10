@@ -31,6 +31,7 @@ abstract class RequestFormsCheckFile with _$RequestFormsCheckFile {
   factory RequestFormsCheckFile({
     required String recto,
     required String verso,
+    required String attestation,
     required String formFive,
     required String userId,
   }) = _SRequestFormsCheckFile;

@@ -55,12 +55,13 @@ extension CheckFileEventPatterns on CheckFileEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeGetRectoCheckFileEvent value)?  changeGetRecto,TResult Function( ChangeGetVersoCheckFileEvent value)?  changeGetVerso,TResult Function( SubmitCheckFileEvent value)?  submit,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ChangeGetRectoCheckFileEvent value)?  changeGetRecto,TResult Function( ChangeGetVersoCheckFileEvent value)?  changeGetVerso,TResult Function( ChangeAttestAtionCheckFileEvent value)?  changeAttestAtion,TResult Function( SubmitCheckFileEvent value)?  submit,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent() when changeGetRecto != null:
 return changeGetRecto(_that);case ChangeGetVersoCheckFileEvent() when changeGetVerso != null:
-return changeGetVerso(_that);case SubmitCheckFileEvent() when submit != null:
+return changeGetVerso(_that);case ChangeAttestAtionCheckFileEvent() when changeAttestAtion != null:
+return changeAttestAtion(_that);case SubmitCheckFileEvent() when submit != null:
 return submit(_that);case _:
   return orElse();
 
@@ -79,12 +80,13 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeGetRectoCheckFileEvent value)  changeGetRecto,required TResult Function( ChangeGetVersoCheckFileEvent value)  changeGetVerso,required TResult Function( SubmitCheckFileEvent value)  submit,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ChangeGetRectoCheckFileEvent value)  changeGetRecto,required TResult Function( ChangeGetVersoCheckFileEvent value)  changeGetVerso,required TResult Function( ChangeAttestAtionCheckFileEvent value)  changeAttestAtion,required TResult Function( SubmitCheckFileEvent value)  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent():
 return changeGetRecto(_that);case ChangeGetVersoCheckFileEvent():
-return changeGetVerso(_that);case SubmitCheckFileEvent():
+return changeGetVerso(_that);case ChangeAttestAtionCheckFileEvent():
+return changeAttestAtion(_that);case SubmitCheckFileEvent():
 return submit(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +104,13 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeGetRectoCheckFileEvent value)?  changeGetRecto,TResult? Function( ChangeGetVersoCheckFileEvent value)?  changeGetVerso,TResult? Function( SubmitCheckFileEvent value)?  submit,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ChangeGetRectoCheckFileEvent value)?  changeGetRecto,TResult? Function( ChangeGetVersoCheckFileEvent value)?  changeGetVerso,TResult? Function( ChangeAttestAtionCheckFileEvent value)?  changeAttestAtion,TResult? Function( SubmitCheckFileEvent value)?  submit,}){
 final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent() when changeGetRecto != null:
 return changeGetRecto(_that);case ChangeGetVersoCheckFileEvent() when changeGetVerso != null:
-return changeGetVerso(_that);case SubmitCheckFileEvent() when submit != null:
+return changeGetVerso(_that);case ChangeAttestAtionCheckFileEvent() when changeAttestAtion != null:
+return changeAttestAtion(_that);case SubmitCheckFileEvent() when submit != null:
 return submit(_that);case _:
   return null;
 
@@ -125,11 +128,12 @@ return submit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cniRecto)?  changeGetRecto,TResult Function( String cniVeso)?  changeGetVerso,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cniRecto)?  changeGetRecto,TResult Function( String cniVeso)?  changeGetVerso,TResult Function( String attestation)?  changeAttestAtion,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent() when changeGetRecto != null:
 return changeGetRecto(_that.cniRecto);case ChangeGetVersoCheckFileEvent() when changeGetVerso != null:
-return changeGetVerso(_that.cniVeso);case SubmitCheckFileEvent() when submit != null:
+return changeGetVerso(_that.cniVeso);case ChangeAttestAtionCheckFileEvent() when changeAttestAtion != null:
+return changeAttestAtion(_that.attestation);case SubmitCheckFileEvent() when submit != null:
 return submit();case _:
   return orElse();
 
@@ -148,11 +152,12 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cniRecto)  changeGetRecto,required TResult Function( String cniVeso)  changeGetVerso,required TResult Function()  submit,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cniRecto)  changeGetRecto,required TResult Function( String cniVeso)  changeGetVerso,required TResult Function( String attestation)  changeAttestAtion,required TResult Function()  submit,}) {final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent():
 return changeGetRecto(_that.cniRecto);case ChangeGetVersoCheckFileEvent():
-return changeGetVerso(_that.cniVeso);case SubmitCheckFileEvent():
+return changeGetVerso(_that.cniVeso);case ChangeAttestAtionCheckFileEvent():
+return changeAttestAtion(_that.attestation);case SubmitCheckFileEvent():
 return submit();case _:
   throw StateError('Unexpected subclass');
 
@@ -170,11 +175,12 @@ return submit();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cniRecto)?  changeGetRecto,TResult? Function( String cniVeso)?  changeGetVerso,TResult? Function()?  submit,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cniRecto)?  changeGetRecto,TResult? Function( String cniVeso)?  changeGetVerso,TResult? Function( String attestation)?  changeAttestAtion,TResult? Function()?  submit,}) {final _that = this;
 switch (_that) {
 case ChangeGetRectoCheckFileEvent() when changeGetRecto != null:
 return changeGetRecto(_that.cniRecto);case ChangeGetVersoCheckFileEvent() when changeGetVerso != null:
-return changeGetVerso(_that.cniVeso);case SubmitCheckFileEvent() when submit != null:
+return changeGetVerso(_that.cniVeso);case ChangeAttestAtionCheckFileEvent() when changeAttestAtion != null:
+return changeAttestAtion(_that.attestation);case SubmitCheckFileEvent() when submit != null:
 return submit();case _:
   return null;
 
@@ -308,6 +314,72 @@ class _$ChangeGetVersoCheckFileEventCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? cniVeso = null,}) {
   return _then(ChangeGetVersoCheckFileEvent(
 null == cniVeso ? _self.cniVeso : cniVeso // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ChangeAttestAtionCheckFileEvent implements CheckFileEvent {
+   ChangeAttestAtionCheckFileEvent(this.attestation);
+  
+
+ final  String attestation;
+
+/// Create a copy of CheckFileEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChangeAttestAtionCheckFileEventCopyWith<ChangeAttestAtionCheckFileEvent> get copyWith => _$ChangeAttestAtionCheckFileEventCopyWithImpl<ChangeAttestAtionCheckFileEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChangeAttestAtionCheckFileEvent&&(identical(other.attestation, attestation) || other.attestation == attestation));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,attestation);
+
+@override
+String toString() {
+  return 'CheckFileEvent.changeAttestAtion(attestation: $attestation)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ChangeAttestAtionCheckFileEventCopyWith<$Res> implements $CheckFileEventCopyWith<$Res> {
+  factory $ChangeAttestAtionCheckFileEventCopyWith(ChangeAttestAtionCheckFileEvent value, $Res Function(ChangeAttestAtionCheckFileEvent) _then) = _$ChangeAttestAtionCheckFileEventCopyWithImpl;
+@useResult
+$Res call({
+ String attestation
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChangeAttestAtionCheckFileEventCopyWithImpl<$Res>
+    implements $ChangeAttestAtionCheckFileEventCopyWith<$Res> {
+  _$ChangeAttestAtionCheckFileEventCopyWithImpl(this._self, this._then);
+
+  final ChangeAttestAtionCheckFileEvent _self;
+  final $Res Function(ChangeAttestAtionCheckFileEvent) _then;
+
+/// Create a copy of CheckFileEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? attestation = null,}) {
+  return _then(ChangeAttestAtionCheckFileEvent(
+null == attestation ? _self.attestation : attestation // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

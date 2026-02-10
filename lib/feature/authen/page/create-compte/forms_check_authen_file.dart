@@ -13,9 +13,7 @@ import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
@@ -23,6 +21,7 @@ import 'package:mnc_identifier_ocr/mnc_identifier_ocr.dart';
 import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:scanner_document/scanner_document.dart';
 // import 'package:gscankit/gscankit.dart';
 
 class FormsCheckAuthenFile extends StatefulWidget {
@@ -62,28 +61,30 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
   File? _imageFileRecto;
   File? _imageFileVerso;
   late String selectedOptions = "";
+  File? _imageFileAttestation;
+
   TextEditingController controller = TextEditingController();
 
   String rectoOne = "";
   String vectoOne = "";
+
+  get isGalleryImportAllowed => null;
 
   Future<void> _imagePikers(
     ImageSource source,
     void Function(File) onImageSelected,
   ) async {
     try {
-      final pickedImage = await ImagePicker().pickImage(
-        source: source,
-        maxWidth: 800.w, // pour réduire la taille si besoin
-        maxHeight: 800.h,
-        imageQuality: 80,
+      final pickedImage = await ScannerDocument.getPictures(
+        noOfPages: 1, // Limit the number of pages to 1
+        isGalleryImportAllowed: true,
       );
       if (pickedImage == null) return;
 
-      final selectedFile = File(pickedImage.path);
+      final selectedFile = File(pickedImage.first);
 
       setState(() {
-        rectoOne = pickedImage.path;
+        rectoOne = pickedImage.first;
         onImageSelected(selectedFile);
       });
 
@@ -124,18 +125,61 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
       setState(() {
         _imageFileRecto = null;
       });
+      showAppSnackBar(
+        context,
+        color: MyColorName.errorRed,
+        iconRight: Icons.close,
+        message: "Document non reconnu comme carte d’identité ❌",
+      );
+      context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeGetRecto(''.toString()),
+      );
+    }
+  }
 
+  Future<void> _textReconginitionAttestation(File img) async {
+    final textRecoginition = TextRecognizer(
+      script: TextRecognitionScript.latin,
+    );
+    final inputImage = InputImage.fromFilePath(img.path);
+    final myText = await textRecoginition.processImage(inputImage);
+
+    final rawText = myText.text.toUpperCase();
+
+    // Vérifie si c'est une CNI ou un passeport
+    final isCNI =
+        rawText.contains("CI") &&
+            rawText.contains("CIV") &&
+            rawText.contains("IVOIRIENNE") ||
+        rawText.contains("PASSPORT");
+
+    if (isCNI) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
             behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            content: Text('Document non reconnu comme carte d’identité ❌'),
+            backgroundColor: Colors.green,
+            content: Text('Document reconnue ✅'),
           ),
         );
+        context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeAttestAtion(img.path.toString()),
+      );
+      context.read<CheckFileBloc>().add(CheckFileEvent.submit());
+    } else {
+      // Remise à l’état initial
+      setState(() {
+        _imageFileRecto = null;
+      });
+      showAppSnackBar(
+        context,
+        color: MyColorName.errorRed,
+        iconRight: Icons.close,
+        message: "Document non reconnu  ❌",
+      );
       context.read<CheckFileBloc>().add(
-        CheckFileEvent.changeGetRecto(''.toString()),
+        CheckFileEvent.changeAttestAtion(''.toString()),
       );
     }
   }
@@ -145,18 +189,16 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     void Function(File) onImageSelected,
   ) async {
     try {
-      final pickedImage = await ImagePicker().pickImage(
-        source: source,
-        maxWidth: 800.w, // pour réduire la taille si besoin
-        maxHeight: 800.h,
-        imageQuality: 80,
+      final pickedImage = await ScannerDocument.getPictures(
+        noOfPages: 1, // Limit the number of pages to 1
+        isGalleryImportAllowed: true,
       );
       if (pickedImage == null) return;
 
-      final selectedFile = File(pickedImage.path);
+      final selectedFile = File(pickedImage.first);
 
       setState(() {
-        vectoOne = pickedImage.path;
+        vectoOne = pickedImage.first;
         onImageSelected(selectedFile);
       });
 
@@ -179,125 +221,41 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     final isCNI = rawText.contains("DC");
 
     if (isCNI) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.green,
-            content: Text('Carte d’identité reconnue ✅'),
-          ),
-        );
+      showAppSnackBar(
+        context,
+        color: Colors.green,
+        iconRight: Icons.close,
+        message: "Document reconnu ✅'",
+      );
     } else {
       // Remise à l’état initial
       setState(() {
-        _imageFileVerso = null;
+        _imageFileAttestation = null;
       });
 
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            content: Text('Document non reconnu comme carte d’identité ❌'),
-          ),
-        );
+      showAppSnackBar(
+        context,
+        color: MyColorName.errorRed,
+        iconRight: Icons.close,
+        message: "Document non reconnu  ❌",
+      );
+
       context.read<CheckFileBloc>().add(
         CheckFileEvent.changeGetVerso(''.toString()),
       );
     }
   }
 
-  Future<void> _scanner(
-    ImageSource source,
-    void Function(File) onImageSelected,
-  ) async {
-    try {
-      final pickedImage = await ImagePicker().pickImage(
-        source: source,
-        maxWidth: 800.w, // pour réduire la taille si besoin
-        maxHeight: 800.h,
-        imageQuality: 80,
-      );
-      if (pickedImage == null) return;
-
-      final selectedFile = File(pickedImage.path);
-
-      setState(() {
-        onImageSelected(selectedFile);
-      });
-
-      await _textReconginitionss(selectedFile);
-    } catch (e) {
-      log("Erreur lors de la sélection de l'image : $e");
-    }
-  }
-
-  Future<void> _textReconginitionss(File img) async {
-    final textRecoginition = TextRecognizer(
-      script: TextRecognitionScript.latin,
+  Future<void> scannerPlace() async {
+    final imagesPath = await ScannerDocument.getPictures(
+      noOfPages: 1, // Limit the number of pages to 1
+      isGalleryImportAllowed: true,
     );
-    final inputImage = InputImage.fromFilePath(img.path);
-    final myText = await textRecoginition.processImage(inputImage);
 
-    final rawText = myText.text.toUpperCase();
-
-    // Vérifie si c'est une CNI ou un passeport
-    final isCNI =
-        rawText.contains("CI") &&
-            rawText.contains("CIV") &&
-            rawText.contains("IVOIRIENNE") ||
-        rawText.contains("PASSPORT");
-
-    if (isCNI) {
-      showAppSnackBar(
-        context,
-        color: MyColorName.successGreen,
-        iconRight: Icons.check,
-        message: "Document authentifié ✅",
-      );
-    } else {
-      // Remise à l’état initial
-      showAppSnackBar(
-        context,
-        color: MyColorName.errorRed,
-        iconRight: Icons.close,
-        message: "Document non authentifié ❌",
-      );
-    }
-  }
-
-  Future<void> scanDocument() async {
-    //by default way they fetch pdf for android and png for iOS
-    dynamic scannedDocuments;
-    try {
-      scannedDocuments =
-          await FlutterDocScanner().getScanDocuments(page: 1) ??
-          'Unknown platform documents';
-
-      final pickedImage = await ImagePicker().pickImage(
-        source: ImageSource.camera,
-        maxWidth: 800.w, // pour réduire la taille si besoin
-        maxHeight: 800.h,
-        imageQuality: 80,
-      );
-      log('=======${pickedImage.toString()}');
-
-      if (pickedImage == null) return;
-
-      final selectedFile = File(pickedImage.path);
-
-      log('=======${selectedFile.toString()}');
-
-      setState(() {
-        rectoOne = pickedImage.path;
-      });
-    } on PlatformException {
-      scannedDocuments = 'Failed to get scanned documents.';
-    }
-    // log(scannedDocuments.toString());
-    // await _textReconginition(File(scannedDocuments));
+    if (imagesPath == null) return;
+    final selectedFile = File(imagesPath.first);
+    await _textReconginitionAttestation(selectedFile);
+    log("********* $imagesPath");
   }
 
   @override
@@ -356,21 +314,23 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                     Align(
                       alignment: Alignment.center,
                       child: CustomeText(
-                        texte: "Document d'atestation",
+                        texte: "Scannez votre pièce d’identité",
                         texteSize: 20.sp,
                         fontWeight: FontWeight.w500,
                         color: MyColorName.textPrimaryDark,
                       ),
                     ),
-
                     SizedBox(height: 14.h),
 
-                    CustomeText(
-                      texte:
-                          "Veuillez ajouter les différentent facette de carte d'identité (CNI)",
-                      texteSize: 13.sp,
-                      fontWeight: FontWeight.w300,
-                      color: MyColorName.textPrimaryDark,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: CustomeText(
+                        texte:
+                            "Vérifiez la qualité de la photo et assurez-vous que les informations sont lisibles. Sinon, réessayez !",
+                        texteSize: 13.sp,
+                        fontWeight: FontWeight.w300,
+                        color: MyColorName.textPrimaryDark,
+                      ),
                     ),
                     SizedBox(height: 17.h),
 
@@ -544,7 +504,8 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                       builder: (context, state) {
                         return GestureDetector(
                           onTap: () async {
-                            scanDocument();
+                            scannerPlace();
+                            // scanDocument();
                             // context.read<CheckFileBloc>().add(
                             //   CheckFileEvent.submit(),
                             // );

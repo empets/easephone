@@ -10,6 +10,7 @@ _SRequestAuthen _$SRequestAuthenFromJson(Map<String, dynamic> json) =>
     _SRequestAuthen(
       email: json['email'] as String,
       password: json['password'] as String,
+      remenber: json['remenber'] as String? ?? '',
       isgoogleAuthen: json['isgoogleAuthen'] as bool,
     );
 
@@ -17,6 +18,7 @@ Map<String, dynamic> _$SRequestAuthenToJson(_SRequestAuthen instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
+      'remenber': instance.remenber,
       'isgoogleAuthen': instance.isgoogleAuthen,
     };
 

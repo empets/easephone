@@ -1,4 +1,3 @@
-import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

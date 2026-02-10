@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,14 +31,10 @@ void main() async {
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.debug,
   );
-  // final prefs = await SharedPreferences.getInstance();
 
-  // getIt.registerSingleton<SharedPreferences>(prefs);
   runApp(MyApp());
 }
-// await FirebaseAppCheck.instance.activate(
-//   androidProvider: AndroidProvider.playIntegrity,
-// );
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

@@ -30,6 +30,7 @@ class CheckFileBloc
             isValide: Formz.validate([
               TextFormz.dirty(cniRecto),
               state.cnvecso,
+              state.attestation,
             ]),
           ),
         );
@@ -40,7 +41,25 @@ class CheckFileBloc
           state.copyWith(
             cnvecso: TextFormz.dirty(cniVeso),
             status: FormzSubmissionStatus.initial,
-            isValide: Formz.validate([TextFormz.dirty(cniVeso), state.cnRecto]),
+            isValide: Formz.validate([
+              TextFormz.dirty(cniVeso),
+              state.cnRecto,
+              state.attestation,
+            ]),
+          ),
+        );
+        break;
+
+      case ChangeAttestAtionCheckFileEvent(:String attestation):
+        emit(
+          state.copyWith(
+            attestation: TextFormz.dirty(attestation),
+            status: FormzSubmissionStatus.initial,
+            isValide: Formz.validate([
+              TextFormz.dirty(attestation),
+              state.cnRecto,
+              state.cnvecso,
+            ]),
           ),
         );
         break;
@@ -53,6 +72,7 @@ class CheckFileBloc
           RequestFormsCheckFile(
             recto: state.cnRecto.value,
             verso: state.cnvecso.value,
+            attestation: state.attestation.value,
             userId: localUserSection.toString(),
             formFive: 'Success',
           ),

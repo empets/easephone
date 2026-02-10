@@ -41,6 +41,7 @@ _SRequestFormsCheckFile _$SRequestFormsCheckFileFromJson(
 ) => _SRequestFormsCheckFile(
   recto: json['recto'] as String,
   verso: json['verso'] as String,
+  attestation: json['attestation'] as String,
   formFive: json['formFive'] as String,
   userId: json['userId'] as String,
 );
@@ -50,6 +51,7 @@ Map<String, dynamic> _$SRequestFormsCheckFileToJson(
 ) => <String, dynamic>{
   'recto': instance.recto,
   'verso': instance.verso,
+  'attestation': instance.attestation,
   'formFive': instance.formFive,
   'userId': instance.userId,
 };

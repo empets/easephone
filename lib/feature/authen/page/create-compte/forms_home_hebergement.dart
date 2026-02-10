@@ -9,7 +9,6 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/state/create_compte_state.dart';
-import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_check_authen_file.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/forms_home_profile_image.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
