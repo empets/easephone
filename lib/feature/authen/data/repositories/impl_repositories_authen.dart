@@ -17,8 +17,12 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   final FirebaseRemoteService firebaseRemoteService;
 
   @override
-  Future<Either<Failure, String?>> userAuthen(RequestAuthen request) async {
-    final response = await firebaseRemoteService.userAuthen(request);
+  Future<Either<Failure, String?>> authentificationSignUp(
+    RequestAuthentificationSignIntificationSignIntificationSignUp request,
+  ) async {
+    final response = await firebaseRemoteService.authentificationSignUp(
+      request,
+    );
 
     if (response is FirebaseSuccess<String?>) {
       final shared = await shareData.SharedPreferences.getInstance();
@@ -35,8 +39,12 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
   }
 
   @override
-  Future<Either<Failure, String?>> signIn(RequestAuthen request) async {
-    final response = await firebaseRemoteService.signIn(request);
+  Future<Either<Failure, String?>> authentificationSignIn(
+    RequestAuthentificationSignIntificationSignIn request,
+  ) async {
+    final response = await firebaseRemoteService.authentificationSignIn(
+      request,
+    );
     if (response is FirebaseSuccess<String?>) {
       final shared = await shareData.SharedPreferences.getInstance();
 
@@ -117,7 +125,7 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
 
   @override
   Future<Either<Failure, String?>> userAutheUpdateKey(
-    RequestAuthenUpdateKey request,
+    RequestAuthentificationSignIntificationSignInUpdateKey request,
   ) {
     // TODO: implement userAutheUpdateKey
     throw UnimplementedError();
@@ -158,8 +166,29 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     );
     if (response is FirebaseSuccess<String>) {
       return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
     }
-     else if (response is FirebaseError) {
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  @override
+  Future<Either<Failure, String?>> recuperationAuthentification(
+    RequestAuthentificationSignIntificationSignIntificationSignUp request,
+  ) async {
+    final response = await firebaseRemoteService.recuperationAuthentification(
+      request,
+    );
+    if (response is FirebaseSuccess<String?>) {
+      final shared = await shareData.SharedPreferences.getInstance();
+
+      await shared.setString('user_section', response.data ?? '');
+      await shared.setString(
+        'user_actif_by_change_profile_photo',
+        response.data ?? '',
+      );
+      return Right(response.data);
+    } else if (response is FirebaseError) {
       return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));

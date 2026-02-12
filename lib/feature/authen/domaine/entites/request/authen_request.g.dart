@@ -6,28 +6,53 @@ part of 'authen_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SRequestAuthen _$SRequestAuthenFromJson(Map<String, dynamic> json) =>
-    _SRequestAuthen(
-      email: json['email'] as String,
-      password: json['password'] as String,
-      remenber: json['remenber'] as String? ?? '',
-      isgoogleAuthen: json['isgoogleAuthen'] as bool,
-    );
-
-Map<String, dynamic> _$SRequestAuthenToJson(_SRequestAuthen instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'remenber': instance.remenber,
-      'isgoogleAuthen': instance.isgoogleAuthen,
-    };
-
-_SRequestAuthenUpdateKey _$SRequestAuthenUpdateKeyFromJson(
+_SRequestAuthentificationSignIntificationSignIn
+_$SRequestAuthentificationSignIntificationSignInFromJson(
   Map<String, dynamic> json,
-) => _SRequestAuthenUpdateKey(userId: json['userId'] as String);
+) => _SRequestAuthentificationSignIntificationSignIn(
+  email: json['email'] as String,
+  password: json['password'] as String,
+  isgoogleAuthen: json['isgoogleAuthen'] as bool,
+);
 
-Map<String, dynamic> _$SRequestAuthenUpdateKeyToJson(
-  _SRequestAuthenUpdateKey instance,
+Map<String, dynamic> _$SRequestAuthentificationSignIntificationSignInToJson(
+  _SRequestAuthentificationSignIntificationSignIn instance,
+) => <String, dynamic>{
+  'email': instance.email,
+  'password': instance.password,
+  'isgoogleAuthen': instance.isgoogleAuthen,
+};
+
+_SRequestAuthentificationSignIntificationSignIntificationSignUp
+_$SRequestAuthentificationSignIntificationSignIntificationSignUpFromJson(
+  Map<String, dynamic> json,
+) => _SRequestAuthentificationSignIntificationSignIntificationSignUp(
+  email: json['email'] as String,
+  password: json['password'] as String,
+  remenber: json['remenber'] as String,
+  isgoogleAuthen: json['isgoogleAuthen'] as bool,
+);
+
+Map<String, dynamic>
+_$SRequestAuthentificationSignIntificationSignIntificationSignUpToJson(
+  _SRequestAuthentificationSignIntificationSignIntificationSignUp instance,
+) => <String, dynamic>{
+  'email': instance.email,
+  'password': instance.password,
+  'remenber': instance.remenber,
+  'isgoogleAuthen': instance.isgoogleAuthen,
+};
+
+_SRequestAuthentificationSignIntificationSignInUpdateKey
+_$SRequestAuthentificationSignIntificationSignInUpdateKeyFromJson(
+  Map<String, dynamic> json,
+) => _SRequestAuthentificationSignIntificationSignInUpdateKey(
+  userId: json['userId'] as String,
+);
+
+Map<String, dynamic>
+_$SRequestAuthentificationSignIntificationSignInUpdateKeyToJson(
+  _SRequestAuthentificationSignIntificationSignInUpdateKey instance,
 ) => <String, dynamic>{'userId': instance.userId};
 
 _SRequestCreateCompteHomeInformation

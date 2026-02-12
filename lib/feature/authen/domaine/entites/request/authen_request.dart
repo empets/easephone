@@ -4,25 +4,46 @@ part 'authen_request.freezed.dart';
 part 'authen_request.g.dart';
 
 @freezed
-abstract class RequestAuthen with _$RequestAuthen {
-  factory RequestAuthen({
+abstract class RequestAuthentificationSignIntificationSignIn
+    with _$RequestAuthentificationSignIntificationSignIn {
+  factory RequestAuthentificationSignIntificationSignIn({
     required String email,
     required String password,
-    @Default('') String remenber,
     required bool isgoogleAuthen,
-  }) = _SRequestAuthen;
+  }) = _SRequestAuthentificationSignIntificationSignIn;
 
-  factory RequestAuthen.fromJson(Map<String, dynamic> json) =>
-      _$RequestAuthenFromJson(json);
+  factory RequestAuthentificationSignIntificationSignIn.fromJson(
+    Map<String, dynamic> json,
+  ) => _$RequestAuthentificationSignIntificationSignInFromJson(json);
 }
 
 @freezed
-abstract class RequestAuthenUpdateKey with _$RequestAuthenUpdateKey {
-  factory RequestAuthenUpdateKey({required String userId}) =
-      _SRequestAuthenUpdateKey;
+abstract class RequestAuthentificationSignIntificationSignIntificationSignUp
+    with _$RequestAuthentificationSignIntificationSignIntificationSignUp {
+  factory RequestAuthentificationSignIntificationSignIntificationSignUp({
+    required String email,
+    required String password,
+    required String remenber,
+    required bool isgoogleAuthen,
+  }) = _SRequestAuthentificationSignIntificationSignIntificationSignUp;
 
-  factory RequestAuthenUpdateKey.fromJson(Map<String, dynamic> json) =>
-      _$RequestAuthenUpdateKeyFromJson(json);
+  factory RequestAuthentificationSignIntificationSignIntificationSignUp.fromJson(
+    Map<String, dynamic> json,
+  ) => _$RequestAuthentificationSignIntificationSignIntificationSignUpFromJson(
+    json,
+  );
+}
+
+@freezed
+abstract class RequestAuthentificationSignIntificationSignInUpdateKey
+    with _$RequestAuthentificationSignIntificationSignInUpdateKey {
+  factory RequestAuthentificationSignIntificationSignInUpdateKey({
+    required String userId,
+  }) = _SRequestAuthentificationSignIntificationSignInUpdateKey;
+
+  factory RequestAuthentificationSignIntificationSignInUpdateKey.fromJson(
+    Map<String, dynamic> json,
+  ) => _$RequestAuthentificationSignIntificationSignInUpdateKeyFromJson(json);
 }
 
 @freezed

@@ -1,6 +1,7 @@
 import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
+import 'package:com.example.epbomi/feature/authen/page/create-compte/authentification_screen.dart';
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
@@ -156,7 +157,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               btnTextSize: 14.sp,
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  fadeRoute(const SignIn()),
+                  fadeRoute(const AuthentificationScreen()),
                   (route) => false,
                 );
               },

@@ -17,17 +17,17 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   ImplFirebaseRemoteService({required this.db});
 
   final databaseReference.DatabaseReference db;
-  // static final FirebaseAuth _auth = FirebaseAuth.instance;
-  // static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   late String userKey = '';
   late String authKey = '';
 
   /*
-  Cette methode permet d'enregister les information d'authentification du user
+  Cette methode permet d'enregister un nouvelle utilisateur
   */
   @override
-  Future<FirebaseResult<String?>> userAuthen(RequestAuthen params) async {
+  Future<FirebaseResult<String?>> authentificationSignUp(
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
+  ) async {
     try {
       final snapShot = await db
           .child('users')
@@ -39,11 +39,14 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
         return FirebaseError("Cet utilisateur existe deja");
       } else {
         // 1) Construire l'objet Request
-        final request = Request<RequestAuthen>(
-          data: params.toJson(),
-          user: "",
-          serviceLibelle: 'serviceLibelle',
-        );
+        final request =
+            Request<
+              RequestAuthentificationSignIntificationSignIntificationSignUp
+            >(
+              data: params.toJson(),
+              user: "",
+              serviceLibelle: 'serviceLibelle',
+            );
         log("data ::::  $request");
 
         // 2) Créer une nouvelle entré ou table
@@ -53,7 +56,11 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
         // 3) Sauvegarder dans Firebase (en convertissant en Map)
         await ref.set(request.data);
 
-        userAutheUpdateKey(RequestAuthenUpdateKey(userId: ref.key.toString()));
+        userAutheUpdateKey(
+          RequestAuthentificationSignIntificationSignInUpdateKey(
+            userId: ref.key.toString(),
+          ),
+        );
         // 4) Retourner le key généré
         return FirebaseSuccess(ref.key);
       }
@@ -65,12 +72,12 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
   /*
   Cette methode permet d'enregister la 
-  clé primaire géneré dans lors de l'authentification
-  elle est apeller dans la Methode --->> signIn() 
+  clé primaire géneré  lors de l'authentification
+  elle est apeller dans la Methode --->> authentificationSignUp() 
   */
   @override
   Future<FirebaseResult<String?>> userAutheUpdateKey(
-    RequestAuthenUpdateKey params,
+    RequestAuthentificationSignIntificationSignInUpdateKey params,
   ) async {
     try {
       final Map<String, dynamic> updates = {
@@ -89,10 +96,12 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   }
 
   /*
-  Cette methode permet de se re authentifier
+  Cette methode permet de se re-authentifier
   */
   @override
-  Future<FirebaseResult<String?>> signIn(RequestAuthen params) async {
+  Future<FirebaseResult<String?>> authentificationSignIn(
+    RequestAuthentificationSignIntificationSignIn params,
+  ) async {
     try {
       final snapShot = await db
           .child('users')
@@ -123,6 +132,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
+  /*
+  Cette methode permet de crée un nouvelle profile
+  */
   @override
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
@@ -206,21 +218,19 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       // 4) Retourner le key généré
       return FirebaseSuccess(localUserSection);
     } catch (e) {
-      log('************$e');
       return FirebaseError(e.toString());
     }
   }
 
+  /*  permet de recuper le profile d'utilisateur
+  */
   @override
   Future<FirebaseResult<ProfileUserModel>> getProfileUser() async {
-    // final sharedPreferences = await SharedPreferences.getInstance();
-    // final localUserSection = sharedPreferences.getString('user_section');
     final shared = await shareData.SharedPreferences.getInstance();
     final localUserSection = shared.getString('user_section');
 
     try {
       final response = await db.child('users/$localUserSection').get();
-      log(',,, ${response.value}');
       final data = Map<String, dynamic>.from(response.value as Map);
 
       if (response.exists) {
@@ -247,7 +257,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
       return FirebaseSuccess(userProfile);
     } catch (e) {
-      log(':: information:${e.runtimeType.toString()}');
       return FirebaseError(e.toString());
     }
   }
@@ -263,7 +272,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       await ref.putFile(File(params.file));
 
       final reponse = await ref.getDownloadURL();
-      log('service ------>>> $reponse');
 
       saveImageUrl(
         params.copyWith(file: reponse),
@@ -272,7 +280,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       );
       return FirebaseSuccess(reponse);
     } catch (e) {
-      log('************$e');
       return FirebaseError(e.toString());
     }
   }
@@ -293,7 +300,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     };
 
     await db.child('$path/$userId').update(updates);
-    log('create compte key:: ------->> ${db.ref.key}');
 
     // final shared = await SharedPreferences.getInstance();
     // sharedPreferences.setString('user_actif_by_change_profile_photo', userId);
@@ -332,7 +338,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
       return FirebaseSuccess(reponse);
     } catch (e) {
-      log('************$e');
       return FirebaseError(e.toString());
     }
   }
@@ -372,56 +377,9 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       // 4) Retourner le key généré
       return FirebaseSuccess(localUserSection);
     } catch (e) {
-      log('************$e');
       return FirebaseError(e.toString());
     }
   }
-
-  // @override
-  // Future<FirebaseResult<String?>> uploadAdministrativeFile(
-  //   RequestFormsCheckFile params,
-  // ) async {
-
-  //      final shared = await shareData.SharedPreferences.getInstance();
-
-  //   final localUserSection = shared.getString(
-  //     'user_actif_by_change_profile_photo',
-  //   );
-
-  //   try {
-  //     final ref = FirebaseStorage.instance
-  //         .ref()
-  //         .child('profile_images')
-  //         .child('${params.userId}${DateTime.timestamp()}.jpg');
-
-  //     // final refs = FirebaseStorage.instance
-  //     //     .ref()
-  //     //     .child('profile_images')
-  //     //     .child('${params.userId}${DateTime.timestamp()}.jpg');
-
-  //     await ref.putFile(File(params.recto));
-  //     final reponse = await ref.getDownloadURL();
-
-  //     // await ref.putFile(File(params.verso));
-  //     // final tester = await refs.getDownloadURL();
-
-  //     saveImageUrl(
-  //       params.copyWith(verso: reponse),
-  //       path: 'hotel',
-  //       userId: params.userId,
-  //     );
-
-  //     // saveImageUrl(
-  //     //   params.copyWith(recto: tester),
-  //     //   path: 'hotel',
-  //     //   userId: params.userId,
-  //     // );
-  //     return FirebaseSuccess(reponse);
-  //   } catch (e) {
-  //     log('************$e');
-  //     return FirebaseError(e.toString());
-  //   }
-  // }
 
   @override
   Future<FirebaseResult<String?>> uploadAdministrativeFile(
@@ -451,8 +409,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       final reponses = await refs.getDownloadURL();
       final reponses3 = await ref3.getDownloadURL();
 
-      log('service ------>>> $reponse');
-
       saveImageUrl(
         params.copyWith(
           recto: reponse,
@@ -464,7 +420,30 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
       );
       return FirebaseSuccess(reponses);
     } catch (e) {
-      log('************$e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> recuperationAuthentification(
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
+  ) async {
+    try {
+      log('=====>> ${params.remenber}');
+      final snapShot = await db
+          .child('users')
+          .orderByChild('remenber')
+          .equalTo(params.remenber)
+          .get();
+
+      if (snapShot.exists) {
+        final data = Map<String, dynamic>.from(snapShot.value as Map);
+        final firebaseResult = ProfileUserModel.fromJson(data);
+        return FirebaseSuccess(firebaseResult.userId);
+      } else {
+        return FirebaseError("Aucune infromation");
+      }
+    } catch (e) {
       return FirebaseError(e.toString());
     }
   }

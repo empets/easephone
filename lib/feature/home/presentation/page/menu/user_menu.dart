@@ -7,6 +7,7 @@ import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authe
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/Forms_lacation.dart';
+import 'package:com.example.epbomi/feature/authen/page/create-compte/authentification_screen.dart';
 import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
@@ -19,7 +20,6 @@ import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -522,7 +522,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                   message: 'Déconnexion effectuer avec success',
                                 );
                                 Navigator.of(context).pushAndRemoveUntil(
-                                  fadeRoute(const SignIn()),
+                                  fadeRoute(const AuthentificationScreen()),
                                   (route) => false,
                                 );
                               },
@@ -963,7 +963,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                                 message: 'Déconnexion effectuer avec success',
                               );
                               Navigator.of(context).pushAndRemoveUntil(
-                                fadeRoute(const SignIn()),
+                                fadeRoute(const AuthentificationScreen()),
                                 (route) => false,
                               );
                             },

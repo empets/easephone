@@ -2,23 +2,23 @@ import 'package:com.example.epbomi/core/extension/email_extension.dart';
 import 'package:com.example.epbomi/core/extension/extension_form.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'auth_by_mail_state.freezed.dart';
+part 'authentification_state.freezed.dart';
 
 @freezed
-abstract class AuthByMailState with _$AuthByMailState {
-  factory AuthByMailState({
+abstract class AuthentificationState with _$AuthentificationState {
+  factory AuthentificationState({
     required EmailFormz email,
     required PhoneFormz password,
-    required TextFormz remenber,
+    required PhoneFormz remenber,
     required FormzSubmissionStatus status,
     required String errorMessage,
     required bool isValide,
-  }) = SAuthByMailState;
+  }) = SAuthentificationState;
 
-  factory AuthByMailState.initiale() => AuthByMailState(
+  factory AuthentificationState.initiale() => AuthentificationState(
     email: EmailFormz.pure(),
     password: PhoneFormz.pure(),
-    remenber: TextFormz.pure(),
+    remenber: PhoneFormz.pure(),
     status: FormzSubmissionStatus.initial,
     errorMessage: '',
     isValide: false,

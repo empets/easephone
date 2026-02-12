@@ -197,7 +197,7 @@ class CustomeFormsSigin extends StatelessWidget {
           ),
           errorStyle: GoogleFonts.roboto(
             color: (isCancel != null) ? MyColorName.errorRed : Colors.red,
-            fontSize: 11.sp,
+            fontSize: 1.sp,
             fontWeight: FontWeight.bold,
           ),
           hint: Text(

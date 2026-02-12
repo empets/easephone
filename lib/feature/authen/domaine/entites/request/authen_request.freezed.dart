@@ -11,51 +11,51 @@ part of 'authen_request.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-RequestAuthen _$RequestAuthenFromJson(
+RequestAuthentificationSignIntificationSignIn _$RequestAuthentificationSignIntificationSignInFromJson(
   Map<String, dynamic> json
 ) {
-    return _SRequestAuthen.fromJson(
+    return _SRequestAuthentificationSignIntificationSignIn.fromJson(
       json
     );
 }
 
 /// @nodoc
-mixin _$RequestAuthen {
+mixin _$RequestAuthentificationSignIntificationSignIn {
 
- String get email; String get password; String get remenber; bool get isgoogleAuthen;
-/// Create a copy of RequestAuthen
+ String get email; String get password; bool get isgoogleAuthen;
+/// Create a copy of RequestAuthentificationSignIntificationSignIn
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$RequestAuthenCopyWith<RequestAuthen> get copyWith => _$RequestAuthenCopyWithImpl<RequestAuthen>(this as RequestAuthen, _$identity);
+$RequestAuthentificationSignIntificationSignInCopyWith<RequestAuthentificationSignIntificationSignIn> get copyWith => _$RequestAuthentificationSignIntificationSignInCopyWithImpl<RequestAuthentificationSignIntificationSignIn>(this as RequestAuthentificationSignIntificationSignIn, _$identity);
 
-  /// Serializes this RequestAuthen to a JSON map.
+  /// Serializes this RequestAuthentificationSignIntificationSignIn to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthentificationSignIntificationSignIn&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,password,remenber,isgoogleAuthen);
+int get hashCode => Object.hash(runtimeType,email,password,isgoogleAuthen);
 
 @override
 String toString() {
-  return 'RequestAuthen(email: $email, password: $password, remenber: $remenber, isgoogleAuthen: $isgoogleAuthen)';
+  return 'RequestAuthentificationSignIntificationSignIn(email: $email, password: $password, isgoogleAuthen: $isgoogleAuthen)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RequestAuthenCopyWith<$Res>  {
-  factory $RequestAuthenCopyWith(RequestAuthen value, $Res Function(RequestAuthen) _then) = _$RequestAuthenCopyWithImpl;
+abstract mixin class $RequestAuthentificationSignIntificationSignInCopyWith<$Res>  {
+  factory $RequestAuthentificationSignIntificationSignInCopyWith(RequestAuthentificationSignIntificationSignIn value, $Res Function(RequestAuthentificationSignIntificationSignIn) _then) = _$RequestAuthentificationSignIntificationSignInCopyWithImpl;
 @useResult
 $Res call({
- String email, String password, String remenber, bool isgoogleAuthen
+ String email, String password, bool isgoogleAuthen
 });
 
 
@@ -63,20 +63,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$RequestAuthenCopyWithImpl<$Res>
-    implements $RequestAuthenCopyWith<$Res> {
-  _$RequestAuthenCopyWithImpl(this._self, this._then);
+class _$RequestAuthentificationSignIntificationSignInCopyWithImpl<$Res>
+    implements $RequestAuthentificationSignIntificationSignInCopyWith<$Res> {
+  _$RequestAuthentificationSignIntificationSignInCopyWithImpl(this._self, this._then);
 
-  final RequestAuthen _self;
-  final $Res Function(RequestAuthen) _then;
+  final RequestAuthentificationSignIntificationSignIn _self;
+  final $Res Function(RequestAuthentificationSignIntificationSignIn) _then;
 
-/// Create a copy of RequestAuthen
+/// Create a copy of RequestAuthentificationSignIntificationSignIn
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? remenber = null,Object? isgoogleAuthen = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? isgoogleAuthen = null,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,remenber: null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
 as String,isgoogleAuthen: null == isgoogleAuthen ? _self.isgoogleAuthen : isgoogleAuthen // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -85,8 +84,8 @@ as bool,
 }
 
 
-/// Adds pattern-matching-related methods to [RequestAuthen].
-extension RequestAuthenPatterns on RequestAuthen {
+/// Adds pattern-matching-related methods to [RequestAuthentificationSignIntificationSignIn].
+extension RequestAuthentificationSignIntificationSignInPatterns on RequestAuthentificationSignIntificationSignIn {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -99,10 +98,10 @@ extension RequestAuthenPatterns on RequestAuthen {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthen value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignIn value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SRequestAuthen() when $default != null:
+case _SRequestAuthentificationSignIntificationSignIn() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -121,10 +120,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthen value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignIn value)  $default,){
 final _that = this;
 switch (_that) {
-case _SRequestAuthen():
+case _SRequestAuthentificationSignIntificationSignIn():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -142,10 +141,287 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthen value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthentificationSignIntificationSignIn value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SRequestAuthen() when $default != null:
+case _SRequestAuthentificationSignIntificationSignIn() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  bool isgoogleAuthen)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIn() when $default != null:
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  bool isgoogleAuthen)  $default,) {final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIn():
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  bool isgoogleAuthen)?  $default,) {final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIn() when $default != null:
+return $default(_that.email,_that.password,_that.isgoogleAuthen);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SRequestAuthentificationSignIntificationSignIn implements RequestAuthentificationSignIntificationSignIn {
+   _SRequestAuthentificationSignIntificationSignIn({required this.email, required this.password, required this.isgoogleAuthen});
+  factory _SRequestAuthentificationSignIntificationSignIn.fromJson(Map<String, dynamic> json) => _$SRequestAuthentificationSignIntificationSignInFromJson(json);
+
+@override final  String email;
+@override final  String password;
+@override final  bool isgoogleAuthen;
+
+/// Create a copy of RequestAuthentificationSignIntificationSignIn
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SRequestAuthentificationSignIntificationSignInCopyWith<_SRequestAuthentificationSignIntificationSignIn> get copyWith => __$SRequestAuthentificationSignIntificationSignInCopyWithImpl<_SRequestAuthentificationSignIntificationSignIn>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SRequestAuthentificationSignIntificationSignInToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthentificationSignIntificationSignIn&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,email,password,isgoogleAuthen);
+
+@override
+String toString() {
+  return 'RequestAuthentificationSignIntificationSignIn(email: $email, password: $password, isgoogleAuthen: $isgoogleAuthen)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SRequestAuthentificationSignIntificationSignInCopyWith<$Res> implements $RequestAuthentificationSignIntificationSignInCopyWith<$Res> {
+  factory _$SRequestAuthentificationSignIntificationSignInCopyWith(_SRequestAuthentificationSignIntificationSignIn value, $Res Function(_SRequestAuthentificationSignIntificationSignIn) _then) = __$SRequestAuthentificationSignIntificationSignInCopyWithImpl;
+@override @useResult
+$Res call({
+ String email, String password, bool isgoogleAuthen
+});
+
+
+
+
+}
+/// @nodoc
+class __$SRequestAuthentificationSignIntificationSignInCopyWithImpl<$Res>
+    implements _$SRequestAuthentificationSignIntificationSignInCopyWith<$Res> {
+  __$SRequestAuthentificationSignIntificationSignInCopyWithImpl(this._self, this._then);
+
+  final _SRequestAuthentificationSignIntificationSignIn _self;
+  final $Res Function(_SRequestAuthentificationSignIntificationSignIn) _then;
+
+/// Create a copy of RequestAuthentificationSignIntificationSignIn
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? isgoogleAuthen = null,}) {
+  return _then(_SRequestAuthentificationSignIntificationSignIn(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,isgoogleAuthen: null == isgoogleAuthen ? _self.isgoogleAuthen : isgoogleAuthen // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+RequestAuthentificationSignIntificationSignIntificationSignUp _$RequestAuthentificationSignIntificationSignIntificationSignUpFromJson(
+  Map<String, dynamic> json
+) {
+    return _SRequestAuthentificationSignIntificationSignIntificationSignUp.fromJson(
+      json
+    );
+}
+
+/// @nodoc
+mixin _$RequestAuthentificationSignIntificationSignIntificationSignUp {
+
+ String get email; String get password; String get remenber; bool get isgoogleAuthen;
+/// Create a copy of RequestAuthentificationSignIntificationSignIntificationSignUp
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<RequestAuthentificationSignIntificationSignIntificationSignUp> get copyWith => _$RequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl<RequestAuthentificationSignIntificationSignIntificationSignUp>(this as RequestAuthentificationSignIntificationSignIntificationSignUp, _$identity);
+
+  /// Serializes this RequestAuthentificationSignIntificationSignIntificationSignUp to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthentificationSignIntificationSignIntificationSignUp&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,email,password,remenber,isgoogleAuthen);
+
+@override
+String toString() {
+  return 'RequestAuthentificationSignIntificationSignIntificationSignUp(email: $email, password: $password, remenber: $remenber, isgoogleAuthen: $isgoogleAuthen)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<$Res>  {
+  factory $RequestAuthentificationSignIntificationSignIntificationSignUpCopyWith(RequestAuthentificationSignIntificationSignIntificationSignUp value, $Res Function(RequestAuthentificationSignIntificationSignIntificationSignUp) _then) = _$RequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl;
+@useResult
+$Res call({
+ String email, String password, String remenber, bool isgoogleAuthen
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl<$Res>
+    implements $RequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<$Res> {
+  _$RequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl(this._self, this._then);
+
+  final RequestAuthentificationSignIntificationSignIntificationSignUp _self;
+  final $Res Function(RequestAuthentificationSignIntificationSignIntificationSignUp) _then;
+
+/// Create a copy of RequestAuthentificationSignIntificationSignIntificationSignUp
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? remenber = null,Object? isgoogleAuthen = null,}) {
+  return _then(_self.copyWith(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,remenber: null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
+as String,isgoogleAuthen: null == isgoogleAuthen ? _self.isgoogleAuthen : isgoogleAuthen // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [RequestAuthentificationSignIntificationSignIntificationSignUp].
+extension RequestAuthentificationSignIntificationSignIntificationSignUpPatterns on RequestAuthentificationSignIntificationSignIntificationSignUp {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignIntificationSignUp value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignIntificationSignUp value)  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthentificationSignIntificationSignIntificationSignUp value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -165,7 +441,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password,  String remenber,  bool isgoogleAuthen)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SRequestAuthen() when $default != null:
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp() when $default != null:
 return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);case _:
   return orElse();
 
@@ -186,7 +462,7 @@ return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password,  String remenber,  bool isgoogleAuthen)  $default,) {final _that = this;
 switch (_that) {
-case _SRequestAuthen():
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp():
 return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);case _:
   throw StateError('Unexpected subclass');
 
@@ -206,7 +482,7 @@ return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password,  String remenber,  bool isgoogleAuthen)?  $default,) {final _that = this;
 switch (_that) {
-case _SRequestAuthen() when $default != null:
+case _SRequestAuthentificationSignIntificationSignIntificationSignUp() when $default != null:
 return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);case _:
   return null;
 
@@ -218,29 +494,29 @@ return $default(_that.email,_that.password,_that.remenber,_that.isgoogleAuthen);
 /// @nodoc
 @JsonSerializable()
 
-class _SRequestAuthen implements RequestAuthen {
-   _SRequestAuthen({required this.email, required this.password, this.remenber = '', required this.isgoogleAuthen});
-  factory _SRequestAuthen.fromJson(Map<String, dynamic> json) => _$SRequestAuthenFromJson(json);
+class _SRequestAuthentificationSignIntificationSignIntificationSignUp implements RequestAuthentificationSignIntificationSignIntificationSignUp {
+   _SRequestAuthentificationSignIntificationSignIntificationSignUp({required this.email, required this.password, required this.remenber, required this.isgoogleAuthen});
+  factory _SRequestAuthentificationSignIntificationSignIntificationSignUp.fromJson(Map<String, dynamic> json) => _$SRequestAuthentificationSignIntificationSignIntificationSignUpFromJson(json);
 
 @override final  String email;
 @override final  String password;
-@override@JsonKey() final  String remenber;
+@override final  String remenber;
 @override final  bool isgoogleAuthen;
 
-/// Create a copy of RequestAuthen
+/// Create a copy of RequestAuthentificationSignIntificationSignIntificationSignUp
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SRequestAuthenCopyWith<_SRequestAuthen> get copyWith => __$SRequestAuthenCopyWithImpl<_SRequestAuthen>(this, _$identity);
+_$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<_SRequestAuthentificationSignIntificationSignIntificationSignUp> get copyWith => __$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl<_SRequestAuthentificationSignIntificationSignIntificationSignUp>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SRequestAuthenToJson(this, );
+  return _$SRequestAuthentificationSignIntificationSignIntificationSignUpToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthen&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthentificationSignIntificationSignIntificationSignUp&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.remenber, remenber) || other.remenber == remenber)&&(identical(other.isgoogleAuthen, isgoogleAuthen) || other.isgoogleAuthen == isgoogleAuthen));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -249,15 +525,15 @@ int get hashCode => Object.hash(runtimeType,email,password,remenber,isgoogleAuth
 
 @override
 String toString() {
-  return 'RequestAuthen(email: $email, password: $password, remenber: $remenber, isgoogleAuthen: $isgoogleAuthen)';
+  return 'RequestAuthentificationSignIntificationSignIntificationSignUp(email: $email, password: $password, remenber: $remenber, isgoogleAuthen: $isgoogleAuthen)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SRequestAuthenCopyWith<$Res> implements $RequestAuthenCopyWith<$Res> {
-  factory _$SRequestAuthenCopyWith(_SRequestAuthen value, $Res Function(_SRequestAuthen) _then) = __$SRequestAuthenCopyWithImpl;
+abstract mixin class _$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<$Res> implements $RequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<$Res> {
+  factory _$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWith(_SRequestAuthentificationSignIntificationSignIntificationSignUp value, $Res Function(_SRequestAuthentificationSignIntificationSignIntificationSignUp) _then) = __$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl;
 @override @useResult
 $Res call({
  String email, String password, String remenber, bool isgoogleAuthen
@@ -268,17 +544,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SRequestAuthenCopyWithImpl<$Res>
-    implements _$SRequestAuthenCopyWith<$Res> {
-  __$SRequestAuthenCopyWithImpl(this._self, this._then);
+class __$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl<$Res>
+    implements _$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWith<$Res> {
+  __$SRequestAuthentificationSignIntificationSignIntificationSignUpCopyWithImpl(this._self, this._then);
 
-  final _SRequestAuthen _self;
-  final $Res Function(_SRequestAuthen) _then;
+  final _SRequestAuthentificationSignIntificationSignIntificationSignUp _self;
+  final $Res Function(_SRequestAuthentificationSignIntificationSignIntificationSignUp) _then;
 
-/// Create a copy of RequestAuthen
+/// Create a copy of RequestAuthentificationSignIntificationSignIntificationSignUp
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? remenber = null,Object? isgoogleAuthen = null,}) {
-  return _then(_SRequestAuthen(
+  return _then(_SRequestAuthentificationSignIntificationSignIntificationSignUp(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,remenber: null == remenber ? _self.remenber : remenber // ignore: cast_nullable_to_non_nullable
@@ -290,31 +566,31 @@ as bool,
 
 }
 
-RequestAuthenUpdateKey _$RequestAuthenUpdateKeyFromJson(
+RequestAuthentificationSignIntificationSignInUpdateKey _$RequestAuthentificationSignIntificationSignInUpdateKeyFromJson(
   Map<String, dynamic> json
 ) {
-    return _SRequestAuthenUpdateKey.fromJson(
+    return _SRequestAuthentificationSignIntificationSignInUpdateKey.fromJson(
       json
     );
 }
 
 /// @nodoc
-mixin _$RequestAuthenUpdateKey {
+mixin _$RequestAuthentificationSignIntificationSignInUpdateKey {
 
  String get userId;
-/// Create a copy of RequestAuthenUpdateKey
+/// Create a copy of RequestAuthentificationSignIntificationSignInUpdateKey
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$RequestAuthenUpdateKeyCopyWith<RequestAuthenUpdateKey> get copyWith => _$RequestAuthenUpdateKeyCopyWithImpl<RequestAuthenUpdateKey>(this as RequestAuthenUpdateKey, _$identity);
+$RequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<RequestAuthentificationSignIntificationSignInUpdateKey> get copyWith => _$RequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl<RequestAuthentificationSignIntificationSignInUpdateKey>(this as RequestAuthentificationSignIntificationSignInUpdateKey, _$identity);
 
-  /// Serializes this RequestAuthenUpdateKey to a JSON map.
+  /// Serializes this RequestAuthentificationSignIntificationSignInUpdateKey to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthenUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAuthentificationSignIntificationSignInUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -323,15 +599,15 @@ int get hashCode => Object.hash(runtimeType,userId);
 
 @override
 String toString() {
-  return 'RequestAuthenUpdateKey(userId: $userId)';
+  return 'RequestAuthentificationSignIntificationSignInUpdateKey(userId: $userId)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RequestAuthenUpdateKeyCopyWith<$Res>  {
-  factory $RequestAuthenUpdateKeyCopyWith(RequestAuthenUpdateKey value, $Res Function(RequestAuthenUpdateKey) _then) = _$RequestAuthenUpdateKeyCopyWithImpl;
+abstract mixin class $RequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<$Res>  {
+  factory $RequestAuthentificationSignIntificationSignInUpdateKeyCopyWith(RequestAuthentificationSignIntificationSignInUpdateKey value, $Res Function(RequestAuthentificationSignIntificationSignInUpdateKey) _then) = _$RequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl;
 @useResult
 $Res call({
  String userId
@@ -342,14 +618,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$RequestAuthenUpdateKeyCopyWithImpl<$Res>
-    implements $RequestAuthenUpdateKeyCopyWith<$Res> {
-  _$RequestAuthenUpdateKeyCopyWithImpl(this._self, this._then);
+class _$RequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl<$Res>
+    implements $RequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<$Res> {
+  _$RequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl(this._self, this._then);
 
-  final RequestAuthenUpdateKey _self;
-  final $Res Function(RequestAuthenUpdateKey) _then;
+  final RequestAuthentificationSignIntificationSignInUpdateKey _self;
+  final $Res Function(RequestAuthentificationSignIntificationSignInUpdateKey) _then;
 
-/// Create a copy of RequestAuthenUpdateKey
+/// Create a copy of RequestAuthentificationSignIntificationSignInUpdateKey
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? userId = null,}) {
   return _then(_self.copyWith(
@@ -361,8 +637,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [RequestAuthenUpdateKey].
-extension RequestAuthenUpdateKeyPatterns on RequestAuthenUpdateKey {
+/// Adds pattern-matching-related methods to [RequestAuthentificationSignIntificationSignInUpdateKey].
+extension RequestAuthentificationSignIntificationSignInUpdateKeyPatterns on RequestAuthentificationSignIntificationSignInUpdateKey {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -375,10 +651,10 @@ extension RequestAuthenUpdateKeyPatterns on RequestAuthenUpdateKey {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthenUpdateKey value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignInUpdateKey value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey() when $default != null:
+case _SRequestAuthentificationSignIntificationSignInUpdateKey() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -397,10 +673,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthenUpdateKey value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestAuthentificationSignIntificationSignInUpdateKey value)  $default,){
 final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey():
+case _SRequestAuthentificationSignIntificationSignInUpdateKey():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -418,10 +694,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthenUpdateKey value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestAuthentificationSignIntificationSignInUpdateKey value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey() when $default != null:
+case _SRequestAuthentificationSignIntificationSignInUpdateKey() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -441,7 +717,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey() when $default != null:
+case _SRequestAuthentificationSignIntificationSignInUpdateKey() when $default != null:
 return $default(_that.userId);case _:
   return orElse();
 
@@ -462,7 +738,7 @@ return $default(_that.userId);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId)  $default,) {final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey():
+case _SRequestAuthentificationSignIntificationSignInUpdateKey():
 return $default(_that.userId);case _:
   throw StateError('Unexpected subclass');
 
@@ -482,7 +758,7 @@ return $default(_that.userId);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId)?  $default,) {final _that = this;
 switch (_that) {
-case _SRequestAuthenUpdateKey() when $default != null:
+case _SRequestAuthentificationSignIntificationSignInUpdateKey() when $default != null:
 return $default(_that.userId);case _:
   return null;
 
@@ -494,26 +770,26 @@ return $default(_that.userId);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SRequestAuthenUpdateKey implements RequestAuthenUpdateKey {
-   _SRequestAuthenUpdateKey({required this.userId});
-  factory _SRequestAuthenUpdateKey.fromJson(Map<String, dynamic> json) => _$SRequestAuthenUpdateKeyFromJson(json);
+class _SRequestAuthentificationSignIntificationSignInUpdateKey implements RequestAuthentificationSignIntificationSignInUpdateKey {
+   _SRequestAuthentificationSignIntificationSignInUpdateKey({required this.userId});
+  factory _SRequestAuthentificationSignIntificationSignInUpdateKey.fromJson(Map<String, dynamic> json) => _$SRequestAuthentificationSignIntificationSignInUpdateKeyFromJson(json);
 
 @override final  String userId;
 
-/// Create a copy of RequestAuthenUpdateKey
+/// Create a copy of RequestAuthentificationSignIntificationSignInUpdateKey
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SRequestAuthenUpdateKeyCopyWith<_SRequestAuthenUpdateKey> get copyWith => __$SRequestAuthenUpdateKeyCopyWithImpl<_SRequestAuthenUpdateKey>(this, _$identity);
+_$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<_SRequestAuthentificationSignIntificationSignInUpdateKey> get copyWith => __$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl<_SRequestAuthentificationSignIntificationSignInUpdateKey>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SRequestAuthenUpdateKeyToJson(this, );
+  return _$SRequestAuthentificationSignIntificationSignInUpdateKeyToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthenUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestAuthentificationSignIntificationSignInUpdateKey&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -522,15 +798,15 @@ int get hashCode => Object.hash(runtimeType,userId);
 
 @override
 String toString() {
-  return 'RequestAuthenUpdateKey(userId: $userId)';
+  return 'RequestAuthentificationSignIntificationSignInUpdateKey(userId: $userId)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SRequestAuthenUpdateKeyCopyWith<$Res> implements $RequestAuthenUpdateKeyCopyWith<$Res> {
-  factory _$SRequestAuthenUpdateKeyCopyWith(_SRequestAuthenUpdateKey value, $Res Function(_SRequestAuthenUpdateKey) _then) = __$SRequestAuthenUpdateKeyCopyWithImpl;
+abstract mixin class _$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<$Res> implements $RequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<$Res> {
+  factory _$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWith(_SRequestAuthentificationSignIntificationSignInUpdateKey value, $Res Function(_SRequestAuthentificationSignIntificationSignInUpdateKey) _then) = __$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl;
 @override @useResult
 $Res call({
  String userId
@@ -541,17 +817,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SRequestAuthenUpdateKeyCopyWithImpl<$Res>
-    implements _$SRequestAuthenUpdateKeyCopyWith<$Res> {
-  __$SRequestAuthenUpdateKeyCopyWithImpl(this._self, this._then);
+class __$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl<$Res>
+    implements _$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWith<$Res> {
+  __$SRequestAuthentificationSignIntificationSignInUpdateKeyCopyWithImpl(this._self, this._then);
 
-  final _SRequestAuthenUpdateKey _self;
-  final $Res Function(_SRequestAuthenUpdateKey) _then;
+  final _SRequestAuthentificationSignIntificationSignInUpdateKey _self;
+  final $Res Function(_SRequestAuthentificationSignIntificationSignInUpdateKey) _then;
 
-/// Create a copy of RequestAuthenUpdateKey
+/// Create a copy of RequestAuthentificationSignIntificationSignInUpdateKey
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
-  return _then(_SRequestAuthenUpdateKey(
+  return _then(_SRequestAuthentificationSignIntificationSignInUpdateKey(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,
   ));

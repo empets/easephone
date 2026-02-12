@@ -4,12 +4,16 @@ import 'package:com.example.epbomi/feature/authen/domaine/entites/request/authen
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 
 abstract class FirebaseRemoteService {
-  Future<FirebaseResult<String?>> userAuthen(RequestAuthen params);
+  Future<FirebaseResult<String?>> authentificationSignUp(
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
+  );
   Future<FirebaseResult<String?>> userAutheUpdateKey(
-    RequestAuthenUpdateKey params,
+    RequestAuthentificationSignIntificationSignInUpdateKey params,
   );
 
-  Future<FirebaseResult<String?>> signIn(RequestAuthen params);
+  Future<FirebaseResult<String?>> authentificationSignIn(
+    RequestAuthentificationSignIntificationSignIn params,
+  );
   Future<FirebaseResult<String?>> createCompte(
     RequestCreateCompteHomeInformation params,
   );
@@ -26,5 +30,11 @@ abstract class FirebaseRemoteService {
 
   Future<FirebaseResult<String?>> formFiveUpdate(RequestFormsCheckFile params);
 
-   Future<FirebaseResult<String?>> uploadAdministrativeFile(RequestFormsCheckFile params);
+  Future<FirebaseResult<String?>> uploadAdministrativeFile(
+    RequestFormsCheckFile params,
+  );
+
+  Future<FirebaseResult<String?>> recuperationAuthentification(
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
+  );
 }

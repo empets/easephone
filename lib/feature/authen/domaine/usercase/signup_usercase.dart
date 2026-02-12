@@ -5,18 +5,17 @@ import 'package:com.example.epbomi/feature/authen/domaine/repositorie/I_reposito
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-
 @lazySingleton
-class AuthenByMailUsercase
-    implements UseCase<String?, RequestAuthen> {
-  AuthenByMailUsercase(this.repository);
+class AuthentificationSignUpUsercase
+    implements UseCase<String?, RequestAuthentificationSignIntificationSignIntificationSignUp> {
+  AuthentificationSignUpUsercase(this.repository);
 
   final IRepositoryAuthen repository;
 
   @override
   Future<Either<Failure, String?>> call(
-    RequestAuthen params,
-  ){
-    return repository.userAuthen(params);
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
+  ) {
+    return repository.authentificationSignUp(params);
   }
 }

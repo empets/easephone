@@ -6,16 +6,16 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class AuthentificationSignInUsercase
-    implements UseCase<String?, RequestAuthentificationSignIntificationSignIn> {
-  AuthentificationSignInUsercase(this.repository);
+class RecuperationAuthentidicationUsercase
+    implements UseCase<String?, RequestAuthentificationSignIntificationSignIntificationSignUp> {
+  RecuperationAuthentidicationUsercase(this.repository);
 
   final IRepositoryAuthen repository;
 
   @override
   Future<Either<Failure, String?>> call(
-    RequestAuthentificationSignIntificationSignIn params,
+    RequestAuthentificationSignIntificationSignIntificationSignUp params,
   ) {
-    return repository.authentificationSignIn(params);
+    return repository.recuperationAuthentification(params);
   }
 }

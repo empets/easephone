@@ -206,100 +206,14 @@ class _HomeOverViewState extends State<HomeOverView> {
 
                     const SizedBox(width: 10),
 
-                    // Élément suivant : exemple d'un bouton rond
-                    // Container(
-                    //   padding: EdgeInsets.symmetric(
-                    //     vertical: 8.h,
-                    //     horizontal: 10.w,
-                    //   ),
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.grey.shade300,
-                    //     borderRadius: BorderRadius.circular(4.r),
-                    //     // boxShadow: [
-                    //     //   BoxShadow(
-                    //     //     color: Colors.black.withOpacity(0.2),
-                    //     //     offset: const Offset(2, 2),
-                    //     //     blurRadius: 6,
-                    //     //   ),
-                    //     // ],
-                    //   ),
-                    //   child: const Icon(
-                    //     Icons.filter_list,
-                    //     color: Colors.black,
-                    //   ),
-                    // ),
+         
                   ],
                 ),
 
                 // Section de button
                 SizedBox(height: 20.h),
 
-                // Row(
-                //   children: [
-                //     GestureDetector(
-                //       onTap: () async {},
-                //       child: Container(
-                //         padding: EdgeInsets.symmetric(
-                //           vertical: 8.h,
-                //           horizontal: 15.w,
-                //         ),
-                //         decoration: BoxDecoration(
-                //           color: Colors.grey.shade300,
-                //           borderRadius: BorderRadius.circular(15.r),
-                //           // boxShadow: [
-                //           //   BoxShadow(
-                //           //     color: Colors.black.withOpacity(0.2),
-                //           //     offset: const Offset(2, 2),
-                //           //     blurRadius: 6,
-                //           //   ),
-                //           // ],
-                //         ),
-                //         child: Text(
-                //           'All',
-                //           style: GoogleFonts.roboto(
-                //             color: Colors.black,
-                //             fontSize: 13.sp,
-                //             fontWeight: FontWeight.w500,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //     SizedBox(width: 9.w),
-
-                //     GestureDetector(
-                //       onTap: () {
-                //         // Navigator.of(
-                //         //   context,
-                //         // ).push(fadeRoute(const EligibilityTestPage()));
-                //       },
-                //       child: Container(
-                //         padding: EdgeInsets.symmetric(
-                //           vertical: 8.h,
-                //           horizontal: 15.w,
-                //         ),
-                //         decoration: BoxDecoration(
-                //           color: Colors.black,
-                //           borderRadius: BorderRadius.circular(15.r),
-                //           boxShadow: [
-                //             BoxShadow(
-                //               color: Colors.black.withOpacity(0.2),
-                //               offset: const Offset(2, 2),
-                //               blurRadius: 6,
-                //             ),
-                //           ],
-                //         ),
-                //         child: Text(
-                //           'Vue maps',
-                //           style: GoogleFonts.roboto(
-                //             color: Colors.white,
-                //             fontSize: 13.sp,
-                //             fontWeight: FontWeight.w500,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+       
                 SizedBox(height: 10.h),
 
                 SizedBox(height: 10.h),
@@ -972,73 +886,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                       ],
                                                     ),
                                                   )
-                                                : Container(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                top: 50.h,
-                                                              ),
-                                                          child: Lottie.asset(
-                                                            MyAssets
-                                                                .icons
-                                                                .emptyData
-                                                                .path,
-                                                          ),
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentGeometry
-                                                                  .center,
-                                                          child: CustomeText(
-                                                            texte:
-                                                                "Aucune donnée disponible rafechiser la page",
-
-                                                            texteSize: 14.sp,
-                                                          ),
-                                                        ),
-
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                top: 0.26.sh,
-                                                              ),
-                                                          child: CustomeButton(
-                                                            btnBackground:
-                                                                MyColorName
-                                                                    .black,
-                                                            btnTextColor:
-                                                                MyColorName
-                                                                    .white,
-                                                            btnText:
-                                                                'Rafrechir',
-                                                            btnTextSize: 13.sp,
-                                                            onTap: () {
-                                                              context
-                                                                  .read<
-                                                                    GetActifUserInformationBloc
-                                                                  >()
-                                                                  .add(
-                                                                    FiltreEvent.filtre(
-                                                                      filterIsActif:
-                                                                          false,
-                                                                      adresse:
-                                                                          "",
-                                                                    ),
-                                                                  );
-                                                              FocusScope.of(
-                                                                context,
-                                                              ).unfocus();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
+                                                : SizedBox();
                                           },
                                         ),
                                       );
@@ -1156,6 +1004,7 @@ class _UserProfileState extends State<UserProfile> {
         child: StreamBuilder(
           stream: FirebaseStreamService().userStream(localkey),
           builder: (context, asyncSnapshot) {
+            log('LOCAL USERID -->> $localkey');
             if (asyncSnapshot.hasData || asyncSnapshot.data != null) {
               return BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {

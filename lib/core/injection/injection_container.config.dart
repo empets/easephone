@@ -26,8 +26,6 @@ import '../../feature/authen/data/service/remote/real_time_authen/request_reposi
     as _i279;
 import '../../feature/authen/domaine/repositorie/I_repository_authen.dart'
     as _i283;
-import '../../feature/authen/domaine/usercase/authen_by_mail_usercase.dart'
-    as _i933;
 import '../../feature/authen/domaine/usercase/create_compte_check_file.dart'
     as _i473;
 import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
@@ -38,10 +36,17 @@ import '../../feature/authen/domaine/usercase/get_user_list_usercase.dart'
     as _i470;
 import '../../feature/authen/domaine/usercase/get_user_profile_usercase.dart'
     as _i973;
+import '../../feature/authen/domaine/usercase/recuperation_authentidication_usercase.dart'
+    as _i141;
 import '../../feature/authen/domaine/usercase/send_image.dart' as _i452;
 import '../../feature/authen/domaine/usercase/signin_usercase.dart' as _i228;
-import '../../feature/authen/page/bloc/auth-by-mail/auth_by_mail_bloc.dart'
-    as _i622;
+import '../../feature/authen/domaine/usercase/signup_usercase.dart' as _i10;
+import '../../feature/authen/page/bloc/authentification/authentification_signin_bloc.dart'
+    as _i859;
+import '../../feature/authen/page/bloc/authentification/authentification_signup_bloc.dart'
+    as _i263;
+import '../../feature/authen/page/bloc/authentification/compte_recuperation_bloc.dart'
+    as _i987;
 import '../../feature/home/data/repository/imp_repository_marchant.dart'
     as _i772;
 import '../../feature/home/data/service/firebase/remote.dart' as _i35;
@@ -97,8 +102,8 @@ extension GetItInjectableX on _i174.GetIt {
         marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i228.SigninUsercase>(
-      () => _i228.SigninUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i228.AuthentificationSignInUsercase>(
+      () => _i228.AuthentificationSignInUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -113,9 +118,6 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i452.CreateAdminitrativeFileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i933.AuthenByMailUsercase>(
-      () => _i933.AuthenByMailUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
     gh.lazySingleton<_i973.GetUserProfileUsercase>(
       () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
@@ -127,6 +129,20 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i470.GetUserListUsercase>(
       () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i10.AuthentificationSignUpUsercase>(
+      () => _i10.AuthentificationSignUpUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i141.RecuperationAuthentidicationUsercase>(
+      () => _i141.RecuperationAuthentidicationUsercase(
+        gh<_i283.IRepositoryAuthen>(),
+      ),
+    );
+    gh.lazySingleton<_i987.CompteRecuperationBloc>(
+      () => _i987.CompteRecuperationBloc(
+        recuperationAuthentidication:
+            gh<_i141.RecuperationAuthentidicationUsercase>(),
+      ),
     );
     gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
       () => _i774.GetActifCompteInformationUsercase(
@@ -142,10 +158,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i832.GetLikeListeUsercase>(
       () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
-    gh.lazySingleton<_i622.AuthByMailBloc>(
-      () => _i622.AuthByMailBloc(
-        signinUsercase: gh<_i228.SigninUsercase>(),
-        authenByMailUsercase: gh<_i933.AuthenByMailUsercase>(),
+    gh.lazySingleton<_i263.AuthentificationSignUpBloc>(
+      () => _i263.AuthentificationSignUpBloc(
+        authenSignUp: gh<_i10.AuthentificationSignUpUsercase>(),
+        googleAuthService: gh<_i623.GoogleAuthService>(),
+      ),
+    );
+    gh.lazySingleton<_i859.AuthentificationAuthentificationSignInBloc>(
+      () => _i859.AuthentificationAuthentificationSignInBloc(
+        authenSignIn: gh<_i228.AuthentificationSignInUsercase>(),
         googleAuthService: gh<_i623.GoogleAuthService>(),
       ),
     );
