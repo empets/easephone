@@ -7,8 +7,8 @@
 // import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
-// class GetActifUserInformationBloc extends Bloc<SigninEvent, ApiState<List<ActiveUserProfile>>> {
-//   GetActifUserInformationBloc({required this.getActifCompteInformationUsercase})
+// class GetActifProfileListBloc extends Bloc<SigninEvent, ApiState<List<ActiveUserProfile>>> {
+//   GetActifProfileListBloc({required this.getActifCompteInformationUsercase})
 //     : super(ApiState<List<ActiveUserProfile>>.initial()) {
 //     on<SigninEvent>(getUser);
 //   }

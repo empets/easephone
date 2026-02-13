@@ -8,9 +8,9 @@ import 'package:injectable/injectable.dart';
 
 
 @lazySingleton
-class GetActifCompteInformationUsercase
+class GetActifProfileListUsercase
     implements UseCase<List<ActiveUserProfile>, RequestFilterProfile> {
-  GetActifCompteInformationUsercase(this.repository);
+  GetActifProfileListUsercase(this.repository);
 
   final IRepositoryMarchant repository;
 
@@ -18,7 +18,7 @@ class GetActifCompteInformationUsercase
   Future<Either<Failure, List<ActiveUserProfile>>> call(
     RequestFilterProfile params,
   ){
-    return repository.getActifUserInformationAboutCompte(params);
+    return repository.getActifProfileList(params);
   }
 }
 

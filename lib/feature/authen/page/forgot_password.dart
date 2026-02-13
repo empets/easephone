@@ -5,7 +5,6 @@ import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/navigator_widget/custome_app_bar.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
-import 'package:com.example.epbomi/feature/authen/data/service/remote/google_authen/service_firebase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/recuperation_authentidication_usercase.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/authentification/compte_recuperation_bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/authentification/event/authentification_event.dart';

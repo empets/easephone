@@ -1,7 +1,7 @@
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
-import 'package:com.example.epbomi/feature/home/data/service/firebase/remote.dart';
+import 'package:com.example.epbomi/feature/home/data/service/remot_reposytory.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:com.example.epbomi/feature/home/domaine/repository/i_repository_marchant.dart';
@@ -14,12 +14,12 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
 
   MarchanServiceFirebase marchanServiceFirebase;
 
-  // cette mehode permet d'obtenir les information sur un compte actf
+  // permet de recuperer la liste des profile actif
   @override
   Future<Either<Failure, List<ActiveUserProfile>>>
-  getActifUserInformationAboutCompte(RequestFilterProfile reques) async {
+  getActifProfileList(RequestFilterProfile reques) async {
     final response = await marchanServiceFirebase
-        .getActifUserInformationAboutCompte(reques);
+        .getActifProfileList(reques);
     if (response is FirebaseSuccess<List<ActiveUserProfileModel>>) {
       return Right(
         response.data.map(ActiveUserProfileModel.toDomaine).toList(),

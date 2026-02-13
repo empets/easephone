@@ -8,21 +8,21 @@ import 'package:com.example.epbomi/core/injection/injection_container.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
 import 'package:com.example.epbomi/feature/authen/data/service/remote/real_time_authen/firebase_stream_service.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/entites/response/authen_response.dart';
-import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_user_list_usercase.dart';
-import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_user_profile_usercase.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_profile_list_usercase.dart';
+import 'package:com.example.epbomi/feature/authen/domaine/usercase/get_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/authen/domaine/usercase/send_image.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create_compte_image.bloc.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
-import 'package:com.example.epbomi/feature/authen/page/bloc/user_list/get_user_list_bloc.dart';
+import 'package:com.example.epbomi/feature/authen/page/bloc/user_list/get_profile_list_bloc.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_profile_list_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_like_number.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/check_internet/check_connexion_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/event/like_profile_event.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_like_number.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_user_profile_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_profile_list_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_detail/home_details.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/user_menu.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
@@ -36,7 +36,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import 'dart:ui';
 
 class HomeOverView extends StatefulWidget {
   const HomeOverView({super.key});
@@ -52,30 +51,30 @@ class _HomeOverViewState extends State<HomeOverView> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        
+        // Bloc de profile
         BlocProvider(
-          create: (context) => GetUserProfileBloc(
-            getUserProfileUsercase: getIt<GetUserProfileUsercase>(),
-          )..add(SigninEvent.googleAuthen()),
+          create: (context) => GetProfileBloc(
+            getProfileUsercase: getIt<GetProfileUsercase>(),
+          )..add(SigninEvent.fetch()),
         ),
-
+        
+        // Bloc de profile list
         BlocProvider(
-          create: (context) => GetUserProfileListBloc(
-            getUserListUsercase: getIt<GetUserListUsercase>(),
-          )..add(SigninEvent.googleAuthen()),
+          create: (context) => GetProfileListBloc(
+            getProfileListUsercase: getIt<GetProfileListUsercase>(),
+          )..add(SigninEvent.fetch()),
         ),
+        
+        // Bloc de profile actif
         BlocProvider(
-          create: (context) => GetActifUserInformationBloc(
-            getActifCompteInformationUsercase:
-                getIt<GetActifCompteInformationUsercase>(),
+          create: (context) => GetActifProfileListBloc(
+            getActifProfileListUsercase:
+                getIt<GetActifProfileListUsercase>(),
           )..add(FiltreEvent.filtre(filterIsActif: false, adresse: "")),
         ),
 
-        // BlocProvider(
-        //   create: (context) => LikeProfileBloc(
-        //     likeProfileUsercase: getIt<LikeProfileUsercase>(),
-        //     disLikeProfileUsercase: getIt<DisLikeProfileUsercase>(),
-        //   ),
-        // ),
+     
         BlocProvider(
           create: (context) => GetLikeNumberBloc(
             getLikeListeUsercase: getIt<GetLikeListeUsercase>(),
@@ -96,7 +95,7 @@ class _HomeOverViewState extends State<HomeOverView> {
               children: [
                 SizedBox(width: 7.h),
 
-                BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                   builder: (context, state) {
                     return UserProfile();
                   },
@@ -137,7 +136,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                         ),
                         child:
                             BlocBuilder<
-                              GetActifUserInformationBloc,
+                              GetActifProfileListBloc,
                               ApiState<List<ActiveUserProfile>>
                             >(
                               builder: (context, state) {
@@ -164,7 +163,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                           : () {
                                               context
                                                   .read<
-                                                    GetActifUserInformationBloc
+                                                    GetActifProfileListBloc
                                                   >()
                                                   .add(
                                                     FiltreEvent.filtre(
@@ -220,7 +219,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                 Expanded(
                   child:
                       BlocBuilder<
-                        GetActifUserInformationBloc,
+                        GetActifProfileListBloc,
                         ApiState<List<ActiveUserProfile>>
                       >(
                         builder: (context, state) {
@@ -281,7 +280,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                   onTap: () {
                                                     context
                                                         .read<
-                                                          GetActifUserInformationBloc
+                                                          GetActifProfileListBloc
                                                         >()
                                                         .add(
                                                           FiltreEvent.filtre(
@@ -513,7 +512,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                             ),
                                                                             child:
                                                                                 BlocBuilder<
-                                                                                  GetUserProfileBloc,
+                                                                                  GetProfileBloc,
                                                                                   ApiState<
                                                                                     ProfileUser
                                                                                   >
@@ -647,7 +646,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                             ),
                                                                             child:
                                                                                 BlocBuilder<
-                                                                                  GetUserProfileBloc,
+                                                                                  GetProfileBloc,
                                                                                   ApiState<
                                                                                     ProfileUser
                                                                                   >
@@ -967,17 +966,17 @@ class _UserProfileState extends State<UserProfile> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetUserProfileBloc(
-            getUserProfileUsercase: getIt<GetUserProfileUsercase>(),
-          )..add(SigninEvent.googleAuthen()),
+          create: (context) => GetProfileBloc(
+            getProfileUsercase: getIt<GetProfileUsercase>(),
+          )..add(SigninEvent.fetch()),
         ),
 
         BlocProvider(
           create: (context) =>
-              CheckConnexionBloc()..add(SigninEvent.googleAuthen()),
+              CheckConnexionBloc()..add(SigninEvent.fetch()),
         ),
 
-        BlocProvider.value(value: context.read<GetActifUserInformationBloc>()),
+        BlocProvider.value(value: context.read<GetActifProfileListBloc>()),
       ],
       child: BlocListener<CheckConnexionBloc, ApiState<bool>>(
         listener: (context, state) {
@@ -1006,7 +1005,7 @@ class _UserProfileState extends State<UserProfile> {
           builder: (context, asyncSnapshot) {
             log('LOCAL USERID -->> $localkey');
             if (asyncSnapshot.hasData || asyncSnapshot.data != null) {
-              return BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+              return BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {
                   if (state is SuccessState<ProfileUser>) {
                     return GestureDetector(
@@ -1024,11 +1023,11 @@ class _UserProfileState extends State<UserProfile> {
                             return MultiBlocProvider(
                               providers: [
                                 BlocProvider.value(
-                                  value: context.read<GetUserProfileBloc>(),
+                                  value: context.read<GetProfileBloc>(),
                                 ),
                                 BlocProvider.value(
                                   value: context
-                                      .read<GetActifUserInformationBloc>(),
+                                      .read<GetActifProfileListBloc>(),
                                 ),
                                 BlocProvider(
                                   create: (context) => CreateProfileImageBloc(
@@ -1202,7 +1201,7 @@ class _UserProfileState extends State<UserProfile> {
                 },
               );
             } else {
-              return BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+              return BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {
                   if (state is SuccessState<ProfileUser>) {
                     return GestureDetector(
@@ -1220,11 +1219,11 @@ class _UserProfileState extends State<UserProfile> {
                             return MultiBlocProvider(
                               providers: [
                                 BlocProvider.value(
-                                  value: context.read<GetUserProfileBloc>(),
+                                  value: context.read<GetProfileBloc>(),
                                 ),
                                 BlocProvider.value(
                                   value: context
-                                      .read<GetActifUserInformationBloc>(),
+                                      .read<GetActifProfileListBloc>(),
                                 ),
                                 BlocProvider(
                                   create: (context) => CreateProfileImageBloc(

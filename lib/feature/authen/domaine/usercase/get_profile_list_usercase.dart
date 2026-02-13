@@ -6,14 +6,13 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class GetUserProfileUsercase
-    implements UseCase<ProfileUser, NoParams> {
-  GetUserProfileUsercase(this.repository);
+class GetProfileListUsercase implements UseCase<List<ProfileUser>, NoParams> {
+  GetProfileListUsercase(this.repository);
 
   final IRepositoryAuthen repository;
 
   @override
-  Future<Either<Failure, ProfileUser>> call(NoParams noParams) {
-    return repository.getProfileUser();
+  Future<Either<Failure, List<ProfileUser>>> call(NoParams params) {
+    return repository.getProfileList();
   }
 }

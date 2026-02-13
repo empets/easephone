@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:com.example.epbomi/core/extension/extensions.dart';
 import 'package:com.example.epbomi/core/geocoding/data/datasources/nominatim_datasource.dart';
 import 'package:com.example.epbomi/core/geocoding/data/repositories/geocoding_repository_impl.dart';
 import 'package:com.example.epbomi/core/geocoding/domain/usecases/reverse_geocode_usecase.dart';
@@ -14,14 +12,11 @@ import 'package:com.example.epbomi/core/map/widgets/interactive_map.dart';
 import 'package:com.example.epbomi/core/map/widgets/map_controls.dart';
 import 'package:com.example.epbomi/core/services/permission_preferences_service.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/presentation/page/request_management/domain/entities/location_suggestion.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/cubit/location_search/location_search_cubit.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/cubit/map_location/map_location_cubit.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/cubit/map_location/map_location_state.dart';
-import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/eligibility_form_content.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_denied_message.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_permission_dialog.dart';
-import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/widgets/location_search_content.dart';
 import 'package:com.example.epbomi/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,7 +82,6 @@ class _EligibilityTestPageContent extends StatefulWidget {
 class _EligibilityTestPageState extends State<_EligibilityTestPageContent>
     with TickerProviderStateMixin {
   PermissionState _permissionState = PermissionState.notAsked;
-  SheetView _currentView = SheetView.form;
   MapLocation _selectedLocation = MapConstants.defaultLocation;
   final DraggableScrollableController _sheetController =
       DraggableScrollableController();
@@ -208,143 +202,12 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent>
     );
   }
 
-  void _handleMapTap(MapLocation location) {
-    // Delegate to Cubit for reverse geocoding
-    context.read<MapLocationCubit>().handleMapTap(location);
-  }
-
-  void _handleManualPosition() {
-    // Collapse the sheet to show more map
-    _sheetController.animateTo(
-      0.3,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
-
-  void _handleValidate() {
-    // Validation des champs
-    final phoneNumber = _phoneController.text.trim();
-    final address = _addressController.text.trim();
-
-    // Réinitialiser les erreurs
-    setState(() {
-      _phoneError = null;
-      _addressError = null;
-    });
-
-    var hasError = false;
-
-    // Vérifier que le numéro de téléphone n'est pas vide
-    if (phoneNumber.isEmpty) {
-      setState(() {
-        _phoneError = 'Veuillez renseigner votre numéro de téléphone';
-      });
-      hasError = true;
-    }
-    // Vérifier le format du numéro de téléphone
-    else {
-      // Vérifier si le numéro ne commence pas par 07
-      if (!phoneNumber.isValidContact()) {
-        setState(() {
-          _phoneError = 'Veuillez renseigner un numéro Orange';
-        });
-        hasError = true;
-      }
-      // Vérifier si le numéro n'a pas 10 chiffres
-      else if (phoneNumber.length != 10 ||
-          !RegExp(r'^\d+$').hasMatch(phoneNumber)) {
-        setState(() {
-          _phoneError = 'Le numéro doit contenir exactement 10 chiffres';
-        });
-        hasError = true;
-      }
-    }
-
-    // Vérifier que l'adresse n'est pas vide
-    if (address.isEmpty) {
-      setState(() {
-        _addressError = 'Veuillez sélectionner une adresse';
-      });
-      hasError = true;
-    }
-
-    // Vérifier que les coordonnées GPS sont valides
-    if (_selectedLocation.latitude == 0 && _selectedLocation.longitude == 0) {
-      setState(() {
-        _addressError = 'Veuillez sélectionner une position sur la carte';
-      });
-      hasError = true;
-    }
-
-    // Si des erreurs existent, ne pas continuer
-    if (hasError) return;
-
-    // // Appeler l'API de vérification d'éligibilité
-    // context.read<EligibilityCubit>().checkEligibility(
-    //       latitude: _selectedLocation.latitude,
-    //       longitude: _selectedLocation.longitude,
-    //     );
-  }
-
   void _handleAuthorize() {
     setState(() {
       _permissionState = PermissionState.granted;
     });
     // Fetch current location via Cubit
     context.read<MapLocationCubit>().fetchCurrentLocation();
-  }
-
-  void _handleLocationSearch() {
-    setState(() {
-      _currentView = SheetView.locationSearch;
-    });
-    // Use WidgetsBinding to ensure the sheet is built before animating
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_sheetController.isAttached) {
-        _sheetController.animateTo(
-          0.85,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
-  void _handleBackFromSearch() {
-    setState(() {
-      _currentView = SheetView.form;
-    });
-    // Use WidgetsBinding to ensure the sheet is built before animating
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_sheetController.isAttached) {
-        _sheetController.animateTo(
-          0.6,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
-  void _handleLocationSelected(LocationSuggestion suggestion) {
-    // Update address via Cubit
-    if (suggestion.latitude != null && suggestion.longitude != null) {
-      context.read<MapLocationCubit>().setLocationFromSearch(
-        latitude: suggestion.latitude!,
-        longitude: suggestion.longitude!,
-        address: suggestion.displayName,
-      );
-    }
-
-    setState(() {
-      _currentView = SheetView.form;
-    });
-    _sheetController.animateTo(
-      0.2,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
   }
 
   /// Calculate the bottom position for map controls based on sheet extent
@@ -378,58 +241,8 @@ class _EligibilityTestPageState extends State<_EligibilityTestPageContent>
     }
   }
 
-  final MapController _mapController = MapController();
   late MapController mapController;
 
-  void _animatedMapMove(LatLng destLocation, double dezoomer) {
-    // Décalage pour que le marqueur soit plus haut dans l’écran
-    const double offsetLatitude = -0.002;
-
-    // Nouveau point où la caméra doit aller (un peu plus haut que le marqueur)
-    final LatLng cameraTarget = LatLng(
-      destLocation.latitude + offsetLatitude,
-      destLocation.longitude,
-    );
-
-    final latTween = Tween<double>(
-      begin: mapController.camera.center.latitude,
-      end: cameraTarget.latitude,
-    );
-    final lngTween = Tween<double>(
-      begin: mapController.camera.center.longitude,
-      end: cameraTarget.longitude,
-    );
-    final zoomTween = Tween<double>(
-      begin: mapController.camera.zoom,
-      end: dezoomer,
-    );
-
-    final controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-
-    final animation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.fastOutSlowIn,
-    );
-
-    controller.addListener(() {
-      mapController.move(
-        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
-        zoomTween.evaluate(animation),
-      );
-    });
-
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed ||
-          status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
-
-    controller.forward();
-  }
 
   Future<List<LatLng>> getRouteOSRM(LatLng start, LatLng end) async {
     final url =

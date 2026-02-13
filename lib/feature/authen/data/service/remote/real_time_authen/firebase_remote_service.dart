@@ -225,7 +225,7 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
   /*  permet de recuper le profile d'utilisateur
   */
   @override
-  Future<FirebaseResult<ProfileUserModel>> getProfileUser() async {
+  Future<FirebaseResult<ProfileUserModel>> getProfile() async {
     final shared = await shareData.SharedPreferences.getInstance();
     final localUserSection = shared.getString('user_section');
 
@@ -244,8 +244,10 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
+
+  // <----->> cette methode permet de recuperer la liste des utilisateurs
   @override
-  Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList() async {
+  Future<FirebaseResult<List<ProfileUserModel>>> getProfileList() async {
     try {
       final snapshot = await db.child('users').get();
       if (!snapshot.exists || snapshot.value == null) {

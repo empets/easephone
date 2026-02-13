@@ -2,22 +2,12 @@ import 'dart:developer';
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
+import 'package:com.example.epbomi/feature/home/data/service/remot_reposytory.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseRf;
 
-abstract class MarchanServiceFirebase {
-  // cette mehode permet d'obtenir les information sur un compte actf
-  Future<FirebaseResult<List<ActiveUserProfileModel>>>
-  getActifUserInformationAboutCompte(RequestFilterProfile params);
 
-  Future<FirebaseResult<String?>> likeProfile(RequestLike params);
-
-  // permet de disliker une profile
-  Future<FirebaseResult<String?>> dislike(RequestLike params);
-
-  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber();
-}
 
 @LazySingleton(as: MarchanServiceFirebase)
 class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
@@ -26,17 +16,13 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   final databaseRf.DatabaseReference db;
   late String? like = '';
 
+
+  // permet de recuperer la liste des profile actif
   @override
   Future<FirebaseResult<List<ActiveUserProfileModel>>>
-  getActifUserInformationAboutCompte(RequestFilterProfile params) async {
+  getActifProfileList(RequestFilterProfile params) async {
     try {
       if (params.filterIsActif) {
-        // final snapshot = await db
-        //     .child('hotel')
-        //     .orderByChild('adresse')
-        //     .equalTo(params.adresse.toLowerCase().trim())
-        //     .get();
-
         final snapshot = await db.child('hotel').get();
 
         final result = snapshot.children.where((child) {
@@ -48,18 +34,8 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
           return adresse.contains(params.adresse.toLowerCase().trim());
         }).toList();
 
-        log("filter =---------->> $result");
 
         if (result.isNotEmpty) {
-          final flatUsers = (snapshot.value as Map).values.map((e) {
-            final m = Map<String, dynamic>.from(e as Map);
-            return {
-              ...m,
-              ...Map<String, dynamic>.from(m.remove('herBer') ?? {}),
-            };
-          }).toList();
-
-          log('data:::::::  $flatUsers');
 
           if (!snapshot.exists || snapshot.value == null) {
             return FirebaseError("Aucune donnée trouvée");
@@ -72,33 +48,14 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
           return FirebaseSuccess(userProfile);
         } else {
           final snapshot = await db.child('hotel').get();
-          final flatUsers = (snapshot.value as Map).values.map((e) {
-            final m = Map<String, dynamic>.from(e as Map);
-            return {
-              ...m,
-              ...Map<String, dynamic>.from(m.remove('herBer') ?? {}),
-            };
-          }).toList();
-          log('data:::::::2  $flatUsers');
-
           if (!snapshot.exists || snapshot.value == null) {
             return FirebaseError("Aucune donnée trouvée");
           }
           final userProfile = <ActiveUserProfileModel>[];
-          // (snapshot.value as Map).values.map((e) {
-          //   return ActiveUserProfileModel.fromJson({});
-          // }).toList();
-
           return FirebaseSuccess(userProfile);
         }
       } else {
         final snapshot = await db.child('hotel').get();
-        final flatUsers = (snapshot.value as Map).values.map((e) {
-          final m = Map<String, dynamic>.from(e as Map);
-          return {...m, ...Map<String, dynamic>.from(m.remove('herBer') ?? {})};
-        }).toList();
-        log('data::::::: 3 $flatUsers');
-
         if (!snapshot.exists || snapshot.value == null) {
           return FirebaseError("Aucune donnée trouvée");
         }
@@ -111,6 +68,14 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
       return FirebaseError(e.runtimeType.toString());
     }
   }
+
+
+
+
+
+
+
+
 
   @override
   Future<FirebaseResult<String?>> likeProfile(RequestLike params) async {

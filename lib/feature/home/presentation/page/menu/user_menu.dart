@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/core/snakbar/custome_snackbar.dart';
@@ -8,10 +7,9 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create
 import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/event/create_compte_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/Forms_lacation.dart';
 import 'package:com.example.epbomi/feature/authen/page/create-compte/authentification_screen.dart';
-import 'package:com.example.epbomi/feature/authen/page/signin.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_user_profile_bloc.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_user_profile_information.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_profile_bloc.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_profile_list_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/historie_profile.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/menu/polique_screen.dart';
@@ -90,7 +88,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
       ),
-      child: BlocBuilder<GetActifUserInformationBloc, ApiState<List<ActiveUserProfile>>>(
+      child: BlocBuilder<GetActifProfileListBloc, ApiState<List<ActiveUserProfile>>>(
         builder: (context, activeUserState) {
           if (activeUserState is SuccessState<List<ActiveUserProfile>>) {
             final isCreatCompte = activeUserState.data.any((x) {
@@ -119,7 +117,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                   ),
                 ),
 
-                BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                   builder: (context, state) {
                     if (state is SuccessState<ProfileUser>) {
                       return Container(
@@ -396,7 +394,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                   ),
                   child: Column(
                     children: [
-                      BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                      BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                         builder: (context, state) {
                           if (state is SuccessState<ProfileUser>) {
                             return GestureDetector(
@@ -505,7 +503,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                         height: 2.h,
                         color: Colors.black.withValues(alpha: 0.15),
                       ),
-                      BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                      BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                         builder: (context, state) {
                           if (state is SuccessState<ProfileUser>) {
                             return GestureDetector(
@@ -595,7 +593,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                 ),
               ),
 
-              BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+              BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {
                   if (state is SuccessState<ProfileUser>) {
                     return Container(
@@ -838,7 +836,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                 ),
                 child: Column(
                   children: [
-                    BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                    BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                       builder: (context, state) {
                         if (state is SuccessState<ProfileUser>) {
                           return GestureDetector(
@@ -946,7 +944,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                       height: 2.h,
                       color: Colors.black.withValues(alpha: 0.15),
                     ),
-                    BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
+                    BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                       builder: (context, state) {
                         if (state is SuccessState<ProfileUser>) {
                           return GestureDetector(

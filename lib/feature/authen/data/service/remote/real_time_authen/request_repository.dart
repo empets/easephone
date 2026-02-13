@@ -21,10 +21,12 @@ abstract class FirebaseRemoteService {
     RequestCreateCompteHeber params,
   );
 
-  Future<FirebaseResult<ProfileUserModel>> getProfileUser();
+  // <----->> cette methode permet de recuperer le profile de l'utilisateur
+  Future<FirebaseResult<ProfileUserModel>> getProfile();
   Future<FirebaseResult<String>> uploadImage(CreatCompteImage params);
 
-  Future<FirebaseResult<List<ProfileUserModel>>> getProfileUserList();
+  // <----->> cette methode permet de recuperer la liste des utilisateurs
+  Future<FirebaseResult<List<ProfileUserModel>>> getProfileList();
 
   Future<FirebaseResult<String?>> uploadprofileImage(CreatProfileImage params);
 

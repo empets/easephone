@@ -62,19 +62,6 @@ class _RelocationPageState extends State<RelocationPage> {
     });
   }
 
-  void _onConfirm() {
-    // TODO: Implement validation and submission
-    // For now, just show a snackbar
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Formulaire soumis avec succès'),
-        backgroundColor: Colors.green,
-      ),
-    );
-
-    // Navigate back or to next page
-    Navigator.pop(context);
-  }
 
   @override
   void dispose() {
@@ -285,10 +272,4 @@ class _RelocationPageState extends State<RelocationPage> {
     );
   }
 
-  // Widget _buildConfirmButton() {
-  //   return SizedBox(
-  //     width: double.infinity,
-  //     child: PrimaryButton(label: 'Confirmer', onPressed: _onConfirm),
-  //   );
-  // }
 }

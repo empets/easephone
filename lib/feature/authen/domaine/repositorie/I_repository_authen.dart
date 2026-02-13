@@ -10,9 +10,7 @@ abstract class IRepositoryAuthen {
   Future<Either<Failure, String?>> authentificationSignUp(
     RequestAuthentificationSignIntificationSignIntificationSignUp request,
   );
-  Future<Either<Failure, String?>> userAutheUpdateKey(
-    RequestAuthentificationSignIntificationSignInUpdateKey request,
-  );
+
 
   //--->>cette methode permet de vérifier si l'utilisateur existe deja
   Future<Either<Failure, String?>> authentificationSignIn(
@@ -29,21 +27,31 @@ abstract class IRepositoryAuthen {
     RequestCreateCompteHeber request,
   );
 
-  //creation de compte marchant
-  Future<Either<Failure, ProfileUser>> getProfileUser();
-  Future<Either<Failure, List<ProfileUser>>> getProfileUserList();
+  // <----->> cette methode permet de recuperer la liste des utilisateurs
+  Future<Either<Failure, List<ProfileUser>>> getProfileList();
 
+  // <----->> cette methode permet de mettre a jour le profile de l'utilisateur
   Future<Either<Failure, String>> uploadImage(CreatCompteImage params);
+
+  // <----->> cette methode permet de mettre a jour le profile de l'utilisateur actif
   Future<Either<Failure, String?>> uploadprofileImage(CreatProfileImage params);
+
+  // <----->> cette methode permet de mettre a jour le formulaire 5
   Future<Either<Failure, String?>> formFiveUpdate(
     RequestFormsCheckFile request,
   );
+
+  // <----->> cette methode permet de mettre a jour le formulaire 6 administratif
   Future<Either<Failure, String?>> uploadAdministrativeFile(
     RequestFormsCheckFile params,
   );
 
 
-    //--->cette methode permet de verifier si l'utilisateur existe via le numero de secret
+   // <----->> creation permet de recuperer le profile de l'utilisateur
+   Future<Either<Failure, ProfileUser>> getProfile();
+
+
+    // <----->> cette methode permet de verifier si l'utilisateur existe via le numero de secret
   Future<Either<Failure, String?>> recuperationAuthentification(
     RequestAuthentificationSignIntificationSignIntificationSignUp request,
   );

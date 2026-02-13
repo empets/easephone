@@ -105,13 +105,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
       child: BlocListener<CreateCompteHBloc, CreateCompteHbState>(
         listener: (context, state) {
           if (state.status.isSuccess) {
-            // BlocProvider(
-            //   create: (context) => CreateCompteImageBloc(
-            //     compteSendImageUsercase:
-            //         getIt<CreateCoompteSendImageUsercase>(),
-            //   ),
-            //   c
-            // );
+           
             Navigator.of(context).push(
               fadeRoute(
                 BlocProvider(
@@ -123,19 +117,6 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                 ),
               ),
             );
-
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => BlocProvider(
-            //       create: (context) => CreateCompteImageBloc(
-            //         compteSendImageUsercase:
-            //             getIt<CreateCoompteSendImageUsercase>(),
-            //       ),
-            //       child: FormsHomeProfileImage(),
-            //     ),
-            //   ),
-            // );
           }
         },
         child: Scaffold(

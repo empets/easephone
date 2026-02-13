@@ -1,17 +1,17 @@
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_compte_information_usercase.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_profile_list_usercase.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<ActiveUserProfile>>> {
-  GetActifUserInformationBloc({required this.getActifCompteInformationUsercase})
+class GetActifProfileListBloc extends Bloc<FiltreEvent, ApiState<List<ActiveUserProfile>>> {
+  GetActifProfileListBloc({required this.getActifProfileListUsercase})
     : super(ApiState<List<ActiveUserProfile>>.initial()) {
     on<FiltreEvent>(getUser);
   }
 
-  GetActifCompteInformationUsercase getActifCompteInformationUsercase;
+  GetActifProfileListUsercase getActifProfileListUsercase;
   Future<void> getUser(
     FiltreEvent event,
     Emitter<ApiState<List<ActiveUserProfile>>> emit,
@@ -21,7 +21,7 @@ class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<Active
 
       if(filterIsActif){
         emit(ApiState<List<ActiveUserProfile>>.load());
-        final response = await getActifCompteInformationUsercase.call(
+        final response = await getActifProfileListUsercase.call(
        RequestFilterProfile(adresse: adresse, filterIsActif: filterIsActif) );
 
         emit(
@@ -31,7 +31,7 @@ class GetActifUserInformationBloc extends Bloc<FiltreEvent, ApiState<List<Active
       }
       else{
           emit(ApiState<List<ActiveUserProfile>>.load());
-        final response = await getActifCompteInformationUsercase.call(
+        final response = await getActifProfileListUsercase.call(
         RequestFilterProfile(adresse: "", filterIsActif: false) );
 
         emit(

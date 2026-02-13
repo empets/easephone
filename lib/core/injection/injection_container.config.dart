@@ -32,10 +32,10 @@ import '../../feature/authen/domaine/usercase/create_compte_herb_usercase.dart'
     as _i700;
 import '../../feature/authen/domaine/usercase/create_compte_usercase.dart'
     as _i406;
-import '../../feature/authen/domaine/usercase/get_user_list_usercase.dart'
-    as _i470;
-import '../../feature/authen/domaine/usercase/get_user_profile_usercase.dart'
-    as _i973;
+import '../../feature/authen/domaine/usercase/get_profile_list_usercase.dart'
+    as _i379;
+import '../../feature/authen/domaine/usercase/get_profile_usercase.dart'
+    as _i764;
 import '../../feature/authen/domaine/usercase/recuperation_authentidication_usercase.dart'
     as _i141;
 import '../../feature/authen/domaine/usercase/send_image.dart' as _i452;
@@ -50,12 +50,13 @@ import '../../feature/authen/page/bloc/authentification/compte_recuperation_bloc
 import '../../feature/home/data/repository/imp_repository_marchant.dart'
     as _i772;
 import '../../feature/home/data/service/firebase/remote.dart' as _i35;
+import '../../feature/home/data/service/remot_reposytory.dart' as _i978;
 import '../../feature/home/domaine/repository/i_repository_marchant.dart'
     as _i956;
 import '../../feature/home/domaine/usercase/dis_like_profile_usercase.dart'
     as _i331;
-import '../../feature/home/domaine/usercase/get_actif_compte_information_usercase.dart'
-    as _i774;
+import '../../feature/home/domaine/usercase/get_actif_profile_list_usercase.dart'
+    as _i1029;
 import '../../feature/home/domaine/usercase/get_like_number.dart' as _i832;
 import '../../feature/home/domaine/usercase/liker_profile.dart' as _i21;
 import '../../router/app_route.dart' as _i574;
@@ -88,25 +89,45 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i279.FirebaseRemoteService>(
       () => _i505.ImplFirebaseRemoteService(db: gh<_i345.DatabaseReference>()),
     );
+    gh.lazySingleton<_i978.MarchanServiceFirebase>(
+      () =>
+          _i35.ImpleMarchantServiceFirebase(db: gh<_i345.DatabaseReference>()),
+    );
     gh.lazySingleton<_i283.IRepositoryAuthen>(
       () => _i417.RepositoriesAuthenImple(
         firebaseRemoteService: gh<_i279.FirebaseRemoteService>(),
       ),
     );
-    gh.lazySingleton<_i35.MarchanServiceFirebase>(
-      () =>
-          _i35.ImpleMarchantServiceFirebase(db: gh<_i345.DatabaseReference>()),
-    );
     gh.lazySingleton<_i956.IRepositoryMarchant>(
       () => _i772.ImpRepositoryMarchant(
-        marchanServiceFirebase: gh<_i35.MarchanServiceFirebase>(),
+        marchanServiceFirebase: gh<_i978.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i228.AuthentificationSignInUsercase>(
-      () => _i228.AuthentificationSignInUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
+      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i832.GetLikeListeUsercase>(
+      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i21.LikeProfileUsercase>(
+      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i1029.GetActifProfileListUsercase>(
+      () => _i1029.GetActifProfileListUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i473.CreateCompteCheckFile>(
+      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i700.CreateComptHebUsercase>(
       () => _i700.CreateComptHebUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
+      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i141.RecuperationAuthentidicationUsercase>(
+      () => _i141.RecuperationAuthentidicationUsercase(
+        gh<_i283.IRepositoryAuthen>(),
+      ),
     );
     gh.lazySingleton<_i452.CreateCoompteSendImageUsercase>(
       () => _i452.CreateCoompteSendImageUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -118,45 +139,23 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i452.CreateAdminitrativeFileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i973.GetUserProfileUsercase>(
-      () => _i973.GetUserProfileUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i473.CreateCompteCheckFile>(
-      () => _i473.CreateCompteCheckFile(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i406.CreateComptemarchantUsercase>(
-      () => _i406.CreateComptemarchantUsercase(gh<_i283.IRepositoryAuthen>()),
-    );
-    gh.lazySingleton<_i470.GetUserListUsercase>(
-      () => _i470.GetUserListUsercase(gh<_i283.IRepositoryAuthen>()),
+    gh.lazySingleton<_i228.AuthentificationSignInUsercase>(
+      () => _i228.AuthentificationSignInUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i10.AuthentificationSignUpUsercase>(
       () => _i10.AuthentificationSignUpUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i141.RecuperationAuthentidicationUsercase>(
-      () => _i141.RecuperationAuthentidicationUsercase(
-        gh<_i283.IRepositoryAuthen>(),
-      ),
+    gh.lazySingleton<_i379.GetProfileListUsercase>(
+      () => _i379.GetProfileListUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i764.GetProfileUsercase>(
+      () => _i764.GetProfileUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i987.CompteRecuperationBloc>(
       () => _i987.CompteRecuperationBloc(
         recuperationAuthentidication:
             gh<_i141.RecuperationAuthentidicationUsercase>(),
       ),
-    );
-    gh.lazySingleton<_i774.GetActifCompteInformationUsercase>(
-      () => _i774.GetActifCompteInformationUsercase(
-        gh<_i956.IRepositoryMarchant>(),
-      ),
-    );
-    gh.lazySingleton<_i21.LikeProfileUsercase>(
-      () => _i21.LikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
-    gh.lazySingleton<_i331.DisLikeProfileUsercase>(
-      () => _i331.DisLikeProfileUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
-    gh.lazySingleton<_i832.GetLikeListeUsercase>(
-      () => _i832.GetLikeListeUsercase(gh<_i956.IRepositoryMarchant>()),
     );
     gh.lazySingleton<_i263.AuthentificationSignUpBloc>(
       () => _i263.AuthentificationSignUpBloc(

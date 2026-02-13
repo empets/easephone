@@ -2,7 +2,6 @@ import 'package:com.example.epbomi/core/custome_widget/custome_button.dart';
 import 'package:com.example.epbomi/core/custome_widget/custome_text.dart';
 import 'package:com.example.epbomi/core/navigator_widget/navigator_widget.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
-import 'package:com.example.epbomi/feature/home/presentation/page/home_maps.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/home_screen.dart';
 import 'package:com.example.epbomi/feature/home/presentation/page/request_management/presentation/pages/eligibility_test_page.dart';
 import 'package:com.example.epbomi/gen/assets.gen.dart';
@@ -147,60 +146,6 @@ class _HomeDetailsState extends State<HomeDetails>
             ),
             SizedBox(height: 9.h),
 
-            // Container(
-            //   width: MediaQuery.sizeOf(context).width.sw,
-            //   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-            //   decoration: BoxDecoration(
-            //     color: MyColorName.backgroundIvory.withValues(alpha: 0.99),
-            //     borderRadius: BorderRadius.only(
-            //       topLeft: Radius.circular(10.r),
-            //       topRight: Radius.circular(10.r),
-            //     ),
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: [
-            //           SizedBox(height: 10.h),
-            //           CustomeText(
-            //             texte: widget.profile.name,
-            //             texteSize: 18.sp,
-            //             fontWeight: FontWeight.w600,
-            //             color: MyColorName.black,
-            //           ),
-            //           SizedBox(height: 5.h),
-            //           CustomeText(
-            //             texte: 'L’Étoile du Soir',
-            //             texteSize: 14.sp,
-            //             fontWeight: FontWeight.w600,
-            //             color: MyColorName.greyMedium,
-            //           ),
-            //         ],
-            //       ),
-            //       Row(
-            //         children: [
-            //           Text(
-            //             '1,5k',
-            //             style: GoogleFonts.roboto(
-            //               color: Colors.grey.shade600,
-            //               fontSize: 14.sp,
-            //               fontWeight: FontWeight.w700,
-            //               letterSpacing: 0.1.sp,
-            //             ),
-            //           ),
-            //           SizedBox(width: 2.w),
-            //           Icon(
-            //             Icons.star_border_purple500_rounded,
-            //             color: Colors.amber,
-            //           ),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Container(
               width: MediaQuery.sizeOf(context).width.sw,
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
@@ -263,16 +208,6 @@ class _HomeDetailsState extends State<HomeDetails>
                         bottom: 0.h,
                         child: GestureDetector(
                           onTap: () {
-                            // Navigator.of(context).push(
-                            //   fadeRoute(
-                            //     HomeMapsOverViewScreen(
-                            //       latitude: double.parse(widget.profile.lat),
-                            //       longitude: double.parse(widget.profile.long),
-                            //       adress: widget.profile.adresse,
-                            //     ),
-                            //   ),
-                            // );
-
                             Navigator.of(context).push(
                               fadeRoute(
                                 EligibilityTestPage(profile: widget.profile),
@@ -312,27 +247,7 @@ class _HomeDetailsState extends State<HomeDetails>
                         ),
                       ),
 
-                      // Positioned(
-                      //   left: 0.44.sw,
-                      //   bottom: 0.h,
-                      //   child: Align(
-                      //     alignment: Alignment.centerRight,
-                      //     child: Container(
-                      //       height: 20.h,
-                      //       margin: REdgeInsets.symmetric(vertical: 6.h),
-                      //       child: SmoothPageIndicator(
-                      //         controller: controller,
-                      //         count: 3,
-                      //         effect: ColorTransitionEffect(
-                      //           dotColor: MyColorName.greyMedium,
-                      //           activeDotColor: Colors.amber,
-                      //           dotHeight: 3.h,
-                      //           radius: 30.r,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                   
                     ],
                   ),
 
@@ -366,12 +281,6 @@ class _HomeDetailsState extends State<HomeDetails>
                             width: 0.08.sh,
                           ),
 
-                          //  Image.network(
-                          //   widget.profile.profileImage,
-                          //   width: 60.r,
-                          //   height: 60.r,
-                          //   fit: BoxFit.cover,
-                          // ),
                         ),
                       ),
                       SizedBox(width: 8.w),

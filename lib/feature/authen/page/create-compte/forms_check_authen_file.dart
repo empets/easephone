@@ -22,7 +22,6 @@ import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:scanner_document/scanner_document.dart';
-// import 'package:gscankit/gscankit.dart';
 
 class FormsCheckAuthenFile extends StatefulWidget {
   const FormsCheckAuthenFile({super.key});
@@ -51,12 +50,6 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
-  //  showAppSnackBar(
-  //           context,
-  //           color: MyColorName.errorRed,
-  //           iconRight: Icons.close,
-  //           message: state.errorMessage,
-  //         );
 
   File? _imageFileRecto;
   File? _imageFileVerso;
@@ -505,19 +498,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                         return GestureDetector(
                           onTap: () async {
                             scannerPlace();
-                            // scanDocument();
-                            // context.read<CheckFileBloc>().add(
-                            //   CheckFileEvent.submit(),
-                            // );
-                            // context.read<CheckFileBloc>().add(
-                            //   CheckFileEvent.submit(),
-                            // );
-
-                            // await _imagePikers(ImageSource.camera, (file) {
-                            //   if (_imageFileRecto != null) {
-
-                            //   }
-                            // });
+                      
                           },
                           child: Container(
                             child: Column(

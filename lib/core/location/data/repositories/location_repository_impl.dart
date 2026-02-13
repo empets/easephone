@@ -1,8 +1,7 @@
 import '../../domain/entities/user_location.dart';
 import '../../domain/repositories/location_repository.dart';
 import 'package:geolocator/geolocator.dart';
-import '../../domain/entities/user_location.dart';
-import '../../domain/repositories/location_repository.dart';
+
 
 /// Implementation of LocationRepository using geolocator package
 class LocationRepositoryImpl implements LocationRepository {
@@ -17,7 +16,6 @@ class LocationRepositoryImpl implements LocationRepository {
           timeLimit: Duration(seconds: 10),
         ),
       );
-
       return UserLocation(
         latitude: position.latitude,
         longitude: position.longitude,

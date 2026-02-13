@@ -15,7 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart' as shareData;
 class RepositoriesAuthenImple implements IRepositoryAuthen {
   RepositoriesAuthenImple({required this.firebaseRemoteService});
   final FirebaseRemoteService firebaseRemoteService;
-
+ 
+  // <----->> cette methode permet de creer un compte
   @override
   Future<Either<Failure, String?>> authentificationSignUp(
     RequestAuthentificationSignIntificationSignIntificationSignUp request,
@@ -38,6 +39,7 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     return Left(Failure(message: "Erreur inconnue"));
   }
 
+  // <----->> cette methode permet de se connecter
   @override
   Future<Either<Failure, String?>> authentificationSignIn(
     RequestAuthentificationSignIntificationSignIn request,
@@ -59,119 +61,8 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-
-  @override
-  Future<Either<Failure, String?>> createCompte(
-    RequestCreateCompteHomeInformation request,
-  ) async {
-    final response = await firebaseRemoteService.createCompte(request);
-    if (response is FirebaseSuccess<String?>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, String?>> createCompteUpdateFormToher(
-    RequestCreateCompteHeber request,
-  ) async {
-    final response = await firebaseRemoteService.createCompteUpdateFormToher(
-      request,
-    );
-    if (response is FirebaseSuccess<String?>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, ProfileUser>> getProfileUser() async {
-    final response = await firebaseRemoteService.getProfileUser();
-
-    if (response is FirebaseSuccess<ProfileUserModel>) {
-      return Right(ProfileUserModel.toDomain(response.data));
-    } else if (response is FirebaseError) {
-      log(':::: $response');
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, String>> uploadImage(CreatCompteImage params) async {
-    final response = await firebaseRemoteService.uploadImage(params);
-    if (response is FirebaseSuccess<String>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, List<ProfileUser>>> getProfileUserList() async {
-    final response = await firebaseRemoteService.getProfileUserList();
-    if (response is FirebaseSuccess<List<ProfileUserModel>>) {
-      return Right(response.data.map(ProfileUserModel.toDomain).toList());
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, String?>> userAutheUpdateKey(
-    RequestAuthentificationSignIntificationSignInUpdateKey request,
-  ) {
-    // TODO: implement userAutheUpdateKey
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, String?>> uploadprofileImage(
-    CreatProfileImage params,
-  ) async {
-    final response = await firebaseRemoteService.uploadprofileImage(params);
-    if (response is FirebaseSuccess<String>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, String?>> formFiveUpdate(
-    RequestFormsCheckFile request,
-  ) async {
-    final response = await firebaseRemoteService.formFiveUpdate(request);
-    if (response is FirebaseSuccess<String?>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
-  @override
-  Future<Either<Failure, String?>> uploadAdministrativeFile(
-    RequestFormsCheckFile params,
-  ) async {
-    final response = await firebaseRemoteService.uploadAdministrativeFile(
-      params,
-    );
-    if (response is FirebaseSuccess<String>) {
-      return Right(response.data);
-    } else if (response is FirebaseError) {
-      return Left(Failure(message: response.toString()));
-    }
-    return Left(Failure(message: "Erreur inconnue"));
-  }
-
+  
+  // <----->> cette methode permet de recuperer le profile de l'utilisateur
   @override
   Future<Either<Failure, String?>> recuperationAuthentification(
     RequestAuthentificationSignIntificationSignIntificationSignUp request,
@@ -193,4 +84,122 @@ class RepositoriesAuthenImple implements IRepositoryAuthen {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-}
+
+
+  // <----->> cette methode permet de creer un compte actif Form 1
+  @override
+  Future<Either<Failure, String?>> createCompte(
+    RequestCreateCompteHomeInformation request,
+  ) async {
+    final response = await firebaseRemoteService.createCompte(request);
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  // <----->> cette methode permet de creer un compte actif Form 2
+  @override
+  Future<Either<Failure, String?>> createCompteUpdateFormToher(
+    RequestCreateCompteHeber request,
+  ) async {
+    final response = await firebaseRemoteService.createCompteUpdateFormToher(
+      request,
+    );
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+
+
+
+
+
+  // <----->> cette methode permet de recuperer le profile de l'utilisateur
+  @override
+  Future<Either<Failure, ProfileUser>> getProfile() async {
+    final response = await firebaseRemoteService.getProfile();
+
+    if (response is FirebaseSuccess<ProfileUserModel>) {
+      return Right(ProfileUserModel.toDomain(response.data));
+    } else if (response is FirebaseError) {
+      log(':::: $response');
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  @override
+  Future<Either<Failure, String>> uploadImage(CreatCompteImage params) async {
+    final response = await firebaseRemoteService.uploadImage(params);
+    if (response is FirebaseSuccess<String>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+
+  // <----->> cette methode permet de recuperer la liste des utilisateurs
+  @override
+  Future<Either<Failure, List<ProfileUser>>> getProfileList() async {
+    final response = await firebaseRemoteService.getProfileList();
+    if (response is FirebaseSuccess<List<ProfileUserModel>>) {
+      return Right(response.data.map(ProfileUserModel.toDomain).toList());
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  // <----->> cette methode permet de mettre a jour le profile de l'utilisateur
+  @override
+  Future<Either<Failure, String?>> uploadprofileImage(
+    CreatProfileImage params,
+  ) async {
+    final response = await firebaseRemoteService.uploadprofileImage(params);
+    if (response is FirebaseSuccess<String>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+  // <----->> cette methode permet de mettre a jour le formulaire 5
+  @override
+  Future<Either<Failure, String?>> formFiveUpdate(
+    RequestFormsCheckFile request,
+  ) async {
+    final response = await firebaseRemoteService.formFiveUpdate(request);
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+ 
+  @override
+  Future<Either<Failure, String?>> uploadAdministrativeFile(
+    RequestFormsCheckFile params,
+  ) async {
+    final response = await firebaseRemoteService.uploadAdministrativeFile(
+      params,
+    );
+    if (response is FirebaseSuccess<String>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+
+ }

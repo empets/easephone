@@ -5,9 +5,9 @@ import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_r
 import 'package:dartz/dartz.dart';
 
 abstract class IRepositoryMarchant {
-  // cette mehode permet d'obtenir les information sur un compte actf
+  // permet de recuperer la liste des profile actif
   Future<Either<Failure, List<ActiveUserProfile>>>
-  getActifUserInformationAboutCompte(RequestFilterProfile request);
+  getActifProfileList(RequestFilterProfile request);
 
   // permet de liker un profile
   Future<Either<Failure, String?>> like(RequestLike request);
