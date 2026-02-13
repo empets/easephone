@@ -1,13 +1,13 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:com.example.epbomi/feature/home/data/service/remot_reposytory.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
+import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseRf;
-
-
 
 @LazySingleton(as: MarchanServiceFirebase)
 class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
@@ -16,11 +16,11 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
   final databaseRf.DatabaseReference db;
   late String? like = '';
 
-
   // permet de recuperer la liste des profile actif
   @override
-  Future<FirebaseResult<List<ActiveUserProfileModel>>>
-  getActifProfileList(RequestFilterProfile params) async {
+  Future<FirebaseResult<List<ActiveUserProfileModel>>> getActifProfileList(
+    RequestFilterProfile params,
+  ) async {
     try {
       if (params.filterIsActif) {
         final snapshot = await db.child('hotel').get();
@@ -34,9 +34,7 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
           return adresse.contains(params.adresse.toLowerCase().trim());
         }).toList();
 
-
         if (result.isNotEmpty) {
-
           if (!snapshot.exists || snapshot.value == null) {
             return FirebaseError("Aucune donnée trouvée");
           }
@@ -68,14 +66,6 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
       return FirebaseError(e.runtimeType.toString());
     }
   }
-
-
-
-
-
-
-
-
 
   @override
   Future<FirebaseResult<String?>> likeProfile(RequestLike params) async {
@@ -147,20 +137,126 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
     }
   }
 
-  @override
-  Future<FirebaseResult<List<LikeResponseModel>>> getLikeNumber() async {
-    try {
-      final snapshot = await db.child('likeProfile').get();
-      if (!snapshot.exists || snapshot.value == null) {
-        return FirebaseError("Aucune donnée trouvée");
-      }
-      final userProfile = (snapshot.value as Map).values.map((e) {
-        return LikeResponseModel.fromJson(Map<String, dynamic>.from(e));
-      }).toList();
+  // @override
+  // Future<FirebaseResult<List<LikeProfileResponseModel>>> getLike(
+  //   RequestLikePost params,
+  // ) async {
+  //   try {
+  //     final snapshot = await db.child('likes/${params.postId}').get();
 
-      return FirebaseSuccess(userProfile);
+  //     log('------------------------->>>>>>>>> ${snapshot.value}');
+
+  //     // 🔎 Si aucun like
+  //     if (!snapshot.exists || snapshot.value == null) {
+  //       return FirebaseSuccess([]);
+  //     }
+
+  //     final data = Map<dynamic, dynamic>.from(snapshot.value as Map);
+
+  //     final likes = data.entries.map((entry) {
+  //       final likeMap = Map<String, dynamic>.from(entry.value);
+  //       return LikeProfileResponseModel.fromJson(likeMap);
+  //     }).toList();
+
+  //     return FirebaseSuccess(likes);
+  //   } catch (e) {
+  //     log('------------------------->>>>>>>>> $e');
+  //     return FirebaseError(e.toString());
+  //   }
+  // }
+
+  @override
+  Future<FirebaseResult<List<LikeProfileResponseModel>>> getLike(
+    RequestLikePost params,
+  ) async {
+    try {
+      final snapshot = await db.child('likes/${params.postId}').get();
+
+      if (!snapshot.exists || snapshot.value == null) {
+        return FirebaseSuccess([]);
+      }
+
+      final data = Map<dynamic, dynamic>.from(snapshot.value as Map);
+
+      final List<LikeProfileResponseModel> likes = [];
+
+      if (data.isNotEmpty) {
+        log('------------------------->>>>>>>>> ${data.entries}');
+      }
+
+      // for (final outerEntry i ) {
+      //   log('------------------------->>>>>>>>> ${data.entries}');
+
+      //   final innerMap = Map<dynamic, dynamic>.from(outerEntry.value);
+
+      //   for (final innerEntry in innerMap.entries) {
+      //     final likeMap = Map<String, dynamic>.from(innerEntry.value as Map);
+
+      //     likes.add(LikeProfileResponseModel.fromJson(likeMap));
+      //   }
+      // }
+      // log('------------------------->>>>>>>>> $likes');
+
+      return FirebaseSuccess(likes);
     } catch (e) {
-      log(':: information:${e.runtimeType.toString()}');
+      log('>>>>>>>> $e');
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> disLikePost(RequestLikePost params) async {
+    try {
+      final likeRef = db.child('likes/${params.postId}/${params.userId}');
+
+      final snapshot = await likeRef.get();
+
+      // 🔍 Vérifier si le like existe
+      if (!snapshot.exists) {
+        return FirebaseError("Like introuvable");
+      }
+
+      // 🗑 Supprimer le like
+      await likeRef.remove();
+
+      // 🔢 Décrémenter le compteur (si tu en as un)
+      await db.child('posts/${params.postId}/likeCount').runTransaction((
+        value,
+      ) {
+        if (value == null) {
+          return databaseRf.Transaction.success(0);
+        }
+        final current = value as int;
+        return databaseRf.Transaction.success(current > 0 ? current - 1 : 0);
+      });
+
+      return FirebaseSuccess(null);
+    } catch (e) {
+      return FirebaseError(e.toString());
+    }
+  }
+
+  @override
+  Future<FirebaseResult<String?>> likePost(RequestLikePost params) async {
+    try {
+      final likeRef = db.child('likes/${params.postId}/${params.userId}');
+
+      // // 🔍 Vérifier si le like existe déjà
+      final snapshot = await likeRef.get();
+
+      if (snapshot.exists) {
+        disLikePost(params);
+        return FirebaseError("Vous avez déjà liké ce post");
+      }
+
+      // ✅ Sauvegarde (1 like max par user par post)
+      await likeRef.set(
+        params.copyWith(likeId: "${params.postId}_${params.userId}").toJson(),
+      );
+
+      return FirebaseSuccess(likeRef.key);
+    } catch (e) {
+      log('-------------------- $e');
       return FirebaseError(e.toString());
     }
   }

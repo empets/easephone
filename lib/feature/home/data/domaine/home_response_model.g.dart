@@ -70,16 +70,22 @@ Map<String, dynamic> _$SActiveUserProfileModelToJson(
   'formFive': instance.formFive,
 };
 
-_SLikeResponseModel _$SLikeResponseModelFromJson(Map<String, dynamic> json) =>
-    _SLikeResponseModel(
-      compter: (json['compter'] as num).toInt(),
-      userId: json['userId'] as String,
-      likeId: json['likeId'] as String?,
-    );
+_SLikeProfileResponseModel _$SLikeProfileResponseModelFromJson(
+  Map<String, dynamic> json,
+) => _SLikeProfileResponseModel(
+  likeId: json['likeId'] as String?,
+  userId: json['userId'] as String?,
+  postId: json['postId'] as String?,
+  type: json['type'] as String?,
+  date: json['date'] as String?,
+);
 
-Map<String, dynamic> _$SLikeResponseModelToJson(_SLikeResponseModel instance) =>
-    <String, dynamic>{
-      'compter': instance.compter,
-      'userId': instance.userId,
-      'likeId': instance.likeId,
-    };
+Map<String, dynamic> _$SLikeProfileResponseModelToJson(
+  _SLikeProfileResponseModel instance,
+) => <String, dynamic>{
+  'likeId': instance.likeId,
+  'userId': instance.userId,
+  'postId': instance.postId,
+  'type': instance.type,
+  'date': instance.date,
+};

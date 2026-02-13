@@ -359,51 +359,51 @@ as String?,
 
 }
 
-LikeResponseModel _$LikeResponseModelFromJson(
+LikeProfileResponseModel _$LikeProfileResponseModelFromJson(
   Map<String, dynamic> json
 ) {
-    return _SLikeResponseModel.fromJson(
+    return _SLikeProfileResponseModel.fromJson(
       json
     );
 }
 
 /// @nodoc
-mixin _$LikeResponseModel {
+mixin _$LikeProfileResponseModel {
 
- int get compter; String get userId; String? get likeId;
-/// Create a copy of LikeResponseModel
+ String? get likeId; String? get userId; String? get postId; String? get type; String? get date;
+/// Create a copy of LikeProfileResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LikeResponseModelCopyWith<LikeResponseModel> get copyWith => _$LikeResponseModelCopyWithImpl<LikeResponseModel>(this as LikeResponseModel, _$identity);
+$LikeProfileResponseModelCopyWith<LikeProfileResponseModel> get copyWith => _$LikeProfileResponseModelCopyWithImpl<LikeProfileResponseModel>(this as LikeProfileResponseModel, _$identity);
 
-  /// Serializes this LikeResponseModel to a JSON map.
+  /// Serializes this LikeProfileResponseModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeResponseModel&&(identical(other.compter, compter) || other.compter == compter)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.likeId, likeId) || other.likeId == likeId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeProfileResponseModel&&(identical(other.likeId, likeId) || other.likeId == likeId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.type, type) || other.type == type)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,compter,userId,likeId);
+int get hashCode => Object.hash(runtimeType,likeId,userId,postId,type,date);
 
 @override
 String toString() {
-  return 'LikeResponseModel(compter: $compter, userId: $userId, likeId: $likeId)';
+  return 'LikeProfileResponseModel(likeId: $likeId, userId: $userId, postId: $postId, type: $type, date: $date)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LikeResponseModelCopyWith<$Res>  {
-  factory $LikeResponseModelCopyWith(LikeResponseModel value, $Res Function(LikeResponseModel) _then) = _$LikeResponseModelCopyWithImpl;
+abstract mixin class $LikeProfileResponseModelCopyWith<$Res>  {
+  factory $LikeProfileResponseModelCopyWith(LikeProfileResponseModel value, $Res Function(LikeProfileResponseModel) _then) = _$LikeProfileResponseModelCopyWithImpl;
 @useResult
 $Res call({
- int compter, String userId, String? likeId
+ String? likeId, String? userId, String? postId, String? type, String? date
 });
 
 
@@ -411,20 +411,22 @@ $Res call({
 
 }
 /// @nodoc
-class _$LikeResponseModelCopyWithImpl<$Res>
-    implements $LikeResponseModelCopyWith<$Res> {
-  _$LikeResponseModelCopyWithImpl(this._self, this._then);
+class _$LikeProfileResponseModelCopyWithImpl<$Res>
+    implements $LikeProfileResponseModelCopyWith<$Res> {
+  _$LikeProfileResponseModelCopyWithImpl(this._self, this._then);
 
-  final LikeResponseModel _self;
-  final $Res Function(LikeResponseModel) _then;
+  final LikeProfileResponseModel _self;
+  final $Res Function(LikeProfileResponseModel) _then;
 
-/// Create a copy of LikeResponseModel
+/// Create a copy of LikeProfileResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? compter = null,Object? userId = null,Object? likeId = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? likeId = freezed,Object? userId = freezed,Object? postId = freezed,Object? type = freezed,Object? date = freezed,}) {
   return _then(_self.copyWith(
-compter: null == compter ? _self.compter : compter // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,likeId: freezed == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+likeId: freezed == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,postId: freezed == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -432,8 +434,8 @@ as String?,
 }
 
 
-/// Adds pattern-matching-related methods to [LikeResponseModel].
-extension LikeResponseModelPatterns on LikeResponseModel {
+/// Adds pattern-matching-related methods to [LikeProfileResponseModel].
+extension LikeProfileResponseModelPatterns on LikeProfileResponseModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -446,10 +448,10 @@ extension LikeResponseModelPatterns on LikeResponseModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SLikeResponseModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SLikeProfileResponseModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SLikeResponseModel() when $default != null:
+case _SLikeProfileResponseModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -468,10 +470,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SLikeResponseModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SLikeProfileResponseModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _SLikeResponseModel():
+case _SLikeProfileResponseModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -489,10 +491,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SLikeResponseModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SLikeProfileResponseModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SLikeResponseModel() when $default != null:
+case _SLikeProfileResponseModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -510,10 +512,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int compter,  String userId,  String? likeId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? likeId,  String? userId,  String? postId,  String? type,  String? date)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SLikeResponseModel() when $default != null:
-return $default(_that.compter,_that.userId,_that.likeId);case _:
+case _SLikeProfileResponseModel() when $default != null:
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
   return orElse();
 
 }
@@ -531,10 +533,10 @@ return $default(_that.compter,_that.userId,_that.likeId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int compter,  String userId,  String? likeId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? likeId,  String? userId,  String? postId,  String? type,  String? date)  $default,) {final _that = this;
 switch (_that) {
-case _SLikeResponseModel():
-return $default(_that.compter,_that.userId,_that.likeId);case _:
+case _SLikeProfileResponseModel():
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -551,10 +553,10 @@ return $default(_that.compter,_that.userId,_that.likeId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int compter,  String userId,  String? likeId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? likeId,  String? userId,  String? postId,  String? type,  String? date)?  $default,) {final _that = this;
 switch (_that) {
-case _SLikeResponseModel() when $default != null:
-return $default(_that.compter,_that.userId,_that.likeId);case _:
+case _SLikeProfileResponseModel() when $default != null:
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
   return null;
 
 }
@@ -565,48 +567,50 @@ return $default(_that.compter,_that.userId,_that.likeId);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SLikeResponseModel implements LikeResponseModel {
-   _SLikeResponseModel({required this.compter, required this.userId, required this.likeId});
-  factory _SLikeResponseModel.fromJson(Map<String, dynamic> json) => _$SLikeResponseModelFromJson(json);
+class _SLikeProfileResponseModel implements LikeProfileResponseModel {
+   _SLikeProfileResponseModel({required this.likeId, required this.userId, required this.postId, required this.type, required this.date});
+  factory _SLikeProfileResponseModel.fromJson(Map<String, dynamic> json) => _$SLikeProfileResponseModelFromJson(json);
 
-@override final  int compter;
-@override final  String userId;
 @override final  String? likeId;
+@override final  String? userId;
+@override final  String? postId;
+@override final  String? type;
+@override final  String? date;
 
-/// Create a copy of LikeResponseModel
+/// Create a copy of LikeProfileResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SLikeResponseModelCopyWith<_SLikeResponseModel> get copyWith => __$SLikeResponseModelCopyWithImpl<_SLikeResponseModel>(this, _$identity);
+_$SLikeProfileResponseModelCopyWith<_SLikeProfileResponseModel> get copyWith => __$SLikeProfileResponseModelCopyWithImpl<_SLikeProfileResponseModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SLikeResponseModelToJson(this, );
+  return _$SLikeProfileResponseModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SLikeResponseModel&&(identical(other.compter, compter) || other.compter == compter)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.likeId, likeId) || other.likeId == likeId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SLikeProfileResponseModel&&(identical(other.likeId, likeId) || other.likeId == likeId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.type, type) || other.type == type)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,compter,userId,likeId);
+int get hashCode => Object.hash(runtimeType,likeId,userId,postId,type,date);
 
 @override
 String toString() {
-  return 'LikeResponseModel(compter: $compter, userId: $userId, likeId: $likeId)';
+  return 'LikeProfileResponseModel(likeId: $likeId, userId: $userId, postId: $postId, type: $type, date: $date)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SLikeResponseModelCopyWith<$Res> implements $LikeResponseModelCopyWith<$Res> {
-  factory _$SLikeResponseModelCopyWith(_SLikeResponseModel value, $Res Function(_SLikeResponseModel) _then) = __$SLikeResponseModelCopyWithImpl;
+abstract mixin class _$SLikeProfileResponseModelCopyWith<$Res> implements $LikeProfileResponseModelCopyWith<$Res> {
+  factory _$SLikeProfileResponseModelCopyWith(_SLikeProfileResponseModel value, $Res Function(_SLikeProfileResponseModel) _then) = __$SLikeProfileResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
- int compter, String userId, String? likeId
+ String? likeId, String? userId, String? postId, String? type, String? date
 });
 
 
@@ -614,20 +618,22 @@ $Res call({
 
 }
 /// @nodoc
-class __$SLikeResponseModelCopyWithImpl<$Res>
-    implements _$SLikeResponseModelCopyWith<$Res> {
-  __$SLikeResponseModelCopyWithImpl(this._self, this._then);
+class __$SLikeProfileResponseModelCopyWithImpl<$Res>
+    implements _$SLikeProfileResponseModelCopyWith<$Res> {
+  __$SLikeProfileResponseModelCopyWithImpl(this._self, this._then);
 
-  final _SLikeResponseModel _self;
-  final $Res Function(_SLikeResponseModel) _then;
+  final _SLikeProfileResponseModel _self;
+  final $Res Function(_SLikeProfileResponseModel) _then;
 
-/// Create a copy of LikeResponseModel
+/// Create a copy of LikeProfileResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? compter = null,Object? userId = null,Object? likeId = freezed,}) {
-  return _then(_SLikeResponseModel(
-compter: null == compter ? _self.compter : compter // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,likeId: freezed == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? likeId = freezed,Object? userId = freezed,Object? postId = freezed,Object? type = freezed,Object? date = freezed,}) {
+  return _then(_SLikeProfileResponseModel(
+likeId: freezed == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,postId: freezed == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

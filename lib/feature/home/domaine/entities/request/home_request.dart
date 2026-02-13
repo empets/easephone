@@ -39,3 +39,17 @@ abstract class RequestFormsCheckFile with _$RequestFormsCheckFile {
   factory RequestFormsCheckFile.fromJson(Map<String, dynamic> json) =>
       _$RequestFormsCheckFileFromJson(json);
 }
+
+@freezed
+abstract class RequestLikePost with _$RequestLikePost {
+  factory RequestLikePost({
+    required String likeId,
+    required String userId,
+    required String postId,
+    required String type,
+    required String date,
+  }) = _SRequestLikePost;
+
+  factory RequestLikePost.fromJson(Map<String, dynamic> json) =>
+      _$RequestLikePostFromJson(json);
+}

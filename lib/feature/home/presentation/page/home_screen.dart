@@ -15,11 +15,14 @@ import 'package:com.example.epbomi/feature/authen/page/bloc/create_compte/create
 import 'package:com.example.epbomi/feature/authen/page/bloc/google_authen/event/signin_event.dart';
 import 'package:com.example.epbomi/feature/authen/page/bloc/user_list/get_profile_list_bloc.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/dis_like_profile_usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/usercase/get_actif_profile_list_usercase.dart';
-import 'package:com.example.epbomi/feature/home/domaine/usercase/get_like_number.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/get_profile_liked_usecase.dart';
+import 'package:com.example.epbomi/feature/home/domaine/usercase/like_profile_actif_usercase.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/check_internet/check_connexion_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/event/like_profile_event.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_like_number.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_profile_liked_usecase_bloc.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/like_profile_actif_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/get_actif_profile_list_bloc.dart';
@@ -51,33 +54,37 @@ class _HomeOverViewState extends State<HomeOverView> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        
         // Bloc de profile
         BlocProvider(
-          create: (context) => GetProfileBloc(
-            getProfileUsercase: getIt<GetProfileUsercase>(),
-          )..add(SigninEvent.fetch()),
+          create: (context) =>
+              GetProfileBloc(getProfileUsercase: getIt<GetProfileUsercase>())
+                ..add(SigninEvent.fetch()),
         ),
-        
+
         // Bloc de profile list
         BlocProvider(
           create: (context) => GetProfileListBloc(
             getProfileListUsercase: getIt<GetProfileListUsercase>(),
           )..add(SigninEvent.fetch()),
         ),
-        
+
         // Bloc de profile actif
         BlocProvider(
           create: (context) => GetActifProfileListBloc(
-            getActifProfileListUsercase:
-                getIt<GetActifProfileListUsercase>(),
+            getActifProfileListUsercase: getIt<GetActifProfileListUsercase>(),
           )..add(FiltreEvent.filtre(filterIsActif: false, adresse: "")),
         ),
 
-     
         BlocProvider(
-          create: (context) => GetLikeNumberBloc(
-            getLikeListeUsercase: getIt<GetLikeListeUsercase>(),
+          create: (context) => LikeProfileBloc(
+            likeProfileActifUsercase: getIt<LikeProfileActifUsercase>(),
+            disLikeProfileActifUsercase: getIt<DisLikeProfileActifUsercase>(),
+          )..add(LikeProfileEvent.likeProfile(like: true)),
+        ),
+
+        BlocProvider(
+          create: (context) => GetProfileLikedBloc(
+            getProfileLikedUsecase: getIt<GetProfileLikedUsecase>(),
           )..add(LikeProfileEvent.likeProfile(like: true)),
         ),
       ],
@@ -204,724 +211,450 @@ class _HomeOverViewState extends State<HomeOverView> {
                     ),
 
                     const SizedBox(width: 10),
-
-         
                   ],
                 ),
 
                 // Section de button
                 SizedBox(height: 20.h),
 
-       
                 SizedBox(height: 10.h),
 
                 SizedBox(height: 10.h),
                 Expanded(
-                  child:
-                      BlocBuilder<
-                        GetActifProfileListBloc,
-                        ApiState<List<ActiveUserProfile>>
-                      >(
-                        builder: (context, state) {
-                          if (state is LoadState<List<ActiveUserProfile>>) {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.black,
-                              ),
-                            );
-                          }
+                  child: BlocBuilder<GetActifProfileListBloc, ApiState<List<ActiveUserProfile>>>(
+                    builder: (context, state) {
+                      if (state is LoadState<List<ActiveUserProfile>>) {
+                        return Center(
+                          child: CircularProgressIndicator(color: Colors.black),
+                        );
+                      }
 
-                          if (state is SuccessState<List<ActiveUserProfile>>) {
-                            return KeyboardVisibilityBuilder(
-                              builder: (context, isKey) {
-                                if (state.data.isEmpty) {
-                                  return SizedBox(
-                                    height: 0.6.sh,
-                                    // color: MyColorName.black,
-                                    child: ListView.builder(
-                                      itemCount: 1,
+                      if (state is SuccessState<List<ActiveUserProfile>>) {
+                        return KeyboardVisibilityBuilder(
+                          builder: (context, isKey) {
+                            if (state.data.isEmpty) {
+                              return SizedBox(
+                                height: 0.6.sh,
+                                // color: MyColorName.black,
+                                child: ListView.builder(
+                                  itemCount: 1,
 
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 50.h,
-                                                ),
-                                                child: Lottie.asset(
-                                                  MyAssets.icons.emptyData.path,
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                    AlignmentGeometry.center,
-                                                child: CustomeText(
-                                                  texte:
-                                                      "Aucune donnée disponible rafechiser la page",
-
-                                                  texteSize: 14.sp,
-                                                ),
-                                              ),
-
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 0.26.sh,
-                                                ),
-                                                child: CustomeButton(
-                                                  btnBackground:
-                                                      MyColorName.black,
-                                                  btnTextColor:
-                                                      MyColorName.white,
-                                                  btnText: 'Rafrechir',
-                                                  btnTextSize: 13.sp,
-                                                  onTap: () {
-                                                    context
-                                                        .read<
-                                                          GetActifProfileListBloc
-                                                        >()
-                                                        .add(
-                                                          FiltreEvent.filtre(
-                                                            filterIsActif:
-                                                                false,
-                                                            adresse: "",
-                                                          ),
-                                                        );
-                                                    FocusScope.of(
-                                                      context,
-                                                    ).unfocus();
-                                                  },
-                                                ),
-                                              ),
-                                            ],
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(top: 50.h),
+                                            child: Lottie.asset(
+                                              MyAssets.icons.emptyData.path,
+                                            ),
                                           ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }
-                                return isKey
-                                    ? SizedBox()
-                                    : SizedBox(
-                                        height: 0.6.sh,
-                                        child: ListView.builder(
-                                          itemCount: state.data.length,
-                                          itemBuilder: (context, index) {
-                                            final profile = state.data[index];
+                                          Align(
+                                            alignment: AlignmentGeometry.center,
+                                            child: CustomeText(
+                                              texte:
+                                                  "Aucune donnée disponible rafechiser la page",
 
-                                            return (profile.formOne ==
-                                                        'success' &&
-                                                    profile.formTwo ==
-                                                        'success' &&
-                                                    profile.formTherd ==
-                                                        'success' &&
-                                                    profile.formFive ==
-                                                        'Success')
-                                                ? Container(
-                                                    margin: EdgeInsets.only(
-                                                      bottom: 15.h,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      // border: Border.all(
-                                                      //   color: Colors.black12,
-                                                      // ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            9.r,
-                                                          ),
-                                                    ),
-                                                    child: Column(
+                                              texteSize: 14.sp,
+                                            ),
+                                          ),
+
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                              top: 0.26.sh,
+                                            ),
+                                            child: CustomeButton(
+                                              btnBackground: MyColorName.black,
+                                              btnTextColor: MyColorName.white,
+                                              btnText: 'Rafrechir',
+                                              btnTextSize: 13.sp,
+                                              onTap: () {
+                                                context
+                                                    .read<
+                                                      GetActifProfileListBloc
+                                                    >()
+                                                    .add(
+                                                      FiltreEvent.filtre(
+                                                        filterIsActif: false,
+                                                        adresse: "",
+                                                      ),
+                                                    );
+                                                FocusScope.of(
+                                                  context,
+                                                ).unfocus();
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            }
+                            return isKey
+                                ? SizedBox()
+                                : SizedBox(
+                                    height: 0.6.sh,
+                                    child: ListView.builder(
+                                      itemCount: state.data.length,
+                                      itemBuilder: (context, index) {
+                                        final profile = state.data[index];
+
+                                        return (profile.formOne == 'success' &&
+                                                profile.formTwo == 'success' &&
+                                                profile.formTherd ==
+                                                    'success' &&
+                                                profile.formFive == 'Success')
+                                            ? Container(
+                                                margin: EdgeInsets.only(
+                                                  bottom: 15.h,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        9.r,
+                                                      ),
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Stack(
                                                       children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 0.26.sh,
-                                                              margin:
-                                                                  EdgeInsetsGeometry.only(
-                                                                    bottom: 9.h,
-                                                                  ),
-                                                              padding:
-                                                                  EdgeInsetsGeometry.symmetric(
-                                                                    vertical:
-                                                                        5.h,
-                                                                    horizontal:
-                                                                        4.w,
-                                                                  ),
-                                                              width:
-                                                                  MediaQuery.sizeOf(
-                                                                    context,
-                                                                  ).width.sw,
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius.circular(
-                                                                      7.r,
-                                                                    ),
-                                                                child: Image.network(
-                                                                  loadingBuilder:
-                                                                      (
-                                                                        context,
-                                                                        child,
-                                                                        loadingProgress,
-                                                                      ) {
-                                                                        if (loadingProgress ==
-                                                                            null)
-                                                                          return child;
-
-                                                                        return ImageShimmer(
-                                                                          width:
-                                                                              150,
-                                                                          height:
-                                                                              150,
-                                                                          borderRadius: BorderRadius.circular(
-                                                                            12,
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                  errorBuilder:
-                                                                      (
-                                                                        _,
-                                                                        __,
-                                                                        ___,
-                                                                      ) => SvgPicture.asset(
-                                                                        MyAssets
-                                                                            .icons
-                                                                            .undrawDeliveryLocationUm5t
-                                                                            .path,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                  profile.file,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
+                                                        Container(
+                                                          height: 0.26.sh,
+                                                          margin:
+                                                              EdgeInsetsGeometry.only(
+                                                                bottom: 9.h,
                                                               ),
-                                                            ),
-
-                                                            BlocBuilder<
-                                                              GetLikeNumberBloc,
-                                                              ApiState<
-                                                                List<
-                                                                  LikeResponse
-                                                                >
-                                                              >
-                                                            >(
-                                                              builder:
+                                                          padding:
+                                                              EdgeInsetsGeometry.symmetric(
+                                                                vertical: 5.h,
+                                                                horizontal: 4.w,
+                                                              ),
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                context,
+                                                              ).width.sw,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  7.r,
+                                                                ),
+                                                            child: Image.network(
+                                                              loadingBuilder:
                                                                   (
                                                                     context,
-                                                                    likeListState,
+                                                                    child,
+                                                                    loadingProgress,
                                                                   ) {
-                                                                    if (likeListState
-                                                                        is SuccessState<
-                                                                          List<
-                                                                            LikeResponse
-                                                                          >
-                                                                        >) {
-                                                                      final userLikeProfile = likeListState.data.where((
-                                                                        element,
-                                                                      ) {
-                                                                        return element.userId ==
-                                                                            profile.userId.toString();
-                                                                      });
+                                                                    if (loadingProgress ==
+                                                                        null)
+                                                                      return child;
 
-                                                                      return InkWell(
-                                                                        onTap:
-                                                                            state
-                                                                                is LoadState<
-                                                                                  String?
-                                                                                >
-                                                                            ? null
-                                                                            : () async {
-                                                                                setState(
-                                                                                  () {
-                                                                                    isLiked = !isLiked;
-                                                                                  },
-                                                                                );
-
-                                                                                if (userLikeProfile ==
-                                                                                    true) {
-                                                                                  await Future.delayed(
-                                                                                    Duration(
-                                                                                      seconds: 1,
-                                                                                    ),
-                                                                                  ).then(
-                                                                                    (
-                                                                                      value,
-                                                                                    ) {
-                                                                                      context
-                                                                                          .read<
-                                                                                            GetLikeNumberBloc
-                                                                                          >()
-                                                                                          .add(
-                                                                                            LikeProfileEvent.likeProfile(
-                                                                                              like: true,
-                                                                                            ),
-                                                                                          );
-                                                                                    },
-                                                                                  );
-                                                                                } else {
-                                                                                  log(
-                                                                                    'DisLike -->>',
-                                                                                  );
-
-                                                                                  if (state
-                                                                                      is SuccessState<
-                                                                                        String?
-                                                                                      >) {
-                                                                                    await Future.delayed(
-                                                                                      Duration(
-                                                                                        seconds: 1,
-                                                                                      ),
-                                                                                    ).then(
-                                                                                      (
-                                                                                        value,
-                                                                                      ) {
-                                                                                        context
-                                                                                            .read<
-                                                                                              GetLikeNumberBloc
-                                                                                            >()
-                                                                                            .add(
-                                                                                              LikeProfileEvent.likeProfile(
-                                                                                                like: true,
-                                                                                              ),
-                                                                                            );
-                                                                                      },
-                                                                                    );
-                                                                                  }
-                                                                                }
-                                                                              },
-                                                                        child: Align(
-                                                                          alignment:
-                                                                              Alignment.topRight,
-                                                                          child: Container(
-                                                                            padding: const EdgeInsets.all(
-                                                                              0.0,
-                                                                            ),
-                                                                            margin: EdgeInsets.only(
-                                                                              top: 15.h,
-                                                                              right: 10.w,
-                                                                            ),
-                                                                            decoration: BoxDecoration(
-                                                                              // color: MyColorName.cardBorder.withValues(
-                                                                              //   alpha: 0.3,
-                                                                              // ),
-                                                                              borderRadius: BorderRadius.circular(
-                                                                                7.r,
-                                                                              ),
-                                                                            ),
-                                                                            child:
-                                                                                BlocBuilder<
-                                                                                  GetProfileBloc,
-                                                                                  ApiState<
-                                                                                    ProfileUser
-                                                                                  >
-                                                                                >(
-                                                                                  builder:
-                                                                                      (
-                                                                                        context,
-                                                                                        profleDataState,
-                                                                                      ) {
-                                                                                        if (profleDataState
-                                                                                            is SuccessState<
-                                                                                              ProfileUser
-                                                                                            >) {
-                                                                                          return BlocBuilder<
-                                                                                            GetLikeNumberBloc,
-                                                                                            ApiState<
-                                                                                              List<
-                                                                                                LikeResponse
-                                                                                              >
-                                                                                            >
-                                                                                          >(
-                                                                                            builder:
-                                                                                                (
-                                                                                                  context,
-                                                                                                  state,
-                                                                                                ) {
-                                                                                                  if (state
-                                                                                                      is LoadState<
-                                                                                                        List<
-                                                                                                          LikeResponse
-                                                                                                        >
-                                                                                                      >) {
-                                                                                                    return CircularProgressIndicator(
-                                                                                                      color: Colors.transparent,
-                                                                                                    );
-                                                                                                  } else if (state
-                                                                                                      is SuccessState<
-                                                                                                        List<
-                                                                                                          LikeResponse
-                                                                                                        >
-                                                                                                      >) {
-                                                                                                    final isLiked = likeListState.data.any(
-                                                                                                      (
-                                                                                                        like,
-                                                                                                      ) =>
-                                                                                                          like.userId ==
-                                                                                                          profleDataState.data.userId,
-                                                                                                    );
-
-                                                                                                    return Container(
-                                                                                                      padding: EdgeInsets.all(
-                                                                                                        4.r,
-                                                                                                      ),
-                                                                                                      child: Icon(
-                                                                                                        Icons.favorite_rounded,
-                                                                                                        color: isLiked
-                                                                                                            ? Colors.red
-                                                                                                            : Colors.grey,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  } else {
-                                                                                                    return Container(
-                                                                                                      padding: EdgeInsets.all(
-                                                                                                        4.r,
-                                                                                                      ),
-                                                                                                      child: Icon(
-                                                                                                        Icons.favorite_rounded,
-                                                                                                        color: Colors.grey,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  }
-                                                                                                },
-                                                                                          );
-                                                                                        } else {
-                                                                                          return SizedBox();
-                                                                                        }
-                                                                                      },
-                                                                                ),
+                                                                    return ImageShimmer(
+                                                                      width:
+                                                                          150,
+                                                                      height:
+                                                                          150,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                            12,
                                                                           ),
-                                                                        ),
-                                                                      );
-                                                                    } else {
-                                                                      return InkWell(
-                                                                        onTap:
-                                                                            state
-                                                                                is LoadState<
-                                                                                  String?
-                                                                                >
-                                                                            ? null
-                                                                            : () async {
-                                                                                if (true) {
-                                                                                  await Future.delayed(
-                                                                                    Duration(
-                                                                                      seconds: 1,
-                                                                                    ),
-                                                                                  ).then(
-                                                                                    (
-                                                                                      value,
-                                                                                    ) {
-                                                                                      context
-                                                                                          .read<
-                                                                                            GetLikeNumberBloc
-                                                                                          >()
-                                                                                          .add(
-                                                                                            LikeProfileEvent.likeProfile(
-                                                                                              like: true,
-                                                                                            ),
-                                                                                          );
-                                                                                    },
-                                                                                  );
-                                                                                }
-                                                                              },
-                                                                        child: Align(
-                                                                          alignment:
-                                                                              Alignment.topRight,
-                                                                          child: Container(
-                                                                            padding: const EdgeInsets.all(
-                                                                              0.0,
-                                                                            ),
-                                                                            margin: EdgeInsets.only(
-                                                                              top: 15.h,
-                                                                              right: 10.w,
-                                                                            ),
-                                                                            decoration: BoxDecoration(
-                                                                              color: MyColorName.cardBorder.withValues(
-                                                                                alpha: 0.3,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(
-                                                                                7.r,
-                                                                              ),
-                                                                            ),
-                                                                            child:
-                                                                                BlocBuilder<
-                                                                                  GetProfileBloc,
-                                                                                  ApiState<
-                                                                                    ProfileUser
-                                                                                  >
-                                                                                >(
-                                                                                  builder:
-                                                                                      (
-                                                                                        context,
-                                                                                        profleDataState,
-                                                                                      ) {
-                                                                                        if (profleDataState
-                                                                                            is SuccessState<
-                                                                                              ProfileUser
-                                                                                            >) {
-                                                                                          return BlocBuilder<
-                                                                                            GetLikeNumberBloc,
-                                                                                            ApiState<
-                                                                                              List<
-                                                                                                LikeResponse
-                                                                                              >
-                                                                                            >
-                                                                                          >(
-                                                                                            builder:
-                                                                                                (
-                                                                                                  context,
-                                                                                                  state,
-                                                                                                ) {
-                                                                                                  if (state
-                                                                                                      is LoadState<
-                                                                                                        List<
-                                                                                                          LikeResponse
-                                                                                                        >
-                                                                                                      >) {
-                                                                                                    return CircularProgressIndicator(
-                                                                                                      color: Colors.transparent,
-                                                                                                    );
-                                                                                                  } else if (state
-                                                                                                      is SuccessState<
-                                                                                                        List<
-                                                                                                          LikeResponse
-                                                                                                        >
-                                                                                                      >) {
-                                                                                                    final likes = state.data;
-                                                                                                    final isLiked = likes.any(
-                                                                                                      (
-                                                                                                        like,
-                                                                                                      ) =>
-                                                                                                          like.userId ==
-                                                                                                              profile.userId &&
-                                                                                                          like.compter ==
-                                                                                                              1,
-                                                                                                    );
-
-                                                                                                    return Container(
-                                                                                                      padding: EdgeInsets.all(
-                                                                                                        4.r,
-                                                                                                      ),
-                                                                                                      child: Icon(
-                                                                                                        Icons.favorite_rounded,
-                                                                                                        color: isLiked
-                                                                                                            ? Colors.red
-                                                                                                            : Colors.red,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  } else {
-                                                                                                    return Container(
-                                                                                                      padding: EdgeInsets.all(
-                                                                                                        4.r,
-                                                                                                      ),
-                                                                                                      child: Icon(
-                                                                                                        Icons.favorite_rounded,
-                                                                                                        color: Colors.red,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  }
-                                                                                                },
-                                                                                          );
-                                                                                        } else {
-                                                                                          return SizedBox();
-                                                                                        }
-                                                                                      },
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    }
+                                                                    );
                                                                   },
+                                                              errorBuilder:
+                                                                  (
+                                                                    _,
+                                                                    __,
+                                                                    ___,
+                                                                  ) => SvgPicture.asset(
+                                                                    MyAssets
+                                                                        .icons
+                                                                        .undrawDeliveryLocationUm5t
+                                                                        .path,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                              profile.file,
+                                                              fit: BoxFit.cover,
                                                             ),
-                                                            Positioned(
-                                                              bottom: 8.h,
-                                                              left: 4.w,
-                                                              right: 4.w,
-                                                              child: Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    child: Container(
-                                                                      padding: EdgeInsets.symmetric(
+                                                          ),
+                                                        ),
+
+                                                        BlocBuilder<
+                                                          LikeProfileBloc,
+                                                          ApiState<String?>
+                                                        >(
+                                                          builder: (context, state) {
+                                                            return SizedBox(
+                                                              // height: 0.4.sh,
+                                                              // width: 0.3.sw,
+                                                              child: GestureDetector(
+                                                                onTap: () {
+                                                                  context
+                                                                      .read<
+                                                                        LikeProfileBloc
+                                                                      >()
+                                                                      .add(
+                                                                        LikeProfileEvent.likeProfile(
+                                                                          like:
+                                                                              true,
+                                                                          userId:
+                                                                              profile.userId,
+                                                                        ),
+                                                                      );
+                                                                },
+                                                                child:
+                                                                    BlocBuilder<
+                                                                      GetProfileLikedBloc,
+                                                                      ApiState<
+                                                                        List<
+                                                                          LikeProfileResponse
+                                                                        >
+                                                                      >
+                                                                    >(
+                                                                      builder:
+                                                                          (
+                                                                            context,
+                                                                            statePost,
+                                                                          ) {
+                                                                            if (statePost
+                                                                                is SuccessState<
+                                                                                  ApiState<
+                                                                                    List<
+                                                                                      LikeProfileResponse
+                                                                                    >
+                                                                                  >
+                                                                                >) {
+                                                                              log(
+                                                                                "Like items =====>>. $statePost",
+                                                                              );
+
+                                                                              return Container(
+                                                                                padding: EdgeInsets.all(
+                                                                                  4.r,
+                                                                                ),
+                                                                                child: Icon(
+                                                                                  Icons.favorite_rounded,
+                                                                                  color: isLiked
+                                                                                      ? Colors.red
+                                                                                      : Colors.grey,
+                                                                                ),
+                                                                              );
+                                                                            }
+
+                                                                            return Container(
+                                                                              padding: EdgeInsets.all(
+                                                                                4.r,
+                                                                              ),
+                                                                              child: Icon(
+                                                                                Icons.favorite_rounded,
+                                                                                color: isLiked
+                                                                                    ? Colors.red
+                                                                                    : Colors.grey,
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                    ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+
+                                                        Positioned(
+                                                          bottom: 8.h,
+                                                          left: 4.w,
+                                                          right: 4.w,
+                                                          child: Stack(
+                                                            children: [
+                                                              Container(
+                                                                child: Container(
+                                                                  padding:
+                                                                      EdgeInsets.symmetric(
                                                                         horizontal:
                                                                             4.w,
                                                                         vertical:
                                                                             5.h,
                                                                       ),
-                                                                      height:
-                                                                          0.11.sh,
-                                                                      width:
-                                                                          1.sw,
-                                                                      decoration: BoxDecoration(
-                                                                        color: MyColorName
-                                                                            .cardBorder
-                                                                            .withValues(
-                                                                              alpha: 0.3,
-                                                                            ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(
-                                                                              7.r,
-                                                                            ),
-                                                                      ),
+                                                                  height:
+                                                                      0.11.sh,
+                                                                  width: 1.sw,
+                                                                  decoration: BoxDecoration(
+                                                                    color: MyColorName
+                                                                        .cardBorder
+                                                                        .withValues(
+                                                                          alpha:
+                                                                              0.3,
+                                                                        ),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                          7.r,
+                                                                        ),
+                                                                  ),
 
-                                                                      child: Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.all(
-                                                                              4.0,
+                                                                  child: Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                          4.0,
+                                                                        ),
+                                                                    child: Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .end,
+                                                                      children: [
+                                                                        Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              profile.specialite,
+                                                                              style: GoogleFonts.roboto(
+                                                                                color: Colors.white,
+                                                                                fontSize: 18.sp,
+                                                                                fontWeight: FontWeight.w500,
+                                                                              ),
                                                                             ),
-                                                                        child: Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                            SizedBox(
+                                                                              width: 10.w,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              5.h,
+                                                                        ),
+                                                                        Row(
                                                                           mainAxisAlignment:
-                                                                              MainAxisAlignment.end,
+                                                                              MainAxisAlignment.spaceBetween,
                                                                           children: [
                                                                             Row(
                                                                               children: [
+                                                                                Icon(
+                                                                                  Icons.location_on_rounded,
+                                                                                  color: Colors.amber,
+                                                                                ),
                                                                                 Text(
-                                                                                  profile.specialite,
+                                                                                  profile.adresse.substring(
+                                                                                    0,
+                                                                                    20,
+                                                                                  ),
                                                                                   style: GoogleFonts.roboto(
                                                                                     color: Colors.white,
-                                                                                    fontSize: 18.sp,
-                                                                                    fontWeight: FontWeight.w500,
+                                                                                    fontSize: 12.sp,
+                                                                                    fontWeight: FontWeight.w400,
                                                                                   ),
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: 10.w,
                                                                                 ),
                                                                               ],
                                                                             ),
                                                                             SizedBox(
-                                                                              height: 5.h,
+                                                                              width: 10.w,
+                                                                            ),
+
+                                                                            SizedBox(
+                                                                              width: 3.w,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
-                                                                                Row(
-                                                                                  children: [
-                                                                                    Icon(
-                                                                                      Icons.location_on_rounded,
-                                                                                      color: Colors.amber,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      profile.adresse.substring(
-                                                                                        0,
-                                                                                        20,
+                                                                                GestureDetector(
+                                                                                  onTap: () {
+                                                                                    showModalBottomSheet(
+                                                                                      context: context,
+                                                                                      backgroundColor: MyColorName.white,
+                                                                                      isScrollControlled: true,
+                                                                                      shape: const RoundedRectangleBorder(
+                                                                                        borderRadius: BorderRadius.vertical(
+                                                                                          top: Radius.circular(
+                                                                                            25,
+                                                                                          ),
+                                                                                        ),
                                                                                       ),
+                                                                                      builder:
+                                                                                          (
+                                                                                            BuildContext context,
+                                                                                          ) {
+                                                                                            return HomeDetails(
+                                                                                              profile: profile,
+                                                                                            );
+                                                                                          },
+                                                                                    );
+                                                                                  },
+                                                                                  child: Container(
+                                                                                    padding: EdgeInsets.symmetric(
+                                                                                      vertical: 9.h,
+                                                                                      horizontal: 12.w,
+                                                                                    ),
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: MyColorName.backgroundIvory,
+                                                                                      borderRadius: BorderRadius.circular(
+                                                                                        8.r,
+                                                                                      ),
+                                                                                    ),
+                                                                                    child: Text(
+                                                                                      "Voir plus",
                                                                                       style: GoogleFonts.roboto(
-                                                                                        color: Colors.white,
+                                                                                        color: Colors.black,
                                                                                         fontSize: 12.sp,
-                                                                                        fontWeight: FontWeight.w400,
+                                                                                        fontWeight: FontWeight.w500,
                                                                                       ),
                                                                                     ),
-                                                                                  ],
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: 10.w,
-                                                                                ),
-
-                                                                                SizedBox(
-                                                                                  width: 3.w,
-                                                                                ),
-                                                                                Row(
-                                                                                  children: [
-                                                                                    GestureDetector(
-                                                                                      onTap: () {
-                                                                                        showModalBottomSheet(
-                                                                                          context: context,
-                                                                                          backgroundColor: MyColorName.white,
-                                                                                          isScrollControlled: true,
-                                                                                          shape: const RoundedRectangleBorder(
-                                                                                            borderRadius: BorderRadius.vertical(
-                                                                                              top: Radius.circular(
-                                                                                                25,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          builder:
-                                                                                              (
-                                                                                                BuildContext context,
-                                                                                              ) {
-                                                                                                return HomeDetails(
-                                                                                                  profile: profile,
-                                                                                                );
-                                                                                              },
-                                                                                        );
-                                                                                      },
-                                                                                      child: Container(
-                                                                                        padding: EdgeInsets.symmetric(
-                                                                                          vertical: 9.h,
-                                                                                          horizontal: 12.w,
-                                                                                        ),
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: MyColorName.backgroundIvory,
-                                                                                          borderRadius: BorderRadius.circular(
-                                                                                            8.r,
-                                                                                          ),
-                                                                                        ),
-                                                                                        child: Text(
-                                                                                          "Voir plus",
-                                                                                          style: GoogleFonts.roboto(
-                                                                                            color: Colors.black,
-                                                                                            fontSize: 12.sp,
-                                                                                            fontWeight: FontWeight.w500,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
+                                                                                  ),
                                                                                 ),
                                                                               ],
                                                                             ),
                                                                           ],
                                                                         ),
-                                                                      ),
+                                                                      ],
                                                                     ),
                                                                   ),
-                                                                ],
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
-                                                  )
-                                                : SizedBox();
-                                          },
+                                                  ],
+                                                ),
+                                              )
+                                            : SizedBox();
+                                      },
+                                    ),
+                                  );
+                          },
+                        );
+                      } else {
+                        return KeyboardVisibilityBuilder(
+                          builder: (context, iskeyActif) {
+                            return !iskeyActif
+                                ? Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Lottie.asset(
+                                          MyAssets.icons.emptyData.path,
                                         ),
-                                      );
-                              },
-                            );
-                          } else {
-                            return KeyboardVisibilityBuilder(
-                              builder: (context, iskeyActif) {
-                                return !iskeyActif
-                                    ? Container(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Lottie.asset(
-                                              MyAssets.icons.emptyData.path,
-                                            ),
-                                            Align(
-                                              alignment:
-                                                  AlignmentGeometry.center,
-                                              child: CustomeText(
-                                                texte:
-                                                    "Aucune donnée disponible pour l'instant",
+                                        Align(
+                                          alignment: AlignmentGeometry.center,
+                                          child: CustomeText(
+                                            texte:
+                                                "Aucune donnée disponible pour l'instant",
 
-                                                texteSize: 14.sp,
-                                              ),
-                                            ),
-                                          ],
+                                            texteSize: 14.sp,
+                                          ),
                                         ),
-                                      )
-                                    : SizedBox();
-                              },
-                            );
-                          }
-                        },
-                      ),
+                                      ],
+                                    ),
+                                  )
+                                : SizedBox();
+                          },
+                        );
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -966,14 +699,13 @@ class _UserProfileState extends State<UserProfile> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetProfileBloc(
-            getProfileUsercase: getIt<GetProfileUsercase>(),
-          )..add(SigninEvent.fetch()),
+          create: (context) =>
+              GetProfileBloc(getProfileUsercase: getIt<GetProfileUsercase>())
+                ..add(SigninEvent.fetch()),
         ),
 
         BlocProvider(
-          create: (context) =>
-              CheckConnexionBloc()..add(SigninEvent.fetch()),
+          create: (context) => CheckConnexionBloc()..add(SigninEvent.fetch()),
         ),
 
         BlocProvider.value(value: context.read<GetActifProfileListBloc>()),

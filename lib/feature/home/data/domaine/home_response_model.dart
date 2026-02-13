@@ -77,21 +77,25 @@ abstract class ActiveUserProfileModel with _$ActiveUserProfileModel {
 }
 
 @freezed
-abstract class LikeResponseModel with _$LikeResponseModel {
-  factory LikeResponseModel({
-    required int compter,
-    required String userId,
+abstract class LikeProfileResponseModel with _$LikeProfileResponseModel {
+  factory LikeProfileResponseModel({
     required String? likeId,
-  }) = _SLikeResponseModel;
+    required String? userId,
+    required String? postId,
+    required String? type,
+    required String? date,
+  }) = _SLikeProfileResponseModel;
 
-  factory LikeResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$LikeResponseModelFromJson(json);
+  factory LikeProfileResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$LikeProfileResponseModelFromJson(json);
 
-  static LikeResponse toDomaine(LikeResponseModel model) {
-    return LikeResponse(
-      compter: model.compter.getOrEmpty(),
-      userId: model.userId.getOrEmpty(),
+  static LikeProfileResponse toDomaine(LikeProfileResponseModel model) {
+    return LikeProfileResponse(
       likeId: model.likeId.getOrEmpty(),
+      userId: model.userId.getOrEmpty(),
+      postId: model.postId.getOrEmpty(),
+      type: model.type.getOrEmpty(),
+      date: model.date.getOrEmpty(),
     );
   }
 }

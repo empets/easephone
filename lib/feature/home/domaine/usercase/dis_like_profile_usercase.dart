@@ -5,18 +5,14 @@ import 'package:com.example.epbomi/feature/home/domaine/repository/i_repository_
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-
 @lazySingleton
-class DisLikeProfileUsercase
-    implements UseCase<String?, RequestLike> {
-  DisLikeProfileUsercase(this.repository);
+class DisLikeProfileActifUsercase implements UseCase<String?, RequestLike> {
+  DisLikeProfileActifUsercase(this.repository);
 
   final IRepositoryMarchant repository;
 
   @override
-  Future<Either<Failure, String?>> call(
-    RequestLike params,
-  ){
+  Future<Either<Failure, String?>> call(RequestLike params) {
     return repository.dislike(params);
   }
 }

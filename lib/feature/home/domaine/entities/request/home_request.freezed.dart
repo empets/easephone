@@ -845,4 +845,286 @@ as String,
 
 }
 
+RequestLikePost _$RequestLikePostFromJson(
+  Map<String, dynamic> json
+) {
+    return _SRequestLikePost.fromJson(
+      json
+    );
+}
+
+/// @nodoc
+mixin _$RequestLikePost {
+
+ String get likeId; String get userId; String get postId; String get type; String get date;
+/// Create a copy of RequestLikePost
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestLikePostCopyWith<RequestLikePost> get copyWith => _$RequestLikePostCopyWithImpl<RequestLikePost>(this as RequestLikePost, _$identity);
+
+  /// Serializes this RequestLikePost to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestLikePost&&(identical(other.likeId, likeId) || other.likeId == likeId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.type, type) || other.type == type)&&(identical(other.date, date) || other.date == date));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,likeId,userId,postId,type,date);
+
+@override
+String toString() {
+  return 'RequestLikePost(likeId: $likeId, userId: $userId, postId: $postId, type: $type, date: $date)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestLikePostCopyWith<$Res>  {
+  factory $RequestLikePostCopyWith(RequestLikePost value, $Res Function(RequestLikePost) _then) = _$RequestLikePostCopyWithImpl;
+@useResult
+$Res call({
+ String likeId, String userId, String postId, String type, String date
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestLikePostCopyWithImpl<$Res>
+    implements $RequestLikePostCopyWith<$Res> {
+  _$RequestLikePostCopyWithImpl(this._self, this._then);
+
+  final RequestLikePost _self;
+  final $Res Function(RequestLikePost) _then;
+
+/// Create a copy of RequestLikePost
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? likeId = null,Object? userId = null,Object? postId = null,Object? type = null,Object? date = null,}) {
+  return _then(_self.copyWith(
+likeId: null == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [RequestLikePost].
+extension RequestLikePostPatterns on RequestLikePost {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SRequestLikePost value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SRequestLikePost() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SRequestLikePost value)  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestLikePost():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SRequestLikePost value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SRequestLikePost() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String likeId,  String userId,  String postId,  String type,  String date)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SRequestLikePost() when $default != null:
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String likeId,  String userId,  String postId,  String type,  String date)  $default,) {final _that = this;
+switch (_that) {
+case _SRequestLikePost():
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String likeId,  String userId,  String postId,  String type,  String date)?  $default,) {final _that = this;
+switch (_that) {
+case _SRequestLikePost() when $default != null:
+return $default(_that.likeId,_that.userId,_that.postId,_that.type,_that.date);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SRequestLikePost implements RequestLikePost {
+   _SRequestLikePost({required this.likeId, required this.userId, required this.postId, required this.type, required this.date});
+  factory _SRequestLikePost.fromJson(Map<String, dynamic> json) => _$SRequestLikePostFromJson(json);
+
+@override final  String likeId;
+@override final  String userId;
+@override final  String postId;
+@override final  String type;
+@override final  String date;
+
+/// Create a copy of RequestLikePost
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SRequestLikePostCopyWith<_SRequestLikePost> get copyWith => __$SRequestLikePostCopyWithImpl<_SRequestLikePost>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SRequestLikePostToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SRequestLikePost&&(identical(other.likeId, likeId) || other.likeId == likeId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.type, type) || other.type == type)&&(identical(other.date, date) || other.date == date));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,likeId,userId,postId,type,date);
+
+@override
+String toString() {
+  return 'RequestLikePost(likeId: $likeId, userId: $userId, postId: $postId, type: $type, date: $date)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SRequestLikePostCopyWith<$Res> implements $RequestLikePostCopyWith<$Res> {
+  factory _$SRequestLikePostCopyWith(_SRequestLikePost value, $Res Function(_SRequestLikePost) _then) = __$SRequestLikePostCopyWithImpl;
+@override @useResult
+$Res call({
+ String likeId, String userId, String postId, String type, String date
+});
+
+
+
+
+}
+/// @nodoc
+class __$SRequestLikePostCopyWithImpl<$Res>
+    implements _$SRequestLikePostCopyWith<$Res> {
+  __$SRequestLikePostCopyWithImpl(this._self, this._then);
+
+  final _SRequestLikePost _self;
+  final $Res Function(_SRequestLikePost) _then;
+
+/// Create a copy of RequestLikePost
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? likeId = null,Object? userId = null,Object? postId = null,Object? type = null,Object? date = null,}) {
+  return _then(_SRequestLikePost(
+likeId: null == likeId ? _self.likeId : likeId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 // dart format on

@@ -39,13 +39,15 @@ abstract class ActiveUserProfile with _$ActiveUserProfile {
 }
 
 @freezed
-abstract class LikeResponse with _$LikeResponse {
-  factory LikeResponse({
-    required int compter,
-    required String userId,
+abstract class LikeProfileResponse with _$LikeProfileResponse {
+  factory LikeProfileResponse({
     required String likeId,
-  }) = _SLikeResponse;
+    required String userId,
+    required String postId,
+    required String type,
+    required String date,
+  }) = _SLikeProfileResponse;
 
-  factory LikeResponse.fromJson(Map<String, dynamic> json) =>
-      _$LikeResponseFromJson(json);
+  factory LikeProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$LikeProfileResponseFromJson(json);
 }

@@ -16,10 +16,10 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
 
   // permet de recuperer la liste des profile actif
   @override
-  Future<Either<Failure, List<ActiveUserProfile>>>
-  getActifProfileList(RequestFilterProfile reques) async {
-    final response = await marchanServiceFirebase
-        .getActifProfileList(reques);
+  Future<Either<Failure, List<ActiveUserProfile>>> getActifProfileList(
+    RequestFilterProfile reques,
+  ) async {
+    final response = await marchanServiceFirebase.getActifProfileList(reques);
     if (response is FirebaseSuccess<List<ActiveUserProfileModel>>) {
       return Right(
         response.data.map(ActiveUserProfileModel.toDomaine).toList(),
@@ -42,6 +42,8 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     return Left(Failure(message: "Erreur inconnue"));
   }
 
+  
+
   @override
   Future<Either<Failure, String?>> dislike(RequestLike request) async {
     final response = await marchanServiceFirebase.likeProfile(request);
@@ -53,30 +55,35 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     return Left(Failure(message: "Erreur inconnue"));
   }
 
+
   @override
-  Future<Either<Failure, List<LikeResponse>>> getLikeNumber() async{
-       final response = await marchanServiceFirebase
-        .getLikeNumber();
-    if (response is FirebaseSuccess<List<LikeResponseModel>>) {
+  Future<Either<Failure, String?>> disLikePost(RequestLikePost request) {
+    // TODO: implement disLikePost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String?>> likePost(RequestLikePost request) async {
+    final response = await marchanServiceFirebase.likePost(request);
+    if (response is FirebaseSuccess<String?>) {
+      return Right(response.data);
+    } else if (response is FirebaseError) {
+      return Left(Failure(message: response.toString()));
+    }
+    return Left(Failure(message: "Erreur inconnue"));
+  }
+  
+  @override
+  Future<Either<Failure, List<LikeProfileResponse>>> getLike(RequestLikePost params) async{
+      final response = await marchanServiceFirebase
+        .getLike(params);
+    if (response is FirebaseSuccess<List<LikeProfileResponseModel>>) {
       return Right(
-        response.data.map(LikeResponseModel.toDomaine).toList(),
+        response.data.map(LikeProfileResponseModel.toDomaine).toList(),
       );
     } else if (response is FirebaseError) {
       return Left(Failure(message: response.toString()));
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-
-//   @override
-//   Stream<Either<Failure, List<LikeResponse>>> getLikeNumber() {
-//     return marchanServiceFirebase.getLikeNumber().map((response) {
-//       if (response is FirebaseSuccess<List<LikeResponseModel>>) {
-//         return Right(response.data.map(LikeResponseModel.toDomaine).toList());
-//       } else if (response is FirebaseError) {
-//         return Left(Failure(message: response.toString()));
-//       } else {
-//         return Left(Failure(message: 'Erreur inconnue'));
-//       }
-//     });
-//   }
 }

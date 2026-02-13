@@ -55,3 +55,21 @@ Map<String, dynamic> _$SRequestFormsCheckFileToJson(
   'formFive': instance.formFive,
   'userId': instance.userId,
 };
+
+_SRequestLikePost _$SRequestLikePostFromJson(Map<String, dynamic> json) =>
+    _SRequestLikePost(
+      likeId: json['likeId'] as String,
+      userId: json['userId'] as String,
+      postId: json['postId'] as String,
+      type: json['type'] as String,
+      date: json['date'] as String,
+    );
+
+Map<String, dynamic> _$SRequestLikePostToJson(_SRequestLikePost instance) =>
+    <String, dynamic>{
+      'likeId': instance.likeId,
+      'userId': instance.userId,
+      'postId': instance.postId,
+      'type': instance.type,
+      'date': instance.date,
+    };
