@@ -493,19 +493,31 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                               ),
                                                                                                               decoration: BoxDecoration(
                                                                                                                 color: MyColorName.backgroundIvory.withValues(
-                                                                                                                  alpha: 0.6,
+                                                                                                                  alpha: 0.9,
                                                                                                                 ),
                                                                                                                 borderRadius: BorderRadius.circular(
                                                                                                                   8.r,
                                                                                                                 ),
                                                                                                               ),
-                                                                                                              child: Icon(
-                                                                                                                Icons.favorite_rounded,
-                                                                                                                color:
-                                                                                                                    userLike ||
-                                                                                                                        isLiked
-                                                                                                                    ? Colors.red
-                                                                                                                    : MyColorName.backgroundIvory,
+                                                                                                              child: Row(
+                                                                                                                children: [
+                                                                                                                  Text(
+                                                                                                                    '${profileLikeNumber?.length.toString()}',
+                                                                                                                    style: GoogleFonts.roboto(
+                                                                                                                      color: Colors.black,
+                                                                                                                      fontSize: 12.sp,
+                                                                                                                      fontWeight: FontWeight.bold,
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                  Icon(
+                                                                                                                    Icons.favorite_rounded,
+                                                                                                                    color:
+                                                                                                                        userLike ||
+                                                                                                                            isLiked
+                                                                                                                        ? Colors.red
+                                                                                                                        : MyColorName.backgroundIvory,
+                                                                                                                  ),
+                                                                                                                ],
                                                                                                               ),
                                                                                                             );
                                                                                                           }
@@ -516,10 +528,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                             ),
                                                                                                             child: Icon(
                                                                                                               Icons.favorite_rounded,
-                                                                                                              color:
-                                                                                                                  isLiked ||
-                                                                                                                      profile.userId ==
-                                                                                                                          stateLikeProfile.data
+                                                                                                              color: isLiked
                                                                                                                   ? Colors.red
                                                                                                                   : MyColorName.backgroundIvory,
                                                                                                             ),
@@ -664,7 +673,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                 ),
                                                                                               ),
                                                                                               child: Text(
-                                                                                                "Voir plus ${profileLikeNumber?.length}",
+                                                                                                "Voir plus ",
                                                                                                 style: GoogleFonts.roboto(
                                                                                                   color: Colors.black,
                                                                                                   fontSize: 12.sp,
