@@ -1,11 +1,10 @@
 import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:com.example.epbomi/core/data_process/request/request.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
+import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:com.example.epbomi/feature/home/data/service/remot_reposytory.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
-import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_database/firebase_database.dart' as databaseRf;
 
@@ -139,63 +138,55 @@ class ImpleMarchantServiceFirebase implements MarchanServiceFirebase {
 
   // @override
   // Future<FirebaseResult<List<LikeProfileResponseModel>>> getLike(
-  //   RequestLikePost params,
+  //   NoParams params,
   // ) async {
   //   try {
-  //     final snapshot = await db.child('likes/${params.postId}').get();
+  //     //{params.postId}
+  //     final snapshot = await db.child('likes/').get();
 
-  //     log('------------------------->>>>>>>>> ${snapshot.value}');
+  //     final likeItem = (snapshot.value as Map<Object?, Object?>).values.e.map((
+  //       e,
+  //     ) {
+  //       log('getLike **------------>>>>>>>>> ${e.runtimeType}');
 
-  //     // 🔎 Si aucun like
-  //     if (!snapshot.exists || snapshot.value == null) {
-  //       return FirebaseSuccess([]);
-  //     }
-
-  //     final data = Map<dynamic, dynamic>.from(snapshot.value as Map);
-
-  //     final likes = data.entries.map((entry) {
-  //       final likeMap = Map<String, dynamic>.from(entry.value);
-  //       return LikeProfileResponseModel.fromJson(likeMap);
+  //       return LikeProfileResponseModel.fromJson(Map<String, dynamic>.from(e));
   //     }).toList();
 
-  //     return FirebaseSuccess(likes);
+  //     return FirebaseSuccess([]);
   //   } catch (e) {
-  //     log('------------------------->>>>>>>>> $e');
+  //     log('>>>>>>>> $e');
   //     return FirebaseError(e.toString());
   //   }
   // }
 
   @override
   Future<FirebaseResult<List<LikeProfileResponseModel>>> getLike(
-    RequestLikePost params,
+    NoParams params,
   ) async {
     try {
-      final snapshot = await db.child('likes/${params.postId}').get();
+      final snapshot = await db.child('likes').get();
 
       if (!snapshot.exists || snapshot.value == null) {
         return FirebaseSuccess([]);
       }
 
-      final data = Map<dynamic, dynamic>.from(snapshot.value as Map);
+      final root = snapshot.value as Map<Object?, Object?>;
 
-      final List<LikeProfileResponseModel> likes = [];
+      final likes = <LikeProfileResponseModel>[];
 
-      if (data.isNotEmpty) {
-        log('------------------------->>>>>>>>> ${data.entries}');
+      for (final postEntry in root.values) {
+        if (postEntry is Map) {
+          for (final likeEntry in postEntry.values) {
+            if (likeEntry is Map) {
+              likes.add(
+                LikeProfileResponseModel.fromJson(
+                  Map<String, dynamic>.from(likeEntry),
+                ),
+              );
+            }
+          }
+        }
       }
-
-      // for (final outerEntry i ) {
-      //   log('------------------------->>>>>>>>> ${data.entries}');
-
-      //   final innerMap = Map<dynamic, dynamic>.from(outerEntry.value);
-
-      //   for (final innerEntry in innerMap.entries) {
-      //     final likeMap = Map<String, dynamic>.from(innerEntry.value as Map);
-
-      //     likes.add(LikeProfileResponseModel.fromJson(likeMap));
-      //   }
-      // }
-      // log('------------------------->>>>>>>>> $likes');
 
       return FirebaseSuccess(likes);
     } catch (e) {

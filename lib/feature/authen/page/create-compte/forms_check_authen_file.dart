@@ -50,7 +50,6 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
-
   File? _imageFileRecto;
   File? _imageFileVerso;
   late String selectedOptions = "";
@@ -63,6 +62,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
 
   get isGalleryImportAllowed => null;
 
+  //**** RECTO */
   Future<void> _imagePikers(
     ImageSource source,
     void Function(File) onImageSelected,
@@ -130,53 +130,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
-  Future<void> _textReconginitionAttestation(File img) async {
-    final textRecoginition = TextRecognizer(
-      script: TextRecognitionScript.latin,
-    );
-    final inputImage = InputImage.fromFilePath(img.path);
-    final myText = await textRecoginition.processImage(inputImage);
-
-    final rawText = myText.text.toUpperCase();
-
-    // Vérifie si c'est une CNI ou un passeport
-    final isCNI =
-        rawText.contains("CI") &&
-            rawText.contains("CIV") &&
-            rawText.contains("IVOIRIENNE") ||
-        rawText.contains("PASSPORT");
-
-    if (isCNI) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.green,
-            content: Text('Document reconnue ✅'),
-          ),
-        );
-        context.read<CheckFileBloc>().add(
-        CheckFileEvent.changeAttestAtion(img.path.toString()),
-      );
-      context.read<CheckFileBloc>().add(CheckFileEvent.submit());
-    } else {
-      // Remise à l’état initial
-      setState(() {
-        _imageFileRecto = null;
-      });
-      showAppSnackBar(
-        context,
-        color: MyColorName.errorRed,
-        iconRight: Icons.close,
-        message: "Document non reconnu  ❌",
-      );
-      context.read<CheckFileBloc>().add(
-        CheckFileEvent.changeAttestAtion(''.toString()),
-      );
-    }
-  }
-
+  //**** VERSO */
   Future<void> _imagePikersVerso(
     ImageSource source,
     void Function(File) onImageSelected,
@@ -239,6 +193,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
+  //**** ATESTATION DE DOCUMENT */
   Future<void> scannerPlace() async {
     final imagesPath = await ScannerDocument.getPictures(
       noOfPages: 1, // Limit the number of pages to 1
@@ -249,6 +204,53 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     final selectedFile = File(imagesPath.first);
     await _textReconginitionAttestation(selectedFile);
     log("********* $imagesPath");
+  }
+
+  Future<void> _textReconginitionAttestation(File img) async {
+    final textRecoginition = TextRecognizer(
+      script: TextRecognitionScript.latin,
+    );
+    final inputImage = InputImage.fromFilePath(img.path);
+    final myText = await textRecoginition.processImage(inputImage);
+
+    final rawText = myText.text.toUpperCase();
+
+    // Vérifie si c'est une CNI ou un passeport
+    final isCNI =
+        rawText.contains("CI") &&
+            rawText.contains("CIV") &&
+            rawText.contains("IVOIRIENNE") ||
+        rawText.contains("PASSPORT");
+
+    if (isCNI) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            content: Text('Document reconnue ✅'),
+          ),
+        );
+      context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeAttestAtion(img.path.toString()),
+      );
+      context.read<CheckFileBloc>().add(CheckFileEvent.submit());
+    } else {
+      // Remise à l’état initial
+      setState(() {
+        _imageFileRecto = null;
+      });
+      showAppSnackBar(
+        context,
+        color: MyColorName.errorRed,
+        iconRight: Icons.close,
+        message: "Document non reconnu  ❌",
+      );
+      context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeAttestAtion(''.toString()),
+      );
+    }
   }
 
   @override
@@ -498,7 +500,6 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                         return GestureDetector(
                           onTap: () async {
                             scannerPlace();
-                      
                           },
                           child: Container(
                             child: Column(

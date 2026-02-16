@@ -14,61 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LikeProfileEvent {
 
- String? get userId;
-/// Create a copy of LikeProfileEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$LikeProfileEventCopyWith<LikeProfileEvent> get copyWith => _$LikeProfileEventCopyWithImpl<LikeProfileEvent>(this as LikeProfileEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeProfileEvent&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeProfileEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userId);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LikeProfileEvent(userId: $userId)';
+  return 'LikeProfileEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LikeProfileEventCopyWith<$Res>  {
-  factory $LikeProfileEventCopyWith(LikeProfileEvent value, $Res Function(LikeProfileEvent) _then) = _$LikeProfileEventCopyWithImpl;
-@useResult
-$Res call({
- String? userId
-});
-
-
-
-
-}
-/// @nodoc
-class _$LikeProfileEventCopyWithImpl<$Res>
-    implements $LikeProfileEventCopyWith<$Res> {
-  _$LikeProfileEventCopyWithImpl(this._self, this._then);
-
-  final LikeProfileEvent _self;
-  final $Res Function(LikeProfileEvent) _then;
-
-/// Create a copy of LikeProfileEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = freezed,}) {
-  return _then(_self.copyWith(
-userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
+class $LikeProfileEventCopyWith<$Res>  {
+$LikeProfileEventCopyWith(LikeProfileEvent _, $Res Function(LikeProfileEvent) __);
 }
 
 
@@ -86,12 +55,13 @@ extension LikeProfileEventPatterns on LikeProfileEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LikeProfileProfileEvent value)?  likeProfile,TResult Function( DisLikeProfileProfileEvent value)?  disLikeProfile,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LikeProfileProfileEvent value)?  likeProfile,TResult Function( DisLikeProfileProfileEvent value)?  disLikeProfile,TResult Function( FetchLikeProfileProfileEvent value)?  fetchLike,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent() when likeProfile != null:
 return likeProfile(_that);case DisLikeProfileProfileEvent() when disLikeProfile != null:
-return disLikeProfile(_that);case _:
+return disLikeProfile(_that);case FetchLikeProfileProfileEvent() when fetchLike != null:
+return fetchLike(_that);case _:
   return orElse();
 
 }
@@ -109,12 +79,13 @@ return disLikeProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LikeProfileProfileEvent value)  likeProfile,required TResult Function( DisLikeProfileProfileEvent value)  disLikeProfile,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LikeProfileProfileEvent value)  likeProfile,required TResult Function( DisLikeProfileProfileEvent value)  disLikeProfile,required TResult Function( FetchLikeProfileProfileEvent value)  fetchLike,}){
 final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent():
 return likeProfile(_that);case DisLikeProfileProfileEvent():
-return disLikeProfile(_that);case _:
+return disLikeProfile(_that);case FetchLikeProfileProfileEvent():
+return fetchLike(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -131,12 +102,13 @@ return disLikeProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LikeProfileProfileEvent value)?  likeProfile,TResult? Function( DisLikeProfileProfileEvent value)?  disLikeProfile,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LikeProfileProfileEvent value)?  likeProfile,TResult? Function( DisLikeProfileProfileEvent value)?  disLikeProfile,TResult? Function( FetchLikeProfileProfileEvent value)?  fetchLike,}){
 final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent() when likeProfile != null:
 return likeProfile(_that);case DisLikeProfileProfileEvent() when disLikeProfile != null:
-return disLikeProfile(_that);case _:
+return disLikeProfile(_that);case FetchLikeProfileProfileEvent() when fetchLike != null:
+return fetchLike(_that);case _:
   return null;
 
 }
@@ -153,11 +125,12 @@ return disLikeProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool? like,  String? userId)?  likeProfile,TResult Function( bool? disLike,  String? userId)?  disLikeProfile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool? like,  String? userId)?  likeProfile,TResult Function( bool? disLike,  String? userId)?  disLikeProfile,TResult Function()?  fetchLike,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent() when likeProfile != null:
 return likeProfile(_that.like,_that.userId);case DisLikeProfileProfileEvent() when disLikeProfile != null:
-return disLikeProfile(_that.disLike,_that.userId);case _:
+return disLikeProfile(_that.disLike,_that.userId);case FetchLikeProfileProfileEvent() when fetchLike != null:
+return fetchLike();case _:
   return orElse();
 
 }
@@ -175,11 +148,12 @@ return disLikeProfile(_that.disLike,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool? like,  String? userId)  likeProfile,required TResult Function( bool? disLike,  String? userId)  disLikeProfile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool? like,  String? userId)  likeProfile,required TResult Function( bool? disLike,  String? userId)  disLikeProfile,required TResult Function()  fetchLike,}) {final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent():
 return likeProfile(_that.like,_that.userId);case DisLikeProfileProfileEvent():
-return disLikeProfile(_that.disLike,_that.userId);case _:
+return disLikeProfile(_that.disLike,_that.userId);case FetchLikeProfileProfileEvent():
+return fetchLike();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,11 +170,12 @@ return disLikeProfile(_that.disLike,_that.userId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool? like,  String? userId)?  likeProfile,TResult? Function( bool? disLike,  String? userId)?  disLikeProfile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool? like,  String? userId)?  likeProfile,TResult? Function( bool? disLike,  String? userId)?  disLikeProfile,TResult? Function()?  fetchLike,}) {final _that = this;
 switch (_that) {
 case LikeProfileProfileEvent() when likeProfile != null:
 return likeProfile(_that.like,_that.userId);case DisLikeProfileProfileEvent() when disLikeProfile != null:
-return disLikeProfile(_that.disLike,_that.userId);case _:
+return disLikeProfile(_that.disLike,_that.userId);case FetchLikeProfileProfileEvent() when fetchLike != null:
+return fetchLike();case _:
   return null;
 
 }
@@ -216,11 +191,11 @@ class LikeProfileProfileEvent implements LikeProfileEvent {
   
 
  final  bool? like;
-@override final  String? userId;
+ final  String? userId;
 
 /// Create a copy of LikeProfileEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $LikeProfileProfileEventCopyWith<LikeProfileProfileEvent> get copyWith => _$LikeProfileProfileEventCopyWithImpl<LikeProfileProfileEvent>(this, _$identity);
 
@@ -246,7 +221,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $LikeProfileProfileEventCopyWith<$Res> implements $LikeProfileEventCopyWith<$Res> {
   factory $LikeProfileProfileEventCopyWith(LikeProfileProfileEvent value, $Res Function(LikeProfileProfileEvent) _then) = _$LikeProfileProfileEventCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  bool? like, String? userId
 });
@@ -265,7 +240,7 @@ class _$LikeProfileProfileEventCopyWithImpl<$Res>
 
 /// Create a copy of LikeProfileEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? like = freezed,Object? userId = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? like = freezed,Object? userId = freezed,}) {
   return _then(LikeProfileProfileEvent(
 like: freezed == like ? _self.like : like // ignore: cast_nullable_to_non_nullable
 as bool?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -284,11 +259,11 @@ class DisLikeProfileProfileEvent implements LikeProfileEvent {
   
 
  final  bool? disLike;
-@override final  String? userId;
+ final  String? userId;
 
 /// Create a copy of LikeProfileEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $DisLikeProfileProfileEventCopyWith<DisLikeProfileProfileEvent> get copyWith => _$DisLikeProfileProfileEventCopyWithImpl<DisLikeProfileProfileEvent>(this, _$identity);
 
@@ -314,7 +289,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $DisLikeProfileProfileEventCopyWith<$Res> implements $LikeProfileEventCopyWith<$Res> {
   factory $DisLikeProfileProfileEventCopyWith(DisLikeProfileProfileEvent value, $Res Function(DisLikeProfileProfileEvent) _then) = _$DisLikeProfileProfileEventCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  bool? disLike, String? userId
 });
@@ -333,7 +308,7 @@ class _$DisLikeProfileProfileEventCopyWithImpl<$Res>
 
 /// Create a copy of LikeProfileEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? disLike = freezed,Object? userId = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? disLike = freezed,Object? userId = freezed,}) {
   return _then(DisLikeProfileProfileEvent(
 disLike: freezed == disLike ? _self.disLike : disLike // ignore: cast_nullable_to_non_nullable
 as bool?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -343,5 +318,37 @@ as String?,
 
 
 }
+
+/// @nodoc
+
+
+class FetchLikeProfileProfileEvent implements LikeProfileEvent {
+   FetchLikeProfileProfileEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FetchLikeProfileProfileEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LikeProfileEvent.fetchLike()';
+}
+
+
+}
+
+
+
 
 // dart format on

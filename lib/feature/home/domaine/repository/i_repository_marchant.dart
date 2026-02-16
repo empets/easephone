@@ -1,4 +1,5 @@
 import 'package:com.example.epbomi/core/data_process/failure.dart';
+import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 
 import 'package:com.example.epbomi/feature/home/domaine/entities/response/home_response.dart';
@@ -18,7 +19,7 @@ abstract class IRepositoryMarchant {
 
   // <----->> permet de récupérer les likes d’un post
   Future<Either<Failure, List<LikeProfileResponse>>> getLike(
-    RequestLikePost params,
+    NoParams params,
   );
 
   // <----->> permet de liker un post

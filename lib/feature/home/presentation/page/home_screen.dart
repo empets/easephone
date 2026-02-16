@@ -21,7 +21,7 @@ import 'package:com.example.epbomi/feature/home/domaine/usercase/get_profile_lik
 import 'package:com.example.epbomi/feature/home/domaine/usercase/like_profile_actif_usercase.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/check_internet/check_connexion_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/event/like_profile_event.dart';
-import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_profile_liked_usecase_bloc.dart';
+import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/get_profile_liked_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/liker_profile/like_profile_actif_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/event/get_profile_bloc.dart';
 import 'package:com.example.epbomi/feature/home/presentation/bloc/user_profile.dart/filter_profile/event/filtre_event.dart';
@@ -50,6 +50,7 @@ class HomeOverView extends StatefulWidget {
 class _HomeOverViewState extends State<HomeOverView> {
   late bool isLiked = false;
   TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -79,13 +80,14 @@ class _HomeOverViewState extends State<HomeOverView> {
           create: (context) => LikeProfileBloc(
             likeProfileActifUsercase: getIt<LikeProfileActifUsercase>(),
             disLikeProfileActifUsercase: getIt<DisLikeProfileActifUsercase>(),
-          )..add(LikeProfileEvent.likeProfile(like: true)),
+          ),
+          //..add(LikeProfileEvent.likeProfile(like: true)),
         ),
 
         BlocProvider(
           create: (context) => GetProfileLikedBloc(
             getProfileLikedUsecase: getIt<GetProfileLikedUsecase>(),
-          )..add(LikeProfileEvent.likeProfile(like: true)),
+          )..add(LikeProfileEvent.fetchLike()),
         ),
       ],
       child: Scaffold(
@@ -221,438 +223,526 @@ class _HomeOverViewState extends State<HomeOverView> {
 
                 SizedBox(height: 10.h),
                 Expanded(
-                  child: BlocBuilder<GetActifProfileListBloc, ApiState<List<ActiveUserProfile>>>(
-                    builder: (context, state) {
-                      if (state is LoadState<List<ActiveUserProfile>>) {
-                        return Center(
-                          child: CircularProgressIndicator(color: Colors.black),
-                        );
-                      }
+                  child: StreamBuilder(
+                    stream: FirebaseStreamService().getLikeStream(),
+                    builder: (context, asyncSnapshot) {
+                      final isLikeProfile = asyncSnapshot.data;
 
-                      if (state is SuccessState<List<ActiveUserProfile>>) {
-                        return KeyboardVisibilityBuilder(
-                          builder: (context, isKey) {
-                            if (state.data.isEmpty) {
-                              return SizedBox(
-                                height: 0.6.sh,
-                                // color: MyColorName.black,
-                                child: ListView.builder(
-                                  itemCount: 1,
+                      return BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
+                        builder: (context, stateProfile) {
+                          if (stateProfile is SuccessState<ProfileUser>) {
+                            return BlocBuilder<
+                              GetActifProfileListBloc,
+                              ApiState<List<ActiveUserProfile>>
+                            >(
+                              builder: (context, state) {
+                                if (state
+                                    is LoadState<List<ActiveUserProfile>>) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    ),
+                                  );
+                                }
 
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 50.h),
-                                            child: Lottie.asset(
-                                              MyAssets.icons.emptyData.path,
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentGeometry.center,
-                                            child: CustomeText(
-                                              texte:
-                                                  "Aucune donnée disponible rafechiser la page",
+                                if (state
+                                    is SuccessState<List<ActiveUserProfile>>) {
+                                  return KeyboardVisibilityBuilder(
+                                    builder: (context, isKey) {
+                                      if (state.data.isEmpty) {
+                                        return SizedBox(
+                                          height: 0.6.sh,
+                                          // color: MyColorName.black,
+                                          child: ListView.builder(
+                                            itemCount: 1,
 
-                                              texteSize: 14.sp,
-                                            ),
-                                          ),
-
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              top: 0.26.sh,
-                                            ),
-                                            child: CustomeButton(
-                                              btnBackground: MyColorName.black,
-                                              btnTextColor: MyColorName.white,
-                                              btnText: 'Rafrechir',
-                                              btnTextSize: 13.sp,
-                                              onTap: () {
-                                                context
-                                                    .read<
-                                                      GetActifProfileListBloc
-                                                    >()
-                                                    .add(
-                                                      FiltreEvent.filtre(
-                                                        filterIsActif: false,
-                                                        adresse: "",
-                                                      ),
-                                                    );
-                                                FocusScope.of(
-                                                  context,
-                                                ).unfocus();
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            }
-                            return isKey
-                                ? SizedBox()
-                                : SizedBox(
-                                    height: 0.6.sh,
-                                    child: ListView.builder(
-                                      itemCount: state.data.length,
-                                      itemBuilder: (context, index) {
-                                        final profile = state.data[index];
-
-                                        return (profile.formOne == 'success' &&
-                                                profile.formTwo == 'success' &&
-                                                profile.formTherd ==
-                                                    'success' &&
-                                                profile.formFive == 'Success')
-                                            ? Container(
-                                                margin: EdgeInsets.only(
-                                                  bottom: 15.h,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                        9.r,
-                                                      ),
-                                                ),
+                                            itemBuilder: (context, index) {
+                                              return Container(
                                                 child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
-                                                    Stack(
-                                                      children: [
-                                                        Container(
-                                                          height: 0.26.sh,
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                        top: 50.h,
+                                                      ),
+                                                      child: Lottie.asset(
+                                                        MyAssets
+                                                            .icons
+                                                            .emptyData
+                                                            .path,
+                                                      ),
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                          AlignmentGeometry
+                                                              .center,
+                                                      child: CustomeText(
+                                                        texte:
+                                                            "Aucune donnée disponible rafechiser la page",
+
+                                                        texteSize: 14.sp,
+                                                      ),
+                                                    ),
+
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                        top: 0.26.sh,
+                                                      ),
+                                                      child: CustomeButton(
+                                                        btnBackground:
+                                                            MyColorName.black,
+                                                        btnTextColor:
+                                                            MyColorName.white,
+                                                        btnText: 'Rafrechir',
+                                                        btnTextSize: 13.sp,
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                GetActifProfileListBloc
+                                                              >()
+                                                              .add(
+                                                                FiltreEvent.filtre(
+                                                                  filterIsActif:
+                                                                      false,
+                                                                  adresse: "",
+                                                                ),
+                                                              );
+                                                          FocusScope.of(
+                                                            context,
+                                                          ).unfocus();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      }
+                                      return isKey
+                                          ? SizedBox()
+                                          : SizedBox(
+                                              height: 0.6.sh,
+                                              child: ListView.builder(
+                                                itemCount: state.data.length,
+                                                itemBuilder: (context, index) {
+                                                  final profile =
+                                                      state.data[index];
+
+                                                  final userLike =
+                                                      isLikeProfile?.any(
+                                                        (like) =>
+                                                            like.postId ==
+                                                            profile.userId,
+                                                      ) ??
+                                                      false;
+
+                                                  final profileLikeNumber =
+                                                      isLikeProfile
+                                                          ?.where(
+                                                            (element) =>
+                                                                element
+                                                                    .postId ==
+                                                                profile.userId,
+                                                          )
+                                                          .toList();
+
+                                                  return (profile.formOne ==
+                                                              'success' &&
+                                                          profile.formTwo ==
+                                                              'success' &&
+                                                          profile.formTherd ==
+                                                              'success' &&
+                                                          profile.formFive ==
+                                                              'Success')
+                                                      ? Container(
                                                           margin:
-                                                              EdgeInsetsGeometry.only(
-                                                                bottom: 9.h,
+                                                              EdgeInsets.only(
+                                                                bottom: 15.h,
                                                               ),
-                                                          padding:
-                                                              EdgeInsetsGeometry.symmetric(
-                                                                vertical: 5.h,
-                                                                horizontal: 4.w,
-                                                              ),
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                context,
-                                                              ).width.sw,
-                                                          child: ClipRRect(
+                                                          decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius.circular(
-                                                                  7.r,
+                                                                  9.r,
                                                                 ),
-                                                            child: Image.network(
-                                                              loadingBuilder:
-                                                                  (
-                                                                    context,
-                                                                    child,
-                                                                    loadingProgress,
-                                                                  ) {
-                                                                    if (loadingProgress ==
-                                                                        null)
-                                                                      return child;
-
-                                                                    return ImageShimmer(
-                                                                      width:
-                                                                          150,
-                                                                      height:
-                                                                          150,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        0.26.sh,
+                                                                    margin:
+                                                                        EdgeInsetsGeometry.only(
+                                                                          bottom:
+                                                                              9.h,
+                                                                        ),
+                                                                    padding: EdgeInsetsGeometry.symmetric(
+                                                                      vertical:
+                                                                          5.h,
+                                                                      horizontal:
+                                                                          4.w,
+                                                                    ),
+                                                                    width: MediaQuery.sizeOf(
+                                                                      context,
+                                                                    ).width.sw,
+                                                                    child: ClipRRect(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                            12,
+                                                                            7.r,
                                                                           ),
-                                                                    );
-                                                                  },
-                                                              errorBuilder:
-                                                                  (
-                                                                    _,
-                                                                    __,
-                                                                    ___,
-                                                                  ) => SvgPicture.asset(
-                                                                    MyAssets
-                                                                        .icons
-                                                                        .undrawDeliveryLocationUm5t
-                                                                        .path,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                              profile.file,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                                      child: Image.network(
+                                                                        loadingBuilder:
+                                                                            (
+                                                                              context,
+                                                                              child,
+                                                                              loadingProgress,
+                                                                            ) {
+                                                                              if (loadingProgress ==
+                                                                                  null)
+                                                                                return child;
 
-                                                        BlocBuilder<
-                                                          LikeProfileBloc,
-                                                          ApiState<String?>
-                                                        >(
-                                                          builder: (context, state) {
-                                                            return SizedBox(
-                                                              // height: 0.4.sh,
-                                                              // width: 0.3.sw,
-                                                              child: GestureDetector(
-                                                                onTap: () {
-                                                                  context
-                                                                      .read<
-                                                                        LikeProfileBloc
-                                                                      >()
-                                                                      .add(
-                                                                        LikeProfileEvent.likeProfile(
-                                                                          like:
-                                                                              true,
-                                                                          userId:
-                                                                              profile.userId,
-                                                                        ),
-                                                                      );
-                                                                },
-                                                                child:
-                                                                    BlocBuilder<
-                                                                      GetProfileLikedBloc,
-                                                                      ApiState<
-                                                                        List<
-                                                                          LikeProfileResponse
-                                                                        >
-                                                                      >
-                                                                    >(
-                                                                      builder:
-                                                                          (
-                                                                            context,
-                                                                            statePost,
-                                                                          ) {
-                                                                            if (statePost
-                                                                                is SuccessState<
-                                                                                  ApiState<
-                                                                                    List<
-                                                                                      LikeProfileResponse
-                                                                                    >
-                                                                                  >
-                                                                                >) {
-                                                                              log(
-                                                                                "Like items =====>>. $statePost",
-                                                                              );
-
-                                                                              return Container(
-                                                                                padding: EdgeInsets.all(
-                                                                                  4.r,
-                                                                                ),
-                                                                                child: Icon(
-                                                                                  Icons.favorite_rounded,
-                                                                                  color: isLiked
-                                                                                      ? Colors.red
-                                                                                      : Colors.grey,
+                                                                              return ImageShimmer(
+                                                                                width: 150,
+                                                                                height: 150,
+                                                                                borderRadius: BorderRadius.circular(
+                                                                                  12,
                                                                                 ),
                                                                               );
-                                                                            }
-
-                                                                            return Container(
-                                                                              padding: EdgeInsets.all(
-                                                                                4.r,
-                                                                              ),
-                                                                              child: Icon(
-                                                                                Icons.favorite_rounded,
-                                                                                color: isLiked
-                                                                                    ? Colors.red
-                                                                                    : Colors.grey,
-                                                                              ),
-                                                                            );
-                                                                          },
-                                                                    ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-
-                                                        Positioned(
-                                                          bottom: 8.h,
-                                                          left: 4.w,
-                                                          right: 4.w,
-                                                          child: Stack(
-                                                            children: [
-                                                              Container(
-                                                                child: Container(
-                                                                  padding:
-                                                                      EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            4.w,
-                                                                        vertical:
-                                                                            5.h,
+                                                                            },
+                                                                        errorBuilder:
+                                                                            (
+                                                                              _,
+                                                                              __,
+                                                                              ___,
+                                                                            ) => SvgPicture.asset(
+                                                                              MyAssets.icons.undrawDeliveryLocationUm5t.path,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                        profile
+                                                                            .file,
+                                                                        fit: BoxFit
+                                                                            .cover,
                                                                       ),
-                                                                  height:
-                                                                      0.11.sh,
-                                                                  width: 1.sw,
-                                                                  decoration: BoxDecoration(
-                                                                    color: MyColorName
-                                                                        .cardBorder
-                                                                        .withValues(
-                                                                          alpha:
-                                                                              0.3,
-                                                                        ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                          7.r,
+                                                                    ),
+                                                                  ),
+
+                                                                  Positioned(
+                                                                    top: 9.h,
+                                                                    right: 10.w,
+                                                                    child:
+                                                                        BlocBuilder<
+                                                                          LikeProfileBloc,
+                                                                          ApiState<
+                                                                            String?
+                                                                          >
+                                                                        >(
+                                                                          builder:
+                                                                              (
+                                                                                context,
+                                                                                state,
+                                                                              ) {
+                                                                                return SizedBox(
+                                                                                  child: GestureDetector(
+                                                                                    onTap: () {
+                                                                                      context
+                                                                                          .read<
+                                                                                            LikeProfileBloc
+                                                                                          >()
+                                                                                          .add(
+                                                                                            LikeProfileEvent.likeProfile(
+                                                                                              like: true,
+                                                                                              userId: profile.userId,
+                                                                                            ),
+                                                                                          );
+                                                                                    },
+                                                                                    child:
+                                                                                        BlocBuilder<
+                                                                                          GetProfileLikedBloc,
+                                                                                          ApiState<
+                                                                                            List<
+                                                                                              LikeProfileResponse
+                                                                                            >
+                                                                                          >
+                                                                                        >(
+                                                                                          builder:
+                                                                                              (
+                                                                                                context,
+                                                                                                stateLikeProfile,
+                                                                                              ) {
+                                                                                                if (stateLikeProfile
+                                                                                                    is SuccessState<
+                                                                                                      List<
+                                                                                                        LikeProfileResponse
+                                                                                                      >
+                                                                                                    >) {
+                                                                                                  return StreamBuilder(
+                                                                                                    stream: FirebaseStreamService().getLikeStream(),
+                                                                                                    builder:
+                                                                                                        (
+                                                                                                          context,
+                                                                                                          asyncSnapshot,
+                                                                                                        ) {
+                                                                                                          if (asyncSnapshot.hasData) {
+                                                                                                            return Container(
+                                                                                                              padding: EdgeInsets.all(
+                                                                                                                4.r,
+                                                                                                              ),
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: MyColorName.backgroundIvory.withValues(
+                                                                                                                  alpha: 0.6,
+                                                                                                                ),
+                                                                                                                borderRadius: BorderRadius.circular(
+                                                                                                                  8.r,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Icon(
+                                                                                                                Icons.favorite_rounded,
+                                                                                                                color:
+                                                                                                                    userLike ||
+                                                                                                                        isLiked
+                                                                                                                    ? Colors.red
+                                                                                                                    : MyColorName.backgroundIvory,
+                                                                                                              ),
+                                                                                                            );
+                                                                                                          }
+
+                                                                                                          return Container(
+                                                                                                            padding: EdgeInsets.all(
+                                                                                                              4.r,
+                                                                                                            ),
+                                                                                                            child: Icon(
+                                                                                                              Icons.favorite_rounded,
+                                                                                                              color:
+                                                                                                                  isLiked ||
+                                                                                                                      profile.userId ==
+                                                                                                                          stateLikeProfile.data
+                                                                                                                  ? Colors.red
+                                                                                                                  : MyColorName.backgroundIvory,
+                                                                                                            ),
+                                                                                                          );
+                                                                                                        },
+                                                                                                  );
+                                                                                                }
+
+                                                                                                return Container(
+                                                                                                  padding: EdgeInsets.all(
+                                                                                                    4.r,
+                                                                                                  ),
+                                                                                                  child: Icon(
+                                                                                                    Icons.favorite_rounded,
+                                                                                                    color: isLiked
+                                                                                                        ? Colors.red
+                                                                                                        : MyColorName.backgroundIvory,
+                                                                                                  ),
+                                                                                                );
+                                                                                              },
+                                                                                        ),
+                                                                                  ),
+                                                                                );
+                                                                              },
                                                                         ),
                                                                   ),
 
-                                                                  child: Padding(
-                                                                    padding:
-                                                                        const EdgeInsets.all(
-                                                                          4.0,
-                                                                        ),
-                                                                    child: Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .end,
+                                                                  Positioned(
+                                                                    bottom: 8.h,
+                                                                    left: 4.w,
+                                                                    right: 4.w,
+                                                                    child: Stack(
                                                                       children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            Text(
-                                                                              profile.specialite,
-                                                                              style: GoogleFonts.roboto(
-                                                                                color: Colors.white,
-                                                                                fontSize: 18.sp,
-                                                                                fontWeight: FontWeight.w500,
+                                                                        Container(
+                                                                          child: Container(
+                                                                            padding: EdgeInsets.symmetric(
+                                                                              horizontal: 4.w,
+                                                                              vertical: 5.h,
+                                                                            ),
+                                                                            height:
+                                                                                0.11.sh,
+                                                                            width:
+                                                                                1.sw,
+                                                                            decoration: BoxDecoration(
+                                                                              color: MyColorName.cardBorder.withValues(
+                                                                                alpha: 0.3,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(
+                                                                                7.r,
                                                                               ),
                                                                             ),
-                                                                            SizedBox(
-                                                                              width: 10.w,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              5.h,
-                                                                        ),
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Row(
-                                                                              children: [
-                                                                                Icon(
-                                                                                  Icons.location_on_rounded,
-                                                                                  color: Colors.amber,
-                                                                                ),
-                                                                                Text(
-                                                                                  profile.adresse.substring(
-                                                                                    0,
-                                                                                    20,
-                                                                                  ),
-                                                                                  style: GoogleFonts.roboto(
-                                                                                    color: Colors.white,
-                                                                                    fontSize: 12.sp,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 10.w,
-                                                                            ),
 
-                                                                            SizedBox(
-                                                                              width: 3.w,
-                                                                            ),
-                                                                            Row(
-                                                                              children: [
-                                                                                GestureDetector(
-                                                                                  onTap: () {
-                                                                                    showModalBottomSheet(
-                                                                                      context: context,
-                                                                                      backgroundColor: MyColorName.white,
-                                                                                      isScrollControlled: true,
-                                                                                      shape: const RoundedRectangleBorder(
-                                                                                        borderRadius: BorderRadius.vertical(
-                                                                                          top: Radius.circular(
-                                                                                            25,
-                                                                                          ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets.all(
+                                                                                4.0,
+                                                                              ),
+                                                                              child: Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Text(
+                                                                                        profile.specialite,
+                                                                                        style: GoogleFonts.roboto(
+                                                                                          color: Colors.white,
+                                                                                          fontSize: 18.sp,
+                                                                                          fontWeight: FontWeight.w500,
                                                                                         ),
                                                                                       ),
-                                                                                      builder:
-                                                                                          (
-                                                                                            BuildContext context,
-                                                                                          ) {
-                                                                                            return HomeDetails(
-                                                                                              profile: profile,
-                                                                                            );
-                                                                                          },
-                                                                                    );
-                                                                                  },
-                                                                                  child: Container(
-                                                                                    padding: EdgeInsets.symmetric(
-                                                                                      vertical: 9.h,
-                                                                                      horizontal: 12.w,
-                                                                                    ),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: MyColorName.backgroundIvory,
-                                                                                      borderRadius: BorderRadius.circular(
-                                                                                        8.r,
+                                                                                      SizedBox(
+                                                                                        width: 10.w,
                                                                                       ),
-                                                                                    ),
-                                                                                    child: Text(
-                                                                                      "Voir plus",
-                                                                                      style: GoogleFonts.roboto(
-                                                                                        color: Colors.black,
-                                                                                        fontSize: 12.sp,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                      ),
-                                                                                    ),
+                                                                                    ],
                                                                                   ),
-                                                                                ),
-                                                                              ],
+                                                                                  SizedBox(
+                                                                                    height: 5.h,
+                                                                                  ),
+                                                                                  Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          Icon(
+                                                                                            Icons.location_on_rounded,
+                                                                                            color: Colors.amber,
+                                                                                          ),
+                                                                                          Text(
+                                                                                            profile.adresse.substring(
+                                                                                              0,
+                                                                                              20,
+                                                                                            ),
+                                                                                            style: GoogleFonts.roboto(
+                                                                                              color: Colors.white,
+                                                                                              fontSize: 12.sp,
+                                                                                              fontWeight: FontWeight.w400,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        width: 10.w,
+                                                                                      ),
+
+                                                                                      SizedBox(
+                                                                                        width: 3.w,
+                                                                                      ),
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          GestureDetector(
+                                                                                            onTap: () {
+                                                                                              showModalBottomSheet(
+                                                                                                context: context,
+                                                                                                backgroundColor: MyColorName.white,
+                                                                                                isScrollControlled: true,
+                                                                                                shape: const RoundedRectangleBorder(
+                                                                                                  borderRadius: BorderRadius.vertical(
+                                                                                                    top: Radius.circular(
+                                                                                                      25,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                                builder:
+                                                                                                    (
+                                                                                                      BuildContext context,
+                                                                                                    ) {
+                                                                                                      return HomeDetails(
+                                                                                                        profile: profile,
+                                                                                                      );
+                                                                                                    },
+                                                                                              );
+                                                                                            },
+                                                                                            child: Container(
+                                                                                              padding: EdgeInsets.symmetric(
+                                                                                                vertical: 9.h,
+                                                                                                horizontal: 12.w,
+                                                                                              ),
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: MyColorName.backgroundIvory,
+                                                                                                borderRadius: BorderRadius.circular(
+                                                                                                  8.r,
+                                                                                                ),
+                                                                                              ),
+                                                                                              child: Text(
+                                                                                                "Voir plus ${profileLikeNumber?.length}",
+                                                                                                style: GoogleFonts.roboto(
+                                                                                                  color: Colors.black,
+                                                                                                  fontSize: 12.sp,
+                                                                                                  fontWeight: FontWeight.w500,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ],
+                                                                              ),
                                                                             ),
-                                                                          ],
+                                                                          ),
                                                                         ),
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
                                                             ],
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            : SizedBox();
-                                      },
-                                    ),
+                                                        )
+                                                      : SizedBox();
+                                                },
+                                              ),
+                                            );
+                                    },
                                   );
-                          },
-                        );
-                      } else {
-                        return KeyboardVisibilityBuilder(
-                          builder: (context, iskeyActif) {
-                            return !iskeyActif
-                                ? Container(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Lottie.asset(
-                                          MyAssets.icons.emptyData.path,
-                                        ),
-                                        Align(
-                                          alignment: AlignmentGeometry.center,
-                                          child: CustomeText(
-                                            texte:
-                                                "Aucune donnée disponible pour l'instant",
+                                } else {
+                                  return KeyboardVisibilityBuilder(
+                                    builder: (context, iskeyActif) {
+                                      return !iskeyActif
+                                          ? Container(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Lottie.asset(
+                                                    MyAssets
+                                                        .icons
+                                                        .emptyData
+                                                        .path,
+                                                  ),
+                                                  Align(
+                                                    alignment: AlignmentGeometry
+                                                        .center,
+                                                    child: CustomeText(
+                                                      texte:
+                                                          "Aucune donnée disponible pour l'instant",
 
-                                            texteSize: 14.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : SizedBox();
-                          },
-                        );
-                      }
+                                                      texteSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : SizedBox();
+                                    },
+                                  );
+                                }
+                              },
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      );
                     },
                   ),
                 ),

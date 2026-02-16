@@ -244,7 +244,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     }
   }
 
-
   // <----->> cette methode permet de recuperer la liste des utilisateurs
   @override
   Future<FirebaseResult<List<ProfileUserModel>>> getProfileList() async {
@@ -431,7 +430,6 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
     RequestAuthentificationSignIntificationSignIntificationSignUp params,
   ) async {
     try {
-      log('=====>> ${params.remenber}');
       final snapShot = await db
           .child('users')
           .orderByChild('remenber')
@@ -440,8 +438,8 @@ class ImplFirebaseRemoteService implements FirebaseRemoteService {
 
       if (snapShot.exists) {
         final data = Map<String, dynamic>.from(snapShot.value as Map);
-        final firebaseResult = ProfileUserModel.fromJson(data);
-        return FirebaseSuccess(firebaseResult.userId);
+
+        return FirebaseSuccess(data.entries.first.key);
       } else {
         return FirebaseError("Aucune infromation");
       }

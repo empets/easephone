@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:com.example.epbomi/core/data_process/failure.dart';
 import 'package:com.example.epbomi/core/data_process/success.dart';
+import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:com.example.epbomi/feature/home/data/service/remot_reposytory.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
@@ -42,8 +45,6 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     return Left(Failure(message: "Erreur inconnue"));
   }
 
-  
-
   @override
   Future<Either<Failure, String?>> dislike(RequestLike request) async {
     final response = await marchanServiceFirebase.likeProfile(request);
@@ -54,7 +55,6 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-
 
   @override
   Future<Either<Failure, String?>> disLikePost(RequestLikePost request) {
@@ -72,12 +72,14 @@ class ImpRepositoryMarchant implements IRepositoryMarchant {
     }
     return Left(Failure(message: "Erreur inconnue"));
   }
-  
+
   @override
-  Future<Either<Failure, List<LikeProfileResponse>>> getLike(RequestLikePost params) async{
-      final response = await marchanServiceFirebase
-        .getLike(params);
+  Future<Either<Failure, List<LikeProfileResponse>>> getLike(
+    NoParams params,
+  ) async {
+    final response = await marchanServiceFirebase.getLike(params);
     if (response is FirebaseSuccess<List<LikeProfileResponseModel>>) {
+      log("----------->> $response");
       return Right(
         response.data.map(LikeProfileResponseModel.toDomaine).toList(),
       );

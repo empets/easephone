@@ -1,4 +1,5 @@
 import 'package:com.example.epbomi/core/data_process/success.dart';
+import 'package:com.example.epbomi/core/usercase/usercase.dart';
 import 'package:com.example.epbomi/feature/home/data/domaine/home_response_model.dart';
 import 'package:com.example.epbomi/feature/home/domaine/entities/request/home_request.dart';
 
@@ -16,7 +17,7 @@ abstract class MarchanServiceFirebase {
 
   // permet de récupérer les likes d’un post
   Future<FirebaseResult<List<LikeProfileResponseModel>>> getLike(
-    RequestLikePost params,
+    NoParams params,
   );
 
   // <----->> permet de liker un post

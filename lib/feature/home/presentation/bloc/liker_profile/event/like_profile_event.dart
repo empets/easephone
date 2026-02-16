@@ -8,4 +8,6 @@ abstract class LikeProfileEvent with _$LikeProfileEvent {
 
   factory LikeProfileEvent.disLikeProfile({bool? disLike, String? userId}) =
       DisLikeProfileProfileEvent;
+
+  factory LikeProfileEvent.fetchLike() = FetchLikeProfileProfileEvent;
 }
