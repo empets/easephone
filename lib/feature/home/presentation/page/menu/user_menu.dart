@@ -279,6 +279,57 @@ class _UserMenuContentState extends State<UserMenuContent> {
                   ),
                   child: Column(
                     children: [
+                        GestureDetector(
+                        onTap: () {
+                          Navigator.of(
+                            context,
+                          ).push(fadeRoute(const FormsLacationScreen()));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 5.h,
+                                    horizontal: 5.w,
+                                  ),
+                                  margin: EdgeInsets.symmetric(
+                                    vertical: 8.h,
+                                    horizontal: 8.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7.r),
+                                  ),
+                                  child: Icon(Icons.person),
+                                ),
+
+                                Text(
+                                  isCreatCompte
+                                      ? 'Modifier'
+                                      : 'Create a compte',
+                                  style: GoogleFonts.roboto(
+                                    color: Colors.black,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Icon(Icons.arrow_right_sharp, color: Colors.black),
+                          ],
+                        ),
+                      ),
+
+                        Divider(
+                        height: 2.h,
+                        color: Colors.black.withValues(alpha: 0.15),
+                      ),
+                    
+
                       GestureDetector(
                         onTap: () {
                           Navigator.of(
@@ -323,54 +374,7 @@ class _UserMenuContentState extends State<UserMenuContent> {
                           ],
                         ),
                       ),
-                      Divider(
-                        height: 2.h,
-                        color: Colors.black.withValues(alpha: 0.15),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(
-                            context,
-                          ).push(fadeRoute(const FormsLacationScreen()));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 5.h,
-                                    horizontal: 5.w,
-                                  ),
-                                  margin: EdgeInsets.symmetric(
-                                    vertical: 8.h,
-                                    horizontal: 8.w,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(7.r),
-                                  ),
-                                  child: Icon(Icons.person),
-                                ),
-
-                                Text(
-                                  isCreatCompte
-                                      ? 'Modifier'
-                                      : 'Create a compte',
-                                  style: GoogleFonts.roboto(
-                                    color: Colors.black,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            Icon(Icons.arrow_right_sharp, color: Colors.black),
-                          ],
-                        ),
-                      ),
+                    
                     ],
                   ),
                 ),

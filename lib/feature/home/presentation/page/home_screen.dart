@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:com.example.epbomi/core/bloc_state/bloc_state.dart';
 import 'package:com.example.epbomi/core/check_connexion/checking.dart';
@@ -515,7 +516,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                                         userLike ||
                                                                                                                             isLiked
                                                                                                                         ? Colors.red
-                                                                                                                        : MyColorName.backgroundIvory,
+                                                                                                                        : MyColorName.black,
                                                                                                                   ),
                                                                                                                 ],
                                                                                                               ),
@@ -530,7 +531,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                               Icons.favorite_rounded,
                                                                                                               color: isLiked
                                                                                                                   ? Colors.red
-                                                                                                                  : MyColorName.backgroundIvory,
+                                                                                                                  : MyColorName.black,
                                                                                                             ),
                                                                                                           );
                                                                                                         },
@@ -545,7 +546,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                                                     Icons.favorite_rounded,
                                                                                                     color: isLiked
                                                                                                         ? Colors.red
-                                                                                                        : MyColorName.backgroundIvory,
+                                                                                                        : MyColorName.black,
                                                                                                   ),
                                                                                                 );
                                                                                               },
@@ -562,131 +563,139 @@ class _HomeOverViewState extends State<HomeOverView> {
                                                                     right: 4.w,
                                                                     child: Stack(
                                                                       children: [
-                                                                        Container(
-                                                                          child: Container(
-                                                                            padding: EdgeInsets.symmetric(
-                                                                              horizontal: 4.w,
-                                                                              vertical: 5.h,
-                                                                            ),
-                                                                            height:
-                                                                                0.11.sh,
-                                                                            width:
-                                                                                1.sw,
-                                                                            decoration: BoxDecoration(
-                                                                              color: MyColorName.cardBorder.withValues(
-                                                                                alpha: 0.3,
+                                                                        ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadiusGeometry.circular(
+                                                                                8,
                                                                               ),
-                                                                              borderRadius: BorderRadius.circular(
-                                                                                7.r,
-                                                                              ),
+                                                                          child: BackdropFilter(
+                                                                            filter: ImageFilter.blur(
+                                                                              sigmaX: 8,
+                                                                              sigmaY: 8,
                                                                             ),
+                                                                            child: Container(
+                                                                              padding: EdgeInsets.symmetric(
+                                                                                horizontal: 4.w,
+                                                                                vertical: 5.h,
+                                                                              ),
+                                                                              height: 0.11.sh,
+                                                                              width: 1.sw,
+                                                                              decoration: BoxDecoration(
+                                                                                color: MyColorName.white.withValues(
+                                                                                  alpha: 0.3,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(
+                                                                                  7.r,
+                                                                                ),
+                                                                              ),
 
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets.all(
-                                                                                4.0,
-                                                                              ),
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                                                children: [
-                                                                                  Row(
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        profile.specialite,
-                                                                                        style: GoogleFonts.roboto(
-                                                                                          color: Colors.white,
-                                                                                          fontSize: 18.sp,
-                                                                                          fontWeight: FontWeight.w500,
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(
+                                                                                  4.0,
+                                                                                ),
+                                                                                child: Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                                                  children: [
+                                                                                    Row(
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          profile.specialite,
+                                                                                          style: GoogleFonts.roboto(
+                                                                                            color: Colors.white,
+                                                                                            fontSize: 18.sp,
+                                                                                            fontWeight: FontWeight.w500,
+                                                                                          ),
                                                                                         ),
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 10.w,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                  SizedBox(
-                                                                                    height: 5.h,
-                                                                                  ),
-                                                                                  Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                    children: [
-                                                                                      Row(
-                                                                                        children: [
-                                                                                          Icon(
-                                                                                            Icons.location_on_rounded,
-                                                                                            color: Colors.amber,
-                                                                                          ),
-                                                                                          Text(
-                                                                                            profile.adresse.substring(
-                                                                                              0,
-                                                                                              20,
+                                                                                        SizedBox(
+                                                                                          width: 10.w,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    SizedBox(
+                                                                                      height: 5.h,
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Icon(
+                                                                                              Icons.location_on_rounded,
+                                                                                              color: Colors.amber,
                                                                                             ),
-                                                                                            style: GoogleFonts.roboto(
-                                                                                              color: Colors.white,
-                                                                                              fontSize: 12.sp,
-                                                                                              fontWeight: FontWeight.w400,
+                                                                                            Text(
+                                                                                              profile.adresse.substring(
+                                                                                                0,
+                                                                                                20,
+                                                                                              ),
+                                                                                              style: GoogleFonts.roboto(
+                                                                                                color: Colors.white,
+                                                                                                fontSize: 12.sp,
+                                                                                                fontWeight: FontWeight.w400,
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 10.w,
-                                                                                      ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 10.w,
+                                                                                        ),
 
-                                                                                      SizedBox(
-                                                                                        width: 3.w,
-                                                                                      ),
-                                                                                      Row(
-                                                                                        children: [
-                                                                                          GestureDetector(
-                                                                                            onTap: () {
-                                                                                              showModalBottomSheet(
-                                                                                                context: context,
-                                                                                                backgroundColor: MyColorName.white,
-                                                                                                isScrollControlled: true,
-                                                                                                shape: const RoundedRectangleBorder(
-                                                                                                  borderRadius: BorderRadius.vertical(
-                                                                                                    top: Radius.circular(
-                                                                                                      25,
+                                                                                        SizedBox(
+                                                                                          width: 3.w,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            GestureDetector(
+                                                                                              onTap: () {
+                                                                                                showModalBottomSheet(
+                                                                                                  context: context,
+                                                                                                  backgroundColor: MyColorName.white,
+                                                                                                  isScrollControlled: true,
+                                                                                                  shape: const RoundedRectangleBorder(
+                                                                                                    borderRadius: BorderRadius.vertical(
+                                                                                                      top: Radius.circular(
+                                                                                                        25,
+                                                                                                      ),
                                                                                                     ),
                                                                                                   ),
+                                                                                                  builder:
+                                                                                                      (
+                                                                                                        BuildContext context,
+                                                                                                      ) {
+                                                                                                        return HomeDetails(
+                                                                                                          profile: profile,
+                                                                                                        );
+                                                                                                      },
+                                                                                                );
+                                                                                              },
+                                                                                              child: Container(
+                                                                                                padding: EdgeInsets.symmetric(
+                                                                                                  vertical: 9.h,
+                                                                                                  horizontal: 12.w,
                                                                                                 ),
-                                                                                                builder:
-                                                                                                    (
-                                                                                                      BuildContext context,
-                                                                                                    ) {
-                                                                                                      return HomeDetails(
-                                                                                                        profile: profile,
-                                                                                                      );
-                                                                                                    },
-                                                                                              );
-                                                                                            },
-                                                                                            child: Container(
-                                                                                              padding: EdgeInsets.symmetric(
-                                                                                                vertical: 9.h,
-                                                                                                horizontal: 12.w,
-                                                                                              ),
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: MyColorName.backgroundIvory,
-                                                                                                borderRadius: BorderRadius.circular(
-                                                                                                  8.r,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: MyColorName.backgroundIvory,
+                                                                                                  borderRadius: BorderRadius.circular(
+                                                                                                    8.r,
+                                                                                                  ),
                                                                                                 ),
-                                                                                              ),
-                                                                                              child: Text(
-                                                                                                "Voir plus ",
-                                                                                                style: GoogleFonts.roboto(
-                                                                                                  color: Colors.black,
-                                                                                                  fontSize: 12.sp,
-                                                                                                  fontWeight: FontWeight.w500,
+                                                                                                child: Text(
+                                                                                                  "Voir plus ",
+                                                                                                  style: GoogleFonts.roboto(
+                                                                                                    color: Colors.black,
+                                                                                                    fontSize: 12.sp,
+                                                                                                    fontWeight: FontWeight.w500,
+                                                                                                  ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ],
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ),

@@ -93,7 +93,10 @@ class _SignUpScrennState extends State<SignUpScrenn> {
                     return CustomeFormsSigin(
                       readOnly: state.status.isInProgress,
                       textInputType: TextInputType.number,
-                      prefixIcon: Icon(Icons.local_fire_department_rounded),
+                      prefixIcon: Icon(
+                        Icons.local_fire_department_rounded,
+                        color: Colors.amberAccent,
+                      ),
                       textLabel: "Entrer autre numéro d'urgence",
                       errorText: state.remenber.isPure || state.remenber.isValid
                           ? null
@@ -233,8 +236,6 @@ class _SignUpScrennState extends State<SignUpScrenn> {
                   },
                 ),
           ),
-
-       
         ],
       ),
     );
