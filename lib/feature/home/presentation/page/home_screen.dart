@@ -40,6 +40,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:badges/badges.dart' as badges;
+import 'dart:math';
 
 class HomeOverView extends StatefulWidget {
   const HomeOverView({super.key});
@@ -134,7 +136,7 @@ class _HomeOverViewState extends State<HomeOverView> {
 
                 SizedBox(height: 20.h),
 
-                // barre de recherche
+                // // barre de recherche
                 Row(
                   children: [
                     // Champ bombé (prend tout l'espace)
@@ -217,7 +219,7 @@ class _HomeOverViewState extends State<HomeOverView> {
                   ],
                 ),
 
-                // Section de button
+                // // Section de button
                 SizedBox(height: 20.h),
 
                 SizedBox(height: 10.h),
@@ -239,10 +241,17 @@ class _HomeOverViewState extends State<HomeOverView> {
                               builder: (context, state) {
                                 if (state
                                     is LoadState<List<ActiveUserProfile>>) {
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black,
-                                    ),
+                                  return Column(
+                                    children: [
+                                      SvgPicture.asset(
+                                        MyAssets.icons.vector1.path,
+                                      ),
+                                      // Center(
+                                      //   child: CircularProgressIndicator(
+                                      //     color: Colors.black,
+                                      //   ),
+                                      // ),
+                                    ],
                                   );
                                 }
 
@@ -749,14 +758,716 @@ class _HomeOverViewState extends State<HomeOverView> {
                               },
                             );
                           } else {
-                            return Column(
-                              children: [
-                                Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.black,
+                            return Container(
+                              // height: 0.5.sh,
+                              width: double.infinity,
+                              color: Colors.black,
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 300,
+                                      height: 150,
+                                      child: Stack(
+                                        children: [
+                                          /// GAUCHE
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  // width: 100,
+                                                  // height: 150,
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      left: BorderSide(
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                    // color: Colors.green,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                150,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment: AlignmentGeometry
+                                                      .bottomLeft,
+                                                  child: Container(
+                                                    margin: ,
+                                                    child: SvgPicture.asset(
+                                                      MyAssets.icons.maBox.path,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          /// CENTRE
+                                          // Align(
+                                          //   alignment: Alignment.bottomCenter,
+                                          //   child: Container(
+                                          //     width: 100,
+                                          //     height: 150,
+                                          //     color: Colors.green,
+                                          //   ),
+                                          // ),
+
+                                          /// DROITE
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              width: 100,
+                                              height: 150,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(
+                                                    150,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
+
+                                  // Row(
+                                  //   children: [
+                                  //     //SEP ONE
+                                  //     Container(
+                                  //       margin: EdgeInsets.only(top: 10.h),
+
+                                  //       color: Colors.black,
+                                  //       child: Column(
+                                  //         children: [
+                                  //           Container(
+                                  //             margin: EdgeInsets.only(
+                                  //               left: 30.w,
+                                  //             ),
+                                  //             child: SvgPicture.asset(
+                                  //               MyAssets.icons.vector1.path,
+                                  //               height: 50.w,
+                                  //               colorFilter: ColorFilter.mode(
+                                  //                 Colors.green,
+                                  //                 BlendMode.srcIn,
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //           badges.Badge(
+                                  //             position:
+                                  //                 badges.BadgePosition.topEnd(
+                                  //                   top: -10,
+                                  //                   end: -12,
+                                  //                 ),
+                                  //             showBadge: true,
+                                  //             ignorePointer: false,
+                                  //             onTap: () {},
+                                  //             badgeContent: Icon(
+                                  //               Icons.check,
+                                  //               color: Colors.white,
+                                  //               size: 10,
+                                  //             ),
+                                  //             badgeAnimation:
+                                  //                 badges
+                                  //                     .BadgeAnimation.rotation(
+                                  //                   animationDuration: Duration(
+                                  //                     seconds: 1,
+                                  //                   ),
+                                  //                   colorChangeAnimationDuration:
+                                  //                       Duration(seconds: 1),
+                                  //                   loopAnimation: false,
+                                  //                   curve: Curves.fastOutSlowIn,
+                                  //                   colorChangeAnimationCurve:
+                                  //                       Curves.easeInCubic,
+                                  //                 ),
+                                  //             child: Container(
+                                  //               child: SvgPicture.asset(
+                                  //                 MyAssets.icons.maBox.path,
+                                  //                 height: 30.w,
+                                  //                 colorFilter: ColorFilter.mode(
+                                  //                   Colors.white,
+                                  //                   BlendMode.srcIn,
+                                  //                 ),
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     //SEP TWO
+                                  //     Container(
+                                  //       height: 0.25.sh,
+                                  //       // color: Colors.brown,
+                                  //       alignment: Alignment.topCenter,
+                                  //       child: Column(
+                                  //         children: [
+                                  //           Container(
+                                  //             color: Colors.black,
+                                  //             child: Row(
+                                  //               children: [
+                                  //                 Container(
+                                  //                   margin: EdgeInsets.only(
+                                  //                     top: 20.w,
+                                  //                   ),
+                                  //                   // color: Colors.red,
+                                  //                   child: badges.Badge(
+                                  //                     position:
+                                  //                         badges
+                                  //                             .BadgePosition.topEnd(
+                                  //                           top: -10,
+                                  //                           end: -12,
+                                  //                         ),
+                                  //                     showBadge: true,
+                                  //                     ignorePointer: false,
+                                  //                     onTap: () {},
+                                  //                     badgeContent: Icon(
+                                  //                       Icons.check,
+                                  //                       color: Colors.white,
+                                  //                       size: 10,
+                                  //                     ),
+                                  //                     badgeAnimation:
+                                  //                         badges
+                                  //                             .BadgeAnimation.rotation(
+                                  //                           animationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           colorChangeAnimationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           loopAnimation:
+                                  //                               false,
+                                  //                           curve: Curves
+                                  //                               .fastOutSlowIn,
+                                  //                           colorChangeAnimationCurve:
+                                  //                               Curves
+                                  //                                   .easeInCubic,
+                                  //                         ),
+                                  //                     child: Container(
+                                  //                       child: SvgPicture.asset(
+                                  //                         MyAssets
+                                  //                             .icons
+                                  //                             .internet
+                                  //                             .path,
+                                  //                         height: 30.w,
+                                  //                         colorFilter:
+                                  //                             ColorFilter.mode(
+                                  //                               Colors.white,
+                                  //                               BlendMode.srcIn,
+                                  //                             ),
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //                 Container(
+                                  //                   height: 30.h,
+                                  //                   // color: Colors.red,
+                                  //                   margin: EdgeInsets.only(
+                                  //                     left: 1.w,
+                                  //                   ),
+                                  //                   alignment:
+                                  //                       Alignment.topLeft,
+                                  //                   child: SvgPicture.asset(
+                                  //                     MyAssets
+                                  //                         .icons
+                                  //                         .vector2
+                                  //                         .path,
+                                  //                     height: 15.w,
+                                  //                     colorFilter:
+                                  //                         ColorFilter.mode(
+                                  //                           Colors.green,
+                                  //                           BlendMode.srcIn,
+                                  //                         ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+
+                                  //     // SEP THERD
+                                  //     Container(
+                                  //       height: 0.25.sh,
+                                  //       width: 0.25.sw,
+                                  //       color: Colors.black,
+                                  //       alignment: Alignment.centerLeft,
+                                  //       child: Column(
+                                  //         children: [
+                                  //           Container(
+                                  //             // color: Colors.yellow,
+                                  //             child: Row(
+                                  //               children: [
+                                  //                 Container(
+                                  //                   margin: EdgeInsets.only(
+                                  //                     top: 20.w,
+                                  //                   ),
+                                  //                   // color: Colors.red,
+                                  //                   child: badges.Badge(
+                                  //                     position:
+                                  //                         badges
+                                  //                             .BadgePosition.topEnd(
+                                  //                           top: -10,
+                                  //                           end: -12,
+                                  //                         ),
+                                  //                     showBadge: true,
+                                  //                     ignorePointer: false,
+                                  //                     onTap: () {},
+                                  //                     badgeContent: Icon(
+                                  //                       Icons.check,
+                                  //                       color: Colors.white,
+                                  //                       size: 10,
+                                  //                     ),
+                                  //                     badgeAnimation:
+                                  //                         badges
+                                  //                             .BadgeAnimation.rotation(
+                                  //                           animationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           colorChangeAnimationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           loopAnimation:
+                                  //                               false,
+                                  //                           curve: Curves
+                                  //                               .fastOutSlowIn,
+                                  //                           colorChangeAnimationCurve:
+                                  //                               Curves
+                                  //                                   .easeInCubic,
+                                  //                         ),
+                                  //                     child: Container(
+                                  //                       child: SvgPicture.asset(
+                                  //                         MyAssets
+                                  //                             .icons
+                                  //                             .phone
+                                  //                             .path,
+                                  //                         height: 30.w,
+                                  //                         colorFilter:
+                                  //                             ColorFilter.mode(
+                                  //                               Colors.white,
+                                  //                               BlendMode.srcIn,
+                                  //                             ),
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(
+                                  //             height: 0.15.sh,
+                                  //             // width: 0.15.sw,
+                                  //             // color: MyColorName.greenForet,
+                                  //             child: Column(
+                                  //               crossAxisAlignment:
+                                  //                   CrossAxisAlignment.center,
+                                  //               children: [
+                                  //                 Transform.rotate(
+                                  //                   angle: 0.1,
+                                  //                   child: Container(
+                                  //                     width: 0.1.sw,
+                                  //                     margin: EdgeInsets.only(
+                                  //                       left: 10.w,
+                                  //                     ),
+                                  //                     child: SvgPicture.asset(
+                                  //                       MyAssets
+                                  //                           .icons
+                                  //                           .vector3
+                                  //                           .path,
+                                  //                       height: 50.w,
+                                  //                       colorFilter:
+                                  //                           ColorFilter.mode(
+                                  //                             Colors.green,
+                                  //                             BlendMode.srcIn,
+                                  //                           ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+
+                                  //                 Container(
+                                  //                   width: 0.3.sw,
+                                  //                   // color: Colors.blueAccent,
+                                  //                   alignment:
+                                  //                       Alignment.centerRight,
+                                  //                   child: badges.Badge(
+                                  //                     position:
+                                  //                         badges
+                                  //                             .BadgePosition.topEnd(
+                                  //                           top: -10,
+                                  //                           end: -12,
+                                  //                         ),
+                                  //                     showBadge: true,
+                                  //                     ignorePointer: false,
+                                  //                     onTap: () {},
+                                  //                     badgeContent: Icon(
+                                  //                       Icons.check,
+                                  //                       color: Colors.white,
+                                  //                       size: 10,
+                                  //                     ),
+                                  //                     badgeAnimation:
+                                  //                         badges
+                                  //                             .BadgeAnimation.rotation(
+                                  //                           animationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           colorChangeAnimationDuration:
+                                  //                               Duration(
+                                  //                                 seconds: 1,
+                                  //                               ),
+                                  //                           loopAnimation:
+                                  //                               false,
+                                  //                           curve: Curves
+                                  //                               .fastOutSlowIn,
+                                  //                           colorChangeAnimationCurve:
+                                  //                               Curves
+                                  //                                   .easeInCubic,
+                                  //                         ),
+                                  //                     child: Container(
+                                  //                       child: SvgPicture.asset(
+                                  //                         MyAssets
+                                  //                             .icons
+                                  //                             .tv
+                                  //                             .path,
+                                  //                         height: 30.w,
+                                  //                         colorFilter:
+                                  //                             ColorFilter.mode(
+                                  //                               Colors.white,
+                                  //                               BlendMode.srcIn,
+                                  //                             ),
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+
+                                  //     // SEP FOR
+                                  //     // Container(
+                                  //     //   height: 0.25.sh,
+                                  //     //   color: Colors.brown,
+                                  //     //   alignment: Alignment.topCenter,
+                                  //     //   child: Column(
+                                  //     //     children: [
+                                  //     //       Container(
+                                  //     //         color: Colors.deepOrange,
+                                  //     //         child: Row(
+                                  //     //           children: [
+                                  //     //             Container(
+                                  //     //               margin: EdgeInsets.only(
+                                  //     //                 top: 20.w,
+                                  //     //               ),
+                                  //     //               // color: Colors.red,
+                                  //     //               child: badges.Badge(
+                                  //     //                 position:
+                                  //     //                     badges
+                                  //     //                         .BadgePosition.topEnd(
+                                  //     //                       top: -10,
+                                  //     //                       end: -12,
+                                  //     //                     ),
+                                  //     //                 showBadge: true,
+                                  //     //                 ignorePointer: false,
+                                  //     //                 onTap: () {},
+                                  //     //                 badgeContent: Icon(
+                                  //     //                   Icons.check,
+                                  //     //                   color: Colors.white,
+                                  //     //                   size: 10,
+                                  //     //                 ),
+                                  //     //                 badgeAnimation:
+                                  //     //                     badges
+                                  //     //                         .BadgeAnimation.rotation(
+                                  //     //                       animationDuration:
+                                  //     //                           Duration(
+                                  //     //                             seconds: 1,
+                                  //     //                           ),
+                                  //     //                       colorChangeAnimationDuration:
+                                  //     //                           Duration(
+                                  //     //                             seconds: 1,
+                                  //     //                           ),
+                                  //     //                       loopAnimation:
+                                  //     //                           false,
+                                  //     //                       curve: Curves
+                                  //     //                           .fastOutSlowIn,
+                                  //     //                       colorChangeAnimationCurve:
+                                  //     //                           Curves
+                                  //     //                               .easeInCubic,
+                                  //     //                     ),
+                                  //     //                 child: Container(
+                                  //     //                   child: SvgPicture.asset(
+                                  //     //                     MyAssets
+                                  //     //                         .icons
+                                  //     //                         .internet
+                                  //     //                         .path,
+                                  //     //                     height: 30.w,
+                                  //     //                     colorFilter:
+                                  //     //                         ColorFilter.mode(
+                                  //     //                           Colors.white,
+                                  //     //                           BlendMode.srcIn,
+                                  //     //                         ),
+                                  //     //                   ),
+                                  //     //                 ),
+                                  //     //               ),
+                                  //     //             ),
+                                  //     //           ],
+                                  //     //         ),
+                                  //     //       ),
+                                  //     //     ],
+                                  //     //   ),
+                                  //     // ),
+                                  //   ],
+                                  // ),
+
+                                  // Positioned(
+                                  //   top: 0.05.sh,
+                                  //   child: Container(
+                                  //     margin: EdgeInsets.only(left: 10.w),
+                                  //     padding: EdgeInsets.only(left: 10.h),
+                                  //     child: Stack(
+                                  //       children: [
+                                  //         Container(
+                                  //           height: 100.h,
+                                  //           width: 100.w,
+                                  //           alignment: Alignment.center,
+                                  //           color: Colors.grey,
+                                  //           child: SvgPicture.asset(
+                                  //             MyAssets.icons.vector1.path,
+                                  //             height: 58.h,
+                                  //             width: 3.w,
+                                  //             colorFilter: ColorFilter.mode(
+                                  //               Colors.green,
+                                  //               BlendMode.srcIn,
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         Positioned(
+                                  //           top: 68.h,
+                                  //           right: 47.w,
+                                  //           child: Container(
+                                  //             margin: EdgeInsets.only(top: 5.h),
+                                  //             child: Column(
+                                  //               children: [
+                                  //                 badges.Badge(
+                                  //                   position:
+                                  //                       badges
+                                  //                           .BadgePosition.topEnd(
+                                  //                         top: -10,
+                                  //                         end: -12,
+                                  //                       ),
+                                  //                   showBadge: true,
+                                  //                   ignorePointer: true,
+                                  //                   onTap: () {},
+                                  //                   badgeContent: Icon(
+                                  //                     Icons.check,
+                                  //                     color: Colors.white,
+                                  //                     size: 10,
+                                  //                   ),
+                                  //                   badgeStyle:
+                                  //                       badges.BadgeStyle(
+                                  //                         badgeColor:
+                                  //                             Colors.green,
+                                  //                       ),
+                                  //                   badgeAnimation:
+                                  //                       badges
+                                  //                           .BadgeAnimation.rotation(
+                                  //                         animationDuration:
+                                  //                             Duration(
+                                  //                               seconds: 1,
+                                  //                             ),
+                                  //                         colorChangeAnimationDuration:
+                                  //                             Duration(
+                                  //                               seconds: 1,
+                                  //                             ),
+                                  //                         loopAnimation: false,
+                                  //                         curve: Curves
+                                  //                             .fastOutSlowIn,
+                                  //                         colorChangeAnimationCurve:
+                                  //                             Curves
+                                  //                                 .easeInCubic,
+                                  //                       ),
+                                  //                   child: Container(
+                                  //                     margin: EdgeInsets.only(
+                                  //                       top: 5.h,
+                                  //                     ),
+                                  //                     child: SvgPicture.asset(
+                                  //                       MyAssets
+                                  //                           .icons
+                                  //                           .maBox
+                                  //                           .path,
+                                  //                       height: 20.h,
+                                  //                       width: 3.w,
+                                  //                       colorFilter:
+                                  //                           ColorFilter.mode(
+                                  //                             Colors.white,
+                                  //                             BlendMode.srcIn,
+                                  //                           ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+                                  // Positioned(
+                                  //   top: 3,
+                                  //   right: 0.29.sw,
+                                  //   child: Container(
+                                  //     margin: EdgeInsets.only(left: 10.h),
+                                  //     padding: EdgeInsets.only(left: 10.h),
+                                  //     child: Row(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.center,
+                                  //       crossAxisAlignment:
+                                  //           CrossAxisAlignment.start,
+                                  //       children: [
+                                  //         Container(
+                                  //           margin: EdgeInsets.only(
+                                  //             left: 20.w,
+                                  //             top: 10.h,
+                                  //           ),
+                                  //           child: badges.Badge(
+                                  //             position:
+                                  //                 badges.BadgePosition.topEnd(
+                                  //                   top: -10,
+                                  //                   end: -12,
+                                  //                 ),
+                                  //             showBadge: true,
+                                  //             ignorePointer: false,
+                                  //             onTap: () {},
+                                  //             badgeContent: Icon(
+                                  //               Icons.check,
+                                  //               color: Colors.white,
+                                  //               size: 10,
+                                  //             ),
+                                  //             badgeAnimation:
+                                  //                 badges
+                                  //                     .BadgeAnimation.rotation(
+                                  //                   animationDuration: Duration(
+                                  //                     seconds: 1,
+                                  //                   ),
+                                  //                   colorChangeAnimationDuration:
+                                  //                       Duration(seconds: 1),
+                                  //                   loopAnimation: false,
+                                  //                   curve: Curves.fastOutSlowIn,
+                                  //                   colorChangeAnimationCurve:
+                                  //                       Curves.easeInCubic,
+                                  //                 ),
+                                  //             child: Container(
+                                  //               margin: EdgeInsets.only(
+                                  //                 top: 5.h,
+                                  //               ),
+                                  //               child: SvgPicture.asset(
+                                  //                 MyAssets.icons.internet.path,
+                                  //                 color: Colors.white,
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         SvgPicture.asset(
+                                  //           MyAssets.icons.vector2.path,
+                                  //           height: 20,
+                                  //           color: Colors.green,
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+                                  // Positioned(
+                                  //   top: 3.h,
+                                  //   right: 0.18.sw,
+                                  //   child: Container(
+                                  //     margin: EdgeInsets.only(
+                                  //       left: 10.h,
+                                  //       top: 5.h,
+                                  //     ),
+                                  //     padding: EdgeInsets.only(left: 10.h),
+                                  //     child: Row(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.center,
+                                  //       crossAxisAlignment:
+                                  //           CrossAxisAlignment.end,
+                                  //       children: [
+                                  //         Container(
+                                  //           margin: EdgeInsets.only(
+                                  //             left: 20.w,
+                                  //             top: 2.h,
+                                  //           ),
+                                  // child: badges.Badge(
+                                  //   position:
+                                  //       badges.BadgePosition.topEnd(
+                                  //         top: -10,
+                                  //         end: -12,
+                                  //       ),
+                                  //   showBadge: true,
+                                  //   ignorePointer: false,
+                                  //   onTap: () {},
+                                  //   badgeContent: Icon(
+                                  //     Icons.check,
+                                  //     color: Colors.white,
+                                  //     size: 10,
+                                  //   ),
+                                  //   badgeAnimation:
+                                  //       badges
+                                  //           .BadgeAnimation.rotation(
+                                  //         animationDuration: Duration(
+                                  //           seconds: 1,
+                                  //         ),
+                                  //         colorChangeAnimationDuration:
+                                  //             Duration(seconds: 1),
+                                  //         loopAnimation: false,
+                                  //         curve: Curves.fastOutSlowIn,
+                                  //         colorChangeAnimationCurve:
+                                  //             Curves.easeInCubic,
+                                  //       ),
+                                  //   child: Container(
+                                  //     margin: EdgeInsets.only(
+                                  //       top: 5.h,
+                                  //     ),
+                                  //     child: SvgPicture.asset(
+                                  //       MyAssets.icons.internet.path,
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // ),
+                                  // SvgPicture.asset(
+                                  //   MyAssets.icons.vector3.path,
+                                  //   height: 50.w,
+                                  //   color: Colors.green,
+                                  // ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+                                  // Center(
+                                  //   child: CircularProgressIndicator(
+                                  //     color: Colors.black,
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
                             );
                           }
                         },
@@ -843,7 +1554,7 @@ class _UserProfileState extends State<UserProfile> {
         child: StreamBuilder(
           stream: FirebaseStreamService().userStream(localkey),
           builder: (context, asyncSnapshot) {
-            log('LOCAL USERID -->> $localkey');
+            //log('LOCAL USERID -->> $localkey');
             if (asyncSnapshot.hasData || asyncSnapshot.data != null) {
               return BlocBuilder<GetProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {
@@ -1170,4 +1881,134 @@ class ImageShimmer extends StatelessWidget {
       ),
     );
   }
+}
+
+class StatusSemiCircle extends StatelessWidget {
+  final double radius = 160;
+  final double iconSpacing = 35;
+
+  final List<IconData> icons = [Icons.wifi, Icons.phone, Icons.tv];
+
+  StatusSemiCircle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: radius * 2,
+        height: radius + 120,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            /// ARC 3 SEGMENTS
+            CustomPaint(
+              size: Size(radius * 2, radius),
+              painter: ThreeSegmentPainter(),
+            ),
+
+            /// ICONES + CHECK
+            ...List.generate(3, (index) {
+              final angle = pi - (pi / 2) * index;
+
+              final iconRadius = radius - iconSpacing;
+
+              final x = radius + iconRadius * cos(angle);
+              final y = radius - iconRadius * sin(angle);
+
+              return Positioned(
+                left: x - 25,
+                top: y - 25,
+                child: Column(
+                  children: [
+                    /// CHECK
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.green,
+                      child: Icon(Icons.check, size: 14, color: Colors.black),
+                    ),
+                    SizedBox(height: 6),
+
+                    /// ICON
+                    Icon(icons[index], color: Colors.white, size: 30),
+                  ],
+                ),
+              );
+            }),
+
+            /// IMAGE CENTRALE
+            Positioned(
+              bottom: 40,
+              child: Icon(Icons.router, color: Colors.white, size: 80),
+            ),
+
+            /// TEXTE
+            Positioned(
+              bottom: 0,
+              child: Text(
+                "Tout fonctionne bien",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ThreeSegmentPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final radius = size.width / 2;
+    final center = Offset(radius, size.height);
+
+    final paint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 14
+      ..strokeCap = StrokeCap.round;
+
+    final segmentAngle = pi / 3; // 3 segments
+    final gap = 0.18; // espace entre segments
+
+    for (int i = 0; i < 3; i++) {
+      final start = pi + i * segmentAngle + gap;
+      final sweep = segmentAngle - gap * 2;
+
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius),
+        start,
+        sweep,
+        false,
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
+class CuveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.lineTo(0, size.height - 50);
+
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height + 5,
+      size.width,
+      size.height - 50,
+    );
+
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

@@ -40,13 +40,25 @@ class $AssetsIconsGen {
   AssetGenImage get backImage =>
       const AssetGenImage('assets/icons/back_image.jpeg');
 
+  /// File path: assets/icons/box.png
+  AssetGenImage get box => const AssetGenImage('assets/icons/box.png');
+
   /// File path: assets/icons/empty_data.json
   LottieGenImage get emptyData =>
       const LottieGenImage('assets/icons/empty_data.json');
 
+  /// File path: assets/icons/fly_box.svg
+  SvgGenImage get flyBox => const SvgGenImage('assets/icons/fly_box.svg');
+
   /// File path: assets/icons/icon_arrow_felt.svg
   SvgGenImage get iconArrowFelt =>
       const SvgGenImage('assets/icons/icon_arrow_felt.svg');
+
+  /// File path: assets/icons/internet.svg
+  SvgGenImage get internet => const SvgGenImage('assets/icons/internet.svg');
+
+  /// File path: assets/icons/ma_box.svg
+  SvgGenImage get maBox => const SvgGenImage('assets/icons/ma_box.svg');
 
   /// File path: assets/icons/pexels-cottonbro-4065165 (1).jpg
   AssetGenImage get pexelsCottonbro40651651 =>
@@ -61,11 +73,20 @@ class $AssetsIconsGen {
     'assets/icons/pexels-vruyr-martirosyan-1447354-2792902.jpg',
   );
 
+  /// File path: assets/icons/phone.svg
+  SvgGenImage get phone => const SvgGenImage('assets/icons/phone.svg');
+
+  /// File path: assets/icons/pic.svg
+  SvgGenImage get pic => const SvgGenImage('assets/icons/pic.svg');
+
   /// File path: assets/icons/premium_photo-1661776594516-6895a89de126.png
   AssetGenImage get premiumPhoto16617765945166895a89de126 =>
       const AssetGenImage(
         'assets/icons/premium_photo-1661776594516-6895a89de126.png',
       );
+
+  /// File path: assets/icons/tv.svg
+  SvgGenImage get tv => const SvgGenImage('assets/icons/tv.svg');
 
   /// File path: assets/icons/undraw_a-woman-avatar_ifsl.svg
   SvgGenImage get undrawAWomanAvatarIfsl =>
@@ -139,17 +160,33 @@ class $AssetsIconsGen {
   SvgGenImage get undrawToDoListO3jf =>
       const SvgGenImage('assets/icons/undraw_to-do-list_o3jf.svg');
 
+  /// File path: assets/icons/vector1.svg
+  SvgGenImage get vector1 => const SvgGenImage('assets/icons/vector1.svg');
+
+  /// File path: assets/icons/vector2.svg
+  SvgGenImage get vector2 => const SvgGenImage('assets/icons/vector2.svg');
+
+  /// File path: assets/icons/vector3.svg
+  SvgGenImage get vector3 => const SvgGenImage('assets/icons/vector3.svg');
+
   /// List of all assets
   List<dynamic> get values => [
     profileAvatarPlaceholderLarge,
     authen,
     backImage,
+    box,
     emptyData,
+    flyBox,
     iconArrowFelt,
+    internet,
+    maBox,
     pexelsCottonbro40651651,
     pexelsCottonbro4065165,
     pexelsVruyrMartirosyan14473542792902,
+    phone,
+    pic,
     premiumPhoto16617765945166895a89de126,
+    tv,
     undrawAWomanAvatarIfsl,
     undrawAddFilesD04y,
     undrawCloudsBmtk,
@@ -168,6 +205,9 @@ class $AssetsIconsGen {
     undrawSignHereLxua,
     undrawTabsTlxz,
     undrawToDoListO3jf,
+    vector1,
+    vector2,
+    vector3,
   ];
 }
 

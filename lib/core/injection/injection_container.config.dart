@@ -105,17 +105,17 @@ extension GetItInjectableX on _i174.GetIt {
         marchanServiceFirebase: gh<_i978.MarchanServiceFirebase>(),
       ),
     );
-    gh.lazySingleton<_i331.DisLikeProfileActifUsercase>(
-      () => _i331.DisLikeProfileActifUsercase(gh<_i956.IRepositoryMarchant>()),
-    );
-    gh.lazySingleton<_i1029.GetActifProfileListUsercase>(
-      () => _i1029.GetActifProfileListUsercase(gh<_i956.IRepositoryMarchant>()),
+    gh.lazySingleton<_i519.GetProfileLikedUsecase>(
+      () => _i519.GetProfileLikedUsecase(gh<_i956.IRepositoryMarchant>()),
     );
     gh.lazySingleton<_i286.LikeProfileActifUsercase>(
       () => _i286.LikeProfileActifUsercase(gh<_i956.IRepositoryMarchant>()),
     );
-    gh.lazySingleton<_i519.GetProfileLikedUsecase>(
-      () => _i519.GetProfileLikedUsecase(gh<_i956.IRepositoryMarchant>()),
+    gh.lazySingleton<_i1029.GetActifProfileListUsercase>(
+      () => _i1029.GetActifProfileListUsercase(gh<_i956.IRepositoryMarchant>()),
+    );
+    gh.lazySingleton<_i331.DisLikeProfileActifUsercase>(
+      () => _i331.DisLikeProfileActifUsercase(gh<_i956.IRepositoryMarchant>()),
     );
     gh.lazySingleton<_i228.AuthentificationSignInUsercase>(
       () => _i228.AuthentificationSignInUsercase(gh<_i283.IRepositoryAuthen>()),
@@ -142,16 +142,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i10.AuthentificationSignUpUsercase>(
       () => _i10.AuthentificationSignUpUsercase(gh<_i283.IRepositoryAuthen>()),
     );
-    gh.lazySingleton<_i141.RecuperationAuthentidicationUsercase>(
-      () => _i141.RecuperationAuthentidicationUsercase(
-        gh<_i283.IRepositoryAuthen>(),
-      ),
-    );
     gh.lazySingleton<_i379.GetProfileListUsercase>(
       () => _i379.GetProfileListUsercase(gh<_i283.IRepositoryAuthen>()),
     );
     gh.lazySingleton<_i764.GetProfileUsercase>(
       () => _i764.GetProfileUsercase(gh<_i283.IRepositoryAuthen>()),
+    );
+    gh.lazySingleton<_i141.RecuperationAuthentidicationUsercase>(
+      () => _i141.RecuperationAuthentidicationUsercase(
+        gh<_i283.IRepositoryAuthen>(),
+      ),
     );
     gh.lazySingleton<_i987.CompteRecuperationBloc>(
       () => _i987.CompteRecuperationBloc(
