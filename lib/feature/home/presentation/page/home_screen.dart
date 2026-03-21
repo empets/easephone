@@ -1435,6 +1435,7 @@ class _UserProfileState extends State<UserProfile> {
           stream: FirebaseStreamService().userStream(localkey),
           builder: (context, asyncSnapshot) {
             if (asyncSnapshot.hasData || asyncSnapshot.data != null) {
+            
               return BlocBuilder<GetUserProfileBloc, ApiState<ProfileUser>>(
                 builder: (context, state) {
                   if (state is SuccessState<ProfileUser>) {

@@ -1,6 +1,6 @@
 import java.util.Properties
 
-val storeFile = file("../keys/keystore.jks")
+val storeFile = file("../keystore.jks")
 
 
 
