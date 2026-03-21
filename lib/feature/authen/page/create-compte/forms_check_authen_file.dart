@@ -25,13 +25,20 @@ import 'package:scanner_document/scanner_document.dart';
 // import 'package:gscankit/gscankit.dart';
 
 class FormsCheckAuthenFile extends StatefulWidget {
-  const FormsCheckAuthenFile({super.key});
+   const  FormsCheckAuthenFile({super.key,});
+   
+ 
 
   @override
   State<FormsCheckAuthenFile> createState() => _FormsCheckAuthenFileState();
 }
 
 class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
+
+  final String name = "KABEYA";
+
+
+
   Future<void> scanKtp() async {
     try {
       OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(
@@ -137,52 +144,6 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
-  Future<void> _textReconginitionAttestation(File img) async {
-    final textRecoginition = TextRecognizer(
-      script: TextRecognitionScript.latin,
-    );
-    final inputImage = InputImage.fromFilePath(img.path);
-    final myText = await textRecoginition.processImage(inputImage);
-
-    final rawText = myText.text.toUpperCase();
-
-    // Vérifie si c'est une CNI ou un passeport
-    final isCNI =
-        rawText.contains("CI") &&
-            rawText.contains("CIV") &&
-            rawText.contains("IVOIRIENNE") ||
-        rawText.contains("PASSPORT");
-
-    if (isCNI) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.green,
-            content: Text('Document reconnue ✅'),
-          ),
-        );
-        context.read<CheckFileBloc>().add(
-        CheckFileEvent.changeAttestAtion(img.path.toString()),
-      );
-      context.read<CheckFileBloc>().add(CheckFileEvent.submit());
-    } else {
-      // Remise à l’état initial
-      setState(() {
-        _imageFileRecto = null;
-      });
-      showAppSnackBar(
-        context,
-        color: MyColorName.errorRed,
-        iconRight: Icons.close,
-        message: "Document non reconnu  ❌",
-      );
-      context.read<CheckFileBloc>().add(
-        CheckFileEvent.changeAttestAtion(''.toString()),
-      );
-    }
-  }
 
   Future<void> _imagePikersVerso(
     ImageSource source,
@@ -246,6 +207,56 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
     }
   }
 
+
+
+ Future<void> _textReconginitionAttestationName(File img) async {
+    final textRecoginition = TextRecognizer(
+      script: TextRecognitionScript.latin,
+    );
+    final inputImage = InputImage.fromFilePath(img.path);
+    final myText = await textRecoginition.processImage(inputImage);
+
+    final rawText = myText.text.toUpperCase();
+    log("rawText: $rawText");
+
+    // Vérifie si c'est une CNI ou un passeport
+    final isCNI =
+        rawText.contains(name.toUpperCase()) &&
+            rawText.contains("BAIL") ; 
+        //     rawText.contains("IVOIRIENNE") ||
+        // rawText.contains("PASSPORT");
+
+    if (isCNI) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            content: Text('Document reconnue ✅'),
+          ),
+        );
+        context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeAttestAtion(img.path.toString()),
+      );
+      context.read<CheckFileBloc>().add(CheckFileEvent.submit());
+    } else {
+      // Remise à l’état initial
+      setState(() {
+        // _imageFileRecto = null;
+      });
+      showAppSnackBar(
+        context,
+        color: MyColorName.errorRed,
+        iconRight: Icons.close,
+        message: "Document non reconnu  ❌",
+      );
+      context.read<CheckFileBloc>().add(
+        CheckFileEvent.changeAttestAtion(''.toString()),
+      );
+    }
+  }
+
   Future<void> scannerPlace() async {
     final imagesPath = await ScannerDocument.getPictures(
       noOfPages: 1, // Limit the number of pages to 1
@@ -254,7 +265,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
 
     if (imagesPath == null) return;
     final selectedFile = File(imagesPath.first);
-    await _textReconginitionAttestation(selectedFile);
+    await _textReconginitionAttestationName(selectedFile);
     log("********* $imagesPath");
   }
 
@@ -271,7 +282,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                   create: (context) => CheckFileBloc(
                     compteCheckFile: getIt<CreateCompteCheckFile>(),
                   ),
-                  child: const FormsHomeHebergement(),
+                  child: FormsHomeHebergement(name: ""),
                 ),
               ),
             );
@@ -285,7 +296,7 @@ class _FormsCheckAuthenFileState extends State<FormsCheckAuthenFile> {
                   create: (context) => CheckFileBloc(
                     compteCheckFile: getIt<CreateCompteCheckFile>(),
                   ),
-                  child: const FormsHomeHebergement(),
+                  child: FormsHomeHebergement(name: ""),
                 ),
               ),
             );

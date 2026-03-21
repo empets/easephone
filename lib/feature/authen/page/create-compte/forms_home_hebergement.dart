@@ -21,7 +21,8 @@ import 'package:formz/formz.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FormsHomeHebergement extends StatefulWidget {
-  const FormsHomeHebergement({super.key});
+  const FormsHomeHebergement({super.key, required this.name});
+  final String name;
 
   @override
   State<FormsHomeHebergement> createState() => _FormsHomeHebergementState();
@@ -119,7 +120,7 @@ class _FormsHomeHebergementState extends State<FormsHomeHebergement>
                     compteSendImageUsercase:
                         getIt<CreateCoompteSendImageUsercase>(),
                   ),
-                  child: const FormsHomeProfileImage(),
+                  child:  FormsHomeProfileImage(),
                 ),
               ),
             );
